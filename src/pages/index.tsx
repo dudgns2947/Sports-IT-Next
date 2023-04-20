@@ -1,9 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import Link from "next/link";
 import styled from "styled-components";
-
-const inter = Inter({ subsets: ["latin"] });
 
 const Nav = styled.nav`
   background-color: red;
@@ -17,10 +15,11 @@ export default function Home() {
       <h1>/pages/index.tsx</h1>
       <ul>
         <li>
-          <a href="/sub">/pages/sub/index.tsx</a>
-          <a href="/sub/about">/pages/sub/about.tsx</a>
-          <a href="/sub/1">/pages/sub/[id].tsx</a>
-          <a href="/sub/2">/pages/sub/[id].tsx</a>
+          <Link href="/sub">/pages/sub/index.tsx</Link>
+          <Link href="/sub/about">/pages/sub/about.tsx</Link>
+          <Link href="/sub/1">/pages/sub/[id].tsx</Link>
+          <Link href="/sub/2">/pages/sub/[id].tsx</Link>
+          <Link href="/auth/login">/auth/login</Link>
           <Nav />
         </li>
       </ul>
