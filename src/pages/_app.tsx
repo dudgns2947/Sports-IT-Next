@@ -1,7 +1,9 @@
 import Layout from "@component/components/Layout";
 import { GlobalStyle } from "@component/styles/global-style";
 import { theme } from "@component/styles/theme";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider } from "styled-components";
 
 // _app.tsx는 모든 페이지에 공통적으로 적용될 내용을 작성 및 서버로부터 요청이 왔을 때 가장 먼저 실행되며,
@@ -21,12 +23,15 @@ import { ThemeProvider } from "styled-components";
 // https://nextjs.org/docs/messages/css-global
 
 export default function App({ Component, pageProps }: AppProps) {
+  const queryClient = new QueryClient();
+
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
-        {/* <GlobalStyle /> */}
-        <Component {...pageProps} />
-      </Layout>
+      <QueryClientProvider client={queryClient}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

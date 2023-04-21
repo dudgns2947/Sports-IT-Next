@@ -1,5 +1,7 @@
 import React from "react";
 import { GlobalStyle } from "@component/styles/global-style";
+import { Container } from "./container/container";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Layouts
 // React 모델을 사용하면 페이지를 일련의 컴포넌트로 분해할 수 있습니다.
@@ -9,10 +11,10 @@ import { GlobalStyle } from "@component/styles/global-style";
 
 const Layout = ({ children }: React.PropsWithChildren) => {
   return (
-    <>
+    <Container>
       <GlobalStyle />
       <div>{children}</div>
-    </>
+    </Container>
   );
 };
 

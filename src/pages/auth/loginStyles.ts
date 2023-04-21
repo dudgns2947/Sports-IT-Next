@@ -2,7 +2,7 @@ import { Container } from "@component/components/container/container";
 import styled from "styled-components";
 import Image from "next/image";
 
-export const LoginContainer = styled(Container)`
+export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
