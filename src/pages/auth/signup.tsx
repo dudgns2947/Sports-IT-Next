@@ -1,5 +1,8 @@
 import Seo from "@component/components/Seo";
-import { Container } from "@component/components/container/container";
+import {
+  Container,
+  PageWrapper,
+} from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import React from "react";
 import * as S from "./signupStyles";
@@ -57,7 +60,7 @@ const signup = () => {
   };
 
   return (
-    <>
+    <PageWrapper>
       <Seo title="회원가입" />
       <GoBackHeader title="회원가입" />
       <S.Form onSubmit={handleSubmit(onValid, onInValid)}>
@@ -145,7 +148,7 @@ const signup = () => {
 
         <NavBar active={true} />
       </S.Form>
-    </>
+    </PageWrapper>
   );
 };
 

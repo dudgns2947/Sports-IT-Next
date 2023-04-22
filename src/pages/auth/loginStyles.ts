@@ -1,10 +1,11 @@
-import { Container } from "@component/components/container/container";
+import {
+  Container,
+  PageWrapper,
+} from "@component/components/container/container";
 import styled from "styled-components";
 import Image from "next/image";
 
-export const LoginContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+export const LoginContainer = styled(PageWrapper)`
   justify-content: center;
   align-items: center;
 `;
