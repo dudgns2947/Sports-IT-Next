@@ -62,7 +62,7 @@ const login = () => {
         <S.SubmitButton>로그인</S.SubmitButton>
       </S.Form>
       <S.AccountPanel>
-        <Link href="/">
+        <Link href="/auth/roleSelect">
           <S.AccountPanelText>회원가입</S.AccountPanelText>
         </Link>
         <Link href="/">

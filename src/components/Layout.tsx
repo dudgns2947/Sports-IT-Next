@@ -13,7 +13,7 @@ const Layout = ({ children }: React.PropsWithChildren) => {
   return (
     <Container>
       <GlobalStyle />
-      <div>{children}</div>
+      {children}
     </Container>
   );
 };
