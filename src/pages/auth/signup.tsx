@@ -35,7 +35,7 @@ const signup = () => {
     //   phone: data.phoneNumber,
     //   activated: 1,
     // });
-    router.push("/auth/login");
+    router.push("/auth/terms");
   };
 
   const onInValid = () => {
