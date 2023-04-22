@@ -40,7 +40,7 @@ const roleSelect = () => {
           </S.RoleArea>
         </S.SportyButton>
       </S.SelectArea>
-      <Link href="/eventSelect">
+      <Link href="/auth/eventSelect">
         <NavBar active={true} />
       </Link>
     </S.RoleSelectContainer>

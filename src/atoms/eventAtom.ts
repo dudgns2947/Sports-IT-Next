@@ -25,3 +25,8 @@ export const eventAtom = atom<IEvent>({
     요가: false,
   },
 });
+
+export const eventCountAtom = atom<number>({
+  key: "eventCount",
+  default: 0,
+});
