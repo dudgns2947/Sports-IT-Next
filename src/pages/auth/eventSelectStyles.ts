@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface BottomTextProps {
+  count: number;
+}
+
 export const TextArea = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,6 +33,7 @@ export const BottomArea = styled.div`
   height: 10%;
 `;
 
-export const BottomText = styled.span`
-  color: #747474;
+export const BottomText = styled.span<BottomTextProps>`
+  /* color: #747474; */
+  color: ${(props) => (props.count > 5 ? "#E05E6D" : "#747474")};
 `;

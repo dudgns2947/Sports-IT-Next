@@ -6,5 +6,6 @@ export const Container = styled.div`
   border: 1px solid gray;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   /* border-radius: 7px; */
 `;
