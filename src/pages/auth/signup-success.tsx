@@ -2,7 +2,7 @@ import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import React from "react";
-import * as S from "./signupSuccessStyles";
+import * as S from "./signup-success.styles";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";

@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "./eventSelectStyles";
+import * as S from "./event-select.styles";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import { useRecoilState } from "recoil";
 import { eventAtom, eventCountAtom } from "@component/atoms/eventAtom";
@@ -29,6 +29,7 @@ const eventSelect = () => {
             text={event}
             active={events[event]}
             setCount={setCount}
+            setEvent={setEvents}
           ></EventSelectButton>
         ))}
       </S.SelectArea>

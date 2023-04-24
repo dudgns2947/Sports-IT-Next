@@ -5,7 +5,7 @@ import {
 } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import React from "react";
-import * as S from "./signupStyles";
+import * as S from "./signup.styles";
 import NavBar from "@component/components/navbar/NavBar";
 import { useForm } from "react-hook-form";
 import { ISignUpForm } from "@component/interfaces/accountInterface";

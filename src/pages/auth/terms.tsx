@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as S from "./termsStyles";
+import * as S from "./terms.styles";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import NavBar from "@component/components/navbar/NavBar";
 import Seo from "@component/components/Seo";
@@ -67,7 +67,7 @@ const terms = () => {
           <S.TermPageIcon />
         </S.Term>
       </S.TermArea>
-      <Link href="/auth/signupSuccess">
+      <Link href="/auth/signup-success">
         <NavBar active={firstTerm && secondTerm} />
       </Link>
     </PageWrapper>
