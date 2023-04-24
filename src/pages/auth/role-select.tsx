@@ -3,7 +3,7 @@ import GoBackHeader from "@component/components/header/GoBackHeader";
 import { RoleAtomType } from "@component/interfaces/roleInterface";
 import React from "react";
 import { useRecoilState } from "recoil";
-import * as S from "./roleSelectStyles";
+import * as S from "./role-select.styles";
 import Link from "next/link";
 import NavBar from "@component/components/navbar/NavBar";
 
@@ -40,7 +40,7 @@ const roleSelect = () => {
           </S.RoleArea>
         </S.SportyButton>
       </S.SelectArea>
-      <Link href="/auth/eventSelect">
+      <Link href="/auth/event-select">
         <NavBar active={true} />
       </Link>
     </S.RoleSelectContainer>

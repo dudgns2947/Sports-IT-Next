@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "./eventSelectStyles";
+import * as S from "./event-select.styles";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import { useRecoilState } from "recoil";
 import { eventAtom, eventCountAtom } from "@component/atoms/eventAtom";
@@ -8,13 +8,14 @@ import Link from "next/link";
 import EventSelectButton from "@component/components/button/EventSelectButton";
 import NavBar from "@component/components/navbar/NavBar";
 import Seo from "@component/components/Seo";
+import { PageWrapper } from "@component/components/container/container";
 
 const eventSelect = () => {
   const [events, setEvents] = useRecoilState<IEvent>(eventAtom);
   const [count, setCount] = useRecoilState<number>(eventCountAtom);
   console.log(events);
   return (
-    <>
+    <PageWrapper>
       <GoBackHeader />
       <Seo title="관심 종목 선택" />
       <S.TextArea>
@@ -28,6 +29,7 @@ const eventSelect = () => {
             text={event}
             active={events[event]}
             setCount={setCount}
+            setEvent={setEvents}
           ></EventSelectButton>
         ))}
       </S.SelectArea>
@@ -39,7 +41,7 @@ const eventSelect = () => {
       <Link href="/auth/signup">
         <NavBar active={count <= 5 ? true : false} />
       </Link>
-    </>
+    </PageWrapper>
   );
 };
 

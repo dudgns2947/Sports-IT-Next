@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import * as S from "./termsStyles";
+import * as S from "./terms.styles";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import NavBar from "@component/components/navbar/NavBar";
 import Seo from "@component/components/Seo";
+import Link from "next/link";
+import { PageWrapper } from "@component/components/container/container";
 
 const terms = () => {
   const [firstTerm, setFirstTerm] = useState(false);
   const [secondTerm, setSecondTerm] = useState(false);
   const [thirdTerm, setThirdTerm] = useState(false);
   return (
-    <>
+    <PageWrapper>
       <GoBackHeader />
       <Seo title="서비스 약관동의" />
       <S.TextArea>
@@ -65,8 +67,10 @@ const terms = () => {
           <S.TermPageIcon />
         </S.Term>
       </S.TermArea>
-      <NavBar active={firstTerm && secondTerm} />
-    </>
+      <Link href="/auth/signup-success">
+        <NavBar active={firstTerm && secondTerm} />
+      </Link>
+    </PageWrapper>
   );
 };
 

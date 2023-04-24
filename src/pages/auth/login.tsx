@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "./loginStyles";
+import * as S from "./login.styles";
 import Link from "next/link";
 import Seo from "@component/components/Seo";
 import { useForm } from "react-hook-form";
@@ -62,7 +62,7 @@ const login = () => {
         <S.SubmitButton>로그인</S.SubmitButton>
       </S.Form>
       <S.AccountPanel>
-        <Link href="/auth/roleSelect">
+        <Link href="/auth/role-select">
           <S.AccountPanelText>회원가입</S.AccountPanelText>
         </Link>
         <Link href="/">

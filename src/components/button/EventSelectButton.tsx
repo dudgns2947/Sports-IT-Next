@@ -7,10 +7,10 @@ const EventSelectButton = ({
   text,
   active,
   setCount,
+  setEvent,
 }: EventSelectButtonProps) => {
-  const [events, setEvents] = useRecoilState(eventAtom);
   const onClickEvent = (eventName: string) => {
-    setEvents((events) => {
+    setEvent((events) => {
       const eventState = events[eventName];
       return {
         ...events,
