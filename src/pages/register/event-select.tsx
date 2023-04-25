@@ -1,8 +1,3 @@
-import {
-  contestEventAtom,
-  contestEventCountAtom,
-  contestEventSelector,
-} from "@component/atoms/eventAtom";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
@@ -12,11 +7,15 @@ import { SelectArea, Text, TextArea } from "../auth/event-select.styles";
 import EventSelectButton from "@component/components/button/EventSelectButton";
 import Link from "next/link";
 import NavBar from "@component/components/navbar/NavBar";
+import {
+  contestEventAtom,
+  contestEventCountAtom,
+  contestEventSelector,
+} from "@component/atoms/contestAtom";
 
 const EventSelect = () => {
   const [contestEvents, setContestEvents] = useRecoilState(contestEventAtom);
   const [count, setCount] = useRecoilState(contestEventCountAtom);
-  const contestEvent = useRecoilValue(contestEventSelector);
   return (
     <PageWrapper>
       <Seo title="대회 종목 선택" />
