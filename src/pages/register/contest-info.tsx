@@ -7,6 +7,7 @@ import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import React from "react";
 import { useRecoilValue } from "recoil";
+import { Input, InputArea, InputTitle } from "./headcount.styles";
 
 const ContestInfo = () => {
   const numOfPlayers = useRecoilValue(contestMaxNumOfPlayers);
@@ -18,6 +19,14 @@ const ContestInfo = () => {
     <PageWrapper>
       <Seo title="대회 정보 입력" />
       <GoBackHeader title="대회 등록" />
+      <InputArea>
+        <InputTitle>대회 제목</InputTitle>
+        <Input type="text"></Input>
+      </InputArea>
+      <InputArea>
+        <InputTitle>대회 기관(단체)명</InputTitle>
+        <Input type="text"></Input>
+      </InputArea>
     </PageWrapper>
   );
 };

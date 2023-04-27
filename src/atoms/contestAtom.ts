@@ -39,12 +39,12 @@ export const contestEventSelector = selector({
     ),
 });
 
-export const contestMaxNumOfPlayers = atom<number>({
+export const contestMaxNumOfPlayers = atom<number | null>({
   key: "contestMaxNumOfPlayers",
-  default: 9999,
+  default: null,
 });
 
-export const contestMaxNumOfAudience = atom<number>({
+export const contestMaxNumOfAudience = atom<number | null>({
   key: "contestMaxNumOfAudience",
-  default: 9999,
+  default: null,
 });
