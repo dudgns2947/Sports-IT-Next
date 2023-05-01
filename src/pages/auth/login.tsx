@@ -7,25 +7,28 @@ import { useMutation } from "react-query";
 import { loginPost } from "@component/api/account/accountApi";
 import { useRouter } from "next/router";
 import { ILoginProps } from "@component/interfaces/accountInterface";
+import { useRecoilState } from "recoil";
+import { userTokenAtom } from "@component/atoms/tokenAtom";
 
 const login = () => {
   const { register, handleSubmit, formState } = useForm<ILoginProps>();
+  const [userToken, setUserToken] = useRecoilState(userTokenAtom);
   const router = useRouter();
 
   const { mutate } = useMutation("loginPost", loginPost, {
     onSuccess: (res) => {
       console.log("Login Success !", res);
+      setUserToken(res.data.token);
       router.push("/");
     },
     onError: (res) => console.log("Error !", res),
   });
 
   const onValid = (data: ILoginProps) => {
-    // mutate({
-    //   loginId: data.loginId,
-    //   pw: data.pw,
-    // });
-    router.push("/");
+    mutate({
+      loginId: data.loginId,
+      pw: data.pw,
+    });
   };
 
   const onInvalid = () => {
