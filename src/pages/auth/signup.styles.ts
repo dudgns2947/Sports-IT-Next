@@ -15,7 +15,7 @@ export const InputArea = styled.div`
 export const Input = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 45px;
 `;
 
 export const InputTitle = styled.h2`

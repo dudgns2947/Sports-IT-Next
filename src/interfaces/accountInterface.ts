@@ -1,19 +1,17 @@
-export interface ISignUpForm {
+export interface ISignupForm {
   name: string;
-  id: string;
-  password: string;
-  passwordCheck: string;
   email: string;
-  phoneNumber: string;
+  phone: string;
   authNumber: string;
+  pw: string;
+  pwCheck: string;
 }
 
 export interface ISignupProps {
-  loginId: string;
+  email: string;
   pw: string;
   name: string;
   memberType: string;
-  email: string;
   phone: string;
   activated: number;
 }
