@@ -10,6 +10,7 @@ import { useRecoilValue } from "recoil";
 import { Input, InputArea, InputTitle } from "./headcount.styles";
 import NavBar from "@component/components/navbar/NavBar";
 import * as S from "./contest-info.styles";
+import Link from "next/link";
 
 const ContestInfo = () => {
   return (
@@ -47,8 +48,9 @@ const ContestInfo = () => {
           <Input type="text" placeholder="상세 주소 입력" />
         </InputArea>
       </S.InputWrapper>
-
-      <NavBar active={true} />
+      <Link href="/register/contest-detail">
+        <NavBar active={true} />
+      </Link>
     </PageWrapper>
   );
 };
