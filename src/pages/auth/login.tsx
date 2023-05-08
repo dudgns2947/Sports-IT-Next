@@ -19,7 +19,8 @@ const login = () => {
     onSuccess: (res) => {
       console.log("Login Success !", res);
       setUserToken(res.data.token);
-      router.push("/");
+      console.log(userToken);
+      router.push("/contest");
     },
     onError: (res) => console.log("Error !", res),
   });
