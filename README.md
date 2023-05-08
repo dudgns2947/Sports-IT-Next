@@ -10,12 +10,14 @@
 
 ## 🧑🏻‍💻 Introduce
 
-안녕하세요, 여기는 Sport-iT 플랫폼을 개발하고 관리 및 기록하는 장소입니다! 
+안녕하세요, 여기는 Sport-iT 플랫폼을 개발하고 관리 및 기록하는 장소입니다!
+
 - [회의록](https://www.notion.so/23356ef3f00f4e1791633a8b90176fe6?pvs=4)
 - [컨셉발표회](https://fanatical-glue-d17.notion.site/PlayMakers-09252d2c70134dc1af9245d85ce37705)
 - [특허출원통지서](https://drive.google.com/file/d/1zWWl8Rf1-3Mnvgm4VATVA6M3-XWzQ9It/view?usp=share_link)
 
 ## 📖PR CONVENTION
+
 <table>
   <thead>
     <tr>
@@ -79,10 +81,10 @@
    </tbody>
   </table>
 
-
 <br/>
 
 ## 💫 팀원 소개
+
 <table>
 <tr>
   <thead>
@@ -153,22 +155,26 @@
 ---
 
 ## 🛎️멘토링 LOG
+
 #### [2023-03-06](https://www.notion.so/03-07-Meeting-Log-f414cd2fbd974f928ebf824226a4da5a) <br/>
 
-
 ## 🎃 캡스톤디자인-실습일지
-#### [2023-03-02](https://docs.google.com/document/d/1_PnYa7qbz4IFehya34LuIMxyMxEma1UphP67YIu4YYY/edit#heading=h.hhevn0icya3z) 
+
+#### [2023-03-02](https://docs.google.com/document/d/1_PnYa7qbz4IFehya34LuIMxyMxEma1UphP67YIu4YYY/edit#heading=h.hhevn0icya3z)
+
 #### [2023-03-06](https://docs.google.com/document/d/1kgtIP7oul6M-yrTJ69PlWwlIq0nhXFXqi02bysBzonI/edit)
+
 #### [2023-03-09](https://docs.google.com/document/d/1Zf70pWBJsU3Fll0uHi9bzmXhwLH1v17t3nU6XFoKawA/edit)
+
 #### [2023-03-13](https://docs.google.com/document/d/1PbdbuJJl2TrJey7IpAsEvTlyhnMADlxoscYtVmK1FfY/edit)
+
 #### [2023-03-16](https://docs.google.com/document/d/1OgMLoCGeePRwEqupT51gYUNHW6mp06WbQwX44dy3A4M/edit)
 
 <br/>
 
-
 ## 🔥 Goal
-추후 업로드 예정입니다. <br/>
 
+추후 업로드 예정입니다. <br/>
 
 ---
 
@@ -188,8 +194,8 @@
 - [Figma 1차 프로토타입 완성본](https://www.figma.com/file/r22vLr44lYeZ9Ewa0wWtZG/Sports-it?node-id=0%3A1&t=3CWaeRBZcUeBoUWl-0)
 
 ---
-## 참고
 
+## 참고
 
 - [Figma 사용법](https://slash-amaranthus-65c.notion.site/Figma-c1dead5d929d44498e94641f8058e10d)
 
