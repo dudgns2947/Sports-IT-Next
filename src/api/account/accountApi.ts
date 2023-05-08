@@ -1,7 +1,4 @@
-import {
-  ILoginProps,
-  ISignupProps,
-} from "@component/interfaces/accountInterface";
+import { ILoginProps, ISignupProps } from "@component/interfaces/accountInterface";
 import { baseApi } from "../utils/instance";
 
 const SIGNUP_URI = "signup";
