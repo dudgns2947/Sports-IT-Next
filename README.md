@@ -134,7 +134,7 @@
       </td>
       <td align="center">
         <ul>
-          <li>해군병장 만기전역 ㅋ</li>
+          <li>해군병장 만기전역</li>
           <li>2022 하계방학 이커머스 플랫폼 'FIM ASIA' 인턴 근무</li>
         </ul>
       </td>
