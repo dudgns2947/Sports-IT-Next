@@ -1,4 +1,76 @@
 import styled from "styled-components";
+import { BiSearch, BiBell, BiUser } from "react-icons/bi";
+
+export const Container = styled.div``;
+
+export const TopBar = styled.div`
+  display: flex;
+  padding: 14px 20px;
+`;
+
+export const SearchForm = styled.form`
+  width: 375px;
+  height: 40px;
+  position: relative;
+`;
+
+export const FilterButtonArea = styled.div`
+  width: 352px;
+  height: 45px;
+  margin: 0px 20px;
+  display: flex;
+`;
+
+export const FilterButton = styled.button`
+  width: 86px;
+  height: 34px;
+  border: 1px solid #ededed;
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 8px 10px;
+  font-weight: 500;
+  font-size: 12px;
+  margin-right: 6px;
+  cursor: pointer;
+`;
+
+export const TotalButton = styled(FilterButton)`
+  width: 47px;
+  height: 34px;
+  background-color: #212121;
+  color: #ffffff;
+`;
+
+export const SearchInput = styled.input`
+  width: 262px;
+  height: 40px;
+  background: #f9f9fa;
+  border-radius: 12px;
+  border: none;
+  padding: 12px 16px;
+  font-weight: 500;
+  font-size: 14px;
+`;
+
+export const SearchButton = styled(BiSearch)`
+  position: absolute;
+  right: 20px;
+  top: 8px;
+  width: 27px;
+  height: 27px;
+  color: #747474;
+  cursor: pointer;
+`;
+
+export const AlarmButton = styled(BiBell)`
+  width: 40px;
+  height: 40px;
+`;
+
+export const MyPageButton = styled(BiUser)`
+  width: 40px;
+  height: 40px;
+`;
 
 export const ContentArea = styled.div`
   padding: 0 20px;
@@ -14,6 +86,7 @@ export const Filter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const Order = styled(Filter)``;
