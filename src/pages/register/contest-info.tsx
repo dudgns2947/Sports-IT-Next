@@ -11,8 +11,11 @@ import { Input, InputArea, InputTitle } from "./headcount.styles";
 import NavBar from "@component/components/navbar/NavBar";
 import * as S from "./contest-info.styles";
 import Link from "next/link";
+import { userTokenAtom } from "@component/atoms/tokenAtom";
 
 const ContestInfo = () => {
+  const token = useRecoilValue(userTokenAtom);
+  console.log(token);
   return (
     <PageWrapper as="form">
       <Seo title="대회 정보 입력" />
