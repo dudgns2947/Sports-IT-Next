@@ -23,7 +23,7 @@ const signup = () => {
   const { mutate } = useMutation("signupPost", signupPost, {
     onSuccess: (res) => {
       console.log("Signup Success !!", res);
-      router.replace("/auth/login");
+      router.replace("/auth/terms");
     },
     onError: (res) => console.log("Error !!", res),
   });
