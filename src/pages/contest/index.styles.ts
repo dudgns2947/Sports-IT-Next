@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { BiSearch, BiBell, BiUser } from "react-icons/bi";
+import { FilterButtonProps } from "@component/interfaces/contestInterface";
+import FilterButton from "@component/components/button/FilterButton";
+import { AiOutlinePlus } from "react-icons/ai";
 
 export const Container = styled.div``;
 
@@ -21,24 +24,22 @@ export const FilterButtonArea = styled.div`
   display: flex;
 `;
 
-export const FilterButton = styled.button`
-  width: 86px;
+interface TotalButtonProps {
+  active: boolean;
+}
+
+export const TotalButton = styled.button<TotalButtonProps>`
+  width: 45px;
   height: 34px;
   border: 1px solid #ededed;
   border-radius: 20px;
-  background: #ffffff;
+  background-color: ${(props) => (props.active ? "#212121" : "#ffffff")};
+  color: ${(props) => (props.active ? "#ffffff" : "#212121")};
   padding: 8px 10px;
   font-weight: 500;
   font-size: 12px;
   margin-right: 6px;
   cursor: pointer;
-`;
-
-export const TotalButton = styled(FilterButton)`
-  width: 47px;
-  height: 34px;
-  background-color: #212121;
-  color: #ffffff;
 `;
 
 export const SearchInput = styled.input`
@@ -79,7 +80,7 @@ export const ContentArea = styled.div`
 export const OrderArea = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 14px 0 24px 0;
+  padding: 14px 0 5px 0;
 `;
 
 export const Filter = styled.div`
@@ -97,7 +98,11 @@ export const OrderText = styled.span`
   line-height: 20px;
 `;
 
-export const ContestArea = styled.div``;
+export const ContestArea = styled.div`
+  position: relative;
+  overflow: auto;
+  height: 620px;
+`;
 
 export const Contest = styled.div`
   display: flex;
@@ -170,4 +175,26 @@ export const ContestHostArea = styled.div`
 export const PremiumLogo = styled.img`
   width: 17px;
   height: 17px;
+`;
+
+export const RegisterButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 140px;
+  height: 44px;
+  left: calc(50% - 140px / 2 + 0.5px);
+  top: calc(50% - 44px / 2 + 320px);
+  background: #212121;
+  border-radius: 50px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+`;
+
+export const PlusIcons = styled(AiOutlinePlus)`
+  width: 16px;
+  height: 16px;
+  margin-right: 8.64px;
 `;

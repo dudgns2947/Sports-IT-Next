@@ -5,11 +5,19 @@ import NavBar from "@component/components/navbar/NavBar";
 import Seo from "@component/components/Seo";
 import Link from "next/link";
 import { PageWrapper } from "@component/components/container/container";
+import { useRecoilState } from "recoil";
+import {
+  appTermAtom,
+  marketingOptInAtom,
+  privacyPolicyAtom,
+  thirdPartyAtom,
+} from "@component/atoms/termAtom";
 
 const terms = () => {
-  const [firstTerm, setFirstTerm] = useState(false);
-  const [secondTerm, setSecondTerm] = useState(false);
-  const [thirdTerm, setThirdTerm] = useState(false);
+  const [appTerm, setAppTerm] = useRecoilState(appTermAtom);
+  const [privacyPolicy, setPrivacyPolicy] = useRecoilState(privacyPolicyAtom);
+  const [thirdParty, setThirdParty] = useRecoilState(thirdPartyAtom);
+  const [marketingOpt, setMarketingOpt] = useRecoilState(marketingOptInAtom);
   return (
     <PageWrapper>
       <GoBackHeader />
@@ -21,16 +29,18 @@ const terms = () => {
       <S.TermArea>
         <S.TotalAgree>
           <S.TotalAgreeIcon
-            agree={firstTerm && secondTerm && thirdTerm}
+            agree={appTerm && privacyPolicy && thirdParty && marketingOpt}
             onClick={() => {
-              if (firstTerm && secondTerm && thirdTerm) {
-                setFirstTerm(false);
-                setSecondTerm(false);
-                setThirdTerm(false);
+              if (appTerm && privacyPolicy && thirdParty && marketingOpt) {
+                setAppTerm(false);
+                setPrivacyPolicy(false);
+                setThirdParty(false);
+                setMarketingOpt(false);
               } else {
-                setFirstTerm(true);
-                setSecondTerm(true);
-                setThirdTerm(true);
+                setAppTerm(true);
+                setPrivacyPolicy(true);
+                setThirdParty(true);
+                setMarketingOpt(true);
               }
             }}
           />
@@ -39,8 +49,8 @@ const terms = () => {
         <S.Term>
           <S.TermLeftArea>
             <S.TermIcon
-              agree={firstTerm}
-              onClick={() => setFirstTerm((current) => !current)}
+              agree={appTerm}
+              onClick={() => setAppTerm((current) => !current)}
             />
             <S.TermText>스포츠잇 이용약관(필수)</S.TermText>
           </S.TermLeftArea>
@@ -49,8 +59,8 @@ const terms = () => {
         <S.Term>
           <S.TermLeftArea>
             <S.TermIcon
-              agree={secondTerm}
-              onClick={() => setSecondTerm((current) => !current)}
+              agree={privacyPolicy}
+              onClick={() => setPrivacyPolicy((current) => !current)}
             />
             <S.TermText>개인정보 처리방침(필수)</S.TermText>
           </S.TermLeftArea>
@@ -59,8 +69,18 @@ const terms = () => {
         <S.Term>
           <S.TermLeftArea>
             <S.TermIcon
-              agree={thirdTerm}
-              onClick={() => setThirdTerm((current) => !current)}
+              agree={thirdParty}
+              onClick={() => setThirdParty((current) => !current)}
+            />
+            <S.TermText>개인정보 제 3자 제공 동의(필수)</S.TermText>
+          </S.TermLeftArea>
+          <S.TermPageIcon />
+        </S.Term>
+        <S.Term>
+          <S.TermLeftArea>
+            <S.TermIcon
+              agree={marketingOpt}
+              onClick={() => setMarketingOpt((current) => !current)}
             />
             <S.TermText>마케팅 수신 동의(선택)</S.TermText>
           </S.TermLeftArea>
@@ -68,7 +88,9 @@ const terms = () => {
         </S.Term>
       </S.TermArea>
       <Link href="/auth/signup-success">
-        <NavBar active={firstTerm && secondTerm} />
+        <NavBar
+          active={appTerm && privacyPolicy && thirdParty && marketingOpt}
+        />
       </Link>
     </PageWrapper>
   );

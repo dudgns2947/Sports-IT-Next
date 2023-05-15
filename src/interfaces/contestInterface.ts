@@ -1,7 +1,29 @@
+import { SetStateAction } from "react";
+
+export type FilterType =
+  | "PLANNING"
+  | "RECRUITING"
+  | "RECRUITING_END"
+  | "IN_PROGRESS"
+  | "END"
+  | "recruitingEnd"
+  | "recommend"
+  | "totalPrize";
+
+export interface ISearchInput {
+  keyword: string;
+}
+
+export interface FilterButtonProps {
+  children: string;
+  active: boolean;
+  onClick: () => void;
+}
+
 export interface IContestParams {
   token: string | null;
   keyword: string;
-  filterBy: string;
+  filterBy: FilterType[];
   orderBy: string;
   page: number;
   size: number;
@@ -37,4 +59,16 @@ export interface IContestInfo {
   totalPrize: number;
   updatedDate: string;
   viewCount: number;
+}
+
+export interface IFilterButton {
+  filterBy: FilterType[];
+  setFilterBy: React.Dispatch<SetStateAction<FilterType[]>>;
+  filterKeyWord: FilterType;
+  filterContent: string;
+}
+
+export interface IContestDetailForm {
+  imageList: FileList;
+  detail: string;
 }
