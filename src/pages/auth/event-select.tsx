@@ -39,7 +39,7 @@ const eventSelect = () => {
         </S.BottomText>
       </S.BottomArea>
       <Link href="/auth/signup">
-        <NavBar active={count <= 5 ? true : false} />
+        <NavBar navText="다음" active={count <= 5 ? true : false} />
       </Link>
     </PageWrapper>
   );

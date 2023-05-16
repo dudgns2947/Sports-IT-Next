@@ -73,7 +73,7 @@ const ContestDetail = () => {
         </S.InputWrapper>
       </Form>
       <Link href="/register-success">
-        <NavBar active={true} />
+        <NavBar navText="다음" active={true} />
       </Link>
     </PageWrapper>
   );

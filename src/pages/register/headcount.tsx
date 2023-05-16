@@ -85,7 +85,7 @@ const headcount = () => {
             </S.ErrorMessage>
           </S.InputArea>
         </S.InputWrapper>
-        <NavBar active={true} />
+        <NavBar navText="다음" active={true} />
       </S.Form>
     </PageWrapper>
   );

@@ -89,6 +89,7 @@ const terms = () => {
       </S.TermArea>
       <Link href="/auth/signup-success">
         <NavBar
+          navText="다음"
           active={appTerm && privacyPolicy && thirdParty && marketingOpt}
         />
       </Link>
