@@ -1,7 +1,14 @@
+import Seo from "@component/components/Seo";
+import * as S from "./index.styles";
+import { PageWrapper } from "@component/components/container/container";
+import GoBackHeader from "@component/components/header/GoBackHeader";
+import NavBar from "@component/components/navbar/NavBar";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import ImageSlider from "@component/components/container/ImageSlider";
 
 const Nav = styled.nav`
   background-color: red;
@@ -9,24 +16,41 @@ const Nav = styled.nav`
   height: 200px;
 `;
 
-export default function Home() {
+export default function Home() {  
+  const images = [
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+  ];
   return (
-    <div>
-      <h1>/pages/index.tsx</h1>
-      <ul>
-        <li>
-          <Link href="/sub">/pages/sub/index.tsx</Link>
-          <Link href="/sub/about">/pages/sub/about.tsx</Link>
-          <Link href="/sub/1">/pages/sub/[id].tsx</Link>
-          <Link href="/sub/2">/pages/sub/[id].tsx</Link>
-          <Link href="/auth/login">/auth/login</Link>
-          <Nav />
-        </li>
-      </ul>
-    </div>
+    <PageWrapper>
+      <Seo title="메인 페이지"/>
+        <div>
+          통합검색 컴포넌트
+        </div>
+        <S.CustomMenu>
+          <S.Banner>
+            <ImageSlider images={images}/>
+          </S.Banner>
+          <div>
+            아이콘들 컴포넌트 자리
+          </div>
+        </S.CustomMenu>
+        <div>
+          김영훈님을 위한 오늘의 게시물
+        </div>
+        <div>
+          HOT 대회 컴포넌트
+        </div>
+        <div>
+          오늘의 추천 체육인
+        </div>
+        <div>
+          관심단체 종목 둘러보기
+        </div>
+    </PageWrapper>
   );
 }
-
 // getServerSideProps(완전한 SSR) ⭐️
 
 // page에서 서버 측 랜더링 함수인 getServerSideProps함수를 export하는 경우
