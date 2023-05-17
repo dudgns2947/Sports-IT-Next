@@ -132,7 +132,7 @@ const signup = () => {
             ></S.InputContent>
           </S.Input>
         </S.InputArea>
-        <NavBar active={true} />
+        <NavBar navText="다음" active={true} />
       </S.Form>
     </PageWrapper>
   );

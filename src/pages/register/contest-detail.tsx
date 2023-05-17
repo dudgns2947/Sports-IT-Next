@@ -72,8 +72,8 @@ const ContestDetail = () => {
           </InputArea>
         </S.InputWrapper>
       </Form>
-      <Link href="/register-success">
-        <NavBar active={true} />
+      <Link href="/register/rules-and-terms">
+        <NavBar navText="다음" active={true} />
       </Link>
     </PageWrapper>
   );

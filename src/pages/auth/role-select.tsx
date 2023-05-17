@@ -34,7 +34,7 @@ const roleSelect = () => {
         </S.SportyButton>
       </S.SelectArea>
       <Link href="/auth/event-select">
-        <NavBar active={true} />
+        <NavBar navText="다음" active={true} />
       </Link>
     </S.RoleSelectContainer>
   );
