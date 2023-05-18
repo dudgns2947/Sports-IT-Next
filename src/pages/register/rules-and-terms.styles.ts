@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { MdArrowForwardIos } from "react-icons/md";
+import { GrClose } from "react-icons/gr";
 
 interface SelectButtonProps {
   active: boolean;
@@ -9,6 +10,36 @@ interface SelectButtonProps {
 export const ContentArea = styled.div`
   height: 100%;
   padding: 10px 20px;
+`;
+
+export const DataArea = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+`;
+
+export const DataWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const DeleteButton = styled(GrClose)`
+  width: 17px;
+  height: 17px;
+`;
+
+export const DataTitle = styled.span`
+  font-weight: 600;
+  font-size: 16px;
+  color: #212121;
+  margin-bottom: 10px;
+`;
+
+export const DataContent = styled.span`
+  font-weight: 500;
+  font-size: 14px;
+  color: #aeaeae;
 `;
 
 export const UploadForm = styled.div`
@@ -87,6 +118,15 @@ export const UrlInputArea = styled.div`
   justify-content: space-between;
   margin-top: 20px;
 `;
+
+export const UploadNoticeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
 export const UploadNotice = styled.span`
   font-weight: 400;
   font-size: 14px;
@@ -94,16 +134,17 @@ export const UploadNotice = styled.span`
   margin-bottom: 3px;
 `;
 
-export const FileUploadButton = styled.button`
+export const FileUploadButton = styled.label`
   width: 168px;
   height: 45px;
   border: 1px solid #ededed;
   background-color: #ffffff;
   border-radius: 6px;
-  margin-top: 15px;
+  /* margin-top: 15px; */
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const PlusIcon = styled(AiOutlinePlusCircle)`
@@ -117,4 +158,8 @@ export const FileUploadText = styled.span`
   font-weight: 400;
   font-size: 14px;
   color: #212121;
+`;
+
+export const FileInput = styled.input`
+  display: none;
 `;
