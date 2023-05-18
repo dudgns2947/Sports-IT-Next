@@ -1,32 +1,56 @@
+import Seo from "@component/components/Seo";
+import * as S from "./index.styles";
+import { PageWrapper } from "@component/components/container/container";
+import GoBackHeader from "@component/components/header/GoBackHeader";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import ImageSlider from "@component/components/container/ImageSlider";
+import CustomButton from "@component/components/button/Custombutton";
+import { ContentArea } from "@component/components/area/areaComponent";
+import MainPagePost from "@component/components/container/mainpagepost";
+import MainPageRecommanduser from "@component/components/container/mainragerecommanduser";
+import BottomBar from "@component/components/navbar/BottomBar";
 
-const Nav = styled.nav`
-  background-color: red;
-  width: 200px;
-  height: 200px;
-`;
-
-export default function Home() {
+export default function Home() {  
+  const images = [
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+  ];
+  const iconProps = [
+    ["/images/icon/Icon1.png", "대회"],
+    ["/images/icon/Icon2.png", "선수등록"],
+    ["/images/icon/Icon3.png", "공문서"],
+    ["/images/icon/Icon4.png", "통계"],
+  ]
+  const userName = "김영훈"
   return (
-    <div>
-      <h1>/pages/index.tsx</h1>
-      <ul>
-        <li>
-          <Link href="/sub">/pages/sub/index.tsx</Link>
-          <Link href="/sub/about">/pages/sub/about.tsx</Link>
-          <Link href="/sub/1">/pages/sub/[id].tsx</Link>
-          <Link href="/sub/2">/pages/sub/[id].tsx</Link>
-          <Link href="/auth/login">/auth/login</Link>
-          <Nav />
-        </li>
-      </ul>
-    </div>
+    <PageWrapper>
+      <Seo title="메인 페이지"/>
+      <ContentArea>
+        <S.CustomMenu>
+          <S.Banner>
+            <ImageSlider images={images}/>
+          </S.Banner>
+          <S.IconContainer>
+            <CustomButton imageUrl="/images/icon/Icon1.png" buttonName="대회"/>
+            <CustomButton imageUrl="/images/icon/Icon2.png" buttonName="선수등록" />
+            <CustomButton imageUrl="/images/icon/Icon3.png" buttonName="공문서" />
+            <CustomButton imageUrl="/images/icon/Icon4.png" buttonName="통계" />
+          </S.IconContainer>
+        </S.CustomMenu>
+        <S.Divider/>
+        <MainPagePost userName={userName} />
+        <MainPageCompetiton />
+        <MainPageRecommanduser />
+      </ContentArea>
+      <BottomBar/>
+    </PageWrapper>
   );
 }
-
 // getServerSideProps(완전한 SSR) ⭐️
 
 // page에서 서버 측 랜더링 함수인 getServerSideProps함수를 export하는 경우
