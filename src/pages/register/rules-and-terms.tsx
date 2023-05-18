@@ -9,16 +9,73 @@ import * as S from "./rules-and-terms.styles";
 import { useRouter } from "next/router";
 import { SubmitButton } from "@component/components/button/buttonComponent";
 
+interface IRuleAndTerm {
+  title: string;
+  content: string;
+}
+
 const RulesAndTerms = () => {
   const [inputText, setInputText] = useState("");
   const [fileUpload, setFileUpload] = useState(true);
+  const [rulesAndTerms, setRulesAndTerms] = useState<IRuleAndTerm[]>([]);
+  const [url, setUrl] = useState("");
+  const [file, setFile] = useState<File | null>();
 
   const router = useRouter();
+
+  const onClickFileSubmit = () => {
+    if (file) {
+      setRulesAndTerms((current) => [
+        ...current,
+        { title: inputText, content: file.name },
+      ]);
+    }
+  };
+
+  const onClickUrlSubmit = () => {
+    if (url.length !== 0) {
+      setRulesAndTerms((current) => [
+        ...current,
+        { title: inputText, content: url },
+      ]);
+      setInputText("");
+      setUrl("");
+    }
+  };
+
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  console.log(file);
+
   return (
     <PageWrapper>
       <Seo title="규정 및 약관등록" />
       <GoBackHeader title="대회 등록" />
       <S.ContentArea>
+        {rulesAndTerms.length !== 0
+          ? rulesAndTerms.map((item) => (
+              <S.DataArea>
+                <S.DataWrapper>
+                  <S.DataTitle>{item.title}</S.DataTitle>
+                  <S.DataContent>{item.content}</S.DataContent>
+                </S.DataWrapper>
+                <S.DeleteButton
+                  onClick={() => {
+                    setRulesAndTerms(
+                      rulesAndTerms.filter(
+                        (element) => element.title !== item.title
+                      )
+                    );
+                  }}
+                />
+              </S.DataArea>
+            ))
+          : null}
         <S.UploadForm>
           <S.TitleArea>
             <S.Title>규정 혹은 약관 이름</S.Title>
@@ -29,7 +86,11 @@ const RulesAndTerms = () => {
               <S.LoadRulesIcon />
             </S.LoadRulesArea>
           </S.TitleArea>
-          <Input placeholder="내용을 입력해주세요." />
+          <Input
+            value={inputText}
+            onChange={(e) => setInputText(e.currentTarget.value)}
+            placeholder="내용을 입력해주세요."
+          />
           <S.SelectArea>
             <S.FileSelectButton
               onClick={() => setFileUpload(true)}
@@ -46,14 +107,33 @@ const RulesAndTerms = () => {
           </S.SelectArea>
           {fileUpload ? (
             <S.FileUploadArea>
-              <S.UploadNotice>참가자에게 동의를 받기 위한</S.UploadNotice>
-              <S.UploadNotice>
-                규정 혹은 약관이 있다면 등록해주세요.
-              </S.UploadNotice>
-              <S.FileUploadButton>
-                <S.PlusIcon />
-                <S.FileUploadText>파일 첨부</S.FileUploadText>
-              </S.FileUploadButton>
+              {file ? (
+                <S.UploadNoticeWrapper>
+                  <S.UploadNotice>{file.name}</S.UploadNotice>
+                </S.UploadNoticeWrapper>
+              ) : (
+                <S.UploadNoticeWrapper>
+                  <S.UploadNotice>참가자에게 동의를 받기 위한</S.UploadNotice>
+                  <S.UploadNotice>
+                    규정 혹은 약관이 있다면 등록해주세요.
+                  </S.UploadNotice>
+                </S.UploadNoticeWrapper>
+              )}
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <S.FileUploadButton htmlFor="file">
+                  <S.PlusIcon />
+                  <S.FileUploadText>파일 첨부</S.FileUploadText>
+                </S.FileUploadButton>
+                <SubmitButton onClick={onClickFileSubmit}>등록</SubmitButton>
+                <S.FileInput type="file" id="file" onChange={onFileChange} />
+              </div>
             </S.FileUploadArea>
           ) : (
             <S.UrlUploadArea>
@@ -62,8 +142,11 @@ const RulesAndTerms = () => {
                 규정 혹은 약관의 링크가 있다면 등록해주세요.
               </S.UploadNotice>
               <S.UrlInputArea>
-                <ShortInput />
-                <SubmitButton>등록</SubmitButton>
+                <ShortInput
+                  value={url}
+                  onChange={(e) => setUrl(e.currentTarget.value)}
+                />
+                <SubmitButton onClick={onClickUrlSubmit}>등록</SubmitButton>
               </S.UrlInputArea>
             </S.UrlUploadArea>
           )}
