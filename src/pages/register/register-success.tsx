@@ -8,7 +8,7 @@ const RegisterSuccess = () => {
       firstText="대회등록이"
       secondText="완료되었습니다."
       navText="내가 올린 대회보기"
-      url="contest"
+      url="/contest"
     ></SuccessPage>
   );
 };

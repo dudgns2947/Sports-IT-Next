@@ -94,7 +94,7 @@ const MakeSurvey = () => {
           </SurveyCard>
         </SurveyArea>
       </ContentArea>
-      <NavBar active={true} />
+      <NavBar navText="다음" active={true} />
     </PageWrapper>
   );
 };
