@@ -15,7 +15,6 @@ const ContestDetail = () => {
     useForm<IContestDetailForm>();
 
   const [previewImages, setPreviewImages] = useState<string[]>([]);
-
   const imageList = watch("imageList");
 
   useEffect(() => {
