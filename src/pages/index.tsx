@@ -2,19 +2,17 @@ import Seo from "@component/components/Seo";
 import * as S from "./index.styles";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
-import NavBar from "@component/components/navbar/NavBar";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ImageSlider from "@component/components/container/ImageSlider";
-
-const Nav = styled.nav`
-  background-color: red;
-  width: 200px;
-  height: 200px;
-`;
+import CustomButton from "@component/components/button/Custombutton";
+import { ContentArea } from "@component/components/area/areaComponent";
+import MainPagePost from "@component/components/container/mainpagepost";
+import MainPageRecommanduser from "@component/components/container/mainragerecommanduser";
+import BottomBar from "@component/components/navbar/BottomBar";
 
 export default function Home() {  
   const images = [
@@ -22,32 +20,34 @@ export default function Home() {
     "/images/logo/advertise.png",
     "/images/logo/advertise.png",
   ];
+  const iconProps = [
+    ["/images/icon/Icon1.png", "대회"],
+    ["/images/icon/Icon2.png", "선수등록"],
+    ["/images/icon/Icon3.png", "공문서"],
+    ["/images/icon/Icon4.png", "통계"],
+  ]
+  const userName = "김영훈"
   return (
     <PageWrapper>
       <Seo title="메인 페이지"/>
-        <div>
-          통합검색 컴포넌트
-        </div>
+      <ContentArea>
         <S.CustomMenu>
           <S.Banner>
             <ImageSlider images={images}/>
           </S.Banner>
-          <div>
-            아이콘들 컴포넌트 자리
-          </div>
+          <S.IconContainer>
+            <CustomButton imageUrl="/images/icon/Icon1.png" buttonName="대회"/>
+            <CustomButton imageUrl="/images/icon/Icon2.png" buttonName="선수등록" />
+            <CustomButton imageUrl="/images/icon/Icon3.png" buttonName="공문서" />
+            <CustomButton imageUrl="/images/icon/Icon4.png" buttonName="통계" />
+          </S.IconContainer>
         </S.CustomMenu>
-        <div>
-          김영훈님을 위한 오늘의 게시물
-        </div>
-        <div>
-          HOT 대회 컴포넌트
-        </div>
-        <div>
-          오늘의 추천 체육인
-        </div>
-        <div>
-          관심단체 종목 둘러보기
-        </div>
+        <S.Divider/>
+        <MainPagePost userName={userName} />
+        <MainPageCompetiton />
+        <MainPageRecommanduser />
+      </ContentArea>
+      <BottomBar/>
     </PageWrapper>
   );
 }

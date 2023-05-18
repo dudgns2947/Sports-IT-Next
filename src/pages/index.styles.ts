@@ -8,3 +8,13 @@ export const CustomMenu = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
+export const IconContainer = styled.div`
+  display : flex;
+  justify-content: space-around;
+  margin-top : 20px;
+`;
+export const Divider = styled.div`
+width: 100%;
+height: 5px;
+background-color: #F9F9FA;
+`;
