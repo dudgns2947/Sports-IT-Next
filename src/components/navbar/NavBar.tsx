@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "./NavBarStyles";
+import * as S from "./NavBar.styles";
 import { NavBarProps, NavProps } from "@component/interfaces/navInterface";
 
 const NavBar = ({ active, navText }: NavBarProps) => {

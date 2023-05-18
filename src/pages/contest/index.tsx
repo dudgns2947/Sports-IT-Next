@@ -131,9 +131,9 @@ const Index = () => {
               type="text"
               placeholder="통합 검색"
             />
-            <button>
-              <S.SearchButton />
-            </button>
+            <S.SearchButton>
+              <S.SearchIcon />
+            </S.SearchButton>
           </S.SearchForm>
           <S.AlarmButton />
           <S.MyPageButton />
