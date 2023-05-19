@@ -1,3 +1,4 @@
+import TopBar from "@component/components/navbar/TopBar";
 import Seo from "@component/components/Seo";
 import * as S from "./index.styles";
 import { PageWrapper } from "@component/components/container/container";

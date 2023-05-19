@@ -16,6 +16,7 @@ const BottomBarWrapper = styled.div`
   width: 375px;
   height: 60px;
   border-top: 1px solid #ededed;
+  background: #ffffff;
 `;
 
 const NavCard = styled.div`
