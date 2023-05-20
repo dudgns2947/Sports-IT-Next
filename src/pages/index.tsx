@@ -45,7 +45,6 @@ export default function Home() {
         </S.CustomMenu>
         <S.Divider/>
         <MainPagePost userName={userName} />
-        <MainPageCompetiton />
         <MainPageRecommanduser />
       </ContentArea>
       <BottomBar/>
