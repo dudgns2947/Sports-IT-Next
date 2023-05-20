@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import qs from "qs";
 import FilterButton from "@component/components/button/FilterButton";
 import { useRouter } from "next/router";
+import BottomBar from "@component/components/navbar/BottomBar";
 
 const getDday = (timestamp: number) => {
   // 주어진 타임스탬프 값을 Date 객체로 변환
@@ -130,9 +131,9 @@ const Index = () => {
               type="text"
               placeholder="통합 검색"
             />
-            <button>
-              <S.SearchButton />
-            </button>
+            <S.SearchButton>
+              <S.SearchIcon />
+            </S.SearchButton>
           </S.SearchForm>
           <S.AlarmButton />
           <S.MyPageButton />
@@ -215,6 +216,7 @@ const Index = () => {
           </S.ContestArea>
         </S.ContentArea>
       </S.Container>
+      <BottomBar />
     </PageWrapper>
   );
 };

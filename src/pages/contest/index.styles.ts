@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { BiSearch, BiBell, BiUser } from "react-icons/bi";
-import { FilterButtonProps } from "@component/interfaces/contestInterface";
-import FilterButton from "@component/components/button/FilterButton";
 import { AiOutlinePlus } from "react-icons/ai";
+import { CiBellOn, CiUser } from "react-icons/ci";
 
 export const Container = styled.div``;
 
 export const TopBar = styled.div`
   display: flex;
   padding: 14px 20px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SearchForm = styled.form`
@@ -53,7 +54,9 @@ export const SearchInput = styled.input`
   font-size: 14px;
 `;
 
-export const SearchButton = styled(BiSearch)`
+export const SearchButton = styled.button``;
+
+export const SearchIcon = styled(BiSearch)`
   position: absolute;
   right: 20px;
   top: 8px;
@@ -63,12 +66,12 @@ export const SearchButton = styled(BiSearch)`
   cursor: pointer;
 `;
 
-export const AlarmButton = styled(BiBell)`
-  width: 40px;
-  height: 40px;
+export const AlarmButton = styled(CiBellOn)`
+  width: 45px;
+  height: 45px;
 `;
 
-export const MyPageButton = styled(BiUser)`
+export const MyPageButton = styled(CiUser)`
   width: 40px;
   height: 40px;
 `;
@@ -185,7 +188,7 @@ export const RegisterButton = styled.button`
   width: 140px;
   height: 44px;
   left: calc(50% - 140px / 2 + 0.5px);
-  top: calc(50% - 44px / 2 + 320px);
+  top: calc(50% - 44px / 2 + 310px);
   background: #212121;
   border-radius: 50px;
   color: #ffffff;

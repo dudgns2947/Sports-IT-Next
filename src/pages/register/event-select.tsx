@@ -36,7 +36,7 @@ const EventSelect = () => {
         ))}
       </SelectArea>
       <Link href="/register/headcount">
-        <NavBar active={count === 1 ? true : false} />
+        <NavBar navText="다음" active={count === 1 ? true : false} />
       </Link>
     </PageWrapper>
   );
