@@ -11,11 +11,11 @@ const BottomBarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  /* top: 750px; */
+  top: 728px;
   bottom: 0;
-  width: 375px;
-  height: 60px;
-  border-top: 1px solid #ededed;
+  width: 100%;
+  height: 8%;
+  border-top: 1px solid #c8c7c7;
   background: #ffffff;
 `;
 
@@ -24,39 +24,50 @@ const NavCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  border: 1px solid #ededed;
+  width: 80px;
+  height: 80px;
+  padding-bottom: 5px;
+  left: 10px;
+  bottom: 24px;
 `;
 
 const NavText = styled.span`
-  font-weight: 500;
-  font-size: 10px;
+  font-weight: 300;
+  font-size: 11px;
+  text-align: center;
+  line-height: 12px;
   color: #212121;
 `;
 
 const HomeIcon = styled(RiHomeLine)`
-  width: 25px;
-  height: 26px;
+  width: 28px;
+  height: 33px;
+  margin-bottom: 3px;
 `;
 
 const TrophyIcon = styled(AiOutlineTrophy)`
-  width: 25px;
-  height: 26px;
+  width: 28px;
+  height: 33px;
+  margin-bottom: 3px;
 `;
 
 const SharpIcon = styled(MdOutlineNumbers)`
-  width: 25px;
-  height: 26px;
+  width: 28px;
+  height: 33px;
+  margin-bottom: 3px;
 `;
 
 const MessageIcon = styled(TbMessageCircle2)`
-  width: 25px;
-  height: 26px;
+  width: 28px;
+  height: 33px;
+  margin-bottom: 3px;
 `;
 
 const SquaresIcon = styled(HiOutlineSquares2X2)`
-  width: 25px;
-  height: 26px;
+  width: 28px;
+  height: 33px;
+  margin-bottom: 3px;
 `;
 
 const BottomBar = () => {

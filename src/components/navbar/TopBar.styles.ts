@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
-import { CiBellOn, CiUser } from "react-icons/ci";
+import { FaRegBell, FaRegUser } from "react-icons/fa";
 
 export const TopBar = styled.div`
   display: flex;
@@ -10,13 +10,13 @@ export const TopBar = styled.div`
 `;
 
 export const SearchForm = styled.form`
-  width: 375px;
+  width: 80%;
   height: 40px;
   position: relative;
 `;
 
 export const SearchInput = styled.input`
-  width: 262px;
+  width: 260px;
   height: 40px;
   background: #f9f9fa;
   border-radius: 12px;
@@ -38,12 +38,19 @@ export const SearchIcon = styled(BiSearch)`
   cursor: pointer;
 `;
 
-export const AlarmButton = styled(CiBellOn)`
-  width: 45px;
-  height: 45px;
+export const ButtonArea = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60px;
 `;
 
-export const MyPageButton = styled(CiUser)`
-  width: 40px;
-  height: 40px;
+export const AlarmButton = styled(FaRegBell)`
+  width: 23px;
+  height: 23px;
+`;
+
+export const MyPageButton = styled(FaRegUser)`
+  width: 22px;
+  height: 22px;
 `;
