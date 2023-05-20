@@ -1,31 +1,15 @@
 import Seo from "@component/components/Seo";
+import { ContentArea } from "@component/components/area/areaComponent";
 import AddButton from "@component/components/button/AddButton";
 import SurveyCard from "@component/components/card/SurveyCard";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import NavBar from "@component/components/navbar/NavBar";
+import { BoldText, BoldTextArea } from "@component/components/text/boldText";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import styled from "styled-components";
-
-const ContentArea = styled.div`
-  height: 100%;
-  padding: 60px 20px 0 20px;
-  overflow: auto;
-`;
-
-const BoldTextArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-`;
-
-const BoldText = styled.span`
-  font-weight: 600;
-  font-size: 28px;
-  margin: 5px 0;
-`;
 
 const SurveyArea = styled.div``;
 
@@ -35,7 +19,7 @@ const AddButtonArea = styled.div`
 
 const SectorAndWeight = () => {
   const [surveyList, setSurveyList] = useState<string[]>([""]);
-  const router = useRouter();
+
   return (
     <PageWrapper>
       <Seo title="부문 및 체급등록" />
