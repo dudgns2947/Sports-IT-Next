@@ -11,9 +11,12 @@ import styled from "styled-components";
 import ImageSlider from "@component/components/container/ImageSlider";
 import CustomButton from "@component/components/button/Custombutton";
 import { ContentArea } from "@component/components/area/areaComponent";
-import MainPagePost from "@component/components/container/mainpagepost";
-import MainPageRecommanduser from "@component/components/container/mainragerecommanduser";
+import MainPagePost from "@component/components/container/MainPagePost";
+
 import BottomBar from "@component/components/navbar/BottomBar";
+import MainPageRecommanduser from "@component/components/container/MainPageRecommanduser";
+import MainPageCompetition from "@component/components/container/MainPageCompetition";
+import { IContestParams } from "@component/interfaces/contestInterface";
 
 export default function Home() {
   const images = [
@@ -27,27 +30,34 @@ export default function Home() {
     ["/images/icon/Icon3.png", "공문서"],
     ["/images/icon/Icon4.png", "통계"],
   ];
-  const userName = "김영훈";
+  const iamgeUrls = [
+    "/images/example/Post1.png",
+    "/images/example/Post2.png",
+    "/images/example/Post1.png",
+    "/images/example/Post2.png",
+  ]
+  const userName = "이준수";
+  const [scrollposition, setScrollPosition] = useState<number>(0);
   return (
     <PageWrapper>
-      <Seo title="메인 페이지"/>
       <TopBar/>
-
+      <Seo title="메인 페이지"/>
       <ContentArea>
         <S.CustomMenu>
           <S.Banner>
             <ImageSlider images={images} />
           </S.Banner>
           <S.IconContainer>
-            <CustomButton imageUrl="/images/icon/Icon1.png" buttonName="대회" />
-            <CustomButton imageUrl="/images/icon/Icon2.png" buttonName="선수등록" />
-            <CustomButton imageUrl="/images/icon/Icon3.png" buttonName="공문서" />
-            <CustomButton imageUrl="/images/icon/Icon4.png" buttonName="통계" /> */}
+            {iconProps? iconProps.map((iconProp)=>(
+              <CustomButton imageUrl={iconProp[0]} buttonName={iconProp[1]}/>
+            )):null}
           </S.IconContainer>
         </S.CustomMenu>
         <S.Divider />
-        <MainPagePost userName={userName} />
-        <MainPageRecommanduser />
+        <MainPagePost userName={userName} imageUrls = {iamgeUrls}/>
+        <MainPageCompetition />
+        <MainPageRecommanduser/>
+
       </ContentArea>
       <BottomBar />
     </PageWrapper>

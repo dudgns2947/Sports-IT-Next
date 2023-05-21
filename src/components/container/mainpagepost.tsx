@@ -4,6 +4,7 @@ import {AiOutlineRight} from 'react-icons/ai';
 
 interface MainPagePostProps {
   userName: string;
+  imageUrls : string[];
 }
 
 const Wrapper = styled.div`
@@ -37,7 +38,7 @@ const SliderImage = styled.img`
   margin-right: 10px;
 `;
 
-const MainPagePost: React.FC<MainPagePostProps> = ({ userName }) => {
+const MainPagePost: React.FC<MainPagePostProps> = ({ userName, imageUrls }) => {
     const [scrollPosition, setScrollPosition] = useState<number>(0);
 
     const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
@@ -53,10 +54,9 @@ const MainPagePost: React.FC<MainPagePostProps> = ({ userName }) => {
                 <AiOutlineRight/>
             </Header>
             <SliderContainer onScroll={handleScroll}>
-                <SliderImage src="/images/example/Post1.png"/>
-                <SliderImage src="/images/example/Post2.png"/>
-                <SliderImage src="/images/example/Post1.png"/>
-                <SliderImage src="/images/example/Post2.png"/>
+              {imageUrls?imageUrls.map((imageUrl)=>(
+                <SliderImage src={imageUrl} />
+              )):null}
             </SliderContainer>
         </Wrapper>
     );
