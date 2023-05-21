@@ -9,14 +9,18 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ImageSlider from "@component/components/container/ImageSlider";
-import CustomButton from "@component/components/button/Custombutton";
+// import CustomButton from "@component/components/button/Custombutton";
 import { ContentArea } from "@component/components/area/areaComponent";
-import MainPagePost from "@component/components/container/mainpagepost";
-import MainPageRecommanduser from "@component/components/container/mainragerecommanduser";
+// import MainPagePost from "@component/components/container/mainpagepost";
+// import MainPageRecommanduser from "@component/components/container/mainragerecommanduser";
 import BottomBar from "@component/components/navbar/BottomBar";
 
 export default function Home() {
-  const images = ["/images/logo/advertise.png", "/images/logo/advertise.png", "/images/logo/advertise.png"];
+  const images = [
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+  ];
   const iconProps = [
     ["/images/icon/Icon1.png", "대회"],
     ["/images/icon/Icon2.png", "선수등록"],
@@ -37,7 +41,7 @@ export default function Home() {
             <CustomButton imageUrl="/images/icon/Icon1.png" buttonName="대회" />
             <CustomButton imageUrl="/images/icon/Icon2.png" buttonName="선수등록" />
             <CustomButton imageUrl="/images/icon/Icon3.png" buttonName="공문서" />
-            <CustomButton imageUrl="/images/icon/Icon4.png" buttonName="통계" />
+            <CustomButton imageUrl="/images/icon/Icon4.png" buttonName="통계" /> */}
           </S.IconContainer>
         </S.CustomMenu>
         <S.Divider />
