@@ -1,9 +1,9 @@
-import {
-  Container,
-  PageWrapper,
-} from "@component/components/container/container";
+import { Container, PageWrapper } from "@component/components/container/container";
 import styled from "styled-components";
 import Image from "next/image";
+import splash from "@public/images/splash.jpg";
+
+export const SplashImg = styled(Image)``;
 
 export const LoginContainer = styled(PageWrapper)`
   justify-content: center;
@@ -26,6 +26,7 @@ export const Input = styled.input`
   height: 50px;
   width: 100%;
   padding-left: 12px;
+  border: 1px solid #eaeaea;
   background-color: #f9f9fa;
   border-radius: 12px;
   margin-bottom: 10px;
@@ -57,5 +58,5 @@ export const AccountPanelText = styled.span`
 export const EasyLoginArea = styled.div``;
 
 export const EasyLoginImage = styled(Image)`
-  margin: 0 10px;
+  margin: 0 25px;
 `;

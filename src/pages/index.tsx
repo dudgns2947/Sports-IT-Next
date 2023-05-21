@@ -31,22 +31,22 @@ export default function Home() {
   return (
     <PageWrapper>
       <Seo title="메인 페이지" />
+      <TopBar />
       <ContentArea>
         <S.CustomMenu>
           <S.Banner>
             <ImageSlider images={images} />
           </S.Banner>
           <S.IconContainer>
-            {/* <CustomButton imageUrl="/images/icon/Icon1.png" buttonName="대회"/>
+            <CustomButton imageUrl="/images/icon/Icon1.png" buttonName="대회" />
             <CustomButton imageUrl="/images/icon/Icon2.png" buttonName="선수등록" />
             <CustomButton imageUrl="/images/icon/Icon3.png" buttonName="공문서" />
             <CustomButton imageUrl="/images/icon/Icon4.png" buttonName="통계" /> */}
           </S.IconContainer>
         </S.CustomMenu>
         <S.Divider />
-        {/* <MainPagePost userName={userName} />
-        <MainPageCompetiton />
-        <MainPageRecommanduser /> */}
+        <MainPagePost userName={userName} />
+        <MainPageRecommanduser />
       </ContentArea>
       <BottomBar />
     </PageWrapper>

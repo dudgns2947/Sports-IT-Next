@@ -15,11 +15,11 @@ const Terms = () => {
   const [marketingOpt, setMarketingOpt] = useRecoilState(marketingOptInAtom);
   return (
     <PageWrapper>
-      <GoBackHeader />
+      <GoBackHeader title="대회 신청" />
       <Seo title="서비스 약관동의" />
       <S.TextArea>
-        <S.Text>서비스 이용약관에</S.Text>
-        <S.Text>동의해주세요.</S.Text>
+        <S.Text>대회 참여약관 확인 후</S.Text>
+        <S.Text>동의 해주세요.</S.Text>
       </S.TextArea>
       <S.TermArea>
         <S.TotalAgree>
@@ -30,12 +30,10 @@ const Terms = () => {
                 setAppTerm(false);
                 setPrivacyPolicy(false);
                 setThirdParty(false);
-                setMarketingOpt(false);
               } else {
                 setAppTerm(true);
                 setPrivacyPolicy(true);
                 setThirdParty(true);
-                setMarketingOpt(true);
               }
             }}
           />
@@ -44,34 +42,27 @@ const Terms = () => {
         <S.Term>
           <S.TermLeftArea>
             <S.TermIcon agree={appTerm} onClick={() => setAppTerm((current) => !current)} />
-            <S.TermText>스포츠잇 이용약관(필수)</S.TermText>
+            <S.TermText>심판규정 (필수)</S.TermText>
           </S.TermLeftArea>
           <S.TermPageIcon />
         </S.Term>
         <S.Term>
           <S.TermLeftArea>
             <S.TermIcon agree={privacyPolicy} onClick={() => setPrivacyPolicy((current) => !current)} />
-            <S.TermText>개인정보 처리방침(필수)</S.TermText>
+            <S.TermText>복장규정 (필수)</S.TermText>
           </S.TermLeftArea>
           <S.TermPageIcon />
         </S.Term>
         <S.Term>
           <S.TermLeftArea>
             <S.TermIcon agree={thirdParty} onClick={() => setThirdParty((current) => !current)} />
-            <S.TermText>개인정보 제 3자 제공 동의(필수)</S.TermText>
-          </S.TermLeftArea>
-          <S.TermPageIcon />
-        </S.Term>
-        <S.Term>
-          <S.TermLeftArea>
-            <S.TermIcon agree={marketingOpt} onClick={() => setMarketingOpt((current) => !current)} />
-            <S.TermText>마케팅 수신 동의(선택)</S.TermText>
+            <S.TermText>시상식규정 (필수)</S.TermText>
           </S.TermLeftArea>
           <S.TermPageIcon />
         </S.Term>
       </S.TermArea>
       <Link href="/auth/signup-success">
-        <NavBar navText="다음" active={appTerm && privacyPolicy && thirdParty && marketingOpt} />
+        <NavBar navText="동의하고 다음" active={appTerm && privacyPolicy && thirdParty && marketingOpt} />
       </Link>
     </PageWrapper>
   );

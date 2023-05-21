@@ -1,7 +1,4 @@
-import {
-  contestMaxNumOfAudience,
-  contestMaxNumOfPlayers,
-} from "@component/atoms/contestAtom";
+import { contestMaxNumOfAudience, contestMaxNumOfPlayers } from "@component/atoms/contestAtom";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
@@ -23,10 +20,7 @@ const ContestInfo = () => {
       <S.InputWrapper>
         <InputArea>
           <InputTitle>대회 제목</InputTitle>
-          <Input
-            type="text"
-            placeholder="ex) 제 1회 스포츠잇 대표 선발전"
-          ></Input>
+          <Input type="text" placeholder="ex) 제 1회 스포츠잇 대표 선발전"></Input>
         </InputArea>
         <InputArea>
           <InputTitle>대회 기관(단체)명</InputTitle>
