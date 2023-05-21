@@ -7,11 +7,8 @@ import { SelectArea, Text, TextArea } from "../auth/event-select.styles";
 import EventSelectButton from "@component/components/button/EventSelectButton";
 import Link from "next/link";
 import NavBar from "@component/components/navbar/NavBar";
-import {
-  contestEventAtom,
-  contestEventCountAtom,
-  contestEventSelector,
-} from "@component/atoms/contestAtom";
+import * as S from "./contest-info.styles";
+import { contestEventAtom, contestEventCountAtom, contestEventSelector } from "@component/atoms/contestAtom";
 
 const EventSelect = () => {
   const [contestEvents, setContestEvents] = useRecoilState(contestEventAtom);
