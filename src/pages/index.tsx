@@ -9,10 +9,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ImageSlider from "@component/components/container/ImageSlider";
-// import CustomButton from "@component/components/button/Custombutton";
+import CustomButton from "@component/components/button/Custombutton";
 import { ContentArea } from "@component/components/area/areaComponent";
-// import MainPagePost from "@component/components/container/mainpagepost";
-// import MainPageRecommanduser from "@component/components/container/mainragerecommanduser";
+import MainPagePost from "@component/components/container/mainpagepost";
+import MainPageRecommanduser from "@component/components/container/mainragerecommanduser";
 import BottomBar from "@component/components/navbar/BottomBar";
 
 export default function Home() {
