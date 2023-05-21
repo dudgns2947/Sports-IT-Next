@@ -34,6 +34,10 @@ export interface IHost {
   name: string;
 }
 
+export interface IPoster {
+  posterUrl: string;
+}
+
 export interface IContestInfo {
   argeements: string[];
   category: string;
@@ -48,7 +52,7 @@ export interface IContestInfo {
   maxPlayer: number | null;
   maxViewer: number | null;
   name: string;
-  posters: string[];
+  posters: IPoster[];
   recruitingEnd: string;
   recruitingStart: string;
   scrapCount: string;

@@ -11,7 +11,7 @@ const BottomBarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  top: 728px;
+  /* top: 728px; */
   bottom: 0;
   width: 100%;
   height: 8%;
@@ -25,7 +25,7 @@ const NavCard = styled.div`
   justify-content: center;
   align-items: center;
   width: 80px;
-  height: 80px;
+  height: 65px;
   padding-bottom: 5px;
   left: 10px;
   bottom: 24px;

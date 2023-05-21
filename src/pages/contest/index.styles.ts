@@ -188,7 +188,7 @@ export const RegisterButton = styled.button`
   width: 140px;
   height: 44px;
   left: calc(50% - 140px / 2 + 0.5px);
-  top: calc(50% - 44px / 2 + 270px);
+  top: calc(50% - 44px / 2 + 310px);
   background: #212121;
   border-radius: 50px;
   color: #ffffff;
