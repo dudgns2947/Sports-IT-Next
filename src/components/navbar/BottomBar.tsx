@@ -24,7 +24,6 @@ const NavCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ededed;
   width: 80px;
   height: 65px;
   padding-bottom: 5px;

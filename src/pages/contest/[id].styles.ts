@@ -55,7 +55,7 @@ export const Tag = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 49px;
+  width: 53px;
   height: 22px;
   background-color: #f9f9f9;
   color: #747474;
@@ -107,10 +107,17 @@ export const DetailWrapper = styled.div`
   padding: 20px 0;
 `;
 
+export const ApplyWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 2px solid #ededed;
+`;
+
 export const ApplyBar = styled.div`
   display: flex;
   justify-content: space-between;
-
   padding: 20px 15px;
 `;
 

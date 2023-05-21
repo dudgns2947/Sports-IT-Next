@@ -47,7 +47,7 @@ export const Tag = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 49px;
+  width: 52px;
   height: 22px;
   background-color: #f9f9f9;
   color: #747474;

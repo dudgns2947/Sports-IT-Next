@@ -149,8 +149,8 @@ const ChoiceRole = () => {
           </S.SurveyArea>
         </S.weightArea>
       </S.ChoiceContainer>
-      <Link href="/participate/terms">
-        <NavBar navText="결제하기" active={weightCost ? true : false} />
+      <Link href="/participate/apply-success">
+        <NavBar navText={`참가비 ${paymentCost} 원 결제하기`} active={weightCost ? true : false} />
       </Link>
     </S.RoleSelectContainer>
   );
