@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {AiOutlineRight} from 'react-icons/ai'; 
+import Profile from './Profile';
 
 interface MainPageRecommanduserProps {
   
@@ -21,17 +22,20 @@ const Header = styled.div`
 const SliderContainer = styled.div`
   width: 100%;
   overflow-x: scroll;
-  white-space: nowrap;
+  white-space: nowrap;  
   margin-top : 20px;
 `;
 
 const Text = styled.div`
   font-size: 20px;
   font-weight: bolder;
-`
+`;
+const SliderWrapper = styled.div`
+  width : 25%;
+`;
 
 const SliderImage = styled.img`
-  width: 20%;
+  width: 100%;
   height: auto;
   border-radius: 50%;
   margin-right: 20px;
@@ -39,7 +43,11 @@ const SliderImage = styled.img`
 
 const MainPageRecommanduser: React.FC<MainPageRecommanduserProps> = () => {
     const [scrollPosition, setScrollPosition] = useState<number>(0);
-
+    const info = {
+      url : "/images/example/Post1.png",
+      name : "김영훈",
+      favorite : "팔씨름・씨름",
+    }
     const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
         const scrollLeft = event.currentTarget.scrollLeft;
         setScrollPosition(scrollLeft);
@@ -53,10 +61,12 @@ const MainPageRecommanduser: React.FC<MainPageRecommanduserProps> = () => {
                 <AiOutlineRight/>
             </Header>
             <SliderContainer onScroll={handleScroll}>
-                <SliderImage src="/images/example/Post1.png"/>
-                <SliderImage src="/images/example/Post2.png"/>
-                <SliderImage src="/images/example/Post1.png"/>
-                <SliderImage src="/images/example/Post2.png"/>
+              <Profile imageUrl={info.url} name={info.name} favorite={info.favorite}/>
+              <Profile imageUrl={info.url} name={info.name} favorite={info.favorite}/>
+              <Profile imageUrl={info.url} name={info.name} favorite={info.favorite}/>
+              <Profile imageUrl={info.url} name={info.name} favorite={info.favorite}/>
+              <Profile imageUrl={info.url} name={info.name} favorite={info.favorite}/>
+              <Profile imageUrl={info.url} name={info.name} favorite={info.favorite}/>
             </SliderContainer>
         </Wrapper>
     );

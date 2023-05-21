@@ -31,6 +31,7 @@ export default function Home() {
   return (
     <PageWrapper>
       <Seo title="메인 페이지"/>
+      <TopBar/>
       <ContentArea>
         <S.CustomMenu>
           <S.Banner>
