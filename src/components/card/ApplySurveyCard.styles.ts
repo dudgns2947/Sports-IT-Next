@@ -13,6 +13,9 @@ export const SurveyCardWrapper = styled.div`
   width: 100%;
   padding: 5px 25px;
   border: 2px solid #ededed;
+  &:hover {
+    border: 2px solid #000000;
+  }
   border-radius: 8px;
   margin-bottom: 30px;
   margin-top: 15px;
@@ -38,22 +41,23 @@ export const SurveyTitleArea = styled.div`
   margin-bottom: 20px;
 `;
 
-export const SurveyTitleInput = styled.input`
+export const SurveyTitleInput = styled.span`
   width: 100%;
   padding: 10px 5px;
   font-weight: 500;
   font-size: 14px;
 `;
 
-export const SurveyInput = styled.input`
-  border-bottom: 1px solid #ededed;
+export const SurveyInput = styled.textarea`
+  border: 1px solid #ededed;
+  border-radius: 8px;
   font-weight: 500;
   font-size: 14px;
-  padding: 0 5px 5px 5px;
+  padding: 8px;
+  resize: none;
 `;
 
 export const SurveyCheckArea = styled.div`
-  border-bottom: 1px solid #ededed;
   padding: 10px 0px;
   display: flex;
   flex-direction: column;
@@ -69,11 +73,12 @@ export const SurveyCheckBox = styled.input`
   height: 1em;
   transition: border 0.1s ease-in-out;
   &:checked {
-    border: 0.35em solid #000000;
+    border: 0.35em solid #fd3446;
+    padding: 3px;
   }
   &:focus-visible {
     outline-offset: max(2px, 0, 1em);
-    outline: max(2px, 0.1em) solid #000000;
+    outline: max(2px, 0.1em) solid #fd3446;
   }
   &:hover {
     box-shadow: 0 0 0 max(4px, 0.2em) lightgray;

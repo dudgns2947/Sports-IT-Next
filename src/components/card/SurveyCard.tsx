@@ -32,28 +32,15 @@ const SurveyCard = ({ index, setSurveyList }: SurveyCardProps) => {
       {isChoice ? (
         <S.SurveyCheckArea>
           <S.SurveyCheckLabel>
-            <S.SurveyCheckBox
-              type={duplicate ? "checkbox" : "radio"}
-              name="category"
-              value="-70kg"
-            />
+            <S.SurveyCheckBox type={duplicate ? "checkbox" : "radio"} name="category" value="-70kg" />
             질문 1
           </S.SurveyCheckLabel>
           <S.SurveyCheckLabel>
-            <S.SurveyCheckBox
-              type={duplicate ? "checkbox" : "radio"}
-              name="category"
-              value="-60kg"
-            />
+            <S.SurveyCheckBox type={duplicate ? "checkbox" : "radio"} name="category" value="-60kg" />
             질문 2
           </S.SurveyCheckLabel>
           <S.AddCheckLabel>
-            <S.SurveyCheckBox
-              disabled
-              type={duplicate ? "checkbox" : "radio"}
-              name="category"
-              value="옵션 추가"
-            />
+            <S.SurveyCheckBox disabled type={duplicate ? "checkbox" : "radio"} name="category" value="옵션 추가" />
             옵션 추가
           </S.AddCheckLabel>
         </S.SurveyCheckArea>
@@ -72,21 +59,13 @@ const SurveyCard = ({ index, setSurveyList }: SurveyCardProps) => {
           <S.ToggleArea>
             <S.ToggleText>중복체크</S.ToggleText>
             <S.ToggleLabel>
-              <S.ToggleInput
-                active={duplicate}
-                role="switch"
-                type="checkbox"
-                onClick={() => setDuplicate((current) => !current)}
-              />
+              <S.ToggleInput active={duplicate} role="switch" type="checkbox" onClick={() => setDuplicate((current) => !current)} />
             </S.ToggleLabel>
             <S.ImageIcon />
             <S.TrashIcon
               onClick={() => {
                 if (typeof setSurveyList !== "undefined") {
-                  setSurveyList((current) => [
-                    ...current.slice(0, index),
-                    ...current.slice(index + 1),
-                  ]);
+                  setSurveyList((current) => [...current.slice(0, index), ...current.slice(index + 1)]);
                 }
               }}
             />

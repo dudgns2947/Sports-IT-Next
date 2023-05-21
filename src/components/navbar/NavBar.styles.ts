@@ -4,6 +4,8 @@ import styled from "styled-components";
 export const NavArea = styled.button<NavProps>`
   display: flex;
   justify-content: center;
+  position: fixed;
+  bottom: 0;
   align-items: center;
   height: 71.3px;
   width: 100%;

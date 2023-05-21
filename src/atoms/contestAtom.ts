@@ -1,4 +1,6 @@
 import { IEvent } from "@component/interfaces/eventInterface";
+import { WeightCost } from "@component/interfaces/weightCostInterface";
+
 import { atom, selector } from "recoil";
 
 export const contestEventAtom = atom<IEvent>({
@@ -31,12 +33,17 @@ export const contestEventCountAtom = atom<number>({
   default: 0,
 });
 
+export const weightcostAtom = atom<WeightCost>({
+  key: "weightcostAtom",
+  default: {
+    cost: 0,
+    extraCost: 0,
+  },
+});
+
 export const contestEventSelector = selector({
   key: "contestEventSelector",
-  get: ({ get }) =>
-    Object.keys(get(contestEventAtom)).find(
-      (key) => get(contestEventAtom)[key] === true
-    ),
+  get: ({ get }) => Object.keys(get(contestEventAtom)).find((key) => get(contestEventAtom)[key] === true),
 });
 
 export const contestMaxNumOfPlayers = atom<number | null>({

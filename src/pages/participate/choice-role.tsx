@@ -12,7 +12,7 @@ const ChoiceRole = () => {
   console.log(role);
   return (
     <S.RoleSelectContainer>
-      <GoBackHeader />
+      <GoBackHeader title="대회 신청" />
       <S.QuestionArea>
         <S.QuestionText>선수로 참여하시나요?</S.QuestionText>
         <S.QuestionText>관람객으로 참여하시나요?</S.QuestionText>

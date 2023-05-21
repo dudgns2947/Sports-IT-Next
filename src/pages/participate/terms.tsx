@@ -6,13 +6,12 @@ import Seo from "@component/components/Seo";
 import Link from "next/link";
 import { PageWrapper } from "@component/components/container/container";
 import { useRecoilState } from "recoil";
-import { appTermAtom, marketingOptInAtom, privacyPolicyAtom, thirdPartyAtom } from "@component/atoms/termAtom";
+import { appTermAtom, privacyPolicyAtom, thirdPartyAtom } from "@component/atoms/termAtom";
 
 const Terms = () => {
   const [appTerm, setAppTerm] = useRecoilState(appTermAtom);
   const [privacyPolicy, setPrivacyPolicy] = useRecoilState(privacyPolicyAtom);
   const [thirdParty, setThirdParty] = useRecoilState(thirdPartyAtom);
-  const [marketingOpt, setMarketingOpt] = useRecoilState(marketingOptInAtom);
   return (
     <PageWrapper>
       <GoBackHeader title="대회 신청" />
@@ -24,9 +23,9 @@ const Terms = () => {
       <S.TermArea>
         <S.TotalAgree>
           <S.TotalAgreeIcon
-            agree={appTerm && privacyPolicy && thirdParty && marketingOpt}
+            agree={appTerm && privacyPolicy && thirdParty}
             onClick={() => {
-              if (appTerm && privacyPolicy && thirdParty && marketingOpt) {
+              if (appTerm && privacyPolicy && thirdParty) {
                 setAppTerm(false);
                 setPrivacyPolicy(false);
                 setThirdParty(false);
@@ -61,8 +60,8 @@ const Terms = () => {
           <S.TermPageIcon />
         </S.Term>
       </S.TermArea>
-      <Link href="/auth/signup-success">
-        <NavBar navText="동의하고 다음" active={appTerm && privacyPolicy && thirdParty && marketingOpt} />
+      <Link href="/participate/apply">
+        <NavBar navText="동의하고 다음" active={appTerm && privacyPolicy && thirdParty} />
       </Link>
     </PageWrapper>
   );
