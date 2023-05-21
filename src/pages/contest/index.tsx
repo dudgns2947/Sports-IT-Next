@@ -19,18 +19,7 @@ import qs from "qs";
 import FilterButton from "@component/components/button/FilterButton";
 import { useRouter } from "next/router";
 import BottomBar from "@component/components/navbar/BottomBar";
-
-const getDday = (timestamp: number) => {
-  // 주어진 타임스탬프 값을 Date 객체로 변환
-  const date = new Date(timestamp * 1000);
-  // 현재 날짜와 시간을 나타내는 Date 객체 생성
-  const today = new Date();
-  // 두 날짜 간의 차이 계산
-  const diffTime = Math.abs(today.getTime() - date.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  return `D-${diffDays}`;
-};
+import Contest from "@component/components/contest/Contest";
 
 const Index = () => {
   const { register, handleSubmit, formState } = useForm<ISearchInput>();
@@ -183,28 +172,14 @@ const Index = () => {
           <S.ContestArea>
             {contestList
               ? contestList.map((contest) => (
-                  <S.Contest key={contest.competitionId}>
-                    <S.ContestImage src="/images/contest/example.png" />
-                    <S.ContestInfo>
-                      <S.ContestTagArea>
-                        {contest.competitionType === "FREE" ? null : (
-                          <S.PremiumTag>프리미엄</S.PremiumTag>
-                        )}
-                        <S.Tag>팔씨름</S.Tag>
-                        <S.Tag>씨름</S.Tag>
-                      </S.ContestTagArea>
-                      <S.ContestTitle>{contest.name}</S.ContestTitle>
-                      <S.ContestHostArea>
-                        <S.ContestHostName>
-                          {contest.host.name}
-                        </S.ContestHostName>
-                        <S.PremiumLogo src="/images/logo/premiumLogo.png" />
-                      </S.ContestHostArea>
-                      <S.ContestDday>
-                        {getDday(Date.parse(contest.endDate) / 1000)}
-                      </S.ContestDday>
-                    </S.ContestInfo>
-                  </S.Contest>
+                  <Contest
+                    key={contest.competitionId}
+                    competitionId={contest.competitionId}
+                    competitionType={contest.competitionType}
+                    name={contest.name}
+                    host={contest.host}
+                    endDate={contest.endDate}
+                  />
                 ))
               : null}
             <S.RegisterButton

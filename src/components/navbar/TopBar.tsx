@@ -10,8 +10,10 @@ const TopBar = () => {
           <S.SearchIcon />
         </S.SearchButton>
       </S.SearchForm>
-      <S.AlarmButton />
-      <S.MyPageButton />
+      <S.ButtonArea>
+        <S.AlarmButton />
+        <S.MyPageButton />
+      </S.ButtonArea>
     </S.TopBar>
   );
 };
