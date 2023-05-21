@@ -1,6 +1,7 @@
 import React from "react";
 import * as S from "./Contest.styles";
 import { IHost } from "@component/interfaces/contestInterface";
+import { useRouter } from "next/router";
 
 interface IContest {
   competitionId: number;
@@ -8,6 +9,7 @@ interface IContest {
   name: string;
   host: IHost;
   endDate: string;
+  showImage?: boolean;
 }
 
 const Contest = ({
@@ -16,6 +18,7 @@ const Contest = ({
   name,
   host,
   endDate,
+  showImage,
 }: IContest) => {
   const getDday = (timestamp: number) => {
     // 주어진 타임스탬프 값을 Date 객체로 변환
@@ -28,16 +31,20 @@ const Contest = ({
 
     return `D-${diffDays}`;
   };
+  const router = useRouter();
   return (
-    <S.Contest>
-      <S.ContestImage src="/images/contest/example.png" />
+    <S.Contest onClick={() => router.push(`/contest/${competitionId}`)}>
+      {showImage === false ? null : (
+        <S.ContestImage src="/images/contest/example.png" />
+      )}
+
       <S.ContestInfo>
         <S.ContestTagArea>
           {competitionType === "FREE" ? null : (
             <S.PremiumTag>프리미엄</S.PremiumTag>
           )}
-          <S.Tag>팔씨름</S.Tag>
-          <S.Tag>씨름</S.Tag>
+          <S.Tag>스포츠</S.Tag>
+          <S.Tag>대회</S.Tag>
         </S.ContestTagArea>
         <S.ContestTitle>{name}</S.ContestTitle>
         <S.ContestHostArea>

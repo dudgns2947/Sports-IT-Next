@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Contest = styled.div`
   display: flex;
   margin: 20px 0;
+  cursor: pointer;
 `;
 
 export const ContestImage = styled.img`
