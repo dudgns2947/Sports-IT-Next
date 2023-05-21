@@ -41,6 +41,9 @@ export const GlobalStyle = createGlobalStyle`
 }
   body {
     line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Pretendard-Regular', sans-serif;
   }
   ol, ul {
