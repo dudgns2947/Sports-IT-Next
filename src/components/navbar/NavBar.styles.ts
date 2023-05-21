@@ -12,5 +12,7 @@ export const NavArea = styled.button<NavProps>`
 `;
 
 export const NavText = styled.span<NavProps>`
+  font-size: 18px;
+  font-weight: bold;
   color: ${(props) => (props.active ? "#ffffff" : "#212121")};
 `;

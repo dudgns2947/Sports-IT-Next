@@ -10,7 +10,7 @@ import NavBar from "@component/components/navbar/NavBar";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
 
-const eventSelect = () => {
+const EventSelect = () => {
   const [events, setEvents] = useRecoilState<IEvent>(eventAtom);
   const [count, setCount] = useRecoilState<number>(eventCountAtom);
   console.log(events);
@@ -24,19 +24,11 @@ const eventSelect = () => {
       </S.TextArea>
       <S.SelectArea>
         {Object.keys(events).map((event, index) => (
-          <EventSelectButton
-            key={index}
-            text={event}
-            active={events[event]}
-            setCount={setCount}
-            setEvent={setEvents}
-          ></EventSelectButton>
+          <EventSelectButton key={index} text={event} active={events[event]} setCount={setCount} setEvent={setEvents}></EventSelectButton>
         ))}
       </S.SelectArea>
       <S.BottomArea>
-        <S.BottomText count={count}>
-          5개까지 선택 가능합니다.({count}/5)
-        </S.BottomText>
+        <S.BottomText count={count}>5개까지 선택 가능합니다.({count}/5)</S.BottomText>
       </S.BottomArea>
       <Link href="/auth/signup">
         <NavBar navText="다음" active={count <= 5 ? true : false} />
@@ -45,4 +37,4 @@ const eventSelect = () => {
   );
 };
 
-export default eventSelect;
+export default EventSelect;

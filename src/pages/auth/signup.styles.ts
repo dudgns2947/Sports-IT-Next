@@ -1,5 +1,15 @@
 import NavBar from "@component/components/navbar/NavBar";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const InputBorderColor = keyframes`
+  0% {
+    border: #eaeaea;
+  }
+  100% {
+    border: #000000;
+  }
+
+`;
 
 export const Form = styled.form`
   height: 93%;
@@ -26,7 +36,19 @@ export const InputTitle = styled.h2`
 
 export const InputContent = styled.input`
   font-size: 15px;
-  padding: 8px 1px;
+  padding: 8px 20px;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  margin-top: 5px;
+  margin-bottom: -18px;
+  width: 335px;
+  height: 45px;
+  left: 20px;
+  top: 147px;
+
+  &:focus {
+    border: 1px solid #000000;
+  }
 `;
 
 export const NavBarTwo = styled(NavBar)`

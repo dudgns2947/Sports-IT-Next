@@ -68,12 +68,23 @@ export const RoleArea = styled.div`
   flex-direction: column;
 `;
 
-export const RoleAreaTitle = styled.div``;
+export const RoleTextArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+`;
 
 export const Role = styled.span`
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 5px;
+`;
+
+export const participateAvailable = styled.span`
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 11px;
+  color: #fd3446;
 `;
 
 export const RoleDescription = styled.span`
