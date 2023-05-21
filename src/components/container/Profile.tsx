@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     width: 20%;
     display: inline-block;
     text-align: center;
-    margin-right: 10px;
+    margin-right: 20px;
 `
 const Image = styled.img`
   width: 100%;
