@@ -11,12 +11,20 @@ import styled from "styled-components";
 import ImageSlider from "@component/components/container/ImageSlider";
 import CustomButton from "@component/components/button/Custombutton";
 import { ContentArea } from "@component/components/area/areaComponent";
-import MainPagePost from "@component/components/container/MainPagePost";
-
+import MainPagePost from "@component/components/container/mainpagepost";
+import qs from "qs";
 import BottomBar from "@component/components/navbar/BottomBar";
 import MainPageRecommanduser from "@component/components/container/MainPageRecommanduser";
 import MainPageCompetition from "@component/components/container/MainPageCompetition";
-import { IContestParams } from "@component/interfaces/contestInterface";
+import {
+  FilterType,
+  IContestInfo,
+  IContestParams,
+} from "@component/interfaces/contestInterface";
+import { baseApi } from "@component/api/utils/instance";
+import { useRecoilValue } from "recoil";
+import { userTokenAtom } from "@component/atoms/tokenAtom";
+import Contest from "@component/components/contest/Contest";
 
 export default function Home() {
   const images = [
@@ -35,29 +43,89 @@ export default function Home() {
     "/images/example/Post2.png",
     "/images/example/Post1.png",
     "/images/example/Post2.png",
-  ]
+  ];
   const userName = "이준수";
   const [scrollposition, setScrollPosition] = useState<number>(0);
+  const [contestList, setContestList] = useState<IContestInfo[]>([]);
+  const token = useRecoilValue(userTokenAtom);
+  const [keyword, setKeyword] = useState("");
+  const [filterBy, setFilterBy] = useState<FilterType[]>([
+    "PLANNING",
+    "RECRUITING",
+  ]);
+  const [orderBy, setOrderBy] = useState("createdDate");
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(3);
+
+  async function getContest(contestProps: IContestParams) {
+    const response = await baseApi.get("competitions/slice", {
+      headers: {
+        Authorization: `Bearer ${contestProps.token}`,
+      },
+      params: {
+        keyword: contestProps.keyword,
+        filterBy: contestProps.filterBy,
+        orderBy: contestProps.orderBy,
+        page: contestProps.page,
+        size: contestProps.size,
+      },
+      paramsSerializer: (params) => {
+        return qs.stringify(params, { arrayFormat: "repeat" });
+      },
+    });
+    console.log(response);
+    setContestList(response.data.content);
+    await console.log(contestList);
+  }
+
+  useEffect(() => {
+    getContest({
+      token: token,
+      keyword: keyword,
+      filterBy: filterBy,
+      orderBy: orderBy,
+      page: page,
+      size: size,
+    });
+  }, [keyword, filterBy, orderBy, page, size]);
+
   return (
     <PageWrapper>
-      <TopBar/>
-      <Seo title="메인 페이지"/>
+      <TopBar />
+      <Seo title="메인 페이지" />
       <ContentArea>
         <S.CustomMenu>
           <S.Banner>
             <ImageSlider images={images} />
           </S.Banner>
           <S.IconContainer>
-            {iconProps? iconProps.map((iconProp)=>(
-              <CustomButton imageUrl={iconProp[0]} buttonName={iconProp[1]}/>
-            )):null}
+            {iconProps
+              ? iconProps.map((iconProp) => (
+                  <CustomButton
+                    imageUrl={iconProp[0]}
+                    buttonName={iconProp[1]}
+                  />
+                ))
+              : null}
           </S.IconContainer>
         </S.CustomMenu>
         <S.Divider />
-        <MainPagePost userName={userName} imageUrls = {iamgeUrls}/>
+        <MainPagePost userName={userName} imageUrls={iamgeUrls} />
         <MainPageCompetition />
-        <MainPageRecommanduser/>
+        {contestList
+          ? contestList.map((contest) => (
+              <Contest
+                key={contest.competitionId}
+                competitionId={contest.competitionId}
+                competitionType={contest.competitionType}
+                name={contest.name}
+                host={contest.host}
+                endDate={contest.endDate}
+              />
+            ))
+          : null}
 
+        <MainPageRecommanduser />
       </ContentArea>
       <BottomBar />
     </PageWrapper>
