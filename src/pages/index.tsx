@@ -30,8 +30,9 @@ export default function Home() {
   const userName = "김영훈";
   return (
     <PageWrapper>
-      <Seo title="메인 페이지" />
-      <TopBar />
+      <Seo title="메인 페이지"/>
+      <TopBar/>
+
       <ContentArea>
         <S.CustomMenu>
           <S.Banner>
