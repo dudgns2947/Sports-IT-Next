@@ -14,7 +14,8 @@ const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
   const [count, setCount] = useState<number>(0);
   const [sectorName, setSectorName] = useState<string>("");
-  const [weightCost, setWeightCost] = useRecoilState<WeightCost>(weightcostAtom);
+  const [weightCost, setWeightCost] =
+    useRecoilState<WeightCost>(weightcostAtom);
   const [paymentCost, setPaymentCost] = useState<number>(0);
   console.log(role);
   console.log(count);
@@ -74,23 +75,48 @@ const ChoiceRole = () => {
           </S.SectorContainer>
           <S.SurveyArea>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox type="radio" name="category" value="프로" onChange={handleSectorName} />
+              <S.SurveyCheckBox
+                type="radio"
+                name="category"
+                value="프로"
+                onChange={handleSectorName}
+              />
               프로
             </S.SurveyCheckLabel>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox type="radio" name="category" value="세미프로" onChange={handleSectorName} />
+              <S.SurveyCheckBox
+                type="radio"
+                name="category"
+                value="세미프로"
+                onChange={handleSectorName}
+              />
               세미프로
             </S.SurveyCheckLabel>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox type="radio" name="category" value="아마추어" onChange={handleSectorName} />
+              <S.SurveyCheckBox
+                type="radio"
+                name="category"
+                value="아마추어"
+                onChange={handleSectorName}
+              />
               아마추어
             </S.SurveyCheckLabel>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox type="radio" name="category" value="노비스" onChange={handleSectorName} />
+              <S.SurveyCheckBox
+                type="radio"
+                name="category"
+                value="노비스"
+                onChange={handleSectorName}
+              />
               노비스
             </S.SurveyCheckLabel>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox type="radio" name="category" value="하비" onChange={handleSectorName} />
+              <S.SurveyCheckBox
+                type="radio"
+                name="category"
+                value="하비"
+                onChange={handleSectorName}
+              />
               하비
             </S.SurveyCheckLabel>
           </S.SurveyArea>
@@ -105,7 +131,11 @@ const ChoiceRole = () => {
               <S.SurveyCheckBox
                 type="checkbox"
                 name="category"
-                value={count === 0 ? costJson.프로.cost : costJson[`${sectorName}`].extraCost}
+                value={
+                  count === 0
+                    ? costJson.프로.cost
+                    : costJson[`${sectorName}`].extraCost
+                }
                 onChange={handleWeightCost}
               />
               -70kg
@@ -114,7 +144,11 @@ const ChoiceRole = () => {
               <S.SurveyCheckBox
                 type="checkbox"
                 name="category"
-                value={count === 0 ? costJson.프로.cost : costJson[`${sectorName}`].extraCost}
+                value={
+                  count === 0
+                    ? costJson.프로.cost
+                    : costJson[`${sectorName}`].extraCost
+                }
                 onChange={handleWeightCost}
               />
               -78kg
@@ -123,7 +157,11 @@ const ChoiceRole = () => {
               <S.SurveyCheckBox
                 type="checkbox"
                 name="category"
-                value={count === 0 ? costJson.프로.cost : costJson[`${sectorName}`].extraCost}
+                value={
+                  count === 0
+                    ? costJson.프로.cost
+                    : costJson[`${sectorName}`].extraCost
+                }
                 onChange={handleWeightCost}
               />
               -86kg
@@ -132,7 +170,11 @@ const ChoiceRole = () => {
               <S.SurveyCheckBox
                 type="checkbox"
                 name="category"
-                value={count === 0 ? costJson.프로.cost : costJson[`${sectorName}`].extraCost}
+                value={
+                  count === 0
+                    ? costJson.프로.cost
+                    : costJson[`${sectorName}`].extraCost
+                }
                 onChange={handleWeightCost}
               />
               -95kg
@@ -141,7 +183,11 @@ const ChoiceRole = () => {
               <S.SurveyCheckBox
                 type="checkbox"
                 name="category"
-                value={count === 0 ? costJson.프로.cost : costJson[`${sectorName}`].extraCost}
+                value={
+                  count === 0
+                    ? costJson.프로.cost
+                    : costJson[`${sectorName}`].extraCost
+                }
                 onChange={handleWeightCost}
               />
               +95kg
@@ -150,7 +196,10 @@ const ChoiceRole = () => {
         </S.weightArea>
       </S.ChoiceContainer>
       <Link href="/participate/apply-success">
-        <NavBar navText={`참가비 ${paymentCost} 원 결제하기`} active={weightCost ? true : false} />
+        <NavBar
+          navText={`참가비 ${paymentCost} 원 결제하기`}
+          active={weightCost ? true : false}
+        />
       </Link>
     </S.RoleSelectContainer>
   );

@@ -19,7 +19,7 @@ export const Form = styled.form`
 `;
 
 export const InputArea = styled.div`
-  padding: 30px;
+  padding: 20px;
 `;
 
 export const Input = styled.div`

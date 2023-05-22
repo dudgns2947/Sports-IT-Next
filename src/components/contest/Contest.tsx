@@ -8,7 +8,7 @@ interface IContest {
   competitionType: string;
   name: string;
   host: IHost;
-  endDate: string;
+  recruitingEnd: string;
   showImage?: boolean;
 }
 
@@ -17,7 +17,7 @@ const Contest = ({
   competitionType,
   name,
   host,
-  endDate,
+  recruitingEnd,
   showImage,
 }: IContest) => {
   const getDday = (timestamp: number) => {
@@ -51,7 +51,9 @@ const Contest = ({
           <S.ContestHostName>{host.name}</S.ContestHostName>
           <S.PremiumLogo src="/images/logo/premiumLogo.png" />
         </S.ContestHostArea>
-        <S.ContestDday>{getDday(Date.parse(endDate) / 1000)}</S.ContestDday>
+        <S.ContestDday>
+          {getDday(Date.parse(recruitingEnd) / 1000)}
+        </S.ContestDday>
       </S.ContestInfo>
     </S.Contest>
   );

@@ -10,7 +10,7 @@ import {
   ISearchInput,
 } from "@component/interfaces/contestInterface";
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { AiOutlineDown } from "react-icons/ai";
 import { FiFilter } from "react-icons/fi";
 import * as S from "./index.styles";
@@ -20,6 +20,7 @@ import FilterButton from "@component/components/button/FilterButton";
 import { useRouter } from "next/router";
 import BottomBar from "@component/components/navbar/BottomBar";
 import Contest from "@component/components/contest/Contest";
+import { roleAtom } from "@component/atoms/roleAtom";
 
 const Index = () => {
   const { register, handleSubmit, formState } = useForm<ISearchInput>();
@@ -32,8 +33,8 @@ const Index = () => {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
   const [contestList, setContestList] = useState<IContestInfo[]>([]);
-
   const token = useRecoilValue(userTokenAtom);
+  const role = useRecoilValue(roleAtom);
 
   const router = useRouter();
 
@@ -114,7 +115,7 @@ const Index = () => {
       <Seo title="대회" />
       <S.Container>
         <S.TopBar>
-          <S.SearchForm>
+          <S.SearchForm onSubmit={handleSubmit(onValid)}>
             <S.SearchInput
               {...register("keyword")}
               type="text"
@@ -178,16 +179,18 @@ const Index = () => {
                     competitionType={contest.competitionType}
                     name={contest.name}
                     host={contest.host}
-                    endDate={contest.endDate}
+                    recruitingEnd={contest.recruitingEnd}
                   />
                 ))
               : null}
-            <S.RegisterButton
-              onClick={() => router.push("register/event-select")}
-            >
-              <S.PlusIcons />
-              대회 개최하기
-            </S.RegisterButton>
+            {role === "ROLE_INSTITUTION" ? (
+              <S.RegisterButton
+                onClick={() => router.push("register/event-select")}
+              >
+                <S.PlusIcons />
+                대회 개최하기
+              </S.RegisterButton>
+            ) : null}
           </S.ContestArea>
         </S.ContentArea>
       </S.Container>

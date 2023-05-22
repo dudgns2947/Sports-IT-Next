@@ -76,3 +76,20 @@ export interface IContestDetailForm {
   imageList: FileList;
   detail: string;
 }
+
+export interface RegisterForm {
+  name: string;
+  sportCategory: string;
+  startDate: string;
+  recruitingStart: string;
+  recruitingEnd: string;
+  totalPrize: number;
+  content: string;
+  location: string;
+  locationDetail: string;
+  CompetitionState: string;
+  CompetitionType: string;
+  maxPlayer: number;
+  maxViewer: number;
+  templateId: number;
+}

@@ -33,6 +33,7 @@ const RulesAndTerms = () => {
       ]);
       alert("규정 및 약관이 추가되었습니다 !");
       setWillAdd(false);
+      setInputText("");
     }
   };
 

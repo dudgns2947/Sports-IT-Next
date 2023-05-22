@@ -1,5 +1,8 @@
 import Seo from "@component/components/Seo";
-import { Container, PageWrapper } from "@component/components/container/container";
+import {
+  Container,
+  PageWrapper,
+} from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import React from "react";
 import * as S from "./signup.styles";
@@ -11,6 +14,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { signupPost } from "@component/api/account/accountApi";
 import { ISignupForm } from "@component/interfaces/accountInterface";
+import { ContentArea } from "@component/components/area/areaComponent";
 
 const Signup = () => {
   const { register, handleSubmit, formState } = useForm<ISignupForm>();
@@ -56,6 +60,7 @@ const Signup = () => {
     <PageWrapper>
       <Seo title="회원가입" />
       <GoBackHeader title="회원가입" />
+
       <S.Form onSubmit={handleSubmit(onValid, onInValid)}>
         <S.InputArea>
           <S.Input>
@@ -73,7 +78,8 @@ const Signup = () => {
               {...register("email", {
                 required: "이메일를 입력해주세요.",
                 pattern: {
-                  value: /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
+                  value:
+                    /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
                   message: "이메일 형식에 맞춰 입력해주세요.",
                 },
               })}
@@ -89,7 +95,7 @@ const Signup = () => {
               placeholder="- 없이 입력"
             ></S.InputContent>
           </S.Input>
-          <S.Input>
+          {/* <S.Input>
             <S.InputTitle>인증번호</S.InputTitle>
             <S.InputContent
               {...register("authNumber", {
@@ -97,7 +103,7 @@ const Signup = () => {
               })}
               placeholder="인증번호 입력"
             ></S.InputContent>
-          </S.Input>
+          </S.Input> */}
           <S.Input>
             <S.InputTitle>비밀번호</S.InputTitle>
             <S.InputContent
@@ -109,7 +115,8 @@ const Signup = () => {
                 },
                 pattern: {
                   value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
-                  message: "비밀번호는 영문, 숫자, 특수문자 포함한 8 ~ 16자리를 만족하여야 합니다.",
+                  message:
+                    "비밀번호는 영문, 숫자, 특수문자 포함한 8 ~ 16자리를 만족하여야 합니다.",
                 },
               })}
               placeholder="8 ~ 16자리 영문, 숫자, 특수문자 포함"

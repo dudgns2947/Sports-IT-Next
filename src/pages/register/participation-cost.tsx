@@ -58,14 +58,14 @@ const ParticipationCost = () => {
           <BoldSubText>아마추어부문 단일체급 추가비용</BoldSubText>
           <Input type="number" placeholder="금액을 입력해주세요." />
         </CostInputArea>
-        <CostInputArea>
+        {/* <CostInputArea>
           <BoldSubText>노비스부문 단일체급 참가비용</BoldSubText>
           <Input type="number" placeholder="금액을 입력해주세요." />
         </CostInputArea>
         <CostInputArea>
           <BoldSubText>노비스부문 단일체급 추가비용</BoldSubText>
           <Input type="number" placeholder="금액을 입력해주세요." />
-        </CostInputArea>
+        </CostInputArea> */}
       </ContentArea>
       <Link href="/register/form">
         <NavBar navText="다음" active={true} />
