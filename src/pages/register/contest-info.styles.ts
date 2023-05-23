@@ -7,7 +7,7 @@ export const SmallInput = styled(Input)`
 `;
 
 export const LargeInput = styled(Input)`
-  height: 150px;
+  height: 100%;
 `;
 
 export const SmallInputWrapper = styled.div``;

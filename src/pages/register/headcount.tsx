@@ -8,8 +8,8 @@ import * as S from "./headcount.styles";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import {
-  contestMaxNumOfAudience,
-  contestMaxNumOfPlayers,
+  contestMaxPlayerAtom,
+  contestMaxViewerAtom,
 } from "@component/atoms/contestAtom";
 import { useRouter } from "next/router";
 import { HeadCountForm } from "@component/interfaces/headcountInterface";
@@ -17,8 +17,8 @@ import { HeadCountForm } from "@component/interfaces/headcountInterface";
 const headcount = () => {
   const router = useRouter();
   const { register, handleSubmit, formState } = useForm<HeadCountForm>();
-  const setMaxNumOfPlayers = useSetRecoilState(contestMaxNumOfPlayers);
-  const setMaxNumOfAudience = useSetRecoilState(contestMaxNumOfAudience);
+  const setMaxNumOfPlayers = useSetRecoilState(contestMaxPlayerAtom);
+  const setMaxNumOfAudience = useSetRecoilState(contestMaxViewerAtom);
   const [errorMsg, setErrorMsg] = useState<string | undefined>("");
   const [errorMsgTwo, setErrorMsgTwo] = useState<string | undefined>("");
 
