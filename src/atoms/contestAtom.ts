@@ -1,3 +1,7 @@
+import {
+  IRuleAndTerm,
+  IWeightSector,
+} from "@component/interfaces/contestInterface";
 import { IEvent } from "@component/interfaces/eventInterface";
 import { WeightCost } from "@component/interfaces/weightCostInterface";
 
@@ -131,5 +135,10 @@ export const contestRuleUrlNames = atom<string[]>({
 
 export const contestRuleUrls = atom<string[]>({
   key: "contestRuleUrls",
+  default: [],
+});
+
+export const contestWeightSectors = atom<IWeightSector[]>({
+  key: "contestWeightSectors",
   default: [],
 });

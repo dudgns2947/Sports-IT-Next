@@ -94,7 +94,15 @@ export interface RegisterForm {
   templateId: number;
 }
 
-export interface IRuleAndTerm {
+export interface ISector {
+  join: boolean;
+  name: string;
+}
+
+export interface IWeightSector {
   title: string;
-  content: string;
+  cost: number;
+  expandCost: number;
+  sectors: ISector[];
+  multi: boolean;
 }

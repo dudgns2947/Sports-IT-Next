@@ -16,13 +16,11 @@ import {
   contestRuleUrlNames,
   contestRuleUrls,
 } from "@component/atoms/contestAtom";
-import { IRuleAndTerm } from "@component/interfaces/contestInterface";
 
 const RulesAndTerms = () => {
   const [inputText, setInputText] = useState("");
   const [fileUpload, setFileUpload] = useState(true);
   const [willAdd, setWillAdd] = useState(false);
-  const [rulesAndTerms, setRulesAndTerms] = useState<IRuleAndTerm[]>([]);
   const [url, setUrl] = useState("");
   const [file, setFile] = useState<File>();
   const [ruleFileNames, setRuleFileNames] =

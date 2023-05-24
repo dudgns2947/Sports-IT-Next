@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-import { MdOutlineCheckBoxOutlineBlank, MdOutlineCheckBox } from "react-icons/md";
+import {
+  MdOutlineCheckBoxOutlineBlank,
+  MdOutlineCheckBox,
+} from "react-icons/md";
 
 import { BsTrash } from "react-icons/bs";
 import { CiImageOn } from "react-icons/ci";
@@ -54,7 +57,6 @@ export const SurveyInput = styled.input`
 
 export const SurveyCheckArea = styled.div`
   border-bottom: 1px solid #ededed;
-  padding: 10px 0px;
   display: flex;
   flex-direction: column;
 `;
@@ -98,7 +100,11 @@ export const AddCheckLabel = styled(SurveyCheckLabel)`
   color: #aeaeae;
 `;
 
-export const SurveyBottomArea = styled.div``;
+export const SurveyBottomArea = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 7px 2px;
+`;
 
 export const UnCheckButton = styled(MdOutlineCheckBoxOutlineBlank)``;
 
@@ -135,11 +141,11 @@ export const ToggleInput = styled.input<ToggleInputProps>`
     transform: scale(0.8);
     background-color: gray;
     transition: left 250ms linear;
-    border-color: ${(props) => (props.active ? "#4C8BFF" : "gray")};
+    border-color: ${(props) => (props.active ? "#FF002E" : "gray")};
   }
   :checked {
-    background-color: #4c8bff;
-    border-color: #4c8bff;
+    background-color: #ff002e;
+    border-color: #ff002e;
   }
   :checked::before {
     background-color: white;

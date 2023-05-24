@@ -1,3 +1,4 @@
+import { contestWeightSectors } from "@component/atoms/contestAtom";
 import Seo from "@component/components/Seo";
 import { ContentArea } from "@component/components/area/areaComponent";
 import AddButton from "@component/components/button/AddButton";
@@ -9,6 +10,7 @@ import { BoldText, BoldTextArea } from "@component/components/text/boldText";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
 const SurveyArea = styled.div``;
@@ -18,7 +20,8 @@ const AddButtonArea = styled.div`
 `;
 
 const SectorAndWeight = () => {
-  const [surveyList, setSurveyList] = useState<string[]>([""]);
+  const [weightSectors, setWeightSectors] =
+    useRecoilState(contestWeightSectors);
 
   return (
     <PageWrapper>
@@ -30,15 +33,18 @@ const SectorAndWeight = () => {
           <BoldText>등록해주세요.</BoldText>
         </BoldTextArea>
         <SurveyArea>
+          <SurveyCard />
+        </SurveyArea>
+        {/* <SurveyArea>
           {surveyList.map((survey, index) => (
             <SurveyCard index={index} setSurveyList={setSurveyList} />
           ))}
-        </SurveyArea>
-        <AddButtonArea
+        </SurveyArea> */}
+        {/* <AddButtonArea
           onClick={() => setSurveyList((current) => [...current, ""])}
         >
           <AddButton text="부문 / 체급 추가하기"></AddButton>
-        </AddButtonArea>
+        </AddButtonArea> */}
       </ContentArea>
       <Link href="/register/participation-cost">
         <NavBar navText="다음" active={true} />
