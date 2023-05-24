@@ -93,3 +93,8 @@ export interface RegisterForm {
   maxViewer: number;
   templateId: number;
 }
+
+export interface IRuleAndTerm {
+  title: string;
+  content: string;
+}

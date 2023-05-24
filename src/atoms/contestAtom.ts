@@ -113,3 +113,23 @@ export const contestPosterList = atom<File[]>({
   key: "contestPosterList",
   default: [],
 });
+
+export const contestRuleFileNames = atom<string[]>({
+  key: "contestRuleFileNames",
+  default: [],
+});
+
+export const contestRuleFiles = atom<File[]>({
+  key: "contestRuleFiles",
+  default: [],
+});
+
+export const contestRuleUrlNames = atom<string[]>({
+  key: "contestRuleUrlNames",
+  default: [],
+});
+
+export const contestRuleUrls = atom<string[]>({
+  key: "contestRuleUrls",
+  default: [],
+});
