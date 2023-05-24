@@ -27,7 +27,7 @@ export const InputTitle = styled.h3`
   color: #212121;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 `;
 
 export const Input = styled.input`

@@ -43,15 +43,73 @@ export const weightcostAtom = atom<WeightCost>({
 
 export const contestEventSelector = selector({
   key: "contestEventSelector",
-  get: ({ get }) => Object.keys(get(contestEventAtom)).find((key) => get(contestEventAtom)[key] === true),
+  get: ({ get }) =>
+    Object.keys(get(contestEventAtom)).find(
+      (key) => get(contestEventAtom)[key] === true
+    ),
 });
 
-export const contestMaxNumOfPlayers = atom<number | null>({
-  key: "contestMaxNumOfPlayers",
+export const contestNameAtom = atom<string | null>({
+  key: "contestName",
+  default: "",
+});
+
+export const contestStartDateAtom = atom<string | null>({
+  key: "contestStartDate",
+  default: "",
+});
+
+export const contestEndDateAtom = atom<string | null>({
+  key: "contestEndDate",
+  default: "",
+});
+
+export const contestRecruitingStartAtom = atom<string | null>({
+  key: "contestRecruitingStart",
+  default: "",
+});
+
+export const contestRecruitingEndAtom = atom<string | null>({
+  key: "contestRecruitingEnd",
+  default: "",
+});
+
+export const contestTotalPrizeAtom = atom<number | null>({
+  key: "contestTotalPrize",
+  default: 0,
+});
+
+export const contestContentAtom = atom<string | null>({
+  key: "contestContent",
+  default: "",
+});
+
+export const contestLocationAtom = atom<string | null>({
+  key: "contestLocation",
+  default: "",
+});
+
+export const contestLocationDetailAtom = atom<string | null>({
+  key: "contestLocationDetail",
+  default: "",
+});
+
+export const contestMaxPlayerAtom = atom<number | null>({
+  key: "contestMaxPlayer",
   default: null,
 });
 
-export const contestMaxNumOfAudience = atom<number | null>({
-  key: "contestMaxNumOfAudience",
+export const contestMaxViewerAtom = atom<number | null>({
+  key: "contestMaxViewer",
   default: null,
+});
+
+export const contestTemplateIdAtom = atom<number | null>({
+  key: "contestTemplateId",
+  default: 0,
+});
+
+export const contestPosterList = atom<File[]>({
+  key: "contestPosterList",
+  default: [],
 });

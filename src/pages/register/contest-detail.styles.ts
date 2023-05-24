@@ -2,8 +2,17 @@ import styled from "styled-components";
 import { AiFillCamera, AiFillCloseCircle } from "react-icons/ai";
 import { Input } from "./headcount.styles";
 
-export const LargeInput = styled(Input)`
+export const LargeInput = styled.textarea`
+  width: 335px;
   height: 400px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 14px 15px;
+  color: #aeaeae;
+  margin-bottom: 8px;
+  background-color: #f9f9fa;
+  border: 1px solid #ededed;
+  border-radius: 8px;
 `;
 
 export const InputWrapper = styled.div`
