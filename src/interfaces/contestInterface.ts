@@ -93,3 +93,20 @@ export interface RegisterForm {
   maxViewer: number;
   templateId: number;
 }
+
+export interface ISector {
+  name: string;
+}
+
+export interface IWeightSector {
+  title: string;
+  cost: number;
+  expandCost: number;
+  sectors: ISector[];
+  multi: boolean;
+}
+
+export interface IWeightSectorList {
+  sectorList: IWeightSector[];
+  surveyList: null;
+}

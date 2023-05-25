@@ -1,9 +1,12 @@
 import styled from "styled-components";
-
-import { MdOutlineCheckBoxOutlineBlank, MdOutlineCheckBox } from "react-icons/md";
-
+import { BiRadioCircle } from "react-icons/bi";
+import {
+  MdOutlineCheckBoxOutlineBlank,
+  MdOutlineCheckBox,
+} from "react-icons/md";
 import { BsTrash } from "react-icons/bs";
 import { CiImageOn } from "react-icons/ci";
+import { MdOutlineClose } from "react-icons/md";
 
 interface ToggleInputProps {
   active: boolean;
@@ -35,10 +38,17 @@ export const TinySqaure = styled.div`
 export const SurveyTitleArea = styled.div`
   border-bottom: 2px solid #ededed;
   padding-bottom: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const SurveyTitleInput = styled.input`
+  width: 100%;
+  padding: 10px 5px;
+  font-weight: 500;
+  font-size: 14px;
+`;
+
+export const SurveyTitle = styled.span`
   width: 100%;
   padding: 10px 5px;
   font-weight: 500;
@@ -54,9 +64,10 @@ export const SurveyInput = styled.input`
 
 export const SurveyCheckArea = styled.div`
   border-bottom: 1px solid #ededed;
-  padding: 10px 0px;
   display: flex;
   flex-direction: column;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
 `;
 
 export const SurveyCheckBox = styled.input`
@@ -98,7 +109,11 @@ export const AddCheckLabel = styled(SurveyCheckLabel)`
   color: #aeaeae;
 `;
 
-export const SurveyBottomArea = styled.div``;
+export const SurveyBottomArea = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 7px 2px;
+`;
 
 export const UnCheckButton = styled(MdOutlineCheckBoxOutlineBlank)``;
 
@@ -193,3 +208,87 @@ export const SelectBar = styled.select`
 `;
 
 export const SelectOption = styled.option``;
+
+export const SectorArea = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  padding-right: 3px;
+`;
+
+export const RadioIcon = styled(BiRadioCircle)`
+  width: 20px;
+  height: 20px;
+  color: #ededed;
+  margin-right: 2px;
+`;
+
+export const SectorName = styled.span`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  padding-left: 3px;
+  color: #212121;
+`;
+
+export const SectorInput = styled.input`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 0 2px;
+  color: #aeaeae;
+`;
+
+export const SectorAddArea = styled(SectorArea)`
+  justify-content: space-between;
+`;
+
+export const SectorInputArea = styled.div`
+  display: flex;
+`;
+
+export const SectorAddButton = styled.button`
+  color: #747474;
+  width: 60px;
+  height: 20px;
+  font-size: 12px;
+  border-radius: 8px;
+  padding: 2px;
+`;
+
+export const CloseIcon = styled(MdOutlineClose)`
+  width: 20px;
+  height: 20px;
+  color: black;
+`;
+
+export const SectorNameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const CostInputArea = styled.div`
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`;
+
+export const RegisterButtonArea = styled.div``;
+
+export const RegisterButton = styled.button`
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+`;
+
+export const CostInputWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;

@@ -7,6 +7,7 @@ export const LargeInput = styled.textarea`
   height: 400px;
   font-size: 14px;
   font-weight: 400;
+  line-height: 23px;
   padding: 14px 15px;
   color: #aeaeae;
   margin-bottom: 8px;

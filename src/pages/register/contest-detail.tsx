@@ -51,6 +51,7 @@ const ContestDetail = () => {
   };
 
   console.log(posterList);
+  console.log(contestContent);
 
   return (
     <PageWrapper>
@@ -77,16 +78,6 @@ const ContestDetail = () => {
                   }
                   return tempList;
                 });
-                // setPreviewImages((current) => {
-                //   const tempPreview = [...current];
-                //   if (e.currentTarget.files) {
-                //     tempPreview.push(
-                //       URL.createObjectURL(e.currentTarget.files[0])
-                //     );
-                //     console.log(e.currentTarget.files[0]);
-                //   }
-                //   return tempPreview;
-                // });
               }}
             />
             {previewImages.map((image, id) => (
@@ -99,7 +90,10 @@ const ContestDetail = () => {
         </InputArea>
         <InputArea>
           <InputTitle>상세 정보</InputTitle>
-          <S.LargeInput />
+          <S.LargeInput
+            placeholder="대회 정보&#13;&#10;장소&#13;&#10;날짜&#13;&#10;식순&#13;&#10;대회 시간&#13;&#10;상금"
+            onChange={(e) => setContestContent(e.currentTarget.value)}
+          />
         </InputArea>
       </ContentArea>
       <Link href="/register/rules-and-terms">

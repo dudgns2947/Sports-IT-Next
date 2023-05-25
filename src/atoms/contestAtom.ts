@@ -1,3 +1,7 @@
+import {
+  IWeightSector,
+  IWeightSectorList,
+} from "@component/interfaces/contestInterface";
 import { IEvent } from "@component/interfaces/eventInterface";
 import { WeightCost } from "@component/interfaces/weightCostInterface";
 
@@ -111,5 +115,30 @@ export const contestTemplateIdAtom = atom<number | null>({
 
 export const contestPosterList = atom<File[]>({
   key: "contestPosterList",
+  default: [],
+});
+
+export const contestRuleFileNames = atom<string[]>({
+  key: "contestRuleFileNames",
+  default: [],
+});
+
+export const contestRuleFiles = atom<File[]>({
+  key: "contestRuleFiles",
+  default: [],
+});
+
+export const contestRuleUrlNames = atom<string[]>({
+  key: "contestRuleUrlNames",
+  default: [],
+});
+
+export const contestRuleUrls = atom<string[]>({
+  key: "contestRuleUrls",
+  default: [],
+});
+
+export const contestWeightSectors = atom<IWeightSector[]>({
+  key: "contestWeightSectors",
   default: [],
 });

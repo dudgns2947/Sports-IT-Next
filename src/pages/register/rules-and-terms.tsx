@@ -9,44 +9,64 @@ import * as S from "./rules-and-terms.styles";
 import { useRouter } from "next/router";
 import { SubmitButton } from "@component/components/button/buttonComponent";
 import AddButton from "@component/components/button/AddButton";
-
-interface IRuleAndTerm {
-  title: string;
-  content: string;
-}
+import { useRecoilState } from "recoil";
+import {
+  contestRuleFileNames,
+  contestRuleFiles,
+  contestRuleUrlNames,
+  contestRuleUrls,
+} from "@component/atoms/contestAtom";
 
 const RulesAndTerms = () => {
   const [inputText, setInputText] = useState("");
   const [fileUpload, setFileUpload] = useState(true);
   const [willAdd, setWillAdd] = useState(false);
-  const [rulesAndTerms, setRulesAndTerms] = useState<IRuleAndTerm[]>([]);
   const [url, setUrl] = useState("");
-  const [file, setFile] = useState<File | null>();
+  const [file, setFile] = useState<File>();
+  const [ruleFileNames, setRuleFileNames] =
+    useRecoilState(contestRuleFileNames);
+  const [ruleFiles, setRuleFiles] = useRecoilState(contestRuleFiles);
+  const [ruleUrlNames, setRuleUrlNames] = useRecoilState(contestRuleUrlNames);
+  const [ruleUrls, setRuleUrls] = useRecoilState(contestRuleUrls);
 
   const router = useRouter();
 
   const onClickFileSubmit = () => {
-    if (file) {
-      setRulesAndTerms((current) => [
-        ...current,
-        { title: inputText, content: file.name },
-      ]);
-      alert("규정 및 약관이 추가되었습니다 !");
-      setWillAdd(false);
-      setInputText("");
-    }
+    setRuleFileNames((current) => {
+      const tempFileNames = [...current];
+      tempFileNames.push(inputText);
+      return tempFileNames;
+    });
+    setRuleFiles((curr) => {
+      const tempFiles = [...curr];
+      if (file) {
+        tempFiles.push(file);
+      }
+      return tempFiles;
+    });
+    alert("규정 및 약관이 추가되었습니다 !");
+    setWillAdd(false);
+    setInputText("");
+    setFile(undefined);
   };
 
   const onClickUrlSubmit = () => {
     if (url.length !== 0) {
-      setRulesAndTerms((current) => [
-        ...current,
-        { title: inputText, content: url },
-      ]);
-      setInputText("");
-      setUrl("");
+      setRuleUrlNames((current) => {
+        const tempUrlNames = [...current];
+        tempUrlNames.push(inputText);
+        return tempUrlNames;
+      });
+
+      setRuleUrls((curr) => {
+        const tempUrls = [...curr];
+        tempUrls.push(url);
+        return tempUrls;
+      });
       alert("규정 및 약관이 추가되었습니다 !");
       setWillAdd(false);
+      setInputText("");
+      setUrl("");
     }
   };
 
@@ -55,28 +75,62 @@ const RulesAndTerms = () => {
     if (e.target.files) {
       setFile(e.target.files[0]);
     }
+    // setRuleFiles((current) => {
+    //   const tempFiles = [...current];
+    //   if (e.currentTarget.files) {
+    //     tempFiles.push(e.currentTarget.files[0]);
+    //   }
+    //   return tempFiles;
+    // });
   };
 
-  console.log(file);
+  console.log("ruleFileNames", ruleFileNames);
+  console.log("ruleFiles", ruleFiles);
+
+  console.log("ruleUrlNames", ruleUrlNames);
+  console.log("ruleUrls", ruleUrls);
 
   return (
     <PageWrapper>
       <Seo title="규정 및 약관등록" />
       <GoBackHeader title="대회 등록" />
       <S.ContentArea>
-        {rulesAndTerms.length !== 0
-          ? rulesAndTerms.map((item) => (
-              <S.DataArea>
+        {ruleFiles.length !== 0
+          ? ruleFiles.map((ruleFile, index) => (
+              <S.DataArea key={index}>
                 <S.DataWrapper>
-                  <S.DataTitle>{item.title}</S.DataTitle>
-                  <S.DataContent>{item.content}</S.DataContent>
+                  <S.DataTitle>{ruleFileNames[index]}</S.DataTitle>
+                  <S.DataContent>{ruleFile.name}</S.DataContent>
                 </S.DataWrapper>
                 <S.DeleteButton
                   onClick={() => {
-                    setRulesAndTerms(
-                      rulesAndTerms.filter(
-                        (element) => element.title !== item.title
-                      )
+                    setRuleFiles((current) =>
+                      current.slice(0, index).concat(current.slice(index + 1))
+                    );
+
+                    setRuleFileNames((curr) =>
+                      curr.slice(0, index).concat(curr.slice(index + 1))
+                    );
+                  }}
+                />
+              </S.DataArea>
+            ))
+          : null}
+        {ruleUrls.length !== 0
+          ? ruleUrls.map((ruleUrl, index) => (
+              <S.DataArea key={index}>
+                <S.DataWrapper>
+                  <S.DataTitle>{ruleUrlNames[index]}</S.DataTitle>
+                  <S.DataContent>{ruleUrl}</S.DataContent>
+                </S.DataWrapper>
+                <S.DeleteButton
+                  onClick={() => {
+                    setRuleUrls((current) =>
+                      current.slice(0, index).concat(current.slice(index + 1))
+                    );
+
+                    setRuleUrlNames((curr) =>
+                      curr.slice(0, index).concat(curr.slice(index + 1))
                     );
                   }}
                 />
