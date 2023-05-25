@@ -1,6 +1,6 @@
 import {
-  IRuleAndTerm,
   IWeightSector,
+  IWeightSectorList,
 } from "@component/interfaces/contestInterface";
 import { IEvent } from "@component/interfaces/eventInterface";
 import { WeightCost } from "@component/interfaces/weightCostInterface";

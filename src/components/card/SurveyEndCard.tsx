@@ -3,12 +3,12 @@ import * as S from "./SurveyCard.styles";
 import { IWeightSector } from "@component/interfaces/contestInterface";
 
 interface SurveyEndCardProps extends IWeightSector {
-  index: number;
+  cardIndex: number;
   setWeightSectors: React.Dispatch<SetStateAction<IWeightSector[]>>;
 }
 
 const SurveyEndCard = ({
-  index,
+  cardIndex,
   title,
   cost,
   expandCost,
@@ -27,8 +27,12 @@ const SurveyEndCard = ({
       <S.SurveyCheckArea>
         {sectors.map((sector, index) => (
           <S.SectorArea key={index}>
-            <S.RadioIcon />
-            <S.SectorName>{sector.name}</S.SectorName>
+            <S.SectorNameWrapper>
+              <S.RadioIcon />
+              <S.SectorName>
+                {sector.name} ( {cost}원 / +{expandCost}원 )
+              </S.SectorName>
+            </S.SectorNameWrapper>
           </S.SectorArea>
         ))}
       </S.SurveyCheckArea>
@@ -47,7 +51,7 @@ const SurveyEndCard = ({
           <S.TrashIcon
             onClick={() =>
               setWeightSectors((current) =>
-                current.slice(0, index).concat(current.slice(index + 1))
+                current.slice(0, cardIndex).concat(current.slice(cardIndex + 1))
               )
             }
           />

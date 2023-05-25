@@ -6,6 +6,7 @@ import {
 } from "react-icons/md";
 import { BsTrash } from "react-icons/bs";
 import { CiImageOn } from "react-icons/ci";
+import { MdOutlineClose } from "react-icons/md";
 
 interface ToggleInputProps {
   active: boolean;
@@ -66,6 +67,7 @@ export const SurveyCheckArea = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
+  margin-bottom: 15px;
 `;
 
 export const SurveyCheckBox = styled.input`
@@ -148,11 +150,11 @@ export const ToggleInput = styled.input<ToggleInputProps>`
     transform: scale(0.8);
     background-color: gray;
     transition: left 250ms linear;
-    border-color: ${(props) => (props.active ? "#FF002E" : "gray")};
+    border-color: ${(props) => (props.active ? "#4C8BFF" : "gray")};
   }
   :checked {
-    background-color: #ff002e;
-    border-color: #ff002e;
+    background-color: #4c8bff;
+    border-color: #4c8bff;
   }
   :checked::before {
     background-color: white;
@@ -209,7 +211,10 @@ export const SelectOption = styled.option``;
 
 export const SectorArea = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 7px 0;
+  padding-right: 3px;
 `;
 
 export const RadioIcon = styled(BiRadioCircle)`
@@ -244,10 +249,46 @@ export const SectorInputArea = styled.div`
 `;
 
 export const SectorAddButton = styled.button`
-  color: black;
+  color: #747474;
   width: 60px;
   height: 20px;
   font-size: 12px;
   border-radius: 8px;
   padding: 2px;
+`;
+
+export const CloseIcon = styled(MdOutlineClose)`
+  width: 20px;
+  height: 20px;
+  color: black;
+`;
+
+export const SectorNameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const CostInputArea = styled.div`
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`;
+
+export const RegisterButtonArea = styled.div``;
+
+export const RegisterButton = styled.button`
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+`;
+
+export const CostInputWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

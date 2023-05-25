@@ -95,7 +95,6 @@ export interface RegisterForm {
 }
 
 export interface ISector {
-  join: boolean;
   name: string;
 }
 
@@ -105,4 +104,9 @@ export interface IWeightSector {
   expandCost: number;
   sectors: ISector[];
   multi: boolean;
+}
+
+export interface IWeightSectorList {
+  sectorList: IWeightSector[];
+  surveyList: null;
 }

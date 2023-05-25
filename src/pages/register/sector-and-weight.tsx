@@ -40,7 +40,7 @@ const SectorAndWeight = () => {
             ? weightSectors.map((weightSector, index) => (
                 <SurveyEndCard
                   key={index}
-                  index={index}
+                  cardIndex={index}
                   title={weightSector.title}
                   cost={weightSector.cost}
                   expandCost={weightSector.expandCost}
