@@ -1,10 +1,9 @@
 import styled from "styled-components";
-
+import { BiRadioCircle } from "react-icons/bi";
 import {
   MdOutlineCheckBoxOutlineBlank,
   MdOutlineCheckBox,
 } from "react-icons/md";
-
 import { BsTrash } from "react-icons/bs";
 import { CiImageOn } from "react-icons/ci";
 
@@ -38,10 +37,17 @@ export const TinySqaure = styled.div`
 export const SurveyTitleArea = styled.div`
   border-bottom: 2px solid #ededed;
   padding-bottom: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const SurveyTitleInput = styled.input`
+  width: 100%;
+  padding: 10px 5px;
+  font-weight: 500;
+  font-size: 14px;
+`;
+
+export const SurveyTitle = styled.span`
   width: 100%;
   padding: 10px 5px;
   font-weight: 500;
@@ -59,6 +65,7 @@ export const SurveyCheckArea = styled.div`
   border-bottom: 1px solid #ededed;
   display: flex;
   flex-direction: column;
+  padding-bottom: 10px;
 `;
 
 export const SurveyCheckBox = styled.input`
@@ -199,3 +206,48 @@ export const SelectBar = styled.select`
 `;
 
 export const SelectOption = styled.option``;
+
+export const SectorArea = styled.div`
+  display: flex;
+  padding: 7px 0;
+`;
+
+export const RadioIcon = styled(BiRadioCircle)`
+  width: 20px;
+  height: 20px;
+  color: #ededed;
+  margin-right: 2px;
+`;
+
+export const SectorName = styled.span`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  padding-left: 3px;
+  color: #212121;
+`;
+
+export const SectorInput = styled.input`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 0 2px;
+  color: #aeaeae;
+`;
+
+export const SectorAddArea = styled(SectorArea)`
+  justify-content: space-between;
+`;
+
+export const SectorInputArea = styled.div`
+  display: flex;
+`;
+
+export const SectorAddButton = styled.button`
+  color: black;
+  width: 60px;
+  height: 20px;
+  font-size: 12px;
+  border-radius: 8px;
+  padding: 2px;
+`;

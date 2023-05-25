@@ -3,6 +3,7 @@ import Seo from "@component/components/Seo";
 import { ContentArea } from "@component/components/area/areaComponent";
 import AddButton from "@component/components/button/AddButton";
 import SurveyCard from "@component/components/card/SurveyCard";
+import SurveyEndCard from "@component/components/card/SurveyEndCard";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import NavBar from "@component/components/navbar/NavBar";
@@ -23,6 +24,8 @@ const SectorAndWeight = () => {
   const [weightSectors, setWeightSectors] =
     useRecoilState(contestWeightSectors);
 
+  console.log(weightSectors);
+
   return (
     <PageWrapper>
       <Seo title="부문 및 체급등록" />
@@ -33,7 +36,21 @@ const SectorAndWeight = () => {
           <BoldText>등록해주세요.</BoldText>
         </BoldTextArea>
         <SurveyArea>
-          <SurveyCard />
+          {weightSectors
+            ? weightSectors.map((weightSector, index) => (
+                <SurveyEndCard
+                  key={index}
+                  index={index}
+                  title={weightSector.title}
+                  cost={weightSector.cost}
+                  expandCost={weightSector.expandCost}
+                  sectors={weightSector.sectors}
+                  multi={weightSector.multi}
+                  setWeightSectors={setWeightSectors}
+                />
+              ))
+            : null}
+          <SurveyCard setWeightSectors={setWeightSectors} />
         </SurveyArea>
         {/* <SurveyArea>
           {surveyList.map((survey, index) => (

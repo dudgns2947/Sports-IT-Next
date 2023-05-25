@@ -2,64 +2,17 @@ import React, { SetStateAction, useState } from "react";
 import * as S from "./SurveyCard.styles";
 import { useRecoilState } from "recoil";
 import { ISector, IWeightSector } from "@component/interfaces/contestInterface";
-import { BiRadioCircle } from "react-icons/bi";
 import styled from "styled-components";
 
-// interface SurveyCardProps {
-//   index: number;
-//   setSurveyList?: React.Dispatch<SetStateAction<IWeightSector[]>>;
-// }
+interface SurveyCardProps {
+  setWeightSectors: React.Dispatch<SetStateAction<IWeightSector[]>>;
+}
 
-const SectorArea = styled.div`
-  display: flex;
-  padding: 7px 0;
-`;
-
-const RadioIcon = styled(BiRadioCircle)`
-  width: 14.9px;
-  height: 15px;
-  color: #ededed;
-  margin-right: 2px;
-`;
-
-const SectorName = styled.span`
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  padding-left: 3px;
-  color: #212121;
-`;
-
-const SectorInput = styled.input`
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  padding: 0 2px;
-  color: #aeaeae;
-`;
-
-const SectorAddArea = styled(SectorArea)`
-  justify-content: space-between;
-`;
-
-const SectorInputArea = styled.div`
-  display: flex;
-`;
-
-const SectorAddButton = styled.button`
-  color: black;
-  width: 60px;
-  height: 20px;
-  font-size: 12px;
-  border-radius: 8px;
-  padding: 2px;
-`;
-
-const SurveyCard = () => {
+const SurveyCard = ({ setWeightSectors }: SurveyCardProps) => {
   const [title, setTitle] = useState<string>("");
   const [sectors, setSectors] = useState<ISector[]>([]);
-  const [multi, setMulti] = useState<Boolean>();
-  const [join, setJoin] = useState<Boolean>();
+  const [multi, setMulti] = useState<boolean>(false);
+  const [join, setJoin] = useState<boolean>();
   const [sectorName, setSectorName] = useState<string>("");
 
   // const [category, setCategory] = useState("");
@@ -85,22 +38,22 @@ const SurveyCard = () => {
         {/* <S.SurveyCheckLabel>
           <S.SurveyCheckBox />
         </S.SurveyCheckLabel> */}
-        {sectors.map((sector) => (
-          <SectorArea>
-            <RadioIcon />
-            <SectorName>{sector.name}</SectorName>
-          </SectorArea>
+        {sectors.map((sector, index) => (
+          <S.SectorArea key={index}>
+            <S.RadioIcon />
+            <S.SectorName>{sector.name}</S.SectorName>
+          </S.SectorArea>
         ))}
-        <SectorAddArea>
-          <SectorInputArea>
-            <RadioIcon />
-            <SectorInput
+        <S.SectorAddArea>
+          <S.SectorInputArea>
+            <S.RadioIcon />
+            <S.SectorInput
               value={sectorName}
               onChange={(e) => setSectorName(e.currentTarget.value)}
               placeholder="옵션을 입력해주세요."
             />
-          </SectorInputArea>
-          <SectorAddButton
+          </S.SectorInputArea>
+          <S.SectorAddButton
             onClick={() => {
               setSectors((current) => {
                 const tempSectors = [...current];
@@ -111,22 +64,45 @@ const SurveyCard = () => {
             }}
           >
             옵션 추가
-          </SectorAddButton>
-        </SectorAddArea>
+          </S.SectorAddButton>
+        </S.SectorAddArea>
       </S.SurveyCheckArea>
       <S.SurveyBottomArea>
         <S.ToggleArea>
           <S.ToggleText>중복여부</S.ToggleText>
           <S.ToggleLabel>
             <S.ToggleInput
-              active={true}
+              active={multi}
+              checked={multi}
               role="switch"
               type="checkbox"
-              onClick={() => setMulti((current) => !current)}
+              onChange={() => setMulti((current) => !current)}
             />
           </S.ToggleLabel>
           <S.TrashIcon />
         </S.ToggleArea>
+        <button
+          onClick={() => {
+            setWeightSectors((current) => {
+              const tempWeightSectors = [...current];
+              tempWeightSectors.push({
+                title: title,
+                cost: 0,
+                expandCost: 0,
+                sectors: sectors,
+                multi: multi,
+              });
+              console.log(tempWeightSectors);
+              return tempWeightSectors;
+            });
+            setTitle("");
+            setSectors([]);
+            setMulti(false);
+            setSectorName("");
+          }}
+        >
+          등록
+        </button>
       </S.SurveyBottomArea>
       {/* {isChoice ? (
         <S.SurveyCheckArea>
