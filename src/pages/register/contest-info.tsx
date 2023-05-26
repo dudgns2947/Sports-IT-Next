@@ -9,16 +9,20 @@ import * as S from "./contest-info.styles";
 import Link from "next/link";
 import { ContentArea } from "@component/components/area/areaComponent";
 import {
+  contestEndDateAtom,
   contestLocationAtom,
   contestLocationDetailAtom,
   contestNameAtom,
   contestRecruitingEndAtom,
   contestRecruitingStartAtom,
+  contestStartDateAtom,
   contestTotalPrizeAtom,
 } from "@component/atoms/contestAtom";
 
 const ContestInfo = () => {
   const [contestName, setContestName] = useRecoilState(contestNameAtom);
+  const [startDate, setStartDate] = useRecoilState(contestStartDateAtom);
+  const [endDate, setEndDate] = useRecoilState(contestEndDateAtom);
   const [recruitingStart, setRecruitingStart] = useRecoilState(
     contestRecruitingStartAtom
   );
@@ -30,6 +34,15 @@ const ContestInfo = () => {
   const [locationDetail, setLocationDetail] = useRecoilState(
     contestLocationDetailAtom
   );
+
+  console.log(contestName);
+  console.log(startDate);
+  console.log(endDate);
+  console.log(recruitingStart);
+  console.log(recruitingEnd);
+  console.log(totalPrize);
+  console.log(location);
+  console.log(locationDetail);
   return (
     <PageWrapper as="form">
       <Seo title="대회 정보 입력" />
@@ -49,15 +62,40 @@ const ContestInfo = () => {
           <Input type="text" placeholder="ex) 스포츠잇"></Input>
         </InputArea> */}
         <InputArea>
-          <InputTitle>모집 기간</InputTitle>
+          <InputTitle>대회 일정</InputTitle>
           <S.SmallInputWrapper>
             <S.SmallInput
-              onChange={(e) => setRecruitingStart(e.currentTarget.value)}
+              onChange={(e) =>
+                setStartDate(new Date(e.currentTarget.value).toISOString())
+              }
               type="date"
             />
             <S.Text>부터</S.Text>
             <S.SmallInput
-              onChange={(e) => setRecruitingEnd(e.currentTarget.value)}
+              onChange={(e) =>
+                setEndDate(new Date(e.currentTarget.value).toISOString())
+              }
+              type="date"
+            />
+            <S.Text>까지</S.Text>
+          </S.SmallInputWrapper>
+        </InputArea>
+        <InputArea>
+          <InputTitle>모집 기간</InputTitle>
+          <S.SmallInputWrapper>
+            <S.SmallInput
+              onChange={(e) =>
+                setRecruitingStart(
+                  new Date(e.currentTarget.value).toISOString()
+                )
+              }
+              type="date"
+            />
+            <S.Text>부터</S.Text>
+            <S.SmallInput
+              onChange={(e) =>
+                setRecruitingEnd(new Date(e.currentTarget.value).toISOString())
+              }
               type="date"
             />
             <S.Text>까지</S.Text>

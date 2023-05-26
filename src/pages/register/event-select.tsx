@@ -17,6 +17,8 @@ import {
 const EventSelect = () => {
   const [contestEvents, setContestEvents] = useRecoilState(contestEventAtom);
   const [count, setCount] = useRecoilState(contestEventCountAtom);
+
+  console.log(contestEvents);
   return (
     <PageWrapper>
       <Seo title="대회 종목 선택" />

@@ -91,6 +91,7 @@ const ContestDetail = () => {
         <InputArea>
           <InputTitle>상세 정보</InputTitle>
           <S.LargeInput
+            value={contestContent ? contestContent : ""}
             placeholder="대회 정보&#13;&#10;장소&#13;&#10;날짜&#13;&#10;식순&#13;&#10;대회 시간&#13;&#10;상금"
             onChange={(e) => setContestContent(e.currentTarget.value)}
           />

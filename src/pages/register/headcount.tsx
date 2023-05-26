@@ -6,7 +6,7 @@ import { Text, TextArea } from "../auth/event-select.styles";
 import NavBar from "@component/components/navbar/NavBar";
 import * as S from "./headcount.styles";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   contestMaxPlayerAtom,
   contestMaxViewerAtom,
@@ -17,10 +17,17 @@ import { HeadCountForm } from "@component/interfaces/headcountInterface";
 const headcount = () => {
   const router = useRouter();
   const { register, handleSubmit, formState } = useForm<HeadCountForm>();
-  const setMaxNumOfPlayers = useSetRecoilState(contestMaxPlayerAtom);
-  const setMaxNumOfAudience = useSetRecoilState(contestMaxViewerAtom);
+  const [maxNumOfPlayers, setMaxNumOfPlayers] =
+    useRecoilState(contestMaxPlayerAtom);
+  const [maxNumOfAudience, setMaxNumOfAudience] =
+    useRecoilState(contestMaxViewerAtom);
+  // const setMaxNumOfPlayers = useSetRecoilState(contestMaxPlayerAtom);
+  // const setMaxNumOfAudience = useSetRecoilState(contestMaxViewerAtom);
   const [errorMsg, setErrorMsg] = useState<string | undefined>("");
   const [errorMsgTwo, setErrorMsgTwo] = useState<string | undefined>("");
+
+  console.log(maxNumOfPlayers);
+  console.log(maxNumOfAudience);
 
   const onValid = (data: HeadCountForm) => {
     if (data.numOfPlayers) {
