@@ -72,14 +72,14 @@ const Form = () => {
         ></S.ContestInform>
         <S.Divider />
 
-        {surveyList.map((survey, index) => (
+        {/* {surveyList.map((survey, index) => (
           <SurveyCard key={index} index={index} setSurveyList={setSurveyList} />
         ))}
         <AddButtonArea
           onClick={() => setSurveyList((current) => [...current, ""])}
         >
           <AddButton text="질문 추가하기" />
-        </AddButtonArea>
+        </AddButtonArea> */}
       </S.ContentAreaWrapper>
       <Link onClick={onRegister} href="/register/register-success">
         <NavBar navText="등록" active={true} />

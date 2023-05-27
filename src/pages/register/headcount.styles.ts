@@ -20,7 +20,7 @@ export const InputWrapper = styled.div`
 export const InputArea = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
 `;
 
 export const InputTitle = styled.h3`
