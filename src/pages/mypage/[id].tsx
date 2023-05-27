@@ -12,38 +12,7 @@ import Seo from "@component/components/Seo";
 import { AiOutlineRight } from "react-icons/ai";
 import NavTitle from "@component/components/navbar/NavTitle";
 import NavTab from "@component/components/navbar/NavTab";
-
-const ProfileArea = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 20px 0;
-`;
-
-const ProfileImage = styled.img`
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  margin-right: 20px;
-`;
-
-const UserInfoArea = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const UserName = styled.span`
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 20px;
-  color: #212121;
-`;
-
-const UserEmail = styled.span`
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: #aeaeae;
-`;
+import ProfileTab from "@component/components/profile/ProfileTab";
 
 const TransformArea = styled.div`
   display: flex;
@@ -90,41 +59,6 @@ const TransformButton = styled.button`
   background-color: #fd3446;
 `;
 
-const ArrowIcon = styled(AiOutlineRight)`
-  height: 20px;
-  width: 15px;
-  color: #aeaeae;
-`;
-
-// const NavTitleArea = styled.div`
-//   height: 50px;
-//   display: flex;
-//   align-items: center;
-//   border-top: 1px solid #f9f9fa;
-//   margin-top: 5px;
-// `;
-
-// const NavTitle = styled.span`
-//   font-weight: 600;
-//   font-size: 14px;
-//   line-height: 20px;
-//   color: #aeaeae;
-// `;
-
-const NavTabArea = styled.div`
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const NavTabText = styled.div`
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  color: #212121;
-`;
-
 const iconProps = [
   ["/images/logo/contest.png", "대회", "contest"],
   ["/images/logo/document.png", "공문서", "document"],
@@ -135,16 +69,14 @@ const iconProps = [
 const MyPage = () => {
   return (
     <PageWrapper>
-      <GoBackHeader title="마이페이지" />
+      <GoBackHeader title="마이페이지" setting={true} id={12} />
       <Seo title="마이페이지" />
       <ContentArea>
-        <ProfileArea>
-          <ProfileImage src="/images/example/Post1.png" />
-          <UserInfoArea>
-            <UserName>김영훈</UserName>
-            <UserEmail>young@naver.com</UserEmail>
-          </UserInfoArea>
-        </ProfileArea>
+        <ProfileTab
+          imgUrl="/images/example/Post1.png"
+          userName="이준수"
+          userEmail="young@naver.com"
+        />
         <TransformArea>
           <TransformTextArea>
             <TransformBoldText>주최자로 전환</TransformBoldText>
@@ -153,8 +85,12 @@ const MyPage = () => {
           <TransformButton>전환</TransformButton>
         </TransformArea>
         <IconContainer>
-          {iconProps.map((iconProp) => (
-            <CustomButton imageUrl={iconProp[0]} buttonName={iconProp[1]} />
+          {iconProps.map((iconProp, index) => (
+            <CustomButton
+              key={index}
+              imageUrl={iconProp[0]}
+              buttonName={iconProp[1]}
+            />
           ))}
         </IconContainer>
         <NavTitle content="나의 스포티" />

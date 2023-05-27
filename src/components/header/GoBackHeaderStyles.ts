@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AiOutlineLeft } from "react-icons/ai";
+import { IoSettingsOutline } from "react-icons/io5";
 
 export const Header = styled.div`
   display: flex;
@@ -33,4 +34,7 @@ export const HeaderTitle = styled.h1`
   padding-right: 2%;
 `;
 
-export const HeaderRightIcon = styled.img``;
+export const HeaderSettingIcon = styled(IoSettingsOutline)`
+  width: 25px;
+  height: 25px;
+`;
