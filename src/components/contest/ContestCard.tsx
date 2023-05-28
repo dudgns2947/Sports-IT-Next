@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 const Contest = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 0;
+  cursor: pointer;
 `;
 
 const ContestTopArea = styled.div`
@@ -75,11 +77,20 @@ interface ContestCardProps {
   title: string;
   host: string;
   date: string;
+  contestId: number;
 }
 
-const ContestCard = ({ tags, scrap, title, host, date }: ContestCardProps) => {
+const ContestCard = ({
+  tags,
+  scrap,
+  title,
+  host,
+  date,
+  contestId,
+}: ContestCardProps) => {
+  const router = useRouter();
   return (
-    <Contest>
+    <Contest onClick={() => router.push(`/document/contest/${contestId}`)}>
       <ContestTopArea>
         <TagArea>
           {tags.map((tag, index) => (

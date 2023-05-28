@@ -66,6 +66,7 @@ const index = () => {
             title="제 26회 대한민국 팔씨름 연맹 주최 국가대표 선발전"
             host="(사)대한 팔씨름 연맹"
             date="2023년 3월 13일"
+            contestId={12}
           />
           <ContestCard
             tags={["탁구", "스포츠"]}
@@ -73,6 +74,7 @@ const index = () => {
             title="22-33 탁구 세계 선수권 대회"
             host="(사)대한 탁구 연맹"
             date="2023년 3월 20일"
+            contestId={11}
           />
         </ContestArea>
       </ContentArea>
