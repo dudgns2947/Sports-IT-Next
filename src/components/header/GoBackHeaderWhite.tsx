@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./GoBackHeaderStyles";
 import { useRouter } from "next/router";
 
-const GoBackHeader = ({
+const GoBackHeaderWhite = ({
   title,
   setting = false,
 }: {
@@ -13,10 +13,10 @@ const GoBackHeader = ({
   return (
     <S.Header>
       <S.IconArea>
-        <S.HeaderLeftIcon onClick={() => router.back()} />
+        <S.HeaderLeftIconWhite onClick={() => router.back()} />
       </S.IconArea>
       <S.TitleArea>
-        <S.HeaderTitle>{title}</S.HeaderTitle>
+        <S.HeaderTitleWhite>{title}</S.HeaderTitleWhite>
       </S.TitleArea>
       <S.IconArea>
         {setting ? (
@@ -27,4 +27,4 @@ const GoBackHeader = ({
   );
 };
 
-export default GoBackHeader;
+export default GoBackHeaderWhite;
