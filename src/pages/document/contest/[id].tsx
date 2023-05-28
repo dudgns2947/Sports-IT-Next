@@ -32,7 +32,6 @@ const ContestDocument = () => {
           <Document name="대회 참여 확인증" documentId={6} />
           <Document name="대회 입상 확인증" documentId={6} />
           <Document name="선수 등록 확인증" documentId={6} />
-          <Document name="대회 참가 확인증" documentId={6} />
           <Document name="대회 입상 확인증" documentId={6} />
           <Document name="선수 참여 확인증" documentId={6} />
           <Document name="대회 참여 확인증" documentId={6} />

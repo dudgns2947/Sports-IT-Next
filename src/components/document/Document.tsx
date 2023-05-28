@@ -44,7 +44,7 @@ interface DocumentProps {
 const Document = ({ name, documentId }: DocumentProps) => {
   const router = useRouter();
   return (
-    <DocumentWrapper onClick={() => router.push(``)}>
+    <DocumentWrapper onClick={() => router.push(`/document/${documentId}`)}>
       <DocumentLogo src="/images/logo/documentLogo.png" />
       <PremiumLogo src="/images/logo/premiumLogo.png" />
       <DocumentName>{name}</DocumentName>
