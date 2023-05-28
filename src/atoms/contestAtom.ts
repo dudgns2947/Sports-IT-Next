@@ -142,3 +142,8 @@ export const contestWeightSectors = atom<IWeightSector[]>({
   key: "contestWeightSectors",
   default: [],
 });
+
+export const totalPaymentAtom = atom<number>({
+  key: "totalPayment",
+  default: 0,
+});

@@ -126,7 +126,7 @@ const ChoiceRole = () => {
             <S.HeaderText>체급</S.HeaderText>
             <S.LowerIcon></S.LowerIcon>
           </S.SectorContainer>
-          <S.SurveyArea>
+          {/* <S.SurveyArea>
             <S.SurveyCheckLabel>
               <S.SurveyCheckBox
                 type="checkbox"
@@ -192,10 +192,10 @@ const ChoiceRole = () => {
               />
               +95kg
             </S.SurveyCheckLabel>
-          </S.SurveyArea>
+          </S.SurveyArea> */}
         </S.weightArea>
       </S.ChoiceContainer>
-      <Link href="/participate/apply-success">
+      <Link href="/participate/payment">
         <NavBar
           navText={`참가비 ${paymentCost} 원 결제하기`}
           active={weightCost ? true : false}
