@@ -33,10 +33,10 @@ export default function Home() {
     "/images/logo/advertise.png",
   ];
   const iconProps = [
-    ["/images/icon/Icon1.png", "대회"],
-    ["/images/icon/Icon2.png", "선수등록"],
-    ["/images/icon/Icon3.png", "공문서"],
-    ["/images/icon/Icon4.png", "통계"],
+    ["/images/icon/Icon1.png", "대회", "contest"],
+    ["/images/icon/Icon2.png", "선수등록", "player-registration"],
+    ["/images/icon/Icon3.png", "공문서", "document"],
+    ["/images/icon/Icon4.png", "통계", "statistics"],
   ];
   const iamgeUrls = [
     "/images/example/Post1.png",
@@ -105,6 +105,7 @@ export default function Home() {
                     key={index}
                     imageUrl={iconProp[0]}
                     buttonName={iconProp[1]}
+                    routeUrl={iconProp[2]}
                   />
                 ))
               : null}

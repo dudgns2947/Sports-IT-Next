@@ -4,6 +4,7 @@ import GoBackHeader from "../header/GoBackHeader";
 import { useRouter } from "next/router";
 import Seo from "../Seo";
 import { SuccessPageProps } from "@component/interfaces/successPageInterface";
+import GoBackHeaderWhite from "../header/GoBackHeaderWhite";
 
 const SuccessPage = ({
   title,
@@ -15,7 +16,7 @@ const SuccessPage = ({
   const router = useRouter();
   return (
     <S.SignUpContainer>
-      <GoBackHeader />
+      <GoBackHeaderWhite />
       <Seo title={`${title}`} />
       <S.TextArea>
         <S.Text>{`${firstText}`}</S.Text>

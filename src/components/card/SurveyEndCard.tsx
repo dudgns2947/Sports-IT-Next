@@ -12,7 +12,7 @@ const SurveyEndCard = ({
   title,
   cost,
   expandCost,
-  sectors,
+  subSectors,
   multi,
   setWeightSectors,
 }: SurveyEndCardProps) => {
@@ -25,7 +25,7 @@ const SurveyEndCard = ({
         <S.SurveyTitle>{title}</S.SurveyTitle>
       </S.SurveyTitleArea>
       <S.SurveyCheckArea>
-        {sectors.map((sector, index) => (
+        {subSectors.map((sector, index) => (
           <S.SectorArea key={index}>
             <S.SectorNameWrapper>
               <S.RadioIcon />

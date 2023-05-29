@@ -38,7 +38,7 @@ const Setting = () => {
         <NavTab url="/" content="비밀번호 재설정" />
         <NavTab url="/" content="휴대폰 번호 재설정" />
         <NavTitle content="알림" />
-        <NavTab url="/" content="비밀번호 재설정" />
+        <NavTab url="/" content="혜택 알림 설정" />
         <NavTitle content="이용정보" />
         <NavTab url="/" content="약관 및 정책" />
         <NavTab url="/" content="오픈소스 라이센스" />

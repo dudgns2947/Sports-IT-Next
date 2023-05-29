@@ -1,7 +1,9 @@
 import React from "react";
 import * as S from "./TopBar.styles";
+import { useRouter } from "next/router";
 
 const TopBar = () => {
+  const router = useRouter();
   return (
     <S.TopBar>
       <S.SearchForm>
@@ -12,7 +14,7 @@ const TopBar = () => {
       </S.SearchForm>
       <S.ButtonArea>
         <S.AlarmButton />
-        <S.MyPageButton />
+        <S.MyPageButton onClick={() => router.push("/mypage")} />
       </S.ButtonArea>
     </S.TopBar>
   );

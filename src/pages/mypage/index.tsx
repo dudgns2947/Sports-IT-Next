@@ -13,6 +13,7 @@ import { AiOutlineRight } from "react-icons/ai";
 import NavTitle from "@component/components/navbar/NavTitle";
 import NavTab from "@component/components/navbar/NavTab";
 import ProfileTab from "@component/components/profile/ProfileTab";
+import { useRouter } from "next/router";
 
 const TransformArea = styled.div`
   display: flex;
@@ -67,9 +68,10 @@ const iconProps = [
 ];
 
 const MyPage = () => {
+  const router = useRouter();
   return (
     <PageWrapper>
-      <GoBackHeader title="마이페이지" setting={true} id={12} />
+      <GoBackHeader title="마이페이지" setting={true} />
       <Seo title="마이페이지" />
       <ContentArea>
         <ProfileTab
@@ -90,6 +92,7 @@ const MyPage = () => {
               key={index}
               imageUrl={iconProp[0]}
               buttonName={iconProp[1]}
+              routeUrl={iconProp[2]}
             />
           ))}
         </IconContainer>

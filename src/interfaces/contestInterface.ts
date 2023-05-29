@@ -102,8 +102,8 @@ export interface IWeightSector {
   title: string;
   cost: number;
   expandCost: number;
-  sectors: ISector[];
   multi: boolean;
+  subSectors: ISector[];
 }
 
 export interface IWeightSectorList {

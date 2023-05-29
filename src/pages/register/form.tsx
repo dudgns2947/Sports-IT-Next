@@ -46,6 +46,16 @@ const Form = () => {
   async function onRegister() {
     try {
       console.log(token);
+      const response1 = await axios.post(
+        "http://3.39.25.156:8080/api/competitions/template",
+        dumyData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       const response = await axios.post(
         "http://3.39.25.156:8080/api/competitions",
         dumyData,

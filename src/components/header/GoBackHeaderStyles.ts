@@ -28,10 +28,18 @@ export const HeaderLeftIcon = styled(AiOutlineLeft)`
   cursor: pointer;
 `;
 
+export const HeaderLeftIconWhite = styled(HeaderLeftIcon)`
+  color: #ffffff;
+`;
+
 export const HeaderTitle = styled.h1`
   font-size: 18px;
   font-weight: 600;
   padding-right: 2%;
+`;
+
+export const HeaderTitleWhite = styled(HeaderTitle)`
+  color: #ffffff;
 `;
 
 export const HeaderSettingIcon = styled(IoSettingsOutline)`
