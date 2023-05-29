@@ -132,7 +132,7 @@ const SurveyCard = ({ setWeightSectors }: SurveyCardProps) => {
               title: title,
               cost: cost,
               expandCost: expendCost,
-              sectors: sectors,
+              subSectors: sectors,
               multi: multi,
             });
             console.log(tempWeightSectors);

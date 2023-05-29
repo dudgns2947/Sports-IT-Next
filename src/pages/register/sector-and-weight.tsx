@@ -7,8 +7,13 @@ import {
   contestMaxPlayerAtom,
   contestMaxViewerAtom,
   contestNameAtom,
+  contestPosterList,
   contestRecruitingEndAtom,
   contestRecruitingStartAtom,
+  contestRuleFileNames,
+  contestRuleFiles,
+  contestRuleUrlNames,
+  contestRuleUrls,
   contestStartDateAtom,
   contestTotalPrizeAtom,
   contestWeightSectors,
@@ -36,6 +41,11 @@ const AddButtonArea = styled.div`
   padding-bottom: 40px;
 `;
 
+interface IResponseOne {
+  success: boolean;
+  templateId: string;
+}
+
 const SectorAndWeight = () => {
   const [weightSectors, setWeightSectors] =
     useRecoilState(contestWeightSectors);
@@ -60,6 +70,14 @@ const SectorAndWeight = () => {
   const [maxViewer, setMaxViewer] = useRecoilState(contestMaxViewerAtom);
   const eventSelector = useRecoilValue(contestEventSelector);
 
+  const [ruleFileNames, setRuleFileNames] =
+    useRecoilState(contestRuleFileNames);
+  const [ruleFiles, setRuleFiles] = useRecoilState(contestRuleFiles);
+  const [ruleUrlNames, setRuleUrlNames] = useRecoilState(contestRuleUrlNames);
+  const [ruleUrls, setRuleUrls] = useRecoilState(contestRuleUrls);
+
+  const [posterList, setPosterList] = useRecoilState(contestPosterList);
+
   const token = useRecoilValue(userTokenAtom);
 
   function eventToEnglish(event: string | undefined) {
@@ -72,8 +90,70 @@ const SectorAndWeight = () => {
     else return "VALLEYBALL";
   }
 
+  function createRuleUrlForm(urlNames: string[], urlList: string[]) {
+    let ruleUrlForm = [];
+
+    for (let i = 0; i < urlNames.length; i++) {
+      let obj = {
+        agreementName: urlNames[i],
+        agreementUrl: urlList[i],
+      };
+      ruleUrlForm.push(obj);
+    }
+
+    // console.log(ruleUrlForm);
+    return ruleUrlForm;
+  }
+
+  function createFormData(fileList: File[], formName: string) {
+    const formData = new FormData();
+
+    for (let i = 0; i < fileList.length; i++) {
+      let file = fileList[i];
+      formData.append(formName, file);
+    }
+
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+    // FormData의 value 확인
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+
+    return formData;
+  }
+
+  // function createFileFormData(fileList: File[], formName: string) {
+  //   const formData = new FormData();
+
+  //   for (let i = 0; i < fileList.length; i++) {
+  //     let file = fileList[i];
+  //     formData.append(formName, file);
+  //   }
+
+  //   for (let key of formData.keys()) {
+  //     console.log(key);
+  //   }
+  //   // FormData의 value 확인
+  //   for (let value of formData.values()) {
+  //     console.log(value);
+  //   }
+  // }
+
   async function registerContest() {
-    const response = await axios.post(
+    createRuleUrlForm(ruleUrlNames, ruleUrls);
+    const response1 = await axios.post<IResponseOne>(
+      "http://3.39.25.156:8080/api/competitions/template",
+      { sectors: weightSectors, questionnaires: null },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response1);
+    const response2 = await axios.post(
       "http://3.39.25.156:8080/api/competitions",
       {
         name: contestName,
@@ -89,8 +169,7 @@ const SectorAndWeight = () => {
         location: location,
         locationDetail: locationDetail,
         CompetitionType: "FREE",
-        agreements: [],
-        templateId: "3",
+        templateId: response1.data.templateId,
       },
       {
         headers: {
@@ -98,7 +177,38 @@ const SectorAndWeight = () => {
         },
       }
     );
-    console.log(response);
+    console.log(response2);
+    const response3 = await axios.post(
+      `http://3.39.25.156:8080/api/image/poster/${response2.data.result.competitionId}`,
+      createFormData(posterList, "posters"),
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response3);
+    const response4 = await axios.post(
+      `http://3.39.25.156:8080/api/agreement/upload/${response2.data.result.competitionId}`,
+      createFormData(ruleFiles, "ruleFiles"),
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log(response4);
+    const response5 = await axios.post(
+      `http://3.39.25.156:8080/api/agreement/save/${response2.data.result.competitionId}`,
+      createRuleUrlForm(ruleUrlNames, ruleUrls),
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response5);
   }
   // const contestStartDate
   console.log(contestName);
@@ -114,7 +224,16 @@ const SectorAndWeight = () => {
   console.log(location);
   console.log(locationDetail);
   console.log(token);
-  // console.log(weightSectors);
+  console.log(weightSectors);
+
+  console.log(ruleFileNames);
+  console.log(ruleFiles);
+  console.log(ruleUrlNames);
+  console.log(ruleUrls);
+
+  console.log(posterList);
+
+  createFormData(posterList, "posters");
 
   return (
     <PageWrapper>
@@ -134,7 +253,7 @@ const SectorAndWeight = () => {
                   title={weightSector.title}
                   cost={weightSector.cost}
                   expandCost={weightSector.expandCost}
-                  sectors={weightSector.sectors}
+                  subSectors={weightSector.subSectors}
                   multi={weightSector.multi}
                   setWeightSectors={setWeightSectors}
                 />
