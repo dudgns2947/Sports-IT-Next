@@ -40,7 +40,7 @@ const SearchInput = styled.input`
 
 const ContestArea = styled.div``;
 
-const index = () => {
+const Index = () => {
   const [keyword, setKeyword] = useState("");
   return (
     <PageWrapper>
@@ -52,11 +52,7 @@ const index = () => {
           <BoldText>선택해주세요.</BoldText>
         </BoldTextArea>
         <SearchInputArea>
-          <SearchInput
-            value={keyword}
-            placeholder="대회 검색"
-            onChange={(e) => setKeyword(e.currentTarget.value)}
-          />
+          <SearchInput value={keyword} placeholder="대회 검색" onChange={(e) => setKeyword(e.currentTarget.value)} />
           <SearchIcon />
         </SearchInputArea>
         <ContestArea>
@@ -82,4 +78,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

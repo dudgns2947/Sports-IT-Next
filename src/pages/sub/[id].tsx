@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Number = () => {
   const router = useRouter();
@@ -9,7 +10,7 @@ const Number = () => {
     <div>
       <h1>/pages/sub/[id].tsx</h1>
       <p>Parameter id : {id}</p>
-      <a href="/">/pages/index.tsx</a>
+      <Link href="/">/pages/index.tsx</Link>
     </div>
   );
 };

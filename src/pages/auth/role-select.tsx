@@ -7,7 +7,7 @@ import * as S from "./role-select.styles";
 import Link from "next/link";
 import NavBar from "@component/components/navbar/NavBar";
 
-const oleSelect = () => {
+const RoleSelect = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
   console.log(role);
   return (
@@ -40,4 +40,4 @@ const oleSelect = () => {
   );
 };
 
-export default oleSelect;
+export default RoleSelect;

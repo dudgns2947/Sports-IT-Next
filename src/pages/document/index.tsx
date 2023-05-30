@@ -75,7 +75,7 @@ const LogoImage = styled.img`
   height: 370.67px;
 `;
 
-const index = () => {
+const Index = () => {
   const router = useRouter();
   return (
     <PageWrapperBlack>
@@ -97,12 +97,10 @@ const index = () => {
         </LogoArea>
       </ContentArea>
       <ButtonArea>
-        <RedButton onClick={() => router.push("/document/contest-select")}>
-          공문서 발급하기
-        </RedButton>
+        <RedButton onClick={() => router.push("/document/contest-select")}>공문서 발급하기</RedButton>
       </ButtonArea>
     </PageWrapperBlack>
   );
 };
 
-export default index;
+export default Index;
