@@ -52,7 +52,7 @@ const Contest = ({
         </S.ContestTagArea>
         <S.ContestTitle>{name}</S.ContestTitle>
         <S.ContestHostArea>
-          <S.ContestHostName>{host.name}</S.ContestHostName>
+          <S.ContestHostName>{host ? host.name : ""}</S.ContestHostName>
           <S.PremiumLogo src="/images/logo/premiumLogo.png" />
         </S.ContestHostArea>
         <S.ContestDday>

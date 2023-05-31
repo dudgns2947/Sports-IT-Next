@@ -17,6 +17,7 @@ import Link from "next/link";
 import NavBar from "../../components/navbar/NavBar";
 import { useState } from "react";
 import axios from "axios";
+import { ContentArea } from "@component/components/area/areaComponent";
 
 const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
@@ -130,18 +131,20 @@ const ChoiceRole = () => {
   return (
     <S.RoleSelectContainer>
       <GoBackHeader title="대회 신청" />
-      <S.QuestionArea>
-        <S.QuestionText>부문 혹은 체급을</S.QuestionText>
-        <S.QuestionText>선택 해주세요.</S.QuestionText>
-      </S.QuestionArea>
-      <S.ChoiceContainer>
+      <ContentArea>
+        <S.QuestionArea>
+          <S.QuestionText>부문 혹은 체급을</S.QuestionText>
+          <S.QuestionText>선택 해주세요.</S.QuestionText>
+        </S.QuestionArea>
+
         <S.SectorArea>
           {sectors
             ? sectors.map((sector) => (
                 <>
                   <S.SectorContainer>
                     <S.HeaderText>
-                      {sector.title} ({sector.cost}원 / +{sector.expandCost}원)
+                      {sector.title} ({sector.cost}원 / +{sector.expandCost}
+                      원)
                     </S.HeaderText>
                     <S.LowerIcon></S.LowerIcon>
                   </S.SectorContainer>
@@ -171,7 +174,8 @@ const ChoiceRole = () => {
               ))
             : null}
         </S.SectorArea>
-      </S.ChoiceContainer>
+      </ContentArea>
+
       <Link href="/participate/payment">
         <NavBar
           navText={`참가비 ${paymentCost} 원 결제하기`}

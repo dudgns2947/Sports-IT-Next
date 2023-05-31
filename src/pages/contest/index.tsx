@@ -125,8 +125,10 @@ const Index = () => {
               <S.SearchIcon />
             </S.SearchButton>
           </S.SearchForm>
-          <S.AlarmButton />
-          <S.MyPageButton />
+          <S.ButtonArea>
+            <S.AlarmButton />
+            <S.MyPageButton onClick={() => router.push("/mypage")} />
+          </S.ButtonArea>
         </S.TopBar>
 
         <S.FilterButtonArea>

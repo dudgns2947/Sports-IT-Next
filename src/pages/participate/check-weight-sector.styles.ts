@@ -12,8 +12,8 @@ export const RoleSelectContainer = styled.div`
 export const QuestionArea = styled.div`
   display: flex;
   flex-direction: column;
-  height: 23%;
-  padding: 18% 0 0 20px;
+  padding-top: 60px;
+  margin-bottom: 47px;
 `;
 
 export const QuestionText = styled.span`
@@ -26,6 +26,7 @@ export const ChoiceContainer = styled.div`
   height: 45%;
   margin-left: 15px;
   margin-right: 10px;
+  margin-bottom: 100px;
 `;
 
 export const UpperIcon = styled(IoIosArrowUp)`

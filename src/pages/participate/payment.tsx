@@ -7,23 +7,33 @@ import NavBar from "@component/components/navbar/NavBar";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import * as S from "./payment.styles";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  participateSectors,
+  paymentCostAtom,
   selectContestIdAtom,
   selectSectorAtom,
   selectSubSectorAtom,
+  templateIdAtom,
+  totalPaymentAtom,
 } from "@component/atoms/contestAtom";
 import { IContestInfo, IHost } from "@component/interfaces/contestInterface";
 import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
+import Index from "../contest";
 
 const Payment = () => {
-  const [insuranceCheck, setInsuranceCheck] = useState(true);
+  const [insuranceCheck, setInsuranceCheck] = useState(false);
   const token = useRecoilValue(userTokenAtom);
   const [contest, setContest] = useState<IContestInfo>();
   const selectSectors = useRecoilValue(selectSectorAtom);
   const selectSubSectors = useRecoilValue(selectSubSectorAtom);
   const selectContestId = useRecoilValue(selectContestIdAtom);
+  const [payment, setPayment] = useRecoilState(paymentCostAtom);
+  const [sectors, setSectors] = useRecoilState(participateSectors);
+  const templateId = useRecoilValue(templateIdAtom);
+  const totalPayment = useRecoilValue(totalPaymentAtom);
+  const [finalPayment, setFinalPayment] = useState(0);
 
   async function getContestDetail(id: number) {
     const response = await baseApi.get(`/competitions/${id}`, {
@@ -33,6 +43,16 @@ const Payment = () => {
     });
     console.log(response.data);
     setContest(response.data);
+    const response2 = await baseApi.get(
+      `/competitions/template/${response.data.templateID}`
+    );
+    console.log(response2.data.result.sectors);
+    setSectors(response2.data.result.sectors);
+  }
+
+  function getPostFix(str: string) {
+    const index = str.indexOf(":");
+    return str.substring(index + 1);
   }
 
   useEffect(() => {
@@ -58,36 +78,49 @@ const Payment = () => {
         <S.HistoryArea>
           <S.BoldText>신청 내역</S.BoldText>
           <S.HistoryContent>
-            <S.RadioArea>
-              <S.RadioIcon />
-              <S.LightText>프로</S.LightText>
-            </S.RadioArea>
-            <S.RadioSubArea>
-              <S.RadioArea>
-                <S.RadioIcon />
-                <S.LightText>-70kg</S.LightText>
-              </S.RadioArea>
-              <S.CostText>90000원</S.CostText>
-            </S.RadioSubArea>
-            <S.RadioSubArea>
-              <S.RadioArea>
-                <S.RadioIcon />
-                <S.LightText>-80kg</S.LightText>
-              </S.RadioArea>
-              <S.CostText>20000원</S.CostText>
-            </S.RadioSubArea>
+            {[...new Set(selectSectors)].map((selectSector) => (
+              <>
+                <S.RadioArea>
+                  <S.RadioIcon />
+                  <S.LightText>{selectSector}</S.LightText>
+                </S.RadioArea>
+                {selectSubSectors
+                  .filter((subSector) => subSector.startsWith(selectSector))
+                  .map((item, index) => (
+                    <S.RadioSubArea>
+                      <S.RadioArea>
+                        <S.RadioIcon />
+                        <S.LightText>{getPostFix(item)}</S.LightText>
+                      </S.RadioArea>
+                      <S.CostText>
+                        {index === 0
+                          ? sectors.filter(
+                              (sector) => sector.title === selectSector
+                            )[0].cost
+                          : sectors.filter(
+                              (sector) => sector.title === selectSector
+                            )[0].expandCost}
+                        원
+                      </S.CostText>
+                    </S.RadioSubArea>
+                  ))}
+              </>
+            ))}
+
             <S.SubArea>
               <S.LightText>VAT (10%)</S.LightText>
-              <S.CostText>11000원</S.CostText>
+              <S.CostText>{payment * 0.1}원</S.CostText>
             </S.SubArea>
             <S.SubArea>
               <S.LightText>수수료 (3%)</S.LightText>
-              <S.CostText>3000원</S.CostText>
+              <S.CostText>{payment * 0.03}원</S.CostText>
             </S.SubArea>
           </S.HistoryContent>
           <S.HistoryBottomArea>
             <S.BoldSmallText>신청 금액</S.BoldSmallText>
-            <S.BoldCostText>124000원</S.BoldCostText>
+            <S.BoldCostText>
+              {payment + payment * 0.1 + payment * 0.03}원
+            </S.BoldCostText>
           </S.HistoryBottomArea>
         </S.HistoryArea>
         <S.InsuranceArea>
@@ -97,7 +130,14 @@ const Payment = () => {
             계좌로 안전하게 자동환불이 이루어집니다.
           </S.ManualText>
           <S.InsuranceRadioArea
-            onClick={() => setInsuranceCheck((current) => !current)}
+            onClick={() => {
+              setInsuranceCheck((current) => !current);
+              if (insuranceCheck) {
+                setFinalPayment(totalPayment);
+              } else {
+                setFinalPayment(totalPayment + 5000);
+              }
+            }}
           >
             <S.RadioLeft>
               <S.RadioIconComponent active={insuranceCheck} />
@@ -108,7 +148,9 @@ const Payment = () => {
         </S.InsuranceArea>
         <S.TotalCostArea>
           <S.BoldText>총 결제금액</S.BoldText>
-          <S.TotalCostText>129000원</S.TotalCostText>
+          <S.TotalCostText>
+            {finalPayment === 0 ? totalPayment : finalPayment}원
+          </S.TotalCostText>
         </S.TotalCostArea>
       </ContentArea>
       <Link href="/participate/apply-success">
