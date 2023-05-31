@@ -147,3 +147,18 @@ export const totalPaymentAtom = atom<number>({
   key: "totalPayment",
   default: 0,
 });
+
+export const templateIdAtom = atom<string>({
+  key: "templateID",
+  default: "",
+});
+
+export const participateSectors = atom<IWeightSector[]>({
+  key: "participateSectors",
+  default: [],
+});
+
+export const paymentCostAtom = atom({
+  key: "paymentCost",
+  default: 0,
+});

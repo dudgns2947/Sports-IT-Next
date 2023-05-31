@@ -73,6 +73,7 @@ export const HeaderText = styled.span`
 export const SurveyArea = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 export const SurveyCheckBox = styled.input`
