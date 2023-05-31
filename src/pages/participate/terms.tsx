@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as S from "./terms.styles";
+import * as S from "../../styles/participate/terms.styles";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import NavBar from "@component/components/navbar/NavBar";
 import Seo from "@component/components/Seo";

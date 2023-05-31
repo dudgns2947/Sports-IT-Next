@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "./event-select.styles";
+import * as S from "../../styles/auth/event-select.styles";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import { useRecoilState } from "recoil";
 import { eventAtom, eventCountAtom } from "@component/atoms/eventAtom";

@@ -5,7 +5,7 @@ import { RoleAtomType } from "../../interfaces/roleInterface";
 import { WeightCost } from "../../interfaces/weightCostInterface";
 import React from "react";
 import { useRecoilState, SetRecoilState } from "recoil";
-import * as S from "./check-weight-sector.styles";
+import * as S from "../../styles/participate/check-weight-sector.styles";
 import Link from "next/link";
 import NavBar from "../../components/navbar/NavBar";
 import { useState } from "react";
@@ -14,8 +14,7 @@ const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
   const [count, setCount] = useState<number>(0);
   const [sectorName, setSectorName] = useState<string>("");
-  const [weightCost, setWeightCost] =
-    useRecoilState<WeightCost>(weightcostAtom);
+  const [weightCost, setWeightCost] = useRecoilState<WeightCost>(weightcostAtom);
   const [paymentCost, setPaymentCost] = useState<number>(0);
   console.log(role);
   console.log(count);
@@ -75,48 +74,23 @@ const ChoiceRole = () => {
           </S.SectorContainer>
           <S.SurveyArea>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="프로"
-                onChange={handleSectorName}
-              />
+              <S.SurveyCheckBox type="radio" name="category" value="프로" onChange={handleSectorName} />
               프로
             </S.SurveyCheckLabel>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="세미프로"
-                onChange={handleSectorName}
-              />
+              <S.SurveyCheckBox type="radio" name="category" value="세미프로" onChange={handleSectorName} />
               세미프로
             </S.SurveyCheckLabel>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="아마추어"
-                onChange={handleSectorName}
-              />
+              <S.SurveyCheckBox type="radio" name="category" value="아마추어" onChange={handleSectorName} />
               아마추어
             </S.SurveyCheckLabel>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="노비스"
-                onChange={handleSectorName}
-              />
+              <S.SurveyCheckBox type="radio" name="category" value="노비스" onChange={handleSectorName} />
               노비스
             </S.SurveyCheckLabel>
             <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="하비"
-                onChange={handleSectorName}
-              />
+              <S.SurveyCheckBox type="radio" name="category" value="하비" onChange={handleSectorName} />
               하비
             </S.SurveyCheckLabel>
           </S.SurveyArea>
@@ -196,10 +170,7 @@ const ChoiceRole = () => {
         </S.weightArea>
       </S.ChoiceContainer>
       <Link href="/participate/payment">
-        <NavBar
-          navText={`참가비 ${paymentCost} 원 결제하기`}
-          active={weightCost ? true : false}
-        />
+        <NavBar navText={`참가비 ${paymentCost} 원 결제하기`} active={weightCost ? true : false} />
       </Link>
     </S.RoleSelectContainer>
   );

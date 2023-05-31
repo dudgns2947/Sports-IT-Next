@@ -4,7 +4,7 @@ import SurveyCard from "@component/components/card/ApplySurveyCard";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import NavBar from "@component/components/navbar/NavBar";
-import * as S from "./apply.styles";
+import * as S from "../../styles/participate/apply.styles";
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -22,10 +22,7 @@ const Apply = () => {
       <Seo title="대회 참가" />
       <GoBackHeader title="대회 신청" />
       <ContentArea>
-        <S.ContestInform
-          contestName="대한팔씨름연맹 제 26회 국가대표 선발전"
-          contestGroup="(사)대한팔씨름연맹"
-        ></S.ContestInform>
+        <S.ContestInform contestName="대한팔씨름연맹 제 26회 국가대표 선발전" contestGroup="(사)대한팔씨름연맹"></S.ContestInform>
         <S.Divider />
 
         {surveyList.map((survey, index) => (

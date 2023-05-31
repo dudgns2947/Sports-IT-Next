@@ -4,7 +4,7 @@ import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
 import NavBar from "@component/components/navbar/NavBar";
 import React from "react";
-import { IconContainer } from "../index.styles";
+import { IconContainer } from "../../styles/index.styles";
 import CustomButton from "@component/components/button/Custombutton";
 import styled from "styled-components";
 import Seo from "@component/components/Seo";
@@ -74,11 +74,7 @@ const MyPage = () => {
       <GoBackHeader title="마이페이지" setting={true} />
       <Seo title="마이페이지" />
       <ContentArea>
-        <ProfileTab
-          imgUrl="/images/example/Post1.png"
-          userName="이준수"
-          userEmail="young@naver.com"
-        />
+        <ProfileTab imgUrl="/images/example/Post1.png" userName="이준수" userEmail="young@naver.com" />
         <TransformArea>
           <TransformTextArea>
             <TransformBoldText>주최자로 전환</TransformBoldText>
@@ -88,12 +84,7 @@ const MyPage = () => {
         </TransformArea>
         <IconContainer>
           {iconProps.map((iconProp, index) => (
-            <CustomButton
-              key={index}
-              imageUrl={iconProp[0]}
-              buttonName={iconProp[1]}
-              routeUrl={iconProp[2]}
-            />
+            <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
           ))}
         </IconContainer>
         <NavTitle content="나의 스포티" />

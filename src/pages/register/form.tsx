@@ -4,7 +4,7 @@ import SurveyCard from "@component/components/card/SurveyCard";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import NavBar from "@component/components/navbar/NavBar";
-import * as S from "./form.styles";
+import * as S from "../../styles/register/form.styles";
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -46,25 +46,17 @@ const Form = () => {
   async function onRegister() {
     try {
       console.log(token);
-      const response1 = await axios.post(
-        "http://3.39.25.156:8080/api/competitions/template",
-        dumyData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response1 = await axios.post("http://3.39.25.156:8080/api/competitions/template", dumyData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      const response = await axios.post(
-        "http://3.39.25.156:8080/api/competitions",
-        dumyData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.post("http://3.39.25.156:8080/api/competitions", dumyData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response);
     } catch (e) {
       console.log(e);
@@ -76,10 +68,7 @@ const Form = () => {
       <Seo title="대회 폼 등록" />
       <GoBackHeader title="대회 등록" />
       <S.ContentAreaWrapper>
-        <S.ContestInform
-          contestName="대한팔씨름연맹 제 26회 국가대표 선발전"
-          contestGroup="(사)대한팔씨름연맹"
-        ></S.ContestInform>
+        <S.ContestInform contestName="대한팔씨름연맹 제 26회 국가대표 선발전" contestGroup="(사)대한팔씨름연맹"></S.ContestInform>
         <S.Divider />
 
         {/* {surveyList.map((survey, index) => (
