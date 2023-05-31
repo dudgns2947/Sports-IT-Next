@@ -2,6 +2,8 @@ import { roleAtom } from "../../atoms/roleAtom";
 import {
   participateSectors,
   paymentCostAtom,
+  selectSectorAtom,
+  selectSubSectorAtom,
   templateIdAtom,
   weightcostAtom,
 } from "../../atoms/contestAtom";
@@ -20,8 +22,9 @@ const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
   const [count, setCount] = useState<number>(0);
   const [sectorName, setSectorName] = useState<string>("");
-  const [selectSectors, setSelectSectors] = useState<string[]>([]);
-  const [selectSubSectors, setSelectSubSectors] = useState<string[]>([]);
+  const [selectSectors, setSelectSectors] = useRecoilState(selectSectorAtom);
+  const [selectSubSectors, setSelectSubSectors] =
+    useRecoilState(selectSubSectorAtom);
   const [sectors, setSectors] = useRecoilState(participateSectors);
   const [weightCost, setWeightCost] =
     useRecoilState<WeightCost>(weightcostAtom);
@@ -167,143 +170,7 @@ const ChoiceRole = () => {
                 </>
               ))
             : null}
-          {/* <S.SectorContainer>
-            <S.HeaderText>부문</S.HeaderText>
-            <S.LowerIcon></S.LowerIcon>
-          </S.SectorContainer>
-          <S.SurveyArea> */}
-          {/* {sectors
-              ? sectors.map((sector) => (
-                  <S.SurveyCheckLabel>
-                    <S.SurveyCheckBox
-                      type="radio"
-                      name={sector.title}
-                      value={sector.title}
-                    />
-                  </S.SurveyCheckLabel>
-                ))
-              : null} */}
-
-          {/* <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="프로"
-                onChange={handleSectorName}
-              />
-              프로
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="세미프로"
-                onChange={handleSectorName}
-              />
-              세미프로
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="아마추어"
-                onChange={handleSectorName}
-              />
-              아마추어
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="노비스"
-                onChange={handleSectorName}
-              />
-              노비스
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="하비"
-                onChange={handleSectorName}
-              />
-              하비
-            </S.SurveyCheckLabel> */}
-          {/* </S.SurveyArea> */}
         </S.SectorArea>
-        {/* <S.weightArea>
-          <S.SectorContainer>
-            <S.HeaderText>체급</S.HeaderText>
-            <S.LowerIcon></S.LowerIcon>
-          </S.SectorContainer> */}
-        {/* <S.SurveyArea>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              -70kg
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              -78kg
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              -86kg
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              -95kg
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              +95kg
-            </S.SurveyCheckLabel>
-          </S.SurveyArea> */}
-        {/* </S.weightArea> */}
       </S.ChoiceContainer>
       <Link href="/participate/payment">
         <NavBar

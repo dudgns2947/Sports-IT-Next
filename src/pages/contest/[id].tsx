@@ -12,7 +12,10 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import * as S from "./[id].styles";
 import styled from "styled-components";
-import { templateIdAtom } from "@component/atoms/contestAtom";
+import {
+  selectContestIdAtom,
+  templateIdAtom,
+} from "@component/atoms/contestAtom";
 
 const ContestDetail = () => {
   const router = useRouter();
@@ -20,6 +23,8 @@ const ContestDetail = () => {
   const token = useRecoilValue(userTokenAtom);
   const [contest, setContest] = useState<IContestInfo>();
   const [templateID, setTemplateID] = useRecoilState(templateIdAtom);
+  const [selectContestID, setSelectContestID] =
+    useRecoilState(selectContestIdAtom);
 
   const getDday = (timestamp: number) => {
     // 주어진 타임스탬프 값을 Date 객체로 변환
@@ -59,6 +64,7 @@ const ContestDetail = () => {
     console.log(response.data);
     setContest(response.data);
     setTemplateID(response.data.templateID);
+    setSelectContestID(response.data.competitionId);
   }
 
   useEffect(() => {
