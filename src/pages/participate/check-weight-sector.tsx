@@ -1,24 +1,103 @@
 import { roleAtom } from "../../atoms/roleAtom";
-import { weightcostAtom } from "../../atoms/contestAtom";
+import {
+  participateSectors,
+  paymentCostAtom,
+  selectSectorAtom,
+  selectSubSectorAtom,
+  templateIdAtom,
+  weightcostAtom,
+} from "../../atoms/contestAtom";
 import GoBackHeader from "../../components/header/GoBackHeader";
 import { RoleAtomType } from "../../interfaces/roleInterface";
 import { WeightCost } from "../../interfaces/weightCostInterface";
-import React from "react";
-import { useRecoilState, SetRecoilState } from "recoil";
+import React, { useEffect } from "react";
+import { useRecoilState, SetRecoilState, useRecoilValue } from "recoil";
 import * as S from "./check-weight-sector.styles";
 import Link from "next/link";
 import NavBar from "../../components/navbar/NavBar";
 import { useState } from "react";
+import axios from "axios";
+import { ContentArea } from "@component/components/area/areaComponent";
 
 const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
   const [count, setCount] = useState<number>(0);
   const [sectorName, setSectorName] = useState<string>("");
+  const [selectSectors, setSelectSectors] = useRecoilState(selectSectorAtom);
+  const [selectSubSectors, setSelectSubSectors] =
+    useRecoilState(selectSubSectorAtom);
+  const [sectors, setSectors] = useRecoilState(participateSectors);
   const [weightCost, setWeightCost] =
     useRecoilState<WeightCost>(weightcostAtom);
-  const [paymentCost, setPaymentCost] = useState<number>(0);
+  const [paymentCost, setPaymentCost] = useRecoilState(paymentCostAtom);
+  const templateId = useRecoilValue(templateIdAtom);
   console.log(role);
   console.log(count);
+
+  function removeFirstOccurrence(arr: string[], value: string) {
+    const index = arr.findIndex((item) => item === value);
+    return [...arr.slice(0, index), ...arr.slice(index + 1)];
+  }
+
+  const onClickCost = (
+    sectorName: string,
+    subSector: string,
+    cost: number,
+    expandCost: number
+  ) => {
+    if (selectSectors?.includes(sectorName)) {
+      // 부문이 존재하는 경우(중복 선택)
+      if (selectSubSectors?.includes(subSector)) {
+        // 부문에 이미 체급이 존재하는 경우
+        if (
+          selectSectors.filter((selectSector) => selectSector === sectorName)
+            .length === 1
+        ) {
+          // 마지막 부문일 경우
+          setPaymentCost((current) => current - cost); // 참가 금액 제거
+          setSelectSectors((current) =>
+            removeFirstOccurrence(current, sectorName)
+          );
+          setSelectSubSectors(
+            selectSubSectors.filter(
+              (selectSubSector) => selectSubSector !== subSector
+            )
+          );
+        } else {
+          setPaymentCost((current) => current - expandCost); // 참가 금액 제거
+          setSelectSectors((current) =>
+            removeFirstOccurrence(current, sectorName)
+          );
+          setSelectSubSectors(
+            selectSubSectors.filter(
+              (selectSubSector) => selectSubSector !== subSector
+            )
+          );
+        }
+      } else {
+        setPaymentCost((current) => current + expandCost);
+        const tempSelectSectors = [...selectSectors];
+        tempSelectSectors.push(sectorName);
+        setSelectSectors(tempSelectSectors);
+
+        const tempSubSectors = [...selectSubSectors];
+        tempSubSectors.push(subSector);
+        setSelectSubSectors(tempSubSectors);
+      }
+      // setPaymentCost(current => current + cost);
+    } else {
+      // 부문이 존재하지 않는 경우(첫 선택)
+      setPaymentCost((current) => current + cost);
+      const tempSelectSectors = [...selectSectors];
+      tempSelectSectors.push(sectorName);
+      setSelectSectors(tempSelectSectors);
+      const tempSelectSubSectors = [...selectSubSectors];
+      tempSelectSubSectors.push(subSector);
+      setSelectSubSectors(tempSelectSubSectors);
+    }
+    console.log("selectSectors : ", selectSectors);
+    console.log("selectSubSectors : ", selectSubSectors);
+  };
   const handleSectorName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     console.log(value);
@@ -38,163 +117,65 @@ const ChoiceRole = () => {
     setCount(count + 1);
   };
 
-  const costJson = {
-    프로: {
-      cost: 100000,
-      extraCost: 20000,
-    },
-    세미프로: {
-      cost: 90000,
-      extraCost: 20000,
-    },
-    아마추어: {
-      cost: 80000,
-      extraCost: 20000,
-    },
-    노비스: {
-      cost: 70000,
-      extraCost: 20000,
-    },
-    하비: {
-      cost: 60000,
-      extraCost: 20000,
-    },
-  };
+  async function getSector() {
+    const response = await axios.get(
+      `http://3.39.25.156:8080/api/competitions/template/${templateId}`
+    );
+    console.log(response.data.result.sectors);
+    setSectors(response.data.result.sectors);
+  }
+
+  useEffect(() => {
+    getSector();
+  }, []);
   return (
     <S.RoleSelectContainer>
       <GoBackHeader title="대회 신청" />
-      <S.QuestionArea>
-        <S.QuestionText>부문 혹은 체급을</S.QuestionText>
-        <S.QuestionText>선택 해주세요.</S.QuestionText>
-      </S.QuestionArea>
-      <S.ChoiceContainer>
+      <ContentArea>
+        <S.QuestionArea>
+          <S.QuestionText>부문 혹은 체급을</S.QuestionText>
+          <S.QuestionText>선택 해주세요.</S.QuestionText>
+        </S.QuestionArea>
+
         <S.SectorArea>
-          <S.SectorContainer>
-            <S.HeaderText>부문</S.HeaderText>
-            <S.LowerIcon></S.LowerIcon>
-          </S.SectorContainer>
-          <S.SurveyArea>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="프로"
-                onChange={handleSectorName}
-              />
-              프로
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="세미프로"
-                onChange={handleSectorName}
-              />
-              세미프로
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="아마추어"
-                onChange={handleSectorName}
-              />
-              아마추어
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="노비스"
-                onChange={handleSectorName}
-              />
-              노비스
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="radio"
-                name="category"
-                value="하비"
-                onChange={handleSectorName}
-              />
-              하비
-            </S.SurveyCheckLabel>
-          </S.SurveyArea>
+          {sectors
+            ? sectors.map((sector) => (
+                <>
+                  <S.SectorContainer>
+                    <S.HeaderText>
+                      {sector.title} ({sector.cost}원 / +{sector.expandCost}
+                      원)
+                    </S.HeaderText>
+                    <S.LowerIcon></S.LowerIcon>
+                  </S.SectorContainer>
+                  <S.SurveyArea>
+                    {sector.subSectors
+                      ? sector.subSectors.map((subSector) => (
+                          <S.SurveyCheckLabel>
+                            <S.SurveyCheckBox
+                              type="checkbox"
+                              name={sector.title}
+                              value={subSector.name}
+                              onChange={() =>
+                                onClickCost(
+                                  sector.title,
+                                  `${sector.title}:${subSector.name}`,
+                                  sector.cost,
+                                  sector.expandCost
+                                )
+                              }
+                            />
+                            {subSector.name}
+                          </S.SurveyCheckLabel>
+                        ))
+                      : null}
+                  </S.SurveyArea>
+                </>
+              ))
+            : null}
         </S.SectorArea>
-        <S.weightArea>
-          <S.SectorContainer>
-            <S.HeaderText>체급</S.HeaderText>
-            <S.LowerIcon></S.LowerIcon>
-          </S.SectorContainer>
-          {/* <S.SurveyArea>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              -70kg
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              -78kg
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              -86kg
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              -95kg
-            </S.SurveyCheckLabel>
-            <S.SurveyCheckLabel>
-              <S.SurveyCheckBox
-                type="checkbox"
-                name="category"
-                value={
-                  count === 0
-                    ? costJson.프로.cost
-                    : costJson[`${sectorName}`].extraCost
-                }
-                onChange={handleWeightCost}
-              />
-              +95kg
-            </S.SurveyCheckLabel>
-          </S.SurveyArea> */}
-        </S.weightArea>
-      </S.ChoiceContainer>
+      </ContentArea>
+
       <Link href="/participate/payment">
         <NavBar
           navText={`참가비 ${paymentCost} 원 결제하기`}

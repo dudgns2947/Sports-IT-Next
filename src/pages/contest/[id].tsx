@@ -9,15 +9,22 @@ import GoBackHeader from "@component/components/header/GoBackHeader";
 import { IContestInfo, IHost } from "@component/interfaces/contestInterface";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import * as S from "./[id].styles";
 import styled from "styled-components";
+import {
+  selectContestIdAtom,
+  templateIdAtom,
+} from "@component/atoms/contestAtom";
 
 const ContestDetail = () => {
   const router = useRouter();
   const id = router.query.id;
   const token = useRecoilValue(userTokenAtom);
   const [contest, setContest] = useState<IContestInfo>();
+  const [templateID, setTemplateID] = useRecoilState(templateIdAtom);
+  const [selectContestID, setSelectContestID] =
+    useRecoilState(selectContestIdAtom);
 
   const getDday = (timestamp: number) => {
     // 주어진 타임스탬프 값을 Date 객체로 변환
@@ -56,11 +63,17 @@ const ContestDetail = () => {
     });
     console.log(response.data);
     setContest(response.data);
+    setTemplateID(response.data.templateID);
+    setSelectContestID(response.data.competitionId);
   }
 
   useEffect(() => {
     getContestDetail(parseInt(id as string));
   }, []);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+  }, [router.isReady]);
 
   return (
     <PageWrapper>
@@ -86,7 +99,13 @@ const ContestDetail = () => {
                 {getDday(Date.parse(contest.endDate) / 1000)}
               </S.ContestDday>
             </S.ContestInfo>
-            <S.PosterImage src={contest?.posters[0].posterUrl} />
+            <S.PosterImage
+              src={
+                contest.posters[0]
+                  ? contest?.posters[0].posterUrl
+                  : "/images/logo/AppLogo_black.png"
+              }
+            />
             <S.DetailWrapper>
               <S.DetailTitle>모집 기간</S.DetailTitle>
               <S.DetailContent>
