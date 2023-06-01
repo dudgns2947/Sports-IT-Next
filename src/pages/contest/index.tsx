@@ -105,8 +105,10 @@ const Index = () => {
               <S.SearchIcon />
             </S.SearchButton>
           </S.SearchForm>
-          <S.AlarmButton />
-          <S.MyPageButton />
+          <S.ButtonArea>
+            <S.AlarmButton />
+            <S.MyPageButton onClick={() => router.push("/mypage")} />
+          </S.ButtonArea>
         </S.TopBar>
 
         <S.FilterButtonArea>
@@ -136,6 +138,9 @@ const Index = () => {
               ? contestList.map((contest) => (
                   <Contest
                     key={contest.competitionId}
+                    posterImageUrl={
+                      contest.posters[0] ? contest.posters[0].posterUrl : ""
+                    }
                     competitionId={contest.competitionId}
                     competitionType={contest.competitionType}
                     name={contest.name}

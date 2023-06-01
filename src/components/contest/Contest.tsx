@@ -4,6 +4,7 @@ import { IHost } from "@component/interfaces/contestInterface";
 import { useRouter } from "next/router";
 
 interface IContest {
+  posterImageUrl: string;
   competitionId: number;
   competitionType: string;
   name: string;
@@ -13,6 +14,7 @@ interface IContest {
 }
 
 const Contest = ({
+  posterImageUrl,
   competitionId,
   competitionType,
   name,
@@ -35,7 +37,9 @@ const Contest = ({
   return (
     <S.Contest onClick={() => router.push(`/contest/${competitionId}`)}>
       {showImage === false ? null : (
-        <S.ContestImage src="/images/contest/example.png" />
+        <S.ContestImage
+          src={posterImageUrl ? posterImageUrl : "/images/logo/AppLogo.png"}
+        />
       )}
 
       <S.ContestInfo>
@@ -48,7 +52,7 @@ const Contest = ({
         </S.ContestTagArea>
         <S.ContestTitle>{name}</S.ContestTitle>
         <S.ContestHostArea>
-          <S.ContestHostName>{host.name}</S.ContestHostName>
+          <S.ContestHostName>{host ? host.name : ""}</S.ContestHostName>
           <S.PremiumLogo src="/images/logo/premiumLogo.png" />
         </S.ContestHostArea>
         <S.ContestDday>

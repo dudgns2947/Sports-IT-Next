@@ -143,7 +143,40 @@ export const contestWeightSectors = atom<IWeightSector[]>({
   default: [],
 });
 
-export const totalPaymentAtom = atom<number>({
+export const templateIdAtom = atom<string>({
+  key: "templateID",
+  default: "",
+});
+
+export const participateSectors = atom<IWeightSector[]>({
+  key: "participateSectors",
+  default: [],
+});
+
+export const paymentCostAtom = atom<number>({
+  key: "paymentCost",
+  default: 0,
+});
+
+export const totalPaymentAtom = selector({
   key: "totalPayment",
+  get: ({ get }) =>
+    get(paymentCostAtom) +
+    get(paymentCostAtom) * 0.1 +
+    get(paymentCostAtom) * 0.03,
+});
+
+export const selectSectorAtom = atom<string[]>({
+  key: "selectSector",
+  default: [],
+});
+
+export const selectSubSectorAtom = atom<string[]>({
+  key: "selectSubSector",
+  default: [],
+});
+
+export const selectContestIdAtom = atom<number>({
+  key: "selectContestId",
   default: 0,
 });
