@@ -9,6 +9,8 @@ import React, { useEffect, useState } from "react";
 import * as S from "./payment.styles";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  applyContestIdAtom,
+  finalPaymentAtom,
   participateSectors,
   paymentCostAtom,
   selectContestIdAtom,
@@ -21,6 +23,11 @@ import { IContestInfo, IHost } from "@component/interfaces/contestInterface";
 import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Index from "../contest";
+import {
+  RequestPayParams,
+  RequestPayResponse,
+} from "@component/interfaces/imp";
+import { useRouter } from "next/router";
 
 const Payment = () => {
   const [insuranceCheck, setInsuranceCheck] = useState(false);
@@ -33,7 +40,45 @@ const Payment = () => {
   const [sectors, setSectors] = useRecoilState(participateSectors);
   const templateId = useRecoilValue(templateIdAtom);
   const totalPayment = useRecoilValue(totalPaymentAtom);
-  const [finalPayment, setFinalPayment] = useState(0);
+  const [finalPayment, setFinalPayment] = useRecoilState(finalPaymentAtom);
+  const [applyContestId, setApplyContestId] =
+    useRecoilState(applyContestIdAtom);
+  const router = useRouter();
+
+  function callback(response: RequestPayResponse) {
+    const { success, error_msg } = response;
+
+    if (success) {
+      setApplyContestId(response.merchant_uid);
+      setFinalPayment(response.paid_amount as number);
+      router.push("/participate/apply-success");
+      console.log(response);
+      console.log(success);
+    } else {
+      alert(`결제 실패: ${error_msg}`);
+    }
+  }
+
+  function onClickPayment() {
+    const { IMP } = window;
+    IMP?.init("imp22742363");
+
+    const data: RequestPayParams = {
+      pg: "kakaopay", // PG사 : https://portone.gitbook.io/docs/sdk/javascript-sdk/payrq#undefined-1 참고
+      pay_method: "trans", // 결제수단
+      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+      amount: finalPayment === 0 ? totalPayment : finalPayment, // 결제금액
+      name: "Sports-it 대회신청 결제", // 주문명
+      buyer_name: "홍길동", // 구매자 이름
+      buyer_tel: "01012341234", // 구매자 전화번호
+      buyer_email: "example@example", // 구매자 이메일
+      buyer_addr: "신사동 661-16", // 구매자 주소
+      buyer_postcode: "06018", // 구매자 우편번호
+      m_redirect_url: "/participate/apply-success",
+    };
+
+    IMP?.request_pay(data, callback);
+  }
 
   async function getContestDetail(id: number) {
     const response = await baseApi.get(`/competitions/${id}`, {
@@ -152,10 +197,18 @@ const Payment = () => {
             {finalPayment === 0 ? totalPayment : finalPayment}원
           </S.TotalCostText>
         </S.TotalCostArea>
+        {/* <S.PayArea>
+          <S.BoldText>결제 수단</S.BoldText>
+          <div>
+            <S.PayImage src="/images/logo/kakaopay.jpeg" />
+            <S.PayImage src="/images/logo/kg.png" />
+          </div>
+        </S.PayArea> */}
       </ContentArea>
-      <Link href="/participate/apply-success">
+
+      <div onClick={onClickPayment}>
         <NavBar navText="결제하기" active={true} />
-      </Link>
+      </div>
     </PageWrapper>
   );
 };

@@ -166,6 +166,11 @@ export const totalPaymentAtom = selector({
     get(paymentCostAtom) * 0.03,
 });
 
+export const finalPaymentAtom = atom({
+  key: "finalPayment",
+  default: 0,
+});
+
 export const selectSectorAtom = atom<string[]>({
   key: "selectSector",
   default: [],
@@ -179,4 +184,14 @@ export const selectSubSectorAtom = atom<string[]>({
 export const selectContestIdAtom = atom<number>({
   key: "selectContestId",
   default: 0,
+});
+
+export const selectContestNameAtom = atom<string>({
+  key: "selectContestName",
+  default: "",
+});
+
+export const applyContestIdAtom = atom<string>({
+  key: "applyContestId",
+  default: "",
 });
