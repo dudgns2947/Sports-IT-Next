@@ -9,7 +9,7 @@ import {
   IContestParams,
   ISearchInput,
 } from "@component/interfaces/contestInterface";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { AiOutlineDown } from "react-icons/ai";
 import { FiFilter } from "react-icons/fi";
@@ -21,6 +21,8 @@ import { useRouter } from "next/router";
 import BottomBar from "@component/components/navbar/BottomBar";
 import Contest from "@component/components/contest/Contest";
 import { roleAtom } from "@component/atoms/roleAtom";
+import { useInfiniteQuery } from "react-query";
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 const Index = () => {
   const { register, handleSubmit, formState } = useForm<ISearchInput>();
@@ -99,6 +101,65 @@ const Index = () => {
     }
   };
 
+  async function fetchServerPage(
+    limit: number,
+    offset: number = 0
+  ): Promise<{ rows: string[]; nextOffset: number }> {
+    const rows = new Array(limit)
+      .fill(0)
+      .map((e, i) => `Async loaded row #${i + offset + limit}`);
+
+    await new Promise((r) => setTimeout(r, 500));
+
+    return { rows, nextOffset: offset + 1 };
+  }
+
+  const {
+    status,
+    data,
+    error,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery(
+    "contests",
+    (ctx) => fetchServerPage(10, ctx.pageParam),
+    { getNextPageParam: (_lastGroup, groups) => groups.length }
+  );
+
+  const allRows = data ? data.pages.flatMap((d) => d.rows) : [];
+
+  const parentRef = useRef(null);
+
+  const rowVirtualizer = useVirtualizer({
+    count: hasNextPage ? allRows.length + 1 : allRows.length,
+    getScrollElement: () => parentRef.current as Element | null,
+    estimateSize: () => 100,
+    overscan: 5,
+  });
+
+  useEffect(() => {
+    const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
+
+    if (!lastItem) {
+      return;
+    }
+    if (
+      lastItem.index >= allRows.length - 1 &&
+      hasNextPage &&
+      !isFetchingNextPage
+    ) {
+      fetchNextPage();
+    }
+  }, [
+    hasNextPage,
+    fetchNextPage,
+    allRows.length,
+    isFetchingNextPage,
+    rowVirtualizer.getVirtualItems(),
+  ]);
+
   useEffect(() => {
     getContest({
       token: token,
@@ -172,7 +233,7 @@ const Index = () => {
               <AiOutlineDown />
             </S.Order>
           </S.OrderArea>
-          <S.ContestArea>
+          <S.ContestArea ref={parentRef}>
             {contestList
               ? contestList.map((contest) => (
                   <Contest
