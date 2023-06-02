@@ -1,3 +1,4 @@
+import { baseApi } from "@component/api/utils/instance";
 import {
   contestContentAtom,
   contestEndDateAtom,
@@ -143,8 +144,8 @@ const SectorAndWeight = () => {
 
   async function registerContest() {
     createRuleUrlForm(ruleUrlNames, ruleUrls);
-    const response1 = await axios.post<IResponseOne>(
-      "http://3.39.25.156:8080/api/competitions/template",
+    const response1 = await baseApi.post<IResponseOne>(
+      "/competitions/template",
       { sectors: weightSectors, questionnaires: null },
       {
         headers: {
@@ -153,8 +154,8 @@ const SectorAndWeight = () => {
       }
     );
     console.log(response1);
-    const response2 = await axios.post(
-      "http://3.39.25.156:8080/api/competitions",
+    const response2 = await baseApi.post(
+      "/competitions",
       {
         name: contestName,
         sportCategory: eventToEnglish(eventSelector),
@@ -178,8 +179,8 @@ const SectorAndWeight = () => {
       }
     );
     console.log(response2);
-    const response3 = await axios.post(
-      `http://3.39.25.156:8080/api/image/poster/${response2.data.result.competitionId}`,
+    const response3 = await baseApi.post(
+      `/image/poster/${response2.data.result.competitionId}`,
       createFormData(posterList, "posters"),
       {
         headers: {
@@ -188,19 +189,18 @@ const SectorAndWeight = () => {
       }
     );
     console.log(response3);
-    const response4 = await axios.post(
-      `http://3.39.25.156:8080/api/agreement/upload/${response2.data.result.competitionId}`,
-      createFormData(ruleFiles, "ruleFiles"),
+    const response4 = await baseApi.post(
+      `/agreement/upload/${response2.data.result.competitionId}`,
+      createFormData(ruleFiles, "agreements"),
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
         },
       }
     );
     console.log(response4);
-    const response5 = await axios.post(
-      `http://3.39.25.156:8080/api/agreement/save/${response2.data.result.competitionId}`,
+    const response5 = await baseApi.post(
+      `/agreement/save/${response2.data.result.competitionId}`,
       createRuleUrlForm(ruleUrlNames, ruleUrls),
       {
         headers: {
@@ -233,7 +233,7 @@ const SectorAndWeight = () => {
 
   console.log(posterList);
 
-  createFormData(posterList, "posters");
+  // createFormData(posterList, "posters");
 
   return (
     <PageWrapper>

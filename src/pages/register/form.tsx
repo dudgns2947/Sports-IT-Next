@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import axios from "axios";
+import { baseApi } from "@component/api/utils/instance";
 
 const AddButtonArea = styled.div`
   padding-bottom: 40px;
@@ -46,25 +47,17 @@ const Form = () => {
   async function onRegister() {
     try {
       console.log(token);
-      const response1 = await axios.post(
-        "http://3.39.25.156:8080/api/competitions/template",
-        dumyData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response1 = await baseApi.post("/competitions/template", dumyData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      const response = await axios.post(
-        "http://3.39.25.156:8080/api/competitions",
-        dumyData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await baseApi.post("/competitions", dumyData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response);
     } catch (e) {
       console.log(e);

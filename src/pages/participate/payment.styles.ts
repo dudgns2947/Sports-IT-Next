@@ -123,3 +123,11 @@ export const TotalCostText = styled.span`
   line-height: 24px;
   color: #fd3446;
 `;
+
+export const PayImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+`;
+
+export const PayArea = styled.div``;

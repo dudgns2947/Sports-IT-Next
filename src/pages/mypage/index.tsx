@@ -77,7 +77,7 @@ const MyPage = () => {
         <ProfileTab
           imgUrl="/images/example/Post1.png"
           userName="이준수"
-          userEmail="young@naver.com"
+          userEmail="yuk@naver.com"
         />
         <TransformArea>
           <TransformTextArea>

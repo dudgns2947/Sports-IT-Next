@@ -1,9 +1,9 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-const BASE_URL = "http://3.39.25.156:8080/api/";
+require("dotenv").config();
 
 const axiosConfig: AxiosRequestConfig = {
-  baseURL: BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 };
 
 export const baseApi = axios.create(axiosConfig);
