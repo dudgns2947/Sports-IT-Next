@@ -12,7 +12,7 @@ import { RoleAtomType } from "../../interfaces/roleInterface";
 import { WeightCost } from "../../interfaces/weightCostInterface";
 import React, { useEffect } from "react";
 import { useRecoilState, SetRecoilState, useRecoilValue } from "recoil";
-import * as S from "./check-weight-sector.styles";
+import * as S from "../../styles/participate/check-weight-sector.styles";
 import Link from "next/link";
 import NavBar from "../../components/navbar/NavBar";
 import { useState } from "react";
@@ -25,11 +25,9 @@ const ChoiceRole = () => {
   const [count, setCount] = useState<number>(0);
   const [sectorName, setSectorName] = useState<string>("");
   const [selectSectors, setSelectSectors] = useRecoilState(selectSectorAtom);
-  const [selectSubSectors, setSelectSubSectors] =
-    useRecoilState(selectSubSectorAtom);
+  const [selectSubSectors, setSelectSubSectors] = useRecoilState(selectSubSectorAtom);
   const [sectors, setSectors] = useRecoilState(participateSectors);
-  const [weightCost, setWeightCost] =
-    useRecoilState<WeightCost>(weightcostAtom);
+  const [weightCost, setWeightCost] = useRecoilState<WeightCost>(weightcostAtom);
   const [paymentCost, setPaymentCost] = useRecoilState(paymentCostAtom);
   const templateId = useRecoilValue(templateIdAtom);
   console.log(role);
@@ -40,40 +38,20 @@ const ChoiceRole = () => {
     return [...arr.slice(0, index), ...arr.slice(index + 1)];
   }
 
-  const onClickCost = (
-    sectorName: string,
-    subSector: string,
-    cost: number,
-    expandCost: number
-  ) => {
+  const onClickCost = (sectorName: string, subSector: string, cost: number, expandCost: number) => {
     if (selectSectors?.includes(sectorName)) {
       // 부문이 존재하는 경우(중복 선택)
       if (selectSubSectors?.includes(subSector)) {
         // 부문에 이미 체급이 존재하는 경우
-        if (
-          selectSectors.filter((selectSector) => selectSector === sectorName)
-            .length === 1
-        ) {
+        if (selectSectors.filter((selectSector) => selectSector === sectorName).length === 1) {
           // 마지막 부문일 경우
           setPaymentCost((current) => current - cost); // 참가 금액 제거
-          setSelectSectors((current) =>
-            removeFirstOccurrence(current, sectorName)
-          );
-          setSelectSubSectors(
-            selectSubSectors.filter(
-              (selectSubSector) => selectSubSector !== subSector
-            )
-          );
+          setSelectSectors((current) => removeFirstOccurrence(current, sectorName));
+          setSelectSubSectors(selectSubSectors.filter((selectSubSector) => selectSubSector !== subSector));
         } else {
           setPaymentCost((current) => current - expandCost); // 참가 금액 제거
-          setSelectSectors((current) =>
-            removeFirstOccurrence(current, sectorName)
-          );
-          setSelectSubSectors(
-            selectSubSectors.filter(
-              (selectSubSector) => selectSubSector !== subSector
-            )
-          );
+          setSelectSectors((current) => removeFirstOccurrence(current, sectorName));
+          setSelectSubSectors(selectSubSectors.filter((selectSubSector) => selectSubSector !== subSector));
         }
       } else {
         setPaymentCost((current) => current + expandCost);
@@ -149,19 +127,14 @@ const ChoiceRole = () => {
                   </S.SectorContainer>
                   <S.SurveyArea>
                     {sector.subSectors
-                      ? sector.subSectors.map((subSector) => (
-                          <S.SurveyCheckLabel>
+                      ? sector.subSectors.map((subSector, index) => (
+                          <S.SurveyCheckLabel key={index}>
                             <S.SurveyCheckBox
                               type="checkbox"
                               name={sector.title}
                               value={subSector.name}
                               onChange={() =>
-                                onClickCost(
-                                  sector.title,
-                                  `${sector.title}:${subSector.name}`,
-                                  sector.cost,
-                                  sector.expandCost
-                                )
+                                onClickCost(sector.title, `${sector.title}:${subSector.name}`, sector.cost, sector.expandCost)
                               }
                             />
                             {subSector.name}
@@ -176,10 +149,7 @@ const ChoiceRole = () => {
       </ContentArea>
 
       <Link href="/participate/payment">
-        <NavBar
-          navText={`참가비 ${paymentCost} 원 결제하기`}
-          active={weightCost ? true : false}
-        />
+        <NavBar navText={`참가비 ${paymentCost} 원 결제하기`} active={weightCost ? true : false} />
       </Link>
     </S.RoleSelectContainer>
   );

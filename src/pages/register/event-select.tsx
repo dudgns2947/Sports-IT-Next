@@ -3,16 +3,12 @@ import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import React, { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { SelectArea, Text, TextArea } from "../auth/event-select.styles";
+import { SelectArea, Text, TextArea } from "../../styles/auth/event-select.styles";
 import EventSelectButton from "@component/components/button/EventSelectButton";
 import Link from "next/link";
 import NavBar from "@component/components/navbar/NavBar";
-import * as S from "./contest-info.styles";
-import {
-  contestEventAtom,
-  contestEventCountAtom,
-  contestEventSelector,
-} from "@component/atoms/contestAtom";
+import * as S from "../../styles/register/contest-info.styles";
+import { contestEventAtom, contestEventCountAtom, contestEventSelector } from "@component/atoms/contestAtom";
 
 const EventSelect = () => {
   const [contestEvents, setContestEvents] = useRecoilState(contestEventAtom);

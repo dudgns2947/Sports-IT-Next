@@ -1,4 +1,4 @@
-import * as S from "./apply-success.styles";
+import * as S from "../../styles/participate/apply-success.styles";
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";

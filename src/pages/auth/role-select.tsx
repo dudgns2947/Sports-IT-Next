@@ -3,7 +3,7 @@ import GoBackHeader from "@component/components/header/GoBackHeader";
 import { RoleAtomType } from "@component/interfaces/roleInterface";
 import React from "react";
 import { useRecoilState } from "recoil";
-import * as S from "./role-select.styles";
+import * as S from "../../styles/auth/role-select.styles";
 import Link from "next/link";
 import NavBar from "@component/components/navbar/NavBar";
 

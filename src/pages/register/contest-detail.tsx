@@ -4,28 +4,23 @@ import GoBackHeader from "@component/components/header/GoBackHeader";
 import NavBar from "@component/components/navbar/NavBar";
 import Link from "next/link";
 import React, { useState } from "react";
-import { Form, InputArea, InputTitle } from "./headcount.styles";
+import { Form, InputArea, InputTitle } from "../../styles/register/headcount.styles";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-import * as S from "./contest-detail.styles";
+import * as S from "../../styles/register/contest-detail.styles";
 import { IContestDetailForm } from "@component/interfaces/contestInterface";
 import { ContentArea } from "@component/components/area/areaComponent";
 import { useRecoilState } from "recoil";
-import {
-  contestContentAtom,
-  contestPosterList,
-} from "@component/atoms/contestAtom";
+import { contestContentAtom, contestPosterList } from "@component/atoms/contestAtom";
 
 const ContestDetail = () => {
-  const { register, handleSubmit, formState, watch, setValue } =
-    useForm<IContestDetailForm>();
+  const { register, handleSubmit, formState, watch, setValue } = useForm<IContestDetailForm>();
 
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [posterList, setPosterList] = useRecoilState(contestPosterList);
   const imageList = watch("imageList");
 
-  const [contestContent, setContestContent] =
-    useRecoilState(contestContentAtom);
+  const [contestContent, setContestContent] = useRecoilState(contestContentAtom);
 
   useEffect(() => {
     if (posterList && posterList.length > 0) {

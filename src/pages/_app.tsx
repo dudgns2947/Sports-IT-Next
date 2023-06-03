@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <Layout>
             <Head>
-              <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+              <script async src="https://cdn.iamport.kr/v1/iamport.js"></script>
             </Head>
             <Component {...pageProps} />
           </Layout>
