@@ -3,6 +3,8 @@ import { BiSearch, BiBell, BiUser } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { CiBellOn, CiUser } from "react-icons/ci";
 import { FaRegBell, FaRegUser } from "react-icons/fa";
+import { FiFilter } from "react-icons/fi";
+import { AiOutlineDown } from "react-icons/ai";
 
 export const Container = styled.div``;
 
@@ -85,7 +87,7 @@ export const ContentArea = styled.div`
 export const OrderArea = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 14px 0 5px 0;
+  padding: 14px 0 10px 0;
 `;
 
 export const Filter = styled.div`
@@ -97,9 +99,19 @@ export const Filter = styled.div`
 
 export const Order = styled(Filter)``;
 
+export const OrderSelect = styled.select`
+  border: none;
+`;
+
+export const OrderOption = styled.option`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+`;
+
 export const OrderText = styled.span`
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 20px;
 `;
 
@@ -107,6 +119,7 @@ export const ContestArea = styled.div`
   position: relative;
   overflow: auto;
   height: 620px;
+  padding-bottom: 30px;
 `;
 
 export const Contest = styled.div`
@@ -191,11 +204,12 @@ export const RegisterButton = styled.button`
   height: 44px;
   left: calc(50% - 140px / 2 + 0.5px);
   top: calc(50% - 44px / 2 + 310px);
-  background: #212121;
+  background: #fd3446;
   border-radius: 50px;
   color: #ffffff;
   font-weight: 600;
   font-size: 14px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
 
 export const PlusIcons = styled(AiOutlinePlus)`
@@ -209,4 +223,30 @@ export const ButtonArea = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 60px;
+`;
+
+export const SeeMoreArea = styled.div`
+  height: 50px;
+  margin: 20px 0 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SeeMoreButton = styled.button`
+  border-radius: 8px;
+  width: 25%;
+  font-size: 14px;
+  height: 70%;
+  background-color: #ffffff;
+  color: #212121;
+  border: #212121 1px solid;
+`;
+
+export const FilterIcon = styled(FiFilter)`
+  margin-right: 5px;
+`;
+
+export const ArrowIcon = styled(AiOutlineDown)`
+  margin-left: 5px;
 `;
