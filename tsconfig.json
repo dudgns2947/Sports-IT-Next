@@ -16,7 +16,9 @@
     "incremental": true,
     "downlevelIteration": true,
     "paths": {
-      "@component/*": ["./src/*"]
+      "@component/*": ["./src/*"],
+      "@pages/*": ["./pages/*"],
+      "@public/*": ["./public/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

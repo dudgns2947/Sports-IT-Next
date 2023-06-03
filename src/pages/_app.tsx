@@ -7,6 +7,8 @@ import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
+import Script from "next/script";
+import { Hydrate } from "react-query/hydration";
 
 // _app.tsx는 모든 페이지에 공통적으로 적용될 내용을 작성 및 서버로부터 요청이 왔을 때 가장 먼저 실행되며,
 // 페이지에 적용할 공통 레이아웃을 설정하는 역할을 한다.
@@ -24,19 +26,19 @@ import { ThemeProvider } from "styled-components";
 // + 파일명.module.css 파일 형태를 제외한 모든 나머지 css파일들은 _app.js에서만 import해와서 사용해야 한다. (글로벌 css간의 충돌을 피하기 위해서이다.)
 // https://nextjs.org/docs/messages/css-global
 
-export default function App({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
-          <Layout>
-            <Head>
-              <script async src="https://cdn.iamport.kr/v1/iamport.js"></script>
-            </Head>
-            <Component {...pageProps} />
-          </Layout>
+          <Hydrate state={pageProps.dehydratedState}>
+            <Layout>
+              <Script async src="https://cdn.iamport.kr/v1/iamport.js" />
+              <Component {...pageProps} />
+            </Layout>
+          </Hydrate>
         </QueryClientProvider>
       </ThemeProvider>
     </RecoilRoot>
