@@ -18,6 +18,7 @@ import NavBar from "../../components/navbar/NavBar";
 import { useState } from "react";
 import axios from "axios";
 import { ContentArea } from "@component/components/area/areaComponent";
+import { baseApi } from "@component/api/utils/instance";
 
 const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
@@ -96,7 +97,7 @@ const ChoiceRole = () => {
   };
 
   async function getSector() {
-    const response = await axios.get(`http://3.39.25.156:8080/api/competitions/template/${templateId}`);
+    const response = await baseApi.get(`/competitions/template/${templateId}`);
     console.log(response.data.result.sectors);
     setSectors(response.data.result.sectors);
   }

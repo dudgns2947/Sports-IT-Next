@@ -4,7 +4,7 @@ import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
 import { FilterType, IContestInfo, IContestParams, ISearchInput } from "@component/interfaces/contestInterface";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { AiOutlineDown } from "react-icons/ai";
 import { FiFilter } from "react-icons/fi";
@@ -16,6 +16,8 @@ import { useRouter } from "next/router";
 import BottomBar from "@component/components/navbar/BottomBar";
 import Contest from "@component/components/contest/Contest";
 import { roleAtom } from "@component/atoms/roleAtom";
+import { useInfiniteQuery } from "react-query";
+// import { useVirtualizer } from "@tanstack/react-virtual";
 
 const Index = () => {
   const { register, handleSubmit, formState } = useForm<ISearchInput>();
@@ -23,7 +25,7 @@ const Index = () => {
   const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(10);
+  const [size, setSize] = useState(20);
   const [contestList, setContestList] = useState<IContestInfo[]>([]);
   const token = useRecoilValue(userTokenAtom);
   const role = useRecoilValue(roleAtom);
@@ -50,6 +52,44 @@ const Index = () => {
     setContestList(response.data.content);
     await console.log(contestList);
   }
+
+  async function getContestData(offset: number = 0): Promise<{ rows: IContestInfo[]; nextOffset: number }> {
+    const response = await baseApi.get("competitions/slice", {
+      headers: {
+        Authorization: `Bearer $token}`,
+      },
+      params: {
+        keyword: keyword,
+        filterBy: filterBy,
+        orderBy: orderBy,
+        page: offset,
+        size: size,
+      },
+      paramsSerializer: (params) => {
+        return qs.stringify(params, { arrayFormat: "repeat" });
+      },
+    });
+    return { rows: response.data.content, nextOffset: offset + 1 };
+  }
+
+  // const { data, fetchNextPage, hasNextPage, isLoading, isError } =
+  //   useInfiniteQuery<IContestInfo[]>(
+  //     ["contests"],
+  //     ({ pageParam = 0 }) => getContestData(pageParam),
+  //     {
+  //       getNextPageParam: (lastPage, allPosts) => {
+  //         if (!lastPage.length) return;
+
+  //         return {
+  //           page: allPosts.length + 1,
+  //         };
+  //       },
+  //     }
+  //   );
+
+  // useEffect(() => {
+  //   fetchNextPage();
+  // }, [fetchNextPage]);
 
   const onValid = (data: ISearchInput) => {
     setKeyword(data.keyword);
@@ -82,6 +122,85 @@ const Index = () => {
       setFilterBy(newFilterBy);
     }
   };
+
+  // async function fetchServerPage(
+  //   limit: number,
+  //   offset: number = 0
+  // ): Promise<{ rows: string[]; nextOffset: number }> {
+  //   // const rows = new Array(limit)
+  //   //   .fill(0)
+  //   //   .map((e, i) => `Async loaded row #${i + offset + limit}`);
+
+  //   // await new Promise((r) => setTimeout(r, 500));
+  //   const response = await baseApi.get("competitions/slice", {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     params: {
+  //       keyword: keyword,
+  //       filterBy: filterBy,
+  //       orderBy: orderBy,
+  //       page: offset,
+  //       size: size,
+  //     },
+  //     paramsSerializer: (params) => {
+  //       return qs.stringify(params, { arrayFormat: "repeat" });
+  //     },
+  //   });
+  //   console.log(response);
+  //   setContestList(response.data.content);
+
+  //   return { rows, nextOffset: offset + 1 };
+  // }
+
+  // const {
+  //   status,
+  //   data,
+  //   error,
+  //   isFetching,
+  //   isFetchingNextPage,
+  //   fetchNextPage,
+  //   hasNextPage,
+  // } = useInfiniteQuery("contests", (ctx) => getContestData(ctx.pageParam), {
+  //   getNextPageParam: (_lastGroup, groups) => groups.length,
+  // });
+
+  // const allRows = data ? data.pages.flatMap((d) => d.rows) : [];
+
+  // const parentRef = useRef(null);
+
+  // const rowVirtualizer = useVirtualizer({
+  //   count: hasNextPage ? allRows.length + 1 : allRows.length,
+  //   getScrollElement: () => parentRef.current as Element | null,
+  //   estimateSize: () => 100,
+  //   overscan: 5,
+  // });
+
+  // useEffect(() => {
+  //   const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
+
+  //   if (!lastItem) {
+  //     return;
+  //   }
+  //   if (
+  //     lastItem.index >= allRows.length - 1 &&
+  //     hasNextPage &&
+  //     !isFetchingNextPage
+  //   ) {
+  //     fetchNextPage();
+  //   }
+  // }, [
+  //   hasNextPage,
+  //   fetchNextPage,
+  //   allRows.length,
+  //   isFetchingNextPage,
+  //   rowVirtualizer.getVirtualItems(),
+  //   keyword,
+  //   filterBy,
+  //   orderBy,
+  //   page,
+  //   size,
+  // ]);
 
   useEffect(() => {
     getContest({
@@ -134,13 +253,80 @@ const Index = () => {
             </S.Order>
           </S.OrderArea>
           <S.ContestArea>
+            {/* <InfiniteScroll
+              hasMore={hasNextPage}
+              loadMore={() => fetchNextPage()}
+            >
+              {data
+                ? data.map((contest) => (
+                    <Contest
+                      key={contest.competitionId}
+                      posterImageUrl={
+                        contest.posters[0] ? contest.posters[0].posterUrl : ""
+                      }
+                      competitionId={contest.competitionId}
+                      competitionType={contest.competitionType}
+                      name={contest.name}
+                      host={contest.host}
+                      recruitingEnd={contest.recruitingEnd}
+                    />
+                  ))
+                : null}
+            </InfiniteScroll> */}
+            {/* <div
+              style={{
+                height: `${rowVirtualizer.getTotalSize()}px`,
+                width: "100%",
+                position: "relative",
+              }}
+            >
+              {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                const isLoaderRow = virtualRow.index > allRows.length - 1;
+                const post = allRows[virtualRow.index];
+
+                return (
+                  <div
+                    key={virtualRow.index}
+                    className={
+                      virtualRow.index % 2 ? "ListItemOdd" : "ListItemEven"
+                    }
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: `${virtualRow.size}px`,
+                      transform: `translateY(${virtualRow.start}px)`,
+                    }}
+                  >
+                    {isLoaderRow ? (
+                      hasNextPage ? (
+                        ""
+                      ) : (
+                        "Nothing more to load"
+                      )
+                    ) : (
+                      <Contest
+                        key={post.competitionId}
+                        posterImageUrl={
+                          post.posters[0] ? post.posters[0].posterUrl : ""
+                        }
+                        competitionId={post.competitionId}
+                        competitionType={post.competitionType}
+                        name={post.name}
+                        host={post.host}
+                        recruitingEnd={post.recruitingEnd}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div> */}
             {contestList
               ? contestList.map((contest) => (
                   <Contest
                     key={contest.competitionId}
-                    posterImageUrl={
-                      contest.posters[0] ? contest.posters[0].posterUrl : ""
-                    }
+                    posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
                     competitionId={contest.competitionId}
                     competitionType={contest.competitionType}
                     name={contest.name}

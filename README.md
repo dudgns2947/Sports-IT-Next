@@ -1,16 +1,20 @@
-# 🤗 Welcome to Sports-IT Platform!
+# Sports-IT Platform 🏆
 
 <div align=center>
 
-<a href="https://github.com/PlayMaker-S/Sports-IT-platform/graphs/contributors">
-  <img src="img/sport-it_logo.png" height="200px" width="200px"/>
+<a href="https://github.com/PlayMaker-S/Sports-IT-Next/graphs/contributors">
+  <img src="/images/logo/MainLogo.png" height="200px" width="200px"/>
 </a>
 
 </div>
 
-## 🧑🏻‍💻 Introduce
+## 🧑🏻‍💻 프로젝트 소개
 
-안녕하세요, 여기는 Sport-iT 플랫폼을 개발하고 관리 및 기록하는 장소입니다!
+스포츠-잇(Sports-IT)은 스포츠대회 운영/관리 솔루션 입니다.
+
+체육 단체는 간편하게 대회를 주최하고 관리할 수 있습니다.
+
+참가자는 대회 정보를 한눈에 파악하고, 대회에 손쉽게 참가할 수 있습니다.
 
 - [회의록](https://www.notion.so/23356ef3f00f4e1791633a8b90176fe6?pvs=4)
 - [컨셉발표회](https://fanatical-glue-d17.notion.site/PlayMakers-09252d2c70134dc1af9245d85ce37705)

@@ -112,7 +112,7 @@ export const DetailWrapper = styled.div`
 export const ApplyWrapper = styled.div`
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 375px;
   background-color: #ffffff;
   border-top: 2px solid #ededed;
 `;

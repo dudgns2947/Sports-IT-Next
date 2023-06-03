@@ -74,7 +74,7 @@ const MyPage = () => {
       <GoBackHeader title="마이페이지" setting={true} />
       <Seo title="마이페이지" />
       <ContentArea>
-        <ProfileTab imgUrl="/images/example/Post1.png" userName="이준수" userEmail="young@naver.com" />
+        <ProfileTab imgUrl="/images/example/Post1.png" userName="이준수" userEmail="yuk@naver.com" />
         <TransformArea>
           <TransformTextArea>
             <TransformBoldText>주최자로 전환</TransformBoldText>

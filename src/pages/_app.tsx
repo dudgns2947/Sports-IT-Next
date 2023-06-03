@@ -3,6 +3,7 @@ import { GlobalStyle } from "@component/styles/global-style";
 import { theme } from "@component/styles/theme";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
@@ -31,6 +32,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <Layout>
+            <Head>
+              <script async src="https://cdn.iamport.kr/v1/iamport.js"></script>
+            </Head>
             <Component {...pageProps} />
           </Layout>
         </QueryClientProvider>

@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import * as S from "../../styles/contest/[id].styles";
-import { selectContestIdAtom, templateIdAtom } from "@component/atoms/contestAtom";
+import { selectContestIdAtom, selectContestNameAtom, templateIdAtom } from "@component/atoms/contestAtom";
 
 const ContestDetail = () => {
   const router = useRouter();
@@ -20,6 +20,7 @@ const ContestDetail = () => {
   const [contest, setContest] = useState<IContestInfo>();
   const [templateID, setTemplateID] = useRecoilState(templateIdAtom);
   const [selectContestID, setSelectContestID] = useRecoilState(selectContestIdAtom);
+  const [selectContestName, setSelectContestName] = useRecoilState(selectContestNameAtom);
 
   const getDday = (timestamp: number) => {
     // 주어진 타임스탬프 값을 Date 객체로 변환
@@ -60,6 +61,7 @@ const ContestDetail = () => {
     setContest(response.data);
     setTemplateID(response.data.templateID);
     setSelectContestID(response.data.competitionId);
+    setSelectContestName(response.data.name);
   }
 
   useEffect(() => {
