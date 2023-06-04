@@ -15,7 +15,11 @@ steps:
       - "init"
     id: build
   - name: "gcr.io/cloud-builders/gcloud"
-    args: ["app", "deploy"]
+    args:
+      - "c"
+      - |
+        VERSION=$(git rev-parse --short HEAD)
+        gcloud app deploy --version $VERSION --quiet
     waitFor:
       - "build"
     entrypoint: "gcloud"
