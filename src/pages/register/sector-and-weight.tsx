@@ -21,7 +21,7 @@ import {
 } from "@component/atoms/contestAtom";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
-import { ContentArea } from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import AddButton from "@component/components/button/AddButton";
 import SurveyCard from "@component/components/card/SurveyCard";
 import SurveyEndCard from "@component/components/card/SurveyEndCard";
@@ -48,31 +48,21 @@ interface IResponseOne {
 }
 
 const SectorAndWeight = () => {
-  const [weightSectors, setWeightSectors] =
-    useRecoilState(contestWeightSectors);
+  const [weightSectors, setWeightSectors] = useRecoilState(contestWeightSectors);
   const [contestName, setContestName] = useRecoilState(contestNameAtom);
-  const [contestStartDate, setContestStartDate] =
-    useRecoilState(contestStartDateAtom);
-  const [contestEndDate, setContestEndDate] =
-    useRecoilState(contestEndDateAtom);
-  const [recruitingStart, setRecruitingStart] = useRecoilState(
-    contestRecruitingStartAtom
-  );
-  const [recruitingEnd, setRecruitingEnd] = useRecoilState(
-    contestRecruitingEndAtom
-  );
+  const [contestStartDate, setContestStartDate] = useRecoilState(contestStartDateAtom);
+  const [contestEndDate, setContestEndDate] = useRecoilState(contestEndDateAtom);
+  const [recruitingStart, setRecruitingStart] = useRecoilState(contestRecruitingStartAtom);
+  const [recruitingEnd, setRecruitingEnd] = useRecoilState(contestRecruitingEndAtom);
   const [totalPrize, setTotalPrize] = useRecoilState(contestTotalPrizeAtom);
   const [content, setContent] = useRecoilState(contestContentAtom);
   const [location, setLocation] = useRecoilState(contestLocationAtom);
-  const [locationDetail, setLocationDetail] = useRecoilState(
-    contestLocationDetailAtom
-  );
+  const [locationDetail, setLocationDetail] = useRecoilState(contestLocationDetailAtom);
   const [maxPlayer, setMaxPlayer] = useRecoilState(contestMaxPlayerAtom);
   const [maxViewer, setMaxViewer] = useRecoilState(contestMaxViewerAtom);
   const eventSelector = useRecoilValue(contestEventSelector);
 
-  const [ruleFileNames, setRuleFileNames] =
-    useRecoilState(contestRuleFileNames);
+  const [ruleFileNames, setRuleFileNames] = useRecoilState(contestRuleFileNames);
   const [ruleFiles, setRuleFiles] = useRecoilState(contestRuleFiles);
   const [ruleUrlNames, setRuleUrlNames] = useRecoilState(contestRuleUrlNames);
   const [ruleUrls, setRuleUrls] = useRecoilState(contestRuleUrls);
@@ -179,15 +169,11 @@ const SectorAndWeight = () => {
       }
     );
     console.log(response2);
-    const response3 = await baseApi.post(
-      `/image/poster/${response2.data.result.competitionId}`,
-      createFormData(posterList, "posters"),
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response3 = await baseApi.post(`/image/poster/${response2.data.result.competitionId}`, createFormData(posterList, "posters"), {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log(response3);
     const response4 = await baseApi.post(
       `/agreement/upload/${response2.data.result.competitionId}`,
@@ -239,7 +225,7 @@ const SectorAndWeight = () => {
     <PageWrapper>
       <Seo title="부문 및 체급등록" />
       <GoBackHeader title="대회 등록" />
-      <ContentArea>
+      <ContentPaddingArea>
         <BoldTextArea>
           <BoldText>부문 또는 체급을</BoldText>
           <BoldText>등록해주세요.</BoldText>
@@ -271,7 +257,7 @@ const SectorAndWeight = () => {
         >
           <AddButton text="부문 / 체급 추가하기"></AddButton>
         </AddButtonArea> */}
-      </ContentArea>
+      </ContentPaddingArea>
       <Link onClick={registerContest} href="/register/register-success">
         <NavBar navText="대회 등록" active={true} />
       </Link>

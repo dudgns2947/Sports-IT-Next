@@ -10,6 +10,7 @@ export const TextArea = styled.div`
   justify-content: flex-end;
   height: 25%;
   padding-left: 18px;
+  font-weight: 600;
 `;
 
 export const Text = styled.span`

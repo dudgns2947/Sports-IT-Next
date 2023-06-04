@@ -10,11 +10,11 @@ import { useRouter } from "next/router";
 const BottomBarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  position: absolute;
+  position: fixed;
   /* top: 728px; */
   bottom: 0;
   width: 100%;
-  height: 8%;
+  height: 10%;
   border-top: 1px solid #c8c7c7;
   background: #ffffff;
 `;

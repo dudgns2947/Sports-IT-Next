@@ -217,30 +217,32 @@ const Index = () => {
     <PageWrapper>
       <Seo title="대회" />
       <S.Container>
-        <S.TopBar>
-          <S.SearchForm onSubmit={handleSubmit(onValid)}>
-            <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
-            <S.SearchButton>
-              <S.SearchIcon />
-            </S.SearchButton>
-          </S.SearchForm>
-          <S.ButtonArea>
-            <S.AlarmButton />
-            <S.MyPageButton onClick={() => router.push("/mypage")} />
-          </S.ButtonArea>
-        </S.TopBar>
+        <S.TopWrapper>
+          <S.TopBar>
+            <S.SearchForm onSubmit={handleSubmit(onValid)}>
+              <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
+              <S.SearchButton>
+                <S.SearchIcon />
+              </S.SearchButton>
+            </S.SearchForm>
+            <S.ButtonArea>
+              <S.AlarmButton />
+              <S.MyPageButton onClick={() => router.push("/mypage")} />
+            </S.ButtonArea>
+          </S.TopBar>
 
-        <S.FilterButtonArea>
-          <S.TotalButton
-            active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
-            onClick={onClickTotal}
-          >
-            전체
-          </S.TotalButton>
-          <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recruitingEnd" filterContent="마감 임박 ⏰" />
-          <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="totalPrize" filterContent="높은 상금 💰" />
-          <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recommend" filterContent="추천 대회 🏆" />
-        </S.FilterButtonArea>
+          <S.FilterButtonArea>
+            <S.TotalButton
+              active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
+              onClick={onClickTotal}
+            >
+              전체
+            </S.TotalButton>
+            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recruitingEnd" filterContent="마감 임박 ⏰" />
+            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="totalPrize" filterContent="높은 상금 💰" />
+            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recommend" filterContent="추천 대회 🏆" />
+          </S.FilterButtonArea>
+        </S.TopWrapper>
         <S.ContentArea>
           <S.OrderArea>
             <S.Filter>
@@ -252,6 +254,7 @@ const Index = () => {
               <AiOutlineDown />
             </S.Order>
           </S.OrderArea>
+
           <S.ContestArea>
             {/* <InfiniteScroll
               hasMore={hasNextPage}

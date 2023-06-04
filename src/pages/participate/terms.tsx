@@ -6,11 +6,7 @@ import Seo from "@component/components/Seo";
 import Link from "next/link";
 import { PageWrapper } from "@component/components/container/container";
 import { useRecoilState } from "recoil";
-import {
-  appTermAtom,
-  privacyPolicyAtom,
-  thirdPartyAtom,
-} from "@component/atoms/termAtom";
+import { appTermAtom, privacyPolicyAtom, thirdPartyAtom } from "@component/atoms/termAtom";
 
 const Terms = () => {
   const [appTerm, setAppTerm] = useRecoilState(appTermAtom);
@@ -44,40 +40,28 @@ const Terms = () => {
         </S.TotalAgree>
         <S.Term>
           <S.TermLeftArea>
-            <S.TermIcon
-              agree={appTerm}
-              onClick={() => setAppTerm((current) => !current)}
-            />
+            <S.TermIcon agree={appTerm} onClick={() => setAppTerm((current) => !current)} />
             <S.TermText>심판규정 (필수)</S.TermText>
           </S.TermLeftArea>
           <S.TermPageIcon />
         </S.Term>
         <S.Term>
           <S.TermLeftArea>
-            <S.TermIcon
-              agree={privacyPolicy}
-              onClick={() => setPrivacyPolicy((current) => !current)}
-            />
+            <S.TermIcon agree={privacyPolicy} onClick={() => setPrivacyPolicy((current) => !current)} />
             <S.TermText>복장규정 (필수)</S.TermText>
           </S.TermLeftArea>
           <S.TermPageIcon />
         </S.Term>
         <S.Term>
           <S.TermLeftArea>
-            <S.TermIcon
-              agree={thirdParty}
-              onClick={() => setThirdParty((current) => !current)}
-            />
+            <S.TermIcon agree={thirdParty} onClick={() => setThirdParty((current) => !current)} />
             <S.TermText>시상식규정 (필수)</S.TermText>
           </S.TermLeftArea>
           <S.TermPageIcon />
         </S.Term>
       </S.TermArea>
       <Link href="/participate/check-weight-sector">
-        <NavBar
-          navText="다음"
-          active={appTerm && privacyPolicy && thirdParty}
-        />
+        <NavBar navText="다음" active={appTerm && privacyPolicy && thirdParty} />
       </Link>
     </PageWrapper>
   );

@@ -33,6 +33,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
           <Script async src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" />
         </Head>

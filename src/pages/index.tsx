@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ImageSlider from "@component/components/container/ImageSlider";
 import CustomButton from "@component/components/button/Custombutton";
-import { ContentArea } from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import MainPagePost from "@component/components/container/mainpagepost";
 import qs from "qs";
 import BottomBar from "@component/components/navbar/BottomBar";
@@ -77,7 +77,7 @@ export default function Home() {
     <PageWrapper>
       <TopBar />
       <Seo title="메인 페이지" />
-      <ContentArea>
+      <ContentPaddingArea>
         <S.CustomMenu>
           <S.Banner>
             <ImageSlider images={images} />
@@ -108,7 +108,7 @@ export default function Home() {
           : null}
 
         <MainPageRecommanduser />
-      </ContentArea>
+      </ContentPaddingArea>
       <BottomBar />
     </PageWrapper>
   );

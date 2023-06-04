@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 import z from "zod";
 import Image from "next/image";
@@ -135,7 +135,7 @@ const Component: React.FC = () => {
             router.back();
           }}
         >
-          <Image alt="" src="@pubilc/images/icon/x_btn.png"></Image>
+          <Image alt="" src="/@pubilc/images/icon/x_btn.png" width={5} height={5}></Image>
         </div>
         <div className="flex-[9] text-lg flex justify-center" style={{ position: "relative", left: "-5vw" }}>
           장소 검색

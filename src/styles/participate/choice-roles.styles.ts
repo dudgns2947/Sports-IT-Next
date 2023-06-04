@@ -5,7 +5,8 @@ import styled from "styled-components";
 export const RoleSelectContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   /* justify-content: center;
   align-items: center; */
 `;
@@ -39,7 +40,7 @@ export const SpoitorButton = styled.button<IRole>`
   border: 2px solid;
   border-color: ${(props) => (props.role === "ROLE_INSTITUTION" ? "#212121" : "#EDEDED")};
   border-radius: 12px;
-  width: 335px;
+  width: 89%;
   height: 100px;
   margin-bottom: 5px;
   padding-left: 20px;

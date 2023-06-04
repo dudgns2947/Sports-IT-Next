@@ -6,9 +6,10 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 375px;
-  height: 50px;
+  width: 100%;
+  height: 6%;
   padding: 12px 20px;
+  margin-bottom: 12px;
 `;
 
 export const IconArea = styled.div`

@@ -57,7 +57,7 @@ export const Tag = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 53px;
+  width: 14%;
   height: 22px;
   background-color: #f9f9f9;
   color: #747474;
@@ -81,6 +81,7 @@ export const ContestHostArea = styled.div`
 export const PremiumLogo = styled.img`
   width: 17px;
   height: 17px;
+  display: inline-block;
 `;
 
 export const PosterImage = styled.img`
@@ -112,7 +113,7 @@ export const DetailWrapper = styled.div`
 export const ApplyWrapper = styled.div`
   position: fixed;
   bottom: 0;
-  width: 375px;
+  width: 100%;
   background-color: #ffffff;
   border-top: 2px solid #ededed;
 `;
@@ -124,7 +125,7 @@ export const ApplyBar = styled.div`
 `;
 
 export const IconArea = styled.div`
-  width: 50px;
+  width: 13%;
   height: 50px;
   background: #ffffff;
   border: 1px solid #ededed;
@@ -135,7 +136,7 @@ export const IconArea = styled.div`
 `;
 
 export const ApplyButton = styled.button`
-  width: 223px;
+  width: 60%;
   height: 50px;
   background: #222428;
   border-radius: 6px;
@@ -143,12 +144,12 @@ export const ApplyButton = styled.button`
 `;
 
 export const ShareIcon = styled(GrShareOption)`
-  width: 28px;
-  height: 28px;
+  width: 50%;
+  height: 50%;
   color: #aeaeae;
 `;
 
 export const MessageIcon = styled(TbMessageCircle2)`
-  height: 28px;
-  width: 28px;
+  height: 50%;
+  width: 50%;
 `;

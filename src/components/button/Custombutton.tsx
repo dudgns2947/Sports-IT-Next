@@ -21,13 +21,13 @@ const ButtonWrapper = styled.button`
 
 const ImageWrapper = styled.div`
   display: flex;
-  margin-bottom: 5px;
-  width: 45px;
-  height: 45px;
+  margin-bottom: 6px;
+  width: 50px;
+  height: 50px;
   justify-content: center;
   align-items: center;
   background-color: #f9f9fa;
-  border-radius: 3px;
+  border-radius: 14px;
 `;
 
 const ButtonImage = styled.img`
@@ -40,11 +40,7 @@ const ButtonText = styled.span`
   font-weight: bold;
 `;
 
-const CustomButton: React.FC<CustomButtonProps> = ({
-  imageUrl,
-  buttonName,
-  routeUrl,
-}) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ imageUrl, buttonName, routeUrl }) => {
   const router = useRouter();
   return (
     <ButtonWrapper onClick={() => router.push(routeUrl)}>

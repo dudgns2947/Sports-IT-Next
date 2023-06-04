@@ -5,14 +5,14 @@ import styled from "styled-components";
 export const RoleSelectContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 `;
 
 export const QuestionArea = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 60px;
+  padding-top: 48px;
   margin-bottom: 47px;
 `;
 
@@ -82,21 +82,21 @@ export const SurveyCheckBox = styled.input`
   vertical-align: middle;
   font-weight: 600;
   appearance: none;
-  border: max(2px, 0.1em) solid black;
+  border: max(1.3px, 0.1em) #eaeaea solid;
   border-radius: 50%;
   width: 1em;
   height: 1em;
   transition: border 0.1s ease-in-out;
   &:checked {
     border: 0.35em solid #fd3446;
-    padding: 3px;
+    padding: 2px;
   }
   &:focus-visible {
-    outline-offset: max(2px, 0, 1em);
-    outline: max(2px, 0.1em) solid #fd3446;
+    outline-offset: max(1.5px, 0, 1em);
+    outline: max(1.5px, 0.1em) solid #fd3446;
   }
   &:hover {
-    box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+    box-shadow: 0 0 0 max(2px, 0.2em) lightgray;
     cursor: pointer;
   }
   &:disabled {

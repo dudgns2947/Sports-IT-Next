@@ -4,11 +4,22 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { CiBellOn, CiUser } from "react-icons/ci";
 import { FaRegBell, FaRegUser } from "react-icons/fa";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+`;
+
+export const TopWrapper = styled.div`
+  width: 100%;
+  padding: 5px;
+  border-bottom: 8px solid #f9f9fa;
+`;
 
 export const TopBar = styled.div`
+  top: 0%;
   display: flex;
-  padding: 14px 20px;
+  padding: 14px 0px;
   justify-content: center;
   align-items: center;
 `;
@@ -21,7 +32,7 @@ export const SearchForm = styled.form`
 `;
 
 export const FilterButtonArea = styled.div`
-  width: 352px;
+  width: 100%;
   height: 45px;
   margin: 0px 20px;
   display: flex;
@@ -32,8 +43,8 @@ interface TotalButtonProps {
 }
 
 export const TotalButton = styled.button<TotalButtonProps>`
-  width: 45px;
   height: 34px;
+  width: 53px;
   border: 1px solid #ededed;
   border-radius: 20px;
   background-color: ${(props) => (props.active ? "#212121" : "#ffffff")};
@@ -43,10 +54,11 @@ export const TotalButton = styled.button<TotalButtonProps>`
   font-size: 12px;
   margin-right: 6px;
   cursor: pointer;
+  display: inline-block;
 `;
 
 export const SearchInput = styled.input`
-  width: 262px;
+  width: 95%;
   height: 40px;
   background: #f9f9fa;
   border-radius: 12px;
@@ -60,7 +72,7 @@ export const SearchButton = styled.button``;
 
 export const SearchIcon = styled(BiSearch)`
   position: absolute;
-  right: 20px;
+  right: 30px;
   top: 8px;
   width: 27px;
   height: 27px;
@@ -104,9 +116,10 @@ export const OrderText = styled.span`
 `;
 
 export const ContestArea = styled.div`
-  position: relative;
+  position: fixed;
   overflow: auto;
-  height: 620px;
+  height: 100%;
+  width: 100%;
 `;
 
 export const Contest = styled.div`
@@ -190,7 +203,7 @@ export const RegisterButton = styled.button`
   width: 140px;
   height: 44px;
   left: calc(50% - 140px / 2 + 0.5px);
-  top: calc(50% - 44px / 2 + 310px);
+  top: 80%;
   background: #212121;
   border-radius: 50px;
   color: #ffffff;

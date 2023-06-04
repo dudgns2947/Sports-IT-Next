@@ -7,7 +7,7 @@ import { Input, InputArea, InputTitle } from "../../styles/register/headcount.st
 import NavBar from "@component/components/navbar/NavBar";
 import * as S from "../../styles/register/contest-info.styles";
 import Link from "next/link";
-import { ContentArea } from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import {
   contestEndDateAtom,
   contestLocationAtom,
@@ -41,7 +41,7 @@ const ContestInfo = () => {
     <PageWrapper as="form">
       <Seo title="대회 정보 입력" />
       <GoBackHeader title="대회 등록" />
-      <ContentArea>
+      <ContentPaddingArea>
         {/* <S.InputWrapper> */}
         <InputArea>
           <InputTitle>대회 제목</InputTitle>
@@ -71,7 +71,7 @@ const ContestInfo = () => {
         </InputArea>
         <InputArea>
           <InputTitle>총 상금</InputTitle>
-          <S.LargeInput type="number" onChange={(e) => setTotalPrize(parseInt(e.currentTarget.value))} />
+          <S.LargeInput type="number" placeholder="ex) 10,000,000" onChange={(e) => setTotalPrize(parseInt(e.currentTarget.value))} />
         </InputArea>
         <InputArea>
           <InputTitle>개최 장소</InputTitle>
@@ -79,7 +79,7 @@ const ContestInfo = () => {
           <Input type="text" placeholder="상세 주소 입력" onChange={(e) => setLocationDetail(e.currentTarget.value)} />
         </InputArea>
         {/* </S.InputWrapper> */}
-      </ContentArea>
+      </ContentPaddingArea>
 
       <Link href="/register/contest-detail">
         <NavBar navText="다음" active={true} />

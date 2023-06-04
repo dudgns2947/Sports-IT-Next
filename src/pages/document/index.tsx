@@ -9,9 +9,12 @@ import styled from "styled-components";
 
 const PageWrapperBlack = styled(PageWrapper)`
   background-color: #212121;
+  height: 100vh;
+  width: 100vw;
 `;
 
 const TextArea = styled.div`
+  padding-left: 10px;
   display: flex;
   flex-direction: column;
   padding-top: 66px;
@@ -47,17 +50,22 @@ const ButtonArea = styled.div`
   align-items: center;
   position: fixed;
   bottom: 0;
-  height: 71.3px;
-  width: 375px;
+  height: 10%;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
   background-color: #212121;
 `;
 
 const RedButton = styled.button`
-  width: 335px;
+  width: 89.3%;
   height: 50px;
   background: #fd3446;
+  justify-content: center;
+  align-items: center;
   border-radius: 12px;
   font-size: 18px;
+  border: none;
   color: #ffffff;
   cursor: pointer;
 `;
@@ -70,7 +78,7 @@ const LogoArea = styled.div`
 const LogoImage = styled.img`
   position: absolute;
   right: 0;
-  bottom: 71.3px;
+  bottom: 22.3px;
   width: 270.64px;
   height: 370.67px;
 `;

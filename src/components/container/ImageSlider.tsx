@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 interface ImageSliderProps {
   images: string[];
@@ -7,7 +7,7 @@ interface ImageSliderProps {
 
 const SliderContainer = styled.div`
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
 `;
 
 const SliderContent = styled.div`

@@ -41,9 +41,12 @@ export const GlobalStyle = createGlobalStyle`
 }
   body {
     line-height: 1;
+    width: 100vw;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
     font-family: 'Pretendard-Regular', sans-serif;
   }
   ol, ul {
@@ -63,9 +66,13 @@ export const GlobalStyle = createGlobalStyle`
   }
   *{
     box-sizing: border-box;
+    
   }
   a{
     text-decoration: none;
     color: inherit;
   }
+  ::-webkit-scrollbar {
+    display: none;
+}
 `;

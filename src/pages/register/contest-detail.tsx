@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import * as S from "../../styles/register/contest-detail.styles";
 import { IContestDetailForm } from "@component/interfaces/contestInterface";
-import { ContentArea } from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import { useRecoilState } from "recoil";
 import { contestContentAtom, contestPosterList } from "@component/atoms/contestAtom";
 
@@ -52,7 +52,7 @@ const ContestDetail = () => {
     <PageWrapper>
       <Seo title="대회 상세정보 입력" />
       <GoBackHeader title="대회 등록" />
-      <ContentArea>
+      <ContentPaddingArea>
         <InputArea>
           <InputTitle>대회 포스터</InputTitle>
           <S.ImageInputArea>
@@ -91,7 +91,7 @@ const ContestDetail = () => {
             onChange={(e) => setContestContent(e.currentTarget.value)}
           />
         </InputArea>
-      </ContentArea>
+      </ContentPaddingArea>
       <Link href="/register/rules-and-terms">
         <NavBar navText="다음" active={true} />
       </Link>

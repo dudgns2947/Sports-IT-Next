@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Input } from "./headcount.styles";
 
 export const SmallInput = styled(Input)`
-  width: 120px;
+  width: 32%;
   margin-right: 10px;
 `;
 
@@ -16,7 +16,7 @@ export const Form = styled.form``;
 
 export const InputWrapper = styled.div`
   padding: 10px 20px;
-  height: 628px;
+  height: 77%;
   overflow-y: auto;
 `;
 
