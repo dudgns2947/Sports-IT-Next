@@ -19,8 +19,8 @@ steps:
     args:
       - "c"
       - |
-        VERSION=$(git rev-parse --short HEAD)
-        gcloud app deploy --version $VERSION --quiet
+        _VERSION=$(git rev-parse --short HEAD)
+        gcloud app deploy --version $_VERSION --quiet
     waitFor:
       - "build"
 options:
