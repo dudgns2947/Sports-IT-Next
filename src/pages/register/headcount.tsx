@@ -10,6 +10,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { contestMaxPlayerAtom, contestMaxViewerAtom } from "@component/atoms/contestAtom";
 import { useRouter } from "next/router";
 import { HeadCountForm } from "@component/interfaces/headcountInterface";
+import Head from "next/head";
 
 const Headcount = () => {
   const router = useRouter();
@@ -48,42 +49,47 @@ const Headcount = () => {
   };
 
   return (
-    <PageWrapper>
-      <Seo title="대회 정원 입력" />
-      <GoBackHeader title="대회 등록" />
-      <TextArea>
-        <Text>대회 정원을</Text>
-        <Text>입력해주세요.</Text>
-        <S.SubText>정원에 제한이 없을 시 공백으로 남겨주세요.</S.SubText>
-      </TextArea>
-      <S.Form onSubmit={handleSubmit(onValid, onInValid)}>
-        <S.InputWrapper>
-          <S.InputArea>
-            <S.InputTitle>선수 정원</S.InputTitle>
-            <S.Input
-              {...register("numOfPlayers", {
-                validate: (value) => (value >= 0 ? true : "선수 정원은 0 이상의 수로 입력해주세요."),
-              })}
-              type="number"
-              placeholder="최대 선수 인원을 입력해주세요."
-            ></S.Input>
-            <S.ErrorMessage>{errorMsg === "" ? null : errorMsg}</S.ErrorMessage>
-          </S.InputArea>
-          <S.InputArea>
-            <S.InputTitle>관람객 정원</S.InputTitle>
-            <S.Input
-              {...register("numOfAudience", {
-                validate: (value) => (value >= 0 ? true : "관람객 정원은 0 이상의 수로 입력해주세요."),
-              })}
-              type="number"
-              placeholder="최대 관람객 인원을 입력해주세요."
-            ></S.Input>
-            <S.ErrorMessage>{errorMsgTwo === "" ? null : errorMsgTwo}</S.ErrorMessage>
-          </S.InputArea>
-        </S.InputWrapper>
-        <NavBar navText="다음" active={true} />
-      </S.Form>
-    </PageWrapper>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="대회 정원 입력" />
+        <GoBackHeader title="대회 등록" />
+        <TextArea>
+          <Text>대회 정원을</Text>
+          <Text>입력해주세요.</Text>
+          <S.SubText>정원에 제한이 없을 시 공백으로 남겨주세요.</S.SubText>
+        </TextArea>
+        <S.Form onSubmit={handleSubmit(onValid, onInValid)}>
+          <S.InputWrapper>
+            <S.InputArea>
+              <S.InputTitle>선수 정원</S.InputTitle>
+              <S.Input
+                {...register("numOfPlayers", {
+                  validate: (value) => (value >= 0 ? true : "선수 정원은 0 이상의 수로 입력해주세요."),
+                })}
+                type="number"
+                placeholder="최대 선수 인원을 입력해주세요."
+              ></S.Input>
+              <S.ErrorMessage>{errorMsg === "" ? null : errorMsg}</S.ErrorMessage>
+            </S.InputArea>
+            <S.InputArea>
+              <S.InputTitle>관람객 정원</S.InputTitle>
+              <S.Input
+                {...register("numOfAudience", {
+                  validate: (value) => (value >= 0 ? true : "관람객 정원은 0 이상의 수로 입력해주세요."),
+                })}
+                type="number"
+                placeholder="최대 관람객 인원을 입력해주세요."
+              ></S.Input>
+              <S.ErrorMessage>{errorMsgTwo === "" ? null : errorMsgTwo}</S.ErrorMessage>
+            </S.InputArea>
+          </S.InputWrapper>
+          <NavBar navText="다음" active={true} />
+        </S.Form>
+      </PageWrapper>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ import { useMutation } from "react-query";
 import { signupPost } from "@component/api/account/accountApi";
 import { ISignupForm } from "@component/interfaces/accountInterface";
 import { ContentArea } from "@component/components/area/areaComponent";
+import Head from "next/head";
 
 const Signup = () => {
   const { register, handleSubmit, formState } = useForm<ISignupForm>();
@@ -54,44 +55,48 @@ const Signup = () => {
   };
 
   return (
-    <PageWrapper>
-      <Seo title="회원가입" />
-      <GoBackHeader title="회원가입" />
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="회원가입" />
+        <GoBackHeader title="회원가입" />
 
-      <S.Form onSubmit={handleSubmit(onValid, onInValid)}>
-        <S.InputArea>
-          <S.Input>
-            <S.InputTitle>이름</S.InputTitle>
-            <S.InputContent
-              {...register("name", {
-                required: "이름을 입력해주세요.",
-              })}
-              placeholder="이름 입력"
-            ></S.InputContent>
-          </S.Input>
-          <S.Input>
-            <S.InputTitle>이메일</S.InputTitle>
-            <S.InputContent
-              {...register("email", {
-                required: "이메일를 입력해주세요.",
-                pattern: {
-                  value: /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
-                  message: "이메일 형식에 맞춰 입력해주세요.",
-                },
-              })}
-              placeholder="이메일 입력"
-            ></S.InputContent>
-          </S.Input>
-          <S.Input>
-            <S.InputTitle>전화번호</S.InputTitle>
-            <S.InputContent
-              {...register("phone", {
-                required: "전화번호를 입력해주세요.",
-              })}
-              placeholder="- 없이 입력"
-            ></S.InputContent>
-          </S.Input>
-          {/* <S.Input>
+        <S.Form onSubmit={handleSubmit(onValid, onInValid)}>
+          <S.InputArea>
+            <S.Input>
+              <S.InputTitle>이름</S.InputTitle>
+              <S.InputContent
+                {...register("name", {
+                  required: "이름을 입력해주세요.",
+                })}
+                placeholder="이름 입력"
+              ></S.InputContent>
+            </S.Input>
+            <S.Input>
+              <S.InputTitle>이메일</S.InputTitle>
+              <S.InputContent
+                {...register("email", {
+                  required: "이메일를 입력해주세요.",
+                  pattern: {
+                    value: /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
+                    message: "이메일 형식에 맞춰 입력해주세요.",
+                  },
+                })}
+                placeholder="이메일 입력"
+              ></S.InputContent>
+            </S.Input>
+            <S.Input>
+              <S.InputTitle>전화번호</S.InputTitle>
+              <S.InputContent
+                {...register("phone", {
+                  required: "전화번호를 입력해주세요.",
+                })}
+                placeholder="- 없이 입력"
+              ></S.InputContent>
+            </S.Input>
+            {/* <S.Input>
             <S.InputTitle>인증번호</S.InputTitle>
             <S.InputContent
               {...register("authNumber", {
@@ -100,38 +105,39 @@ const Signup = () => {
               placeholder="인증번호 입력"
             ></S.InputContent>
           </S.Input> */}
-          <S.Input>
-            <S.InputTitle>비밀번호</S.InputTitle>
-            <S.InputContent
-              {...register("pw", {
-                required: "비밀번호를 입력해주세요.",
-                minLength: {
-                  value: 8,
-                  message: "비밀번호는 8자리 이상 입력해야 합니다.",
-                },
-                pattern: {
-                  value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
-                  message: "비밀번호는 영문, 숫자, 특수문자 포함한 8 ~ 16자리를 만족하여야 합니다.",
-                },
-              })}
-              placeholder="8 ~ 16자리 영문, 숫자, 특수문자 포함"
-              type="password"
-            ></S.InputContent>
-          </S.Input>
-          <S.Input>
-            <S.InputTitle>비밀번호 확인</S.InputTitle>
-            <S.InputContent
-              {...register("pwCheck", {
-                required: "비밀번호 확인을 입력해주세요.",
-              })}
-              placeholder="비밀번호 재입력"
-              type="password"
-            ></S.InputContent>
-          </S.Input>
-        </S.InputArea>
-        <NavBar navText="다음" active={true} />
-      </S.Form>
-    </PageWrapper>
+            <S.Input>
+              <S.InputTitle>비밀번호</S.InputTitle>
+              <S.InputContent
+                {...register("pw", {
+                  required: "비밀번호를 입력해주세요.",
+                  minLength: {
+                    value: 8,
+                    message: "비밀번호는 8자리 이상 입력해야 합니다.",
+                  },
+                  pattern: {
+                    value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
+                    message: "비밀번호는 영문, 숫자, 특수문자 포함한 8 ~ 16자리를 만족하여야 합니다.",
+                  },
+                })}
+                placeholder="8 ~ 16자리 영문, 숫자, 특수문자 포함"
+                type="password"
+              ></S.InputContent>
+            </S.Input>
+            <S.Input>
+              <S.InputTitle>비밀번호 확인</S.InputTitle>
+              <S.InputContent
+                {...register("pwCheck", {
+                  required: "비밀번호 확인을 입력해주세요.",
+                })}
+                placeholder="비밀번호 재입력"
+                type="password"
+              ></S.InputContent>
+            </S.Input>
+          </S.InputArea>
+          <NavBar navText="다음" active={true} />
+        </S.Form>
+      </PageWrapper>
+    </>
   );
 };
 

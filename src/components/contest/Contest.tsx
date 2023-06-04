@@ -13,15 +13,7 @@ interface IContest {
   showImage?: boolean;
 }
 
-const Contest = ({
-  posterImageUrl,
-  competitionId,
-  competitionType,
-  name,
-  host,
-  recruitingEnd,
-  showImage,
-}: IContest) => {
+const Contest = ({ posterImageUrl, competitionId, competitionType, name, host, recruitingEnd, showImage }: IContest) => {
   const getDday = (timestamp: number) => {
     // 주어진 타임스탬프 값을 Date 객체로 변환
     const date = new Date(timestamp * 1000);
@@ -36,17 +28,11 @@ const Contest = ({
   const router = useRouter();
   return (
     <S.Contest onClick={() => router.push(`/contest/${competitionId}`)}>
-      {showImage === false ? null : (
-        <S.ContestImage
-          src={posterImageUrl ? posterImageUrl : "/images/logo/AppLogo.png"}
-        />
-      )}
+      {showImage === false ? null : <S.ContestImage src={posterImageUrl ? posterImageUrl : "/images/logo/replace_poster.png"} />}
 
       <S.ContestInfo>
         <S.ContestTagArea>
-          {competitionType === "FREE" ? null : (
-            <S.PremiumTag>프리미엄</S.PremiumTag>
-          )}
+          {competitionType === "FREE" ? null : <S.PremiumTag>프리미엄</S.PremiumTag>}
           <S.Tag>스포츠</S.Tag>
           <S.Tag>대회</S.Tag>
         </S.ContestTagArea>
@@ -55,9 +41,7 @@ const Contest = ({
           <S.ContestHostName>{host ? host.name : ""}</S.ContestHostName>
           <S.PremiumLogo src="/images/logo/premiumLogo.png" />
         </S.ContestHostArea>
-        <S.ContestDday>
-          {getDday(Date.parse(recruitingEnd) / 1000)}
-        </S.ContestDday>
+        <S.ContestDday>{getDday(Date.parse(recruitingEnd) / 1000)}</S.ContestDday>
       </S.ContestInfo>
     </S.Contest>
   );

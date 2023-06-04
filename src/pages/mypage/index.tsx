@@ -14,6 +14,7 @@ import NavTitle from "@component/components/navbar/NavTitle";
 import NavTab from "@component/components/navbar/NavTab";
 import ProfileTab from "@component/components/profile/ProfileTab";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const TransformArea = styled.div`
   display: flex;
@@ -70,30 +71,35 @@ const iconProps = [
 const MyPage = () => {
   const router = useRouter();
   return (
-    <PageWrapper>
-      <GoBackHeader title="마이페이지" setting={true} />
-      <Seo title="마이페이지" />
-      <ContentPaddingArea>
-        <ProfileTab imgUrl="/images/example/Post1.png" userName="이준수" userEmail="yuk@naver.com" />
-        <TransformArea>
-          <TransformTextArea>
-            <TransformBoldText>주최자로 전환</TransformBoldText>
-            <TransformLightText>대회 개최하고 관리하기</TransformLightText>
-          </TransformTextArea>
-          <TransformButton>전환</TransformButton>
-        </TransformArea>
-        <IconContainer>
-          {iconProps.map((iconProp, index) => (
-            <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
-          ))}
-        </IconContainer>
-        <NavTitle content="나의 스포티" />
-        <NavTab url="/" content="결제 내역" />
-        <NavTab url="/" content="스크랩" />
-        <NavTab url="/" content="프리미엄 구독 신청" />
-      </ContentPaddingArea>
-      <BottomBar />
-    </PageWrapper>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <GoBackHeader title="마이페이지" setting={true} />
+        <Seo title="마이페이지" />
+        <ContentPaddingArea>
+          <ProfileTab imgUrl="/images/example/Post1.png" userName="이준수" userEmail="yuk@naver.com" />
+          <TransformArea>
+            <TransformTextArea>
+              <TransformBoldText>주최자로 전환</TransformBoldText>
+              <TransformLightText>대회 개최하고 관리하기</TransformLightText>
+            </TransformTextArea>
+            <TransformButton>전환</TransformButton>
+          </TransformArea>
+          <IconContainer>
+            {iconProps.map((iconProp, index) => (
+              <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
+            ))}
+          </IconContainer>
+          <NavTitle content="나의 스포티" />
+          <NavTab url="/" content="결제 내역" />
+          <NavTab url="/" content="스크랩" />
+          <NavTab url="/" content="프리미엄 구독 신청" />
+        </ContentPaddingArea>
+        <BottomBar />
+      </PageWrapper>
+    </>
   );
 };
 

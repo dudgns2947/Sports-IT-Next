@@ -17,6 +17,7 @@ import BottomBar from "@component/components/navbar/BottomBar";
 import Contest from "@component/components/contest/Contest";
 import { roleAtom } from "@component/atoms/roleAtom";
 import { useInfiniteQuery } from "react-query";
+import Head from "next/head";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 
 const Index = () => {
@@ -214,49 +215,53 @@ const Index = () => {
   }, [keyword, filterBy, orderBy, page, size]);
 
   return (
-    <PageWrapper>
-      <Seo title="대회" />
-      <S.Container>
-        <S.TopWrapper>
-          <S.TopBar>
-            <S.SearchForm onSubmit={handleSubmit(onValid)}>
-              <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
-              <S.SearchButton>
-                <S.SearchIcon />
-              </S.SearchButton>
-            </S.SearchForm>
-            <S.ButtonArea>
-              <S.AlarmButton />
-              <S.MyPageButton onClick={() => router.push("/mypage")} />
-            </S.ButtonArea>
-          </S.TopBar>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="대회" />
+        <S.Container>
+          <S.TopWrapper>
+            <S.TopBar>
+              <S.SearchForm onSubmit={handleSubmit(onValid)}>
+                <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
+                <S.SearchButton>
+                  <S.SearchIcon />
+                </S.SearchButton>
+              </S.SearchForm>
+              <S.ButtonArea>
+                <S.AlarmButton />
+                <S.MyPageButton onClick={() => router.push("/mypage")} />
+              </S.ButtonArea>
+            </S.TopBar>
 
-          <S.FilterButtonArea>
-            <S.TotalButton
-              active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
-              onClick={onClickTotal}
-            >
-              전체
-            </S.TotalButton>
-            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recruitingEnd" filterContent="마감 임박 ⏰" />
-            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="totalPrize" filterContent="높은 상금 💰" />
-            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recommend" filterContent="추천 대회 🏆" />
-          </S.FilterButtonArea>
-        </S.TopWrapper>
-        <S.ContentArea>
-          <S.OrderArea>
-            <S.Filter>
-              <FiFilter />
-              <S.OrderText>필터</S.OrderText>
-            </S.Filter>
-            <S.Order>
-              <S.OrderText>날짜순</S.OrderText>
-              <AiOutlineDown />
-            </S.Order>
-          </S.OrderArea>
+            <S.FilterButtonArea>
+              <S.TotalButton
+                active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
+                onClick={onClickTotal}
+              >
+                전체
+              </S.TotalButton>
+              <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recruitingEnd" filterContent="마감 임박 ⏰" />
+              <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="totalPrize" filterContent="높은 상금 💰" />
+              <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recommend" filterContent="추천 대회 🏆" />
+            </S.FilterButtonArea>
+          </S.TopWrapper>
+          <S.ContentArea>
+            <S.OrderArea>
+              <S.Filter>
+                <FiFilter />
+                <S.OrderText>필터</S.OrderText>
+              </S.Filter>
+              <S.Order>
+                <S.OrderText>날짜순</S.OrderText>
+                <AiOutlineDown />
+              </S.Order>
+            </S.OrderArea>
 
-          <S.ContestArea>
-            {/* <InfiniteScroll
+            <S.ContestArea>
+              {/* <InfiniteScroll
               hasMore={hasNextPage}
               loadMore={() => fetchNextPage()}
             >
@@ -276,7 +281,7 @@ const Index = () => {
                   ))
                 : null}
             </InfiniteScroll> */}
-            {/* <div
+              {/* <div
               style={{
                 height: `${rowVirtualizer.getTotalSize()}px`,
                 width: "100%",
@@ -325,30 +330,31 @@ const Index = () => {
                 );
               })}
             </div> */}
-            {contestList
-              ? contestList.map((contest) => (
-                  <Contest
-                    key={contest.competitionId}
-                    posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
-                    competitionId={contest.competitionId}
-                    competitionType={contest.competitionType}
-                    name={contest.name}
-                    host={contest.host}
-                    recruitingEnd={contest.recruitingEnd}
-                  />
-                ))
-              : null}
-            {role === "ROLE_INSTITUTION" ? (
-              <S.RegisterButton onClick={() => router.push("register/event-select")}>
-                <S.PlusIcons />
-                대회 개최하기
-              </S.RegisterButton>
-            ) : null}
-          </S.ContestArea>
-        </S.ContentArea>
-      </S.Container>
-      <BottomBar />
-    </PageWrapper>
+              {contestList
+                ? contestList.map((contest) => (
+                    <Contest
+                      key={contest.competitionId}
+                      posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
+                      competitionId={contest.competitionId}
+                      competitionType={contest.competitionType}
+                      name={contest.name}
+                      host={contest.host}
+                      recruitingEnd={contest.recruitingEnd}
+                    />
+                  ))
+                : null}
+              {role === "ROLE_INSTITUTION" ? (
+                <S.RegisterButton onClick={() => router.push("register/event-select")}>
+                  <S.PlusIcons />
+                  대회 개최하기
+                </S.RegisterButton>
+              ) : null}
+            </S.ContestArea>
+          </S.ContentArea>
+        </S.Container>
+        <BottomBar />
+      </PageWrapper>
+    </>
   );
 };
 

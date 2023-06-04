@@ -92,7 +92,7 @@ const ContestDetail = () => {
               </S.ContestHostArea>
               <S.ContestDday>{getDday(Date.parse(contest.endDate) / 1000)}</S.ContestDday>
             </S.ContestInfo>
-            <S.PosterImage src={contest.posters[0] ? contest?.posters[0].posterUrl : "/images/logo/AppLogo_black.png"} />
+            <S.PosterImage src={contest.posters[0] ? contest?.posters[0].posterUrl : "/images/logo/replace_poster.png"} />
             <S.DetailWrapper>
               <S.DetailTitle>모집 기간</S.DetailTitle>
               <S.DetailContent>

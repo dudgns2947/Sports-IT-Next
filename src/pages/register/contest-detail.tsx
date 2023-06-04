@@ -12,6 +12,7 @@ import { IContestDetailForm } from "@component/interfaces/contestInterface";
 import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import { useRecoilState } from "recoil";
 import { contestContentAtom, contestPosterList } from "@component/atoms/contestAtom";
+import Head from "next/head";
 
 const ContestDetail = () => {
   const { register, handleSubmit, formState, watch, setValue } = useForm<IContestDetailForm>();
@@ -49,53 +50,58 @@ const ContestDetail = () => {
   console.log(contestContent);
 
   return (
-    <PageWrapper>
-      <Seo title="대회 상세정보 입력" />
-      <GoBackHeader title="대회 등록" />
-      <ContentPaddingArea>
-        <InputArea>
-          <InputTitle>대회 포스터</InputTitle>
-          <S.ImageInputArea>
-            <S.ImageInputLabel htmlFor="image">
-              <S.CameraIcon />
-            </S.ImageInputLabel>
-            <S.ImageInput
-              {...register("imageList")}
-              id="image"
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={(e) => {
-                setPosterList((current) => {
-                  const tempList = [...current];
-                  if (e.currentTarget.files) {
-                    tempList.push(e.currentTarget.files[0]);
-                  }
-                  return tempList;
-                });
-              }}
-            />
-            {previewImages.map((image, id) => (
-              <S.ImageInputLabel as="div" key={id}>
-                <S.PreviewImage src={image} alt={`${image}-${id}`} />
-                <S.DeleteIcon onClick={() => handleDeleteImage(id)} />
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="대회 상세정보 입력" />
+        <GoBackHeader title="대회 등록" />
+        <ContentPaddingArea>
+          <InputArea>
+            <InputTitle>대회 포스터</InputTitle>
+            <S.ImageInputArea>
+              <S.ImageInputLabel htmlFor="image">
+                <S.CameraIcon />
               </S.ImageInputLabel>
-            ))}
-          </S.ImageInputArea>
-        </InputArea>
-        <InputArea>
-          <InputTitle>상세 정보</InputTitle>
-          <S.LargeInput
-            value={contestContent ? contestContent : ""}
-            placeholder="대회 정보&#13;&#10;장소&#13;&#10;날짜&#13;&#10;식순&#13;&#10;대회 시간&#13;&#10;상금"
-            onChange={(e) => setContestContent(e.currentTarget.value)}
-          />
-        </InputArea>
-      </ContentPaddingArea>
-      <Link href="/register/rules-and-terms">
-        <NavBar navText="다음" active={true} />
-      </Link>
-    </PageWrapper>
+              <S.ImageInput
+                {...register("imageList")}
+                id="image"
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={(e) => {
+                  setPosterList((current) => {
+                    const tempList = [...current];
+                    if (e.currentTarget.files) {
+                      tempList.push(e.currentTarget.files[0]);
+                    }
+                    return tempList;
+                  });
+                }}
+              />
+              {previewImages.map((image, id) => (
+                <S.ImageInputLabel as="div" key={id}>
+                  <S.PreviewImage src={image} alt={`${image}-${id}`} />
+                  <S.DeleteIcon onClick={() => handleDeleteImage(id)} />
+                </S.ImageInputLabel>
+              ))}
+            </S.ImageInputArea>
+          </InputArea>
+          <InputArea>
+            <InputTitle>상세 정보</InputTitle>
+            <S.LargeInput
+              value={contestContent ? contestContent : ""}
+              placeholder="대회 정보&#13;&#10;장소&#13;&#10;날짜&#13;&#10;식순&#13;&#10;대회 시간&#13;&#10;상금"
+              onChange={(e) => setContestContent(e.currentTarget.value)}
+            />
+          </InputArea>
+        </ContentPaddingArea>
+        <Link href="/register/rules-and-terms">
+          <NavBar navText="다음" active={true} />
+        </Link>
+      </PageWrapper>
+    </>
   );
 };
 

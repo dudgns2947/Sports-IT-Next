@@ -11,6 +11,7 @@ import { useRecoilState } from "recoil";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import styled, { keyframes, css } from "styled-components";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 const Login = () => {
   const { register, handleSubmit, formState } = useForm<ILoginProps>();
@@ -85,39 +86,44 @@ const Login = () => {
   };
 
   return (
-    <S.LoginContainer>
-      <Seo title="로그인" />
-      <S.ImageArea>
-        <S.LogoImage width={86} height={74} src="/images/logo/AppLogo.png" alt="App logo" />
-      </S.ImageArea>
-      <S.Form onSubmit={handleSubmit(onValid, onInvalid)}>
-        <S.Input
-          {...register("loginId", {
-            required: "아이디는 필수 입력사항 입니다.",
-          })}
-          placeholder="아이디(이메일)"
-        ></S.Input>
-        <S.Input {...register("pw", { required: "비밀번호는 필수 입력사항 입니다." })} type="password" placeholder="비밀번호"></S.Input>
-        <S.SubmitButton>로그인</S.SubmitButton>
-      </S.Form>
-      <S.AccountPanel>
-        <Link href="/auth/role-select">
-          <S.AccountPanelText>회원가입</S.AccountPanelText>
-        </Link>
-        <Link href="/">
-          <S.AccountPanelText>아이디/비밀번호 찾기</S.AccountPanelText>
-        </Link>
-      </S.AccountPanel>
-      <S.EasyLoginArea>
-        <Link href="/">
-          <S.EasyLoginImage width={60} height={60} src="/images/logo/KakaoLoginLogo.png" alt="Google Logo" />
-        </Link>
-        <Link href="/">
-          <S.EasyLoginImage width={60} height={60} src="/images/logo/GoogleLoginLogo.png" alt="Google" />
-        </Link>
-      </S.EasyLoginArea>
-      <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} />
-    </S.LoginContainer>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <S.LoginContainer>
+        <Seo title="로그인" />
+        <S.ImageArea>
+          <S.LogoImage width={86} height={74} src="/images/logo/AppLogo.png" alt="App logo" />
+        </S.ImageArea>
+        <S.Form onSubmit={handleSubmit(onValid, onInvalid)}>
+          <S.Input
+            {...register("loginId", {
+              required: "아이디는 필수 입력사항 입니다.",
+            })}
+            placeholder="아이디(이메일)"
+          ></S.Input>
+          <S.Input {...register("pw", { required: "비밀번호는 필수 입력사항 입니다." })} type="password" placeholder="비밀번호"></S.Input>
+          <S.SubmitButton>로그인</S.SubmitButton>
+        </S.Form>
+        <S.AccountPanel>
+          <Link href="/auth/role-select">
+            <S.AccountPanelText>회원가입</S.AccountPanelText>
+          </Link>
+          <Link href="/">
+            <S.AccountPanelText>아이디/비밀번호 찾기</S.AccountPanelText>
+          </Link>
+        </S.AccountPanel>
+        <S.EasyLoginArea>
+          <Link href="/">
+            <S.EasyLoginImage width={60} height={60} src="/images/logo/KakaoLoginLogo.png" alt="Google Logo" />
+          </Link>
+          <Link href="/">
+            <S.EasyLoginImage width={60} height={60} src="/images/logo/GoogleLoginLogo.png" alt="Google" />
+          </Link>
+        </S.EasyLoginArea>
+        <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} />
+      </S.LoginContainer>
+    </>
   );
 };
 
