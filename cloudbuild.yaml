@@ -1,10 +1,23 @@
 steps:
+  - name: "node:18.16.0"
+    args:
+      - "install"
+    id: init
+    entrypoint: "npm"
   - name: "gcr.io/cloud-builders/npm"
     args: ["install"]
+    waitFor:
+      - "init"
+    entrypoint: "npm"
   - name: "gcr.io/cloud-builders/npm"
     args: ["run", "build"]
+    waitFor:
+      - "init"
+    id: build
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
-timeout: "2000s"
+    waitFor:
+      - "build"
+    entrypoint: "gcloud"
 options:
-  logging: NONE
+  logging: CLOUD_LOGGING_ONLY
