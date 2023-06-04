@@ -18,7 +18,6 @@ steps:
     args:
       - app
       - deploy
-      - --quiet
       - "--version=1"
     waitFor:
       - "build"
