@@ -15,14 +15,13 @@ steps:
       - "init"
     id: build
   - name: "gcr.io/cloud-builders/gcloud"
-    entrypoint: "bash"
     args:
-      - "-c"
-      - |
-        _VERSION=$(date +%s)
-        echo "Deploying version $_VERSION"
-        gcloud app deploy --version $_VERSION --quiet
+      - app
+      - deploy
+      - --quiet
+      - "--version=1"
     waitFor:
       - "build"
+    entrypoint: "gcloud"
 options:
   logging: CLOUD_LOGGING_ONLY
