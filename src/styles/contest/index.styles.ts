@@ -128,10 +128,11 @@ export const OrderText = styled.span`
 `;
 
 export const ContestArea = styled.div`
-  position: fixed;
+  /* position: fixed; */
   overflow: auto;
   height: 100%;
   width: 100%;
+  /* padding-bottom: 50px; */
 `;
 
 export const Contest = styled.div`
@@ -216,7 +217,7 @@ export const RegisterButton = styled.button`
   height: 44px;
   left: calc(50% - 140px / 2 + 0.5px);
 
-  top: 80%;
+  top: 82%;
   background: #212121;
 
   border-radius: 50px;
@@ -241,7 +242,7 @@ export const ButtonArea = styled.div`
 
 export const SeeMoreArea = styled.div`
   height: 50px;
-  margin: 20px 0 50px 0;
+  margin: 20px 0 40px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -249,7 +250,7 @@ export const SeeMoreArea = styled.div`
 
 export const SeeMoreButton = styled.button`
   border-radius: 8px;
-  width: 25%;
+  width: 100%;
   font-size: 14px;
   height: 70%;
   background-color: #ffffff;

@@ -22,6 +22,7 @@ import BottomBar from "@component/components/navbar/BottomBar";
 import Contest from "@component/components/contest/Contest";
 import { roleAtom } from "@component/atoms/roleAtom";
 import { useInfiniteQuery } from "react-query";
+import { useInView } from "react-intersection-observer";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 
 type OrderType = "viewCount" | "createdDate" | "scrapCount";
@@ -33,7 +34,7 @@ const Options = [
 ];
 
 const Index = () => {
-  const { register, handleSubmit, formState } = useForm<ISearchInput>();
+  const { register, handleSubmit, setValue } = useForm<ISearchInput>();
   const [keyword, setKeyword] = useState("");
   const [filterBy, setFilterBy] = useState<FilterType[]>([
     "PLANNING",
@@ -46,6 +47,7 @@ const Index = () => {
   const token = useRecoilValue(userTokenAtom);
   const role = useRecoilValue(roleAtom);
   const [isFresh, setIsFresh] = useState(true);
+  const [ref, inView] = useInView();
 
   const router = useRouter();
 
@@ -133,7 +135,10 @@ const Index = () => {
   // }, [fetchNextPage]);
 
   const onValid = (data: ISearchInput) => {
+    setIsFresh(true);
+    setPage(0);
     setKeyword(data.keyword);
+    setValue("keyword", "");
   };
 
   const onClickTotal = () => {
@@ -277,15 +282,26 @@ const Index = () => {
     }
   }, [page, size]);
 
+  useEffect(() => {
+    if (inView && contestList.length !== 0) {
+      console.log("get more data !");
+      setIsFresh(false);
+      setPage((current) => current + 1);
+    }
+  }, [inView]);
+
   return (
     <PageWrapper>
       <Seo title="대회" />
       <S.Container>
-
         <S.TopWrapper>
           <S.TopBar>
             <S.SearchForm onSubmit={handleSubmit(onValid)}>
-              <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
+              <S.SearchInput
+                {...register("keyword")}
+                type="text"
+                placeholder="통합 검색"
+              />
               <S.SearchButton>
                 <S.SearchIcon />
               </S.SearchButton>
@@ -298,14 +314,39 @@ const Index = () => {
 
           <S.FilterButtonArea>
             <S.TotalButton
-              active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
+              active={
+                filterBy.includes("recruitingEnd") &&
+                filterBy.includes("totalPrize") &&
+                filterBy.includes("recommend")
+              }
               onClick={onClickTotal}
             >
               전체
             </S.TotalButton>
-            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recruitingEnd" filterContent="마감 임박 ⏰" />
-            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="totalPrize" filterContent="높은 상금 💰" />
-            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recommend" filterContent="추천 대회 🏆" />
+            <FilterButton
+              setIsFresh={setIsFresh}
+              setPage={setPage}
+              filterBy={filterBy}
+              setFilterBy={setFilterBy}
+              filterKeyWord="recruitingEnd"
+              filterContent="마감 임박 ⏰"
+            />
+            <FilterButton
+              setIsFresh={setIsFresh}
+              setPage={setPage}
+              filterBy={filterBy}
+              setFilterBy={setFilterBy}
+              filterKeyWord="totalPrize"
+              filterContent="높은 상금 💰"
+            />
+            <FilterButton
+              setIsFresh={setIsFresh}
+              setPage={setPage}
+              filterBy={filterBy}
+              setFilterBy={setFilterBy}
+              filterKeyWord="recommend"
+              filterContent="추천 대회 🏆"
+            />
           </S.FilterButtonArea>
         </S.TopWrapper>
 
@@ -419,12 +460,13 @@ const Index = () => {
                 ))
               : null}
             <S.SeeMoreArea
-              onClick={() => {
-                setIsFresh(false);
-                setPage((current) => current + 1);
-              }}
+              ref={ref}
+              // onClick={() => {
+              //   setIsFresh(false);
+              //   setPage((current) => current + 1);
+              // }}
             >
-              <S.SeeMoreButton>더보기</S.SeeMoreButton>
+              {/* <S.SeeMoreButton>더보기</S.SeeMoreButton> */}
             </S.SeeMoreArea>
             {role === "ROLE_INSTITUTION" ? (
               <S.RegisterButton
