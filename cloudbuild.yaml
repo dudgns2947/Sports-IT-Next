@@ -19,7 +19,7 @@ steps:
     args:
       - "c"
       - |
-        _VERSION=$(git rev-parse --short HEAD)
+        _VERSION=$(date +%s)
         gcloud app deploy --version $_VERSION --quiet
     waitFor:
       - "build"
