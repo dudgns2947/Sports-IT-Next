@@ -68,6 +68,8 @@ export interface IContestInfo {
 export interface IFilterButton {
   filterBy: FilterType[];
   setFilterBy: React.Dispatch<SetStateAction<FilterType[]>>;
+  setPage: React.Dispatch<SetStateAction<number>>;
+  setIsFresh: React.Dispatch<SetStateAction<boolean>>;
   filterKeyWord: FilterType;
   filterContent: string;
 }

@@ -11,11 +11,13 @@ import { useRecoilState } from "recoil";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import styled, { keyframes, css } from "styled-components";
 import { useEffect, useState } from "react";
+import { roleAtom } from "@component/atoms/roleAtom";
 
 const Login = () => {
   const { register, handleSubmit, formState } = useForm<ILoginProps>();
   const [userToken, setUserToken] = useRecoilState(userTokenAtom);
   const [isVisible, setIsVisible] = useState(true);
+  const [userRole, setUserRole] = useRecoilState(roleAtom);
   const router = useRouter();
 
   const fadeOut = keyframes`
@@ -63,7 +65,9 @@ const Login = () => {
     onSuccess: (res) => {
       console.log("Login Success !", res);
       setUserToken(res.data.token);
+      setUserRole(res.data.role[0].roleName);
       console.log(userToken);
+      console.log(userRole);
       router.push("/");
     },
     onError: (res) => console.log("Error !", res),

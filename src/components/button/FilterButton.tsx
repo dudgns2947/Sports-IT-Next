@@ -8,6 +8,8 @@ import {
 const FilterButton = ({
   filterBy,
   setFilterBy,
+  setPage,
+  setIsFresh,
   filterKeyWord,
   filterContent,
 }: IFilterButton) => {
@@ -15,6 +17,8 @@ const FilterButton = ({
     <S.FilterButton
       active={filterBy.includes(filterKeyWord)}
       onClick={() => {
+        setIsFresh(true);
+        setPage(0);
         if (filterBy.includes(filterKeyWord)) {
           const newFilterBy = filterBy.filter((item) => item !== filterKeyWord);
           setFilterBy(newFilterBy);
