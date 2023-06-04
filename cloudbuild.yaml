@@ -17,7 +17,7 @@ steps:
   - name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "bash"
     args:
-      - "c"
+      - "-c"
       - |
         _VERSION=$(date +%s)
         gcloud app deploy --version $_VERSION --quiet
