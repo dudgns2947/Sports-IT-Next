@@ -1,12 +1,8 @@
 steps:
-  # Docker 이미지를 빌드하고, Google Container Registry에 푸시
-  - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/$sports-it-platform/Sports-it-Platform", "."]
-    images: ["gcr.io/$sports-it-platform/Sports-it-Platform"]
-
-  # 쿠버네티스 클러스터에 배포
-  - name: "gcr.io/cloud-builders/kubectl"
-    args: ["set", "image", "deployment/Sports-it-Platform", "Sports-it-Platform=gcr.io/$sports-it-platform/Sports-it-Platform"]
-    env:
-      - "CLOUDSDK_COMPUTE_ZONE=asia-northeast3"
-      - "CLOUDSDK_CONTAINER_CLUSTER=sports-it-cluster"
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["install"]
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["run", "build"]
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy"]
+timeout: "2000s"
