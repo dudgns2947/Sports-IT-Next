@@ -20,6 +20,7 @@ steps:
       - "-c"
       - |
         _VERSION=$(date +%s)
+        echo "Deploying version $_VERSION"
         gcloud app deploy --version $_VERSION --quiet
     waitFor:
       - "build"
