@@ -7,8 +7,8 @@ export const NavArea = styled.button<NavProps>`
   position: fixed;
   bottom: 0;
   align-items: center;
-  height: 71.3px;
-  width: 375px;
+  height: 10%;
+  width: 100%;
   background-color: ${(props) => (props.active ? "#212121" : "#ffffff")};
   cursor: pointer;
 `;

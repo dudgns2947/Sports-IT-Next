@@ -5,11 +5,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import SuccessIcon from "../../../public/images/icon/Icon5.png";
 import { useRecoilValue } from "recoil";
-import {
-  applyContestIdAtom,
-  finalPaymentAtom,
-  selectContestNameAtom,
-} from "@component/atoms/contestAtom";
+import { applyContestIdAtom, finalPaymentAtom, selectContestNameAtom } from "@component/atoms/contestAtom";
 
 const ApplySuccess = () => {
   const finalPayment = useRecoilValue(finalPaymentAtom);
@@ -18,11 +14,7 @@ const ApplySuccess = () => {
   return (
     <S.SuccessContainer>
       <S.QuestionArea>
-        <Image
-          src={SuccessIcon}
-          alt="Success Image"
-          style={{ width: "100px", height: "94.25px", marginBottom: "20px" }}
-        />
+        <Image src={SuccessIcon} alt="Success Image" style={{ width: "100px", height: "94.25px", marginBottom: "20px" }} />
         <S.QuestionText>대회 신청서가</S.QuestionText>
         <S.QuestionText>등록되었습니다!</S.QuestionText>
       </S.QuestionArea>

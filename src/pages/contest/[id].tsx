@@ -1,7 +1,7 @@
 import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
-import { ContentArea } from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import Contest from "@component/components/contest/Contest";
 import ContestInfo from "@component/components/contest/ContestInfo";
@@ -76,7 +76,7 @@ const ContestDetail = () => {
     <PageWrapper>
       <Seo title="대회 상세정보" />
       <GoBackHeader title="대회 상세" />
-      <ContentArea>
+      <ContentPaddingArea>
         {contest ? (
           <S.ContestArea>
             <S.ContestInfo>
@@ -116,7 +116,7 @@ const ContestDetail = () => {
             </S.DetailWrapper>
           </S.ContestArea>
         ) : null}
-      </ContentArea>
+      </ContentPaddingArea>
       <S.ApplyWrapper>
         <S.ApplyBar>
           <S.IconArea>

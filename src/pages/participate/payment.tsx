@@ -1,5 +1,5 @@
 import Seo from "@component/components/Seo";
-import { ContentArea } from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import Contest from "@component/components/contest/Contest";
 import GoBackHeader from "@component/components/header/GoBackHeader";
@@ -23,10 +23,7 @@ import { IContestInfo, IHost } from "@component/interfaces/contestInterface";
 import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Index from "../contest";
-import {
-  RequestPayParams,
-  RequestPayResponse,
-} from "@component/interfaces/imp";
+import { RequestPayParams, RequestPayResponse } from "@component/interfaces/imp";
 import { useRouter } from "next/router";
 
 const Payment = () => {
@@ -41,8 +38,7 @@ const Payment = () => {
   const templateId = useRecoilValue(templateIdAtom);
   const totalPayment = useRecoilValue(totalPaymentAtom);
   const [finalPayment, setFinalPayment] = useRecoilState(finalPaymentAtom);
-  const [applyContestId, setApplyContestId] =
-    useRecoilState(applyContestIdAtom);
+  const [applyContestId, setApplyContestId] = useRecoilState(applyContestIdAtom);
   const router = useRouter();
 
   function callback(response: RequestPayResponse) {
@@ -109,7 +105,7 @@ const Payment = () => {
     <PageWrapper>
       <Seo title="참가비 결제" />
       <GoBackHeader title="대회 신청" />
-      <ContentArea>
+      <ContentPaddingArea>
         <Contest
           posterImageUrl={contest?.posters[0].posterUrl as string}
           competitionId={contest?.competitionId as number}
@@ -193,7 +189,7 @@ const Payment = () => {
             <S.PayImage src="/images/logo/kg.png" />
           </div>
         </S.PayArea> */}
-      </ContentArea>
+      </ContentPaddingArea>
 
       <div onClick={onClickPayment}>
         <NavBar navText="결제하기" active={true} />

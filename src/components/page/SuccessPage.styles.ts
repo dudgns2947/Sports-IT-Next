@@ -4,12 +4,15 @@ import Image from "next/image";
 
 export const SignUpContainer = styled(PageWrapper)`
   background-color: #212121;
+  height: 100vh;
+  width: 100vw;
 `;
 
 export const TextArea = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 20px;
+  font-weight: 600;
 `;
 
 export const Text = styled.span`
@@ -36,7 +39,7 @@ export const ButtonArea = styled.div`
 export const NavButton = styled.button`
   background-color: #ffffff;
   border-radius: 12px;
-  width: 335px;
+  width: 90%;
   height: 50px;
   font-size: 18px;
 `;

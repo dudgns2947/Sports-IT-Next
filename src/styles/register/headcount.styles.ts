@@ -31,7 +31,7 @@ export const InputTitle = styled.h3`
 `;
 
 export const Input = styled.input`
-  width: 335px;
+  width: 95%;
   height: 45px;
   font-size: 14px;
   font-weight: 400;
@@ -39,6 +39,7 @@ export const Input = styled.input`
   color: #aeaeae;
   background-color: #f9f9fa;
   margin-bottom: 8px;
+  border-radius: 10px;
 `;
 
 export const ErrorMessage = styled.span`

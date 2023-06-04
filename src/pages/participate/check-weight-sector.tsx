@@ -17,7 +17,7 @@ import Link from "next/link";
 import NavBar from "../../components/navbar/NavBar";
 import { useState } from "react";
 import axios from "axios";
-import { ContentArea } from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import { baseApi } from "@component/api/utils/instance";
 
 const ChoiceRole = () => {
@@ -108,7 +108,7 @@ const ChoiceRole = () => {
   return (
     <S.RoleSelectContainer>
       <GoBackHeader title="대회 신청" />
-      <ContentArea>
+      <ContentPaddingArea>
         <S.QuestionArea>
           <S.QuestionText>부문 혹은 체급을</S.QuestionText>
           <S.QuestionText>선택 해주세요.</S.QuestionText>
@@ -146,7 +146,7 @@ const ChoiceRole = () => {
               ))
             : null}
         </S.SectorArea>
-      </ContentArea>
+      </ContentPaddingArea>
 
       <Link href="/participate/payment">
         <NavBar navText={`참가비 ${paymentCost} 원 결제하기`} active={weightCost ? true : false} />

@@ -5,9 +5,9 @@ import Image from "next/image";
 export const SuccessContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
-  background-color: #000000;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
 `;
 
 export const QuestionArea = styled.div`

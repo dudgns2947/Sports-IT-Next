@@ -2,7 +2,6 @@ import { FilterButtonProps } from "@component/interfaces/contestInterface";
 import styled from "styled-components";
 
 export const FilterButton = styled.button<FilterButtonProps>`
-  width: 86px;
   height: 34px;
   border: 1px solid #ededed;
   border-radius: 20px;
@@ -13,4 +12,5 @@ export const FilterButton = styled.button<FilterButtonProps>`
   font-size: 12px;
   margin-right: 6px;
   cursor: pointer;
+  display: inline-block;
 `;

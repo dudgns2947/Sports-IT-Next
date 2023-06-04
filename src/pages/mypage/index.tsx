@@ -1,4 +1,4 @@
-import { ContentArea } from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
@@ -21,7 +21,7 @@ const TransformArea = styled.div`
   align-items: center;
   background: #f9f9fa;
   border-radius: 14px;
-  width: 335px;
+  width: 93%;
   height: 72px;
   padding: 14px 17px;
 `;
@@ -73,7 +73,7 @@ const MyPage = () => {
     <PageWrapper>
       <GoBackHeader title="마이페이지" setting={true} />
       <Seo title="마이페이지" />
-      <ContentArea>
+      <ContentPaddingArea>
         <ProfileTab imgUrl="/images/example/Post1.png" userName="이준수" userEmail="yuk@naver.com" />
         <TransformArea>
           <TransformTextArea>
@@ -91,7 +91,7 @@ const MyPage = () => {
         <NavTab url="/" content="결제 내역" />
         <NavTab url="/" content="스크랩" />
         <NavTab url="/" content="프리미엄 구독 신청" />
-      </ContentArea>
+      </ContentPaddingArea>
       <BottomBar />
     </PageWrapper>
   );
