@@ -4,6 +4,7 @@ import { PageWrapper } from "@component/components/container/container";
 import CloseHeader from "@component/components/header/CloseHeader";
 import React from "react";
 import styled from "styled-components";
+import Head from "next/head";
 
 const DocumentImage = styled.img`
   width: 335px;
@@ -25,14 +26,19 @@ const DownloadButton = styled.button`
 
 const Document = () => {
   return (
-    <PageWrapper>
-      <Seo title="공문서" />
-      <CloseHeader />
-      <ContentArea>
-        <DocumentImage src="/images/example/Document1.png" />
-        <DownloadButton>PDF 문서로 다운로드</DownloadButton>
-      </ContentArea>
-    </PageWrapper>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="공문서" />
+        <CloseHeader />
+        <ContentArea>
+          <DocumentImage src="/images/example/Document1.png" />
+          <DownloadButton>PDF 문서로 다운로드</DownloadButton>
+        </ContentArea>
+      </PageWrapper>
+    </>
   );
 };
 

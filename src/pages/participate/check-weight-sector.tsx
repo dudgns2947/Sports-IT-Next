@@ -19,6 +19,7 @@ import { useState } from "react";
 import axios from "axios";
 import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import { baseApi } from "@component/api/utils/instance";
+import Head from "next/head";
 
 const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
@@ -106,52 +107,57 @@ const ChoiceRole = () => {
     getSector();
   }, []);
   return (
-    <S.RoleSelectContainer>
-      <GoBackHeader title="대회 신청" />
-      <ContentPaddingArea>
-        <S.QuestionArea>
-          <S.QuestionText>부문 혹은 체급을</S.QuestionText>
-          <S.QuestionText>선택 해주세요.</S.QuestionText>
-        </S.QuestionArea>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <S.RoleSelectContainer>
+        <GoBackHeader title="대회 신청" />
+        <ContentPaddingArea>
+          <S.QuestionArea>
+            <S.QuestionText>부문 혹은 체급을</S.QuestionText>
+            <S.QuestionText>선택 해주세요.</S.QuestionText>
+          </S.QuestionArea>
 
-        <S.SectorArea>
-          {sectors
-            ? sectors.map((sector) => (
-                <>
-                  <S.SectorContainer>
-                    <S.HeaderText>
-                      {sector.title} ({sector.cost}원 / +{sector.expandCost}
-                      원)
-                    </S.HeaderText>
-                    <S.LowerIcon></S.LowerIcon>
-                  </S.SectorContainer>
-                  <S.SurveyArea>
-                    {sector.subSectors
-                      ? sector.subSectors.map((subSector, index) => (
-                          <S.SurveyCheckLabel key={index}>
-                            <S.SurveyCheckBox
-                              type="checkbox"
-                              name={sector.title}
-                              value={subSector.name}
-                              onChange={() =>
-                                onClickCost(sector.title, `${sector.title}:${subSector.name}`, sector.cost, sector.expandCost)
-                              }
-                            />
-                            {subSector.name}
-                          </S.SurveyCheckLabel>
-                        ))
-                      : null}
-                  </S.SurveyArea>
-                </>
-              ))
-            : null}
-        </S.SectorArea>
-      </ContentPaddingArea>
+          <S.SectorArea>
+            {sectors
+              ? sectors.map((sector) => (
+                  <>
+                    <S.SectorContainer>
+                      <S.HeaderText>
+                        {sector.title} ({sector.cost}원 / +{sector.expandCost}
+                        원)
+                      </S.HeaderText>
+                      <S.LowerIcon></S.LowerIcon>
+                    </S.SectorContainer>
+                    <S.SurveyArea>
+                      {sector.subSectors
+                        ? sector.subSectors.map((subSector, index) => (
+                            <S.SurveyCheckLabel key={index}>
+                              <S.SurveyCheckBox
+                                type="checkbox"
+                                name={sector.title}
+                                value={subSector.name}
+                                onChange={() =>
+                                  onClickCost(sector.title, `${sector.title}:${subSector.name}`, sector.cost, sector.expandCost)
+                                }
+                              />
+                              {subSector.name}
+                            </S.SurveyCheckLabel>
+                          ))
+                        : null}
+                    </S.SurveyArea>
+                  </>
+                ))
+              : null}
+          </S.SectorArea>
+        </ContentPaddingArea>
 
-      <Link href="/participate/payment">
-        <NavBar navText={`참가비 ${paymentCost} 원 결제하기`} active={weightCost ? true : false} />
-      </Link>
-    </S.RoleSelectContainer>
+        <Link href="/participate/payment">
+          <NavBar navText={`참가비 ${paymentCost} 원 결제하기`} active={weightCost ? true : false} />
+        </Link>
+      </S.RoleSelectContainer>
+    </>
   );
 };
 

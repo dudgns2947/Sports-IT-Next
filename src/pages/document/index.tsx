@@ -6,6 +6,7 @@ import GoBackHeaderWhite from "@component/components/header/GoBackHeaderWhite";
 import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
+import Head from "next/head";
 
 const PageWrapperBlack = styled(PageWrapper)`
   background-color: #212121;
@@ -86,28 +87,33 @@ const LogoImage = styled.img`
 const Index = () => {
   const router = useRouter();
   return (
-    <PageWrapperBlack>
-      <Seo title="공문서 발급" />
-      <GoBackHeaderWhite title="공문서 발급" />
-      <ContentArea>
-        <TextArea>
-          <BoldTextArea>
-            <BoldTextWhite>쉽고, 간편하게</BoldTextWhite>
-            <BoldTextWhite>공문서를 발급 받아보세요!</BoldTextWhite>
-          </BoldTextArea>
-          <LightTextArea>
-            <LightTextGray>1분안에 공문서 발급받고</LightTextGray>
-            <LightTextGray>자신만의 포트폴리오를 꾸며보세요.</LightTextGray>
-          </LightTextArea>
-        </TextArea>
-        <LogoArea>
-          <LogoImage src="/images/logo/documentLarge.png" />
-        </LogoArea>
-      </ContentArea>
-      <ButtonArea>
-        <RedButton onClick={() => router.push("/document/contest-select")}>공문서 발급하기</RedButton>
-      </ButtonArea>
-    </PageWrapperBlack>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapperBlack>
+        <Seo title="공문서 발급" />
+        <GoBackHeaderWhite title="공문서 발급" />
+        <ContentArea>
+          <TextArea>
+            <BoldTextArea>
+              <BoldTextWhite>쉽고, 간편하게</BoldTextWhite>
+              <BoldTextWhite>공문서를 발급 받아보세요!</BoldTextWhite>
+            </BoldTextArea>
+            <LightTextArea>
+              <LightTextGray>1분안에 공문서 발급받고</LightTextGray>
+              <LightTextGray>자신만의 포트폴리오를 꾸며보세요.</LightTextGray>
+            </LightTextArea>
+          </TextArea>
+          <LogoArea>
+            <LogoImage src="/images/logo/documentLarge.png" />
+          </LogoArea>
+        </ContentArea>
+        <ButtonArea>
+          <RedButton onClick={() => router.push("/document/contest-select")}>공문서 발급하기</RedButton>
+        </ButtonArea>
+      </PageWrapperBlack>
+    </>
   );
 };
 

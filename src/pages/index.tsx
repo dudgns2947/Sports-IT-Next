@@ -74,43 +74,48 @@ export default function Home() {
   }, [keyword, filterBy, orderBy, page, size]);
 
   return (
-    <PageWrapper>
-      <TopBar />
-      <Seo title="메인 페이지" />
-      <ContentPaddingArea>
-        <S.CustomMenu>
-          <S.Banner>
-            <ImageSlider images={images} />
-          </S.Banner>
-          <S.IconContainer>
-            {iconProps
-              ? iconProps.map((iconProp, index) => (
-                  <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
-                ))
-              : null}
-          </S.IconContainer>
-        </S.CustomMenu>
-        <S.Divider />
-        <MainPagePost userName={userName} imageUrls={iamgeUrls} />
-        <MainPageCompetition />
-        {contestList
-          ? contestList.map((contest) => (
-              <Contest
-                key={contest.competitionId}
-                posterImageUrl={contest.posters[0].posterUrl}
-                competitionId={contest.competitionId}
-                competitionType={contest.competitionType}
-                name={contest.name}
-                host={contest.host}
-                recruitingEnd={contest.recruitingEnd}
-              />
-            ))
-          : null}
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <TopBar />
+        <Seo title="메인 페이지" />
+        <ContentPaddingArea>
+          <S.CustomMenu>
+            <S.Banner>
+              <ImageSlider images={images} />
+            </S.Banner>
+            <S.IconContainer>
+              {iconProps
+                ? iconProps.map((iconProp, index) => (
+                    <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
+                  ))
+                : null}
+            </S.IconContainer>
+          </S.CustomMenu>
+          <S.Divider />
+          <MainPagePost userName={userName} imageUrls={iamgeUrls} />
+          <MainPageCompetition />
+          {contestList
+            ? contestList.map((contest) => (
+                <Contest
+                  key={contest.competitionId}
+                  posterImageUrl={contest.posters[0].posterUrl}
+                  competitionId={contest.competitionId}
+                  competitionType={contest.competitionType}
+                  name={contest.name}
+                  host={contest.host}
+                  recruitingEnd={contest.recruitingEnd}
+                />
+              ))
+            : null}
 
-        <MainPageRecommanduser />
-      </ContentPaddingArea>
-      <BottomBar />
-    </PageWrapper>
+          <MainPageRecommanduser />
+        </ContentPaddingArea>
+        <BottomBar />
+      </PageWrapper>
+    </>
   );
 }
 // getServerSideProps(완전한 SSR) ⭐️

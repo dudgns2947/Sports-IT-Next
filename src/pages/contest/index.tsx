@@ -3,12 +3,7 @@ import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
-import {
-  FilterType,
-  IContestInfo,
-  IContestParams,
-  ISearchInput,
-} from "@component/interfaces/contestInterface";
+import { FilterType, IContestInfo, IContestParams, ISearchInput } from "@component/interfaces/contestInterface";
 import React, { use, useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { AiOutlineDown } from "react-icons/ai";
@@ -22,6 +17,7 @@ import BottomBar from "@component/components/navbar/BottomBar";
 import Contest from "@component/components/contest/Contest";
 import { roleAtom } from "@component/atoms/roleAtom";
 import { useInfiniteQuery } from "react-query";
+import Head from "next/head";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 
 type OrderType = "viewCount" | "createdDate" | "scrapCount";
@@ -35,10 +31,7 @@ const Options = [
 const Index = () => {
   const { register, handleSubmit, formState } = useForm<ISearchInput>();
   const [keyword, setKeyword] = useState("");
-  const [filterBy, setFilterBy] = useState<FilterType[]>([
-    "PLANNING",
-    "RECRUITING",
-  ]);
+  const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
@@ -92,9 +85,7 @@ const Index = () => {
     // setContestList(response.data.content);
     await console.log(contestList);
   }
-  async function getContestData(
-    offset: number = 0
-  ): Promise<{ rows: IContestInfo[]; nextOffset: number }> {
+  async function getContestData(offset: number = 0): Promise<{ rows: IContestInfo[]; nextOffset: number }> {
     const response = await baseApi.get("competitions/slice", {
       headers: {
         Authorization: `Bearer $token}`,
@@ -139,21 +130,13 @@ const Index = () => {
   const onClickTotal = () => {
     setIsFresh(true);
     setPage(0);
-    if (
-      filterBy.includes("recruitingEnd") &&
-      filterBy.includes("totalPrize") &&
-      filterBy.includes("recommend")
-    ) {
+    if (filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")) {
       let newFilterBy = [...filterBy];
       newFilterBy = newFilterBy.filter((item) => item !== "recruitingEnd");
       newFilterBy = newFilterBy.filter((item) => item !== "totalPrize");
       newFilterBy = newFilterBy.filter((item) => item !== "recommend");
       setFilterBy(newFilterBy);
-    } else if (
-      filterBy.includes("recruitingEnd") ||
-      filterBy.includes("totalPrize") ||
-      filterBy.includes("recommend")
-    ) {
+    } else if (filterBy.includes("recruitingEnd") || filterBy.includes("totalPrize") || filterBy.includes("recommend")) {
       let newFilterBy = [...filterBy];
       if (!newFilterBy.includes("recruitingEnd")) {
         newFilterBy.push("recruitingEnd");
@@ -278,63 +261,99 @@ const Index = () => {
   }, [page, size]);
 
   return (
-    <PageWrapper>
-      <Seo title="대회" />
-      <S.Container>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="대회" />
+        <S.Container>
+          <S.TopWrapper>
+            <S.TopBar>
+              <S.SearchForm onSubmit={handleSubmit(onValid)}>
+                <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
+                <S.SearchButton>
+                  <S.SearchIcon />
+                </S.SearchButton>
+              </S.SearchForm>
+              <S.ButtonArea>
+                <S.AlarmButton />
+                <S.MyPageButton onClick={() => router.push("/mypage")} />
+              </S.ButtonArea>
+            </S.TopBar>
 
-        <S.TopWrapper>
-          <S.TopBar>
-            <S.SearchForm onSubmit={handleSubmit(onValid)}>
-              <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
-              <S.SearchButton>
-                <S.SearchIcon />
-              </S.SearchButton>
-            </S.SearchForm>
-            <S.ButtonArea>
-              <S.AlarmButton />
-              <S.MyPageButton onClick={() => router.push("/mypage")} />
-            </S.ButtonArea>
-          </S.TopBar>
-
-          <S.FilterButtonArea>
-            <S.TotalButton
-              active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
-              onClick={onClickTotal}
-            >
-              전체
-            </S.TotalButton>
-            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recruitingEnd" filterContent="마감 임박 ⏰" />
-            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="totalPrize" filterContent="높은 상금 💰" />
-            <FilterButton filterBy={filterBy} setFilterBy={setFilterBy} filterKeyWord="recommend" filterContent="추천 대회 🏆" />
-          </S.FilterButtonArea>
-        </S.TopWrapper>
-
-        <S.ContentArea>
-          <S.OrderArea>
-            <S.Filter>
-              <S.FilterIcon />
-              <S.OrderText>필터</S.OrderText>
-            </S.Filter>
-            <S.Order>
-              <S.OrderSelect
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                  setIsFresh(true);
-                  setPage(0);
-                  setOrderBy(e.currentTarget.value);
-                }}
+            <S.FilterButtonArea>
+              <S.TotalButton
+                active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
+                onClick={onClickTotal}
               >
-                {Options.map((option) => (
-                  <S.OrderOption key={option.value} value={option.value}>
-                    {option.name}
-                  </S.OrderOption>
-                ))}
-              </S.OrderSelect>
-              {/* <S.ArrowIcon /> */}
-            </S.Order>
-          </S.OrderArea>
+                전체
+              </S.TotalButton>
+              <FilterButton
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+                filterKeyWord="recruitingEnd"
+                filterContent="마감 임박 ⏰"
+                setPage={function (value: React.SetStateAction<number>): void {
+                  throw new Error("Function not implemented.");
+                }}
+                setIsFresh={function (value: React.SetStateAction<boolean>): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+              <FilterButton
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+                filterKeyWord="totalPrize"
+                filterContent="높은 상금 💰"
+                setPage={function (value: React.SetStateAction<number>): void {
+                  throw new Error("Function not implemented.");
+                }}
+                setIsFresh={function (value: React.SetStateAction<boolean>): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+              <FilterButton
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+                filterKeyWord="recommend"
+                filterContent="추천 대회 🏆"
+                setPage={function (value: React.SetStateAction<number>): void {
+                  throw new Error("Function not implemented.");
+                }}
+                setIsFresh={function (value: React.SetStateAction<boolean>): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+            </S.FilterButtonArea>
+          </S.TopWrapper>
 
-          <S.ContestArea>
-            {/* <InfiniteScroll
+          <S.ContentArea>
+            <S.OrderArea>
+              <S.Filter>
+                <S.FilterIcon />
+                <S.OrderText>필터</S.OrderText>
+              </S.Filter>
+              <S.Order>
+                <S.OrderSelect
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                    setIsFresh(true);
+                    setPage(0);
+                    setOrderBy(e.currentTarget.value);
+                  }}
+                >
+                  {Options.map((option) => (
+                    <S.OrderOption key={option.value} value={option.value}>
+                      {option.name}
+                    </S.OrderOption>
+                  ))}
+                </S.OrderSelect>
+                {/* <S.ArrowIcon /> */}
+              </S.Order>
+            </S.OrderArea>
+
+            <S.ContestArea>
+              {/* <InfiniteScroll
               hasMore={hasNextPage}
               loadMore={() => fetchNextPage()}
             >
@@ -354,7 +373,7 @@ const Index = () => {
                   ))
                 : null}
             </InfiniteScroll> */}
-            {/* <div
+              {/* <div
               style={{
                 height: `${rowVirtualizer.getTotalSize()}px`,
                 width: "100%",
@@ -403,42 +422,39 @@ const Index = () => {
                 );
               })}
             </div> */}
-            {contestList
-              ? contestList.map((contest) => (
-                  <Contest
-                    key={contest.competitionId}
-                    posterImageUrl={
-                      contest.posters[0] ? contest.posters[0].posterUrl : ""
-                    }
-                    competitionId={contest.competitionId}
-                    competitionType={contest.competitionType}
-                    name={contest.name}
-                    host={contest.host}
-                    recruitingEnd={contest.recruitingEnd}
-                  />
-                ))
-              : null}
-            <S.SeeMoreArea
-              onClick={() => {
-                setIsFresh(false);
-                setPage((current) => current + 1);
-              }}
-            >
-              <S.SeeMoreButton>더보기</S.SeeMoreButton>
-            </S.SeeMoreArea>
-            {role === "ROLE_INSTITUTION" ? (
-              <S.RegisterButton
-                onClick={() => router.push("register/event-select")}
+              {contestList
+                ? contestList.map((contest) => (
+                    <Contest
+                      key={contest.competitionId}
+                      posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
+                      competitionId={contest.competitionId}
+                      competitionType={contest.competitionType}
+                      name={contest.name}
+                      host={contest.host}
+                      recruitingEnd={contest.recruitingEnd}
+                    />
+                  ))
+                : null}
+              <S.SeeMoreArea
+                onClick={() => {
+                  setIsFresh(false);
+                  setPage((current) => current + 1);
+                }}
               >
-                <S.PlusIcons />
-                대회 개최하기
-              </S.RegisterButton>
-            ) : null}
-          </S.ContestArea>
-        </S.ContentArea>
-      </S.Container>
-      <BottomBar />
-    </PageWrapper>
+                <S.SeeMoreButton>더보기</S.SeeMoreButton>
+              </S.SeeMoreArea>
+              {role === "ROLE_INSTITUTION" ? (
+                <S.RegisterButton onClick={() => router.push("register/event-select")}>
+                  <S.PlusIcons />
+                  대회 개최하기
+                </S.RegisterButton>
+              ) : null}
+            </S.ContestArea>
+          </S.ContentArea>
+        </S.Container>
+        <BottomBar />
+      </PageWrapper>
+    </>
   );
 };
 
