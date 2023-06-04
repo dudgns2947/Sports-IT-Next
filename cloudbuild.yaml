@@ -15,6 +15,7 @@ steps:
       - "init"
     id: build
   - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
     args:
       - "c"
       - |
@@ -22,6 +23,5 @@ steps:
         gcloud app deploy --version $VERSION --quiet
     waitFor:
       - "build"
-    entrypoint: "gcloud"
 options:
   logging: CLOUD_LOGGING_ONLY
