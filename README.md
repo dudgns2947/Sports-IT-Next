@@ -3,7 +3,8 @@
 <div align=center>
 
 <a href="https://github.com/PlayMaker-S/Sports-IT-Next/graphs/contributors">
-  <img src="/images/logo/MainLogo.png" height="200px" width="200px"/>
+  <img height="200px" width="200px" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/c9bffe46-3231-4b7a-9137-9ba792b9aa76"/>
+
 </a>
 
 </div>
@@ -106,16 +107,24 @@
     </tr>
     <tr>
       <td align="center">
-        <a target="_blank" href="#"><img alt height="180px" width="170px" src="img/영훈사진.jpg"/></a>
+        <a target="_blank" href="#">
+          <img alt height="180px" width="170px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/4aad5a3c-06e0-48f8-8ce9-9d8da11dce1e"/>
+        </a>
       </td>
       <td align="center">
-        <a target="_blank" href="#"><img alt height="180px" width="145px" src="img/명규사진.jpg"/></a>
+        <a target="_blank" href="#">
+          <img alt height="180px" width="145px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/b8f4b142-b6b6-4490-abe4-7adf0aaa1453"/>
+        </a>
       </td>
       <td align="center">
-        <a target="_blank" href="#"><img alt height="180px" width="145px" src="img/준수사진.jpg"/></a>
+        <a target="_blank" href="#">
+          <img alt height="180px" width="145px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/d2551821-0ff4-4f78-ba8c-2506c06c86cc"/>
+        </a>
       </td>
       <td align="center">
-        <a target="_blank" href="#"><img alt height="180px" width="180px" src="img/우현사진.jpg"/></a>
+        <a target="_blank" href="#">
+          <img alt height="180px" width="180px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/99dc42d0-b34d-4b2d-9e40-1eca2a503b41"/>
+        </a>
       </td>
     </tr>
     <tr>
@@ -158,21 +167,65 @@
 
 ---
 
+## 주요 기능
+<div align=center>
+  <img alt height="330px" width="540px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/ba28364e-90b5-4de1-8007-60379d8fbdef"/>
+  <img alt height="330px" width="540px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/b3283104-5661-4570-8bd6-6048422c50aa"/>
+  </div>
+
+
+### 1) 대회 개최
+
+- 주최자 계정으로 가입 시 대회 개최 가능
+- 대회 정보, 일정, 포스터, 규약 등 업로드 기능
+- 대회 종료 후 결과 데이터(시상 정보) 입력 기능
+
+### 2) 대회 참가
+
+- 체육인 계정으로 가입 시 대회 참여 가능
+- 선수/관람객으로 참가 및 대회 참가비 결제 기능
+- 대회 종료 후 공문서 조회 및 대회 결과 확인 기능
+
+### 3) 피드 탐색
+
+- 사용자 피드 업로드 및 조회 가능
+
+## SW 아키텍처
+
+### 1) 시스템 아키텍처
+<div align=center>
+  <img width=514 alt="시스템 아키텍처" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/a2394ad9-29d5-4ab5-b07b-e3a44d4b3c86">
+</div>
+
+### 2) ERD
+
+![erd](https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/63a1b0be-80f7-448e-8007-dd4223927e8f)
+
+## 업데이트
+
+- 0.0.1
+    - 작업 진행중
+- 0.1.0
+    - Release
+
+---
+
+## 기여 방법
+
+1. 깃허브 레포지토리를 포크합니다.
+2. (`git checkout -b feature/fooBar`) 명령어로 새 브랜치를 만드세요.
+3. (`git commit -am 'Add some fooBar'`) 명령어로 커밋하세요.
+4. (`git push origin feature/fooBar`) 명령어로 브랜치에 푸시하세요.
+5. 풀리퀘스트를 보내주세요.
+
 ## 🛎️멘토링 LOG
 
 #### [2023-03-06](https://www.notion.so/03-07-Meeting-Log-f414cd2fbd974f928ebf824226a4da5a) <br/>
 
 ## 🎃 캡스톤디자인-실습일지
 
-#### [2023-03-02](https://docs.google.com/document/d/1_PnYa7qbz4IFehya34LuIMxyMxEma1UphP67YIu4YYY/edit#heading=h.hhevn0icya3z)
+#### [실습일지 링크](https://drive.google.com/drive/folders/1et9WkYE5wCEBz_YErpdYXzV6KC_pz6lH?usp=sharing)
 
-#### [2023-03-06](https://docs.google.com/document/d/1kgtIP7oul6M-yrTJ69PlWwlIq0nhXFXqi02bysBzonI/edit)
-
-#### [2023-03-09](https://docs.google.com/document/d/1Zf70pWBJsU3Fll0uHi9bzmXhwLH1v17t3nU6XFoKawA/edit)
-
-#### [2023-03-13](https://docs.google.com/document/d/1PbdbuJJl2TrJey7IpAsEvTlyhnMADlxoscYtVmK1FfY/edit)
-
-#### [2023-03-16](https://docs.google.com/document/d/1OgMLoCGeePRwEqupT51gYUNHW6mp06WbQwX44dy3A4M/edit)
 
 <br/>
 
