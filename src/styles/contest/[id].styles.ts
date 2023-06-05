@@ -136,10 +136,15 @@ export const IconArea = styled.div`
 `;
 
 export const ApplyButton = styled.button`
-  width: 60%;
+  width: 85%;
   height: 50px;
   background: #222428;
   border-radius: 6px;
+  color: #ffffff;
+`;
+
+export const ResultButton = styled(ApplyButton)`
+  background: #fd3446;
   color: #ffffff;
 `;
 
