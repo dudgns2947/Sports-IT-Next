@@ -9,6 +9,7 @@ import Link from "next/link";
 import NavBar from "@component/components/navbar/NavBar";
 import * as S from "../../styles/register/contest-info.styles";
 import { contestEventAtom, contestEventCountAtom, contestEventSelector } from "@component/atoms/contestAtom";
+import Head from "next/head";
 
 const EventSelect = () => {
   const [contestEvents, setContestEvents] = useRecoilState(contestEventAtom);
@@ -16,28 +17,33 @@ const EventSelect = () => {
 
   console.log(contestEvents);
   return (
-    <PageWrapper>
-      <Seo title="대회 종목 선택" />
-      <GoBackHeader title="대회 등록" />
-      <TextArea>
-        <Text>대회 종목을</Text>
-        <Text>선택해주세요.</Text>
-      </TextArea>
-      <SelectArea>
-        {Object.keys(contestEvents).map((event, index) => (
-          <EventSelectButton
-            key={index}
-            text={event}
-            active={contestEvents[event]}
-            setCount={setCount}
-            setEvent={setContestEvents}
-          ></EventSelectButton>
-        ))}
-      </SelectArea>
-      <Link href="/register/headcount">
-        <NavBar navText="다음" active={count === 1 ? true : false} />
-      </Link>
-    </PageWrapper>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="대회 종목 선택" />
+        <GoBackHeader title="대회 등록" />
+        <TextArea>
+          <Text>대회 종목을</Text>
+          <Text>선택해주세요.</Text>
+        </TextArea>
+        <SelectArea>
+          {Object.keys(contestEvents).map((event, index) => (
+            <EventSelectButton
+              key={index}
+              text={event}
+              active={contestEvents[event]}
+              setCount={setCount}
+              setEvent={setContestEvents}
+            ></EventSelectButton>
+          ))}
+        </SelectArea>
+        <Link href="/register/headcount">
+          <NavBar navText="다음" active={count === 1 ? true : false} />
+        </Link>
+      </PageWrapper>
+    </>
   );
 };
 

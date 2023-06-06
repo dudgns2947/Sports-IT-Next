@@ -9,31 +9,37 @@ import EventSelectButton from "@component/components/button/EventSelectButton";
 import NavBar from "@component/components/navbar/NavBar";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
+import Head from "next/head";
 
 const EventSelect = () => {
   const [events, setEvents] = useRecoilState<IEvent>(eventAtom);
   const [count, setCount] = useRecoilState<number>(eventCountAtom);
   console.log(events);
   return (
-    <PageWrapper>
-      <GoBackHeader />
-      <Seo title="관심 종목 선택" />
-      <S.TextArea>
-        <S.Text>관심있는 종목을</S.Text>
-        <S.Text>선택해주세요.</S.Text>
-      </S.TextArea>
-      <S.SelectArea>
-        {Object.keys(events).map((event, index) => (
-          <EventSelectButton key={index} text={event} active={events[event]} setCount={setCount} setEvent={setEvents}></EventSelectButton>
-        ))}
-      </S.SelectArea>
-      <S.BottomArea>
-        <S.BottomText count={count}>5개까지 선택 가능합니다.({count}/5)</S.BottomText>
-      </S.BottomArea>
-      <Link href="/auth/signup">
-        <NavBar navText="다음" active={count <= 5 ? true : false} />
-      </Link>
-    </PageWrapper>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <GoBackHeader />
+        <Seo title="관심 종목 선택" />
+        <S.TextArea>
+          <S.Text>관심있는 종목을</S.Text>
+          <S.Text>선택해주세요.</S.Text>
+        </S.TextArea>
+        <S.SelectArea>
+          {Object.keys(events).map((event, index) => (
+            <EventSelectButton key={index} text={event} active={events[event]} setCount={setCount} setEvent={setEvents}></EventSelectButton>
+          ))}
+        </S.SelectArea>
+        <S.BottomArea>
+          <S.BottomText count={count}>5개까지 선택 가능합니다.({count}/5)</S.BottomText>
+        </S.BottomArea>
+        <Link href="/auth/signup">
+          <NavBar navText="다음" active={count <= 5 ? true : false} />
+        </Link>
+      </PageWrapper>
+    </>
   );
 };
 

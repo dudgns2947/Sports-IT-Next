@@ -6,6 +6,7 @@ import NavBar from "@component/components/navbar/NavBar";
 import styled from "styled-components";
 import SurveyCard from "@component/components/card/SurveyCard";
 import AddButton from "@component/components/button/AddButton";
+import Head from "next/head";
 
 const ContentArea = styled.div`
   height: 100%;
@@ -28,19 +29,24 @@ const SurveyArea = styled.div``;
 
 const MakeSurvey = () => {
   return (
-    <PageWrapper>
-      <Seo title="설문지 등록" />
-      <GoBackHeader title="대회 등록" />
-      <ContentArea>
-        <BoldTextArea>
-          <BoldText>부문 또는 체급을</BoldText>
-          <BoldText>등록해주세요.</BoldText>
-        </BoldTextArea>
-        <SurveyArea>{/* <SurveyCard /> */}</SurveyArea>
-        <AddButton text="부문 / 체급 추가하기"></AddButton>
-      </ContentArea>
-      <NavBar navText="다음" active={true} />
-    </PageWrapper>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="설문지 등록" />
+        <GoBackHeader title="대회 등록" />
+        <ContentArea>
+          <BoldTextArea>
+            <BoldText>부문 또는 체급을</BoldText>
+            <BoldText>등록해주세요.</BoldText>
+          </BoldTextArea>
+          <SurveyArea>{/* <SurveyCard /> */}</SurveyArea>
+          <AddButton text="부문 / 체급 추가하기"></AddButton>
+        </ContentArea>
+        <NavBar navText="다음" active={true} />
+      </PageWrapper>
+    </>
   );
 };
 

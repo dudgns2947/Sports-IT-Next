@@ -16,6 +16,7 @@ import { useRecoilValue } from "recoil";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import axios from "axios";
 import { baseApi } from "@component/api/utils/instance";
+import Head from "next/head";
 
 const AddButtonArea = styled.div`
   padding-bottom: 40px;
@@ -65,14 +66,18 @@ const Form = () => {
   }
 
   return (
-    <PageWrapper>
-      <Seo title="대회 폼 등록" />
-      <GoBackHeader title="대회 등록" />
-      <S.ContentAreaWrapper>
-        <S.ContestInform contestName="대한팔씨름연맹 제 26회 국가대표 선발전" contestGroup="(사)대한팔씨름연맹"></S.ContestInform>
-        <S.Divider />
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="대회 폼 등록" />
+        <GoBackHeader title="대회 등록" />
+        <S.ContentAreaWrapper>
+          <S.ContestInform contestName="대한팔씨름연맹 제 26회 국가대표 선발전" contestGroup="(사)대한팔씨름연맹"></S.ContestInform>
+          <S.Divider />
 
-        {/* {surveyList.map((survey, index) => (
+          {/* {surveyList.map((survey, index) => (
           <SurveyCard key={index} index={index} setSurveyList={setSurveyList} />
         ))}
         <AddButtonArea
@@ -80,11 +85,12 @@ const Form = () => {
         >
           <AddButton text="질문 추가하기" />
         </AddButtonArea> */}
-      </S.ContentAreaWrapper>
-      <Link onClick={onRegister} href="/register/register-success">
-        <NavBar navText="등록" active={true} />
-      </Link>
-    </PageWrapper>
+        </S.ContentAreaWrapper>
+        <Link onClick={onRegister} href="/register/register-success">
+          <NavBar navText="등록" active={true} />
+        </Link>
+      </PageWrapper>
+    </>
   );
 };
 

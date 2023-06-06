@@ -4,14 +4,11 @@ import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import { Input } from "@component/components/input/inputComponent";
 import NavBar from "@component/components/navbar/NavBar";
-import {
-  BoldSubText,
-  BoldText,
-  BoldTextArea,
-} from "@component/components/text/boldText";
+import { BoldSubText, BoldText, BoldTextArea } from "@component/components/text/boldText";
 import Link from "next/link";
 import React, { ChangeEvent } from "react";
 import styled from "styled-components";
+import Head from "next/head";
 
 const CostInputArea = styled.div`
   height: 70px;
@@ -34,31 +31,35 @@ const CostArea = styled.div`
 
 const ParticipationCost = () => {
   return (
-    <PageWrapper>
-      <Seo title="참가비용 설정" />
-      <GoBackHeader title="대회 등록" />
-      <ContentArea>
-        <BoldTextArea>
-          <BoldText>참가 비용을</BoldText>
-          <BoldText>입력해주세요.</BoldText>
-        </BoldTextArea>
-        <CostInputArea>
-          <BoldSubText>프로부문 단일체급 참가비용</BoldSubText>
-          <Input type="number" placeholder="금액을 입력해주세요." />
-        </CostInputArea>
-        <CostInputArea>
-          <BoldSubText>프로부문 단일체급 추가비용</BoldSubText>
-          <Input type="number" placeholder="금액을 입력해주세요." />
-        </CostInputArea>
-        <CostInputArea>
-          <BoldSubText>아마추어부문 단일체급 참가비용</BoldSubText>
-          <Input type="number" placeholder="금액을 입력해주세요." />
-        </CostInputArea>
-        <CostInputArea>
-          <BoldSubText>아마추어부문 단일체급 추가비용</BoldSubText>
-          <Input type="number" placeholder="금액을 입력해주세요." />
-        </CostInputArea>
-        {/* <CostInputArea>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="참가비용 설정" />
+        <GoBackHeader title="대회 등록" />
+        <ContentArea>
+          <BoldTextArea>
+            <BoldText>참가 비용을</BoldText>
+            <BoldText>입력해주세요.</BoldText>
+          </BoldTextArea>
+          <CostInputArea>
+            <BoldSubText>프로부문 단일체급 참가비용</BoldSubText>
+            <Input type="number" placeholder="금액을 입력해주세요." />
+          </CostInputArea>
+          <CostInputArea>
+            <BoldSubText>프로부문 단일체급 추가비용</BoldSubText>
+            <Input type="number" placeholder="금액을 입력해주세요." />
+          </CostInputArea>
+          <CostInputArea>
+            <BoldSubText>아마추어부문 단일체급 참가비용</BoldSubText>
+            <Input type="number" placeholder="금액을 입력해주세요." />
+          </CostInputArea>
+          <CostInputArea>
+            <BoldSubText>아마추어부문 단일체급 추가비용</BoldSubText>
+            <Input type="number" placeholder="금액을 입력해주세요." />
+          </CostInputArea>
+          {/* <CostInputArea>
           <BoldSubText>노비스부문 단일체급 참가비용</BoldSubText>
           <Input type="number" placeholder="금액을 입력해주세요." />
         </CostInputArea>
@@ -66,11 +67,12 @@ const ParticipationCost = () => {
           <BoldSubText>노비스부문 단일체급 추가비용</BoldSubText>
           <Input type="number" placeholder="금액을 입력해주세요." />
         </CostInputArea> */}
-      </ContentArea>
-      <Link href="/register/form">
-        <NavBar navText="다음" active={true} />
-      </Link>
-    </PageWrapper>
+        </ContentArea>
+        <Link href="/register/form">
+          <NavBar navText="다음" active={true} />
+        </Link>
+      </PageWrapper>
+    </>
   );
 };
 

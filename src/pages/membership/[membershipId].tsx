@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { NextComponentType } from "next";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Head from "next/head";
 
 export default function Component() {
   const router = useRouter();
@@ -14,6 +15,9 @@ export default function Component() {
 
   return (
     <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="w-screen  bg-black flex flex-col items-center text-white pb-32">
         <div className="w-full flex pt-5 pb-5 pr-5 pl-5">
           <div className="flex-[1]" onClick={(e) => router.back()}>

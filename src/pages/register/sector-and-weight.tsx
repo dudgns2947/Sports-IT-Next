@@ -35,6 +35,7 @@ import { useRouter } from "next/router";
 import React, { use, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
+import Head from "next/head";
 
 const SurveyArea = styled.div``;
 
@@ -222,46 +223,51 @@ const SectorAndWeight = () => {
   // createFormData(posterList, "posters");
 
   return (
-    <PageWrapper>
-      <Seo title="부문 및 체급등록" />
-      <GoBackHeader title="대회 등록" />
-      <ContentPaddingArea>
-        <BoldTextArea>
-          <BoldText>부문 또는 체급을</BoldText>
-          <BoldText>등록해주세요.</BoldText>
-        </BoldTextArea>
-        <SurveyArea>
-          {weightSectors
-            ? weightSectors.map((weightSector, index) => (
-                <SurveyEndCard
-                  key={index}
-                  cardIndex={index}
-                  title={weightSector.title}
-                  cost={weightSector.cost}
-                  expandCost={weightSector.expandCost}
-                  subSectors={weightSector.subSectors}
-                  multi={weightSector.multi}
-                  setWeightSectors={setWeightSectors}
-                />
-              ))
-            : null}
-          <SurveyCard setWeightSectors={setWeightSectors} />
-        </SurveyArea>
-        {/* <SurveyArea>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <PageWrapper>
+        <Seo title="부문 및 체급등록" />
+        <GoBackHeader title="대회 등록" />
+        <ContentPaddingArea>
+          <BoldTextArea>
+            <BoldText>부문 또는 체급을</BoldText>
+            <BoldText>등록해주세요.</BoldText>
+          </BoldTextArea>
+          <SurveyArea>
+            {weightSectors
+              ? weightSectors.map((weightSector, index) => (
+                  <SurveyEndCard
+                    key={index}
+                    cardIndex={index}
+                    title={weightSector.title}
+                    cost={weightSector.cost}
+                    expandCost={weightSector.expandCost}
+                    subSectors={weightSector.subSectors}
+                    multi={weightSector.multi}
+                    setWeightSectors={setWeightSectors}
+                  />
+                ))
+              : null}
+            <SurveyCard setWeightSectors={setWeightSectors} />
+          </SurveyArea>
+          {/* <SurveyArea>
           {surveyList.map((survey, index) => (
             <SurveyCard index={index} setSurveyList={setSurveyList} />
           ))}
         </SurveyArea> */}
-        {/* <AddButtonArea
+          {/* <AddButtonArea
           onClick={() => setSurveyList((current) => [...current, ""])}
         >
           <AddButton text="부문 / 체급 추가하기"></AddButton>
         </AddButtonArea> */}
-      </ContentPaddingArea>
-      <Link onClick={registerContest} href="/register/register-success">
-        <NavBar navText="대회 등록" active={true} />
-      </Link>
-    </PageWrapper>
+        </ContentPaddingArea>
+        <Link onClick={registerContest} href="/register/register-success">
+          <NavBar navText="대회 등록" active={true} />
+        </Link>
+      </PageWrapper>
+    </>
   );
 };
 
