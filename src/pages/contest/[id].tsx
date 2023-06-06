@@ -76,10 +76,6 @@ const ContestDetail = () => {
     setSelectContestName(response.data.name);
   }
 
-  // useEffect(() => {
-  //   getContestDetail(parseInt(id as string));
-  // }, []);
-
   useEffect(() => {
     if (router.isReady) {
       const { id } = router.query;

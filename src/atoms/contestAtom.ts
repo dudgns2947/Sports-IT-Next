@@ -1,6 +1,7 @@
 import {
   IWeightSector,
   IWeightSectorList,
+  PlayerInfo,
 } from "@component/interfaces/contestInterface";
 import { IEvent } from "@component/interfaces/eventInterface";
 import { WeightCost } from "@component/interfaces/weightCostInterface";
@@ -194,4 +195,14 @@ export const selectContestNameAtom = atom<string>({
 export const applyContestIdAtom = atom<string>({
   key: "applyContestId",
   default: "",
+});
+
+export const playerListAtom = atom<PlayerInfo[]>({
+  key: "playerList",
+  default: [],
+});
+
+export const rankIndexAtom = atom({
+  key: "rankIndex",
+  default: 0,
 });

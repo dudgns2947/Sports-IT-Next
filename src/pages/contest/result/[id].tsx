@@ -1,5 +1,9 @@
 import { baseApi } from "@component/api/utils/instance";
-import { templateIdAtom } from "@component/atoms/contestAtom";
+import {
+  playerListAtom,
+  rankIndexAtom,
+  templateIdAtom,
+} from "@component/atoms/contestAtom";
 import { roleAtom } from "@component/atoms/roleAtom";
 import Seo from "@component/components/Seo";
 import { ContentPaddingArea } from "@component/components/area/areaComponent";
@@ -162,6 +166,7 @@ const RankForm = styled.div`
 
 const RankInput = styled.input`
   background: #f9f9fa;
+  padding-left: 15px;
   height: 100%;
   width: 100%;
 `;
@@ -182,7 +187,8 @@ const Result = () => {
   const [weight, setWeight] = useState("");
   const [templateId, setTemplateId] = useRecoilState(templateIdAtom);
   const [isRank, setIsRank] = useState(true);
-  const [playerList, setPlayerList] = useState<PlayerInfo[]>([]);
+  const [playerList, setPlayerList] = useRecoilState(playerListAtom);
+  const [rankIndex, setRankIndex] = useRecoilState(rankIndexAtom);
 
   const router = useRouter();
   const id = router.query.id;
@@ -207,6 +213,7 @@ const Result = () => {
   }, [router.isReady]);
 
   console.log(sectors);
+  console.log(playerList);
   return (
     <PageWrapper>
       <Seo title="대회 결과" />
@@ -252,7 +259,12 @@ const Result = () => {
               {playerList.map((player, index) => (
                 <Rank key={index}>
                   <RankName>{index + 1}등</RankName>
-                  <RankForm>
+                  <RankForm
+                    onClick={() => {
+                      setRankIndex(index);
+                      router.push(`/contest/player-search/${id}`);
+                    }}
+                  >
                     <RankInput value={player.playerName} readOnly />
                     <SearchIcon />
                   </RankForm>
