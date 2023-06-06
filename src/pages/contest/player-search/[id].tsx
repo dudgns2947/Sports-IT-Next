@@ -8,6 +8,7 @@ import GoBackHeader from "@component/components/header/GoBackHeader";
 import PlayerProfile from "@component/components/profile/PlayerProfile";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { BiSearch } from "react-icons/bi";
 
 const dumyData = [
   {
@@ -40,51 +41,29 @@ const dumyData = [
   },
 ];
 
-const PlayerWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 20px 0;
-`;
-
-const PlayerInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const PlayerImage = styled.img`
-  height: 50px;
-  width: 50px;
-  border-radius: 27px;
-  margin-right: 14px;
-`;
-
-const SectorAndWeight = styled.div`
-  display: flex;
-`;
-
-const PlayerName = styled.span`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  color: #222428;
-`;
-
-const PlaySector = styled.span`
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: #747474;
-  margin-right: 4px;
-`;
-
-const PlayerWeight = styled(PlaySector)``;
-
 const SearchArea = styled.div`
   display: flex;
   width: 100%;
+  position: relative;
 `;
 
-const SearchInput = styled.input``;
+const SearchInput = styled.input`
+  background: #f9f9fa;
+  border-radius: 12px;
+  width: 100%;
+  height: 40px;
+  padding-left: 15px;
+`;
+
+const SearchIcon = styled(BiSearch)`
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  width: 27px;
+  height: 27px;
+  color: #747474;
+  cursor: pointer;
+`;
 
 const PlayerSearch = () => {
   const [keyword, setKeyword] = useState("");
@@ -93,17 +72,27 @@ const PlayerSearch = () => {
       <Seo title="선수 검색" />
       <GoBackHeader title="선수 검색" />
       <ContentPaddingArea>
+        <SearchArea>
+          <SearchInput
+            value={keyword}
+            onChange={(e) => setKeyword(e.currentTarget.value)}
+            placeholder="검색어를 입력해주세요."
+          />
+          <SearchIcon />
+        </SearchArea>
         {dumyData
-          ? dumyData.map((data, index) => (
-              <PlayerProfile
-                key={data.uid}
-                profileImageUrl={data.profileImage}
-                playerName={data.playerName}
-                uid={data.uid}
-                sector={data.sector}
-                weight={data.weight}
-              />
-            ))
+          ? dumyData
+              .filter((dataList) => dataList.playerName.includes(keyword))
+              .map((data) => (
+                <PlayerProfile
+                  key={data.uid}
+                  profileImageUrl={data.profileImage}
+                  playerName={data.playerName}
+                  uid={data.uid}
+                  sector={data.sector}
+                  weight={data.weight}
+                />
+              ))
           : null}
       </ContentPaddingArea>
     </PageWrapper>

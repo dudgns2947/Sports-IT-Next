@@ -1,7 +1,13 @@
-import { playerListAtom, rankIndexAtom } from "@component/atoms/contestAtom";
+import {
+  awardIndexAtom,
+  awardListAtom,
+  isRankAtom,
+  playerListAtom,
+  rankIndexAtom,
+} from "@component/atoms/contestAtom";
 import { useRouter } from "next/router";
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 const PlayerWrapper = styled.div`
@@ -61,16 +67,28 @@ const PlayerProfile = ({
 }: PlayerProfileProps) => {
   const [playerList, setPlayerList] = useRecoilState(playerListAtom);
   const [rankIndex, setRankIndex] = useRecoilState(rankIndexAtom);
+  const [awardList, setAwardList] = useRecoilState(awardListAtom);
+  const [awardIndex, setAwardIndex] = useRecoilState(awardIndexAtom);
+  const isRank = useRecoilValue(isRankAtom);
   const router = useRouter();
   return (
     <PlayerWrapper
       onClick={() => {
-        console.log("index", rankIndex);
-        setPlayerList((current) => {
-          const tempList = [...current];
-          tempList[rankIndex] = { playerName: playerName, playerId: uid };
-          return tempList;
-        });
+        if (isRank) {
+          console.log("rankIndex", rankIndex);
+          setPlayerList((current) => {
+            const tempList = [...current];
+            tempList[rankIndex] = { playerName: playerName, playerId: uid };
+            return tempList;
+          });
+        } else {
+          console.log("awardIndex", awardIndex);
+          setAwardList((current) => {
+            const tempList = [...current];
+            tempList[awardIndex] = { playerName: playerName, playerId: uid };
+            return tempList;
+          });
+        }
         router.back();
       }}
     >

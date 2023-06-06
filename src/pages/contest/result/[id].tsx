@@ -1,7 +1,13 @@
 import { baseApi } from "@component/api/utils/instance";
 import {
+  awardIndexAtom,
+  awardListAtom,
+  awardNameListAtom,
+  isRankAtom,
   playerListAtom,
   rankIndexAtom,
+  resultSectorAtom,
+  resultWeightAtom,
   templateIdAtom,
 } from "@component/atoms/contestAtom";
 import { roleAtom } from "@component/atoms/roleAtom";
@@ -22,6 +28,7 @@ import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 import AddButton from "@component/components/button/AddButton";
 import { useRouter } from "next/router";
+import { AiFillCheckCircle } from "react-icons/ai";
 
 const dumyData = [
   {
@@ -169,6 +176,7 @@ const RankInput = styled.input`
   padding-left: 15px;
   height: 100%;
   width: 100%;
+  border-radius: 12px;
 `;
 
 const SearchIcon = styled(BiSearch)`
@@ -181,14 +189,78 @@ const SearchIcon = styled(BiSearch)`
   cursor: pointer;
 `;
 
+const AwardArea = styled(RankArea)``;
+
+const AwardTitle = styled.span`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  padding-left: 5px;
+`;
+
+const AwardForm = styled(RankForm)`
+  margin-top: 10px;
+  width: 100%;
+`;
+
+const AwardInput = styled(RankInput)``;
+
+const Award = styled.div`
+  margin-bottom: 24px;
+`;
+
+const RankAndWeight = styled.div`
+  border-bottom: 1px solid #ededed;
+`;
+
+const DocumentArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+`;
+
+const DocumentToggle = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 11px;
+`;
+
+const CheckIcon = styled(AiFillCheckCircle)<ToggleProps>`
+  width: 20px;
+  height: 20px;
+  color: ${(props) => (props.active ? "#212121" : "#EDEDED")};
+  margin-right: 5px;
+`;
+
+const CheckText = styled.span`
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #212121;
+`;
+
+const CheckContent = styled.span`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 0 2px;
+  color: #747474;
+`;
+
 const Result = () => {
   const [sectors, setSectors] = useState<IWeightSector[]>([]);
-  const [sector, setSector] = useState("");
-  const [weight, setWeight] = useState("");
+  const [sector, setSector] = useRecoilState(resultSectorAtom);
+  const [weight, setWeight] = useRecoilState(resultWeightAtom);
   const [templateId, setTemplateId] = useRecoilState(templateIdAtom);
-  const [isRank, setIsRank] = useState(true);
+  const [isRank, setIsRank] = useRecoilState(isRankAtom);
   const [playerList, setPlayerList] = useRecoilState(playerListAtom);
+  const [awardList, setAwardList] = useRecoilState(awardListAtom);
   const [rankIndex, setRankIndex] = useRecoilState(rankIndexAtom);
+  const [awardNameList, setAwardNameList] = useRecoilState(awardNameListAtom);
+  const [awardInput, setAwardInput] = useState("");
+  const [awardIndex, setAwardIndex] = useRecoilState(awardIndexAtom);
+  const [permit, setPermit] = useState(false);
 
   const router = useRouter();
   const id = router.query.id;
@@ -200,7 +272,7 @@ const Result = () => {
     );
     console.log(response2.data.result.sectors);
     setSectors(response2.data.result.sectors);
-    setSector(response2.data.result.sectors[0].title);
+    // setSector(response2.data.result.sectors[0].title);
   }
 
   useEffect(() => {
@@ -212,8 +284,20 @@ const Result = () => {
     // if (!router.isReady) return;
   }, [router.isReady]);
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const updatedInputs = [...awardNameList];
+    updatedInputs[index] = e.currentTarget.value;
+    setAwardNameList(updatedInputs);
+  };
+
   console.log(sectors);
   console.log(playerList);
+  console.log(awardList);
+  console.log(awardNameList);
+  console.log(awardInput);
   return (
     <PageWrapper>
       <Seo title="대회 결과" />
@@ -221,7 +305,10 @@ const Result = () => {
       <ContentPaddingArea>
         <SelectArea>
           <SelectContent>부문</SelectContent>
-          <SelectBox onChange={(e) => setSector(e.currentTarget.value)}>
+          <SelectBox
+            value={sector}
+            onChange={(e) => setSector(e.currentTarget.value)}
+          >
             {sectors
               ? sectors.map((data) => (
                   <SelectOption value={data.title} key={data.title}>
@@ -233,16 +320,25 @@ const Result = () => {
         </SelectArea>
         <SelectArea>
           <SelectContent>체급</SelectContent>
-          <SelectBox onChange={(e) => setWeight(e.currentTarget.value)}>
-            {sectors && sector !== ""
+          <SelectBox
+            value={weight}
+            onChange={(e) => setWeight(e.currentTarget.value)}
+          >
+            {sectors && sector === ""
               ? sectors
-                  .filter((data) => data.title === sector)[0]
-                  .subSectors.map((subSector) => (
+                  .filter((data) => data.title === sectors[0].title)[0]
+                  ?.subSectors.map((subSector) => (
                     <SelectOption value={subSector.name} key={subSector.name}>
                       {subSector.name}
                     </SelectOption>
                   ))
-              : null}
+              : sectors
+                  .filter((data) => data.title === sector)[0]
+                  ?.subSectors.map((subSector) => (
+                    <SelectOption value={subSector.name} key={subSector.name}>
+                      {subSector.name}
+                    </SelectOption>
+                  ))}
           </SelectBox>
         </SelectArea>
         <ToggleArea>
@@ -253,29 +349,77 @@ const Result = () => {
             시상 입력
           </ToggleRight>
         </ToggleArea>
-        {isRank ? (
-          <>
-            <RankArea>
-              {playerList.map((player, index) => (
-                <Rank key={index}>
-                  <RankName>{index + 1}등</RankName>
-                  <RankForm
-                    onClick={() => {
-                      setRankIndex(index);
-                      router.push(`/contest/player-search/${id}`);
-                    }}
-                  >
-                    <RankInput value={player.playerName} readOnly />
-                    <SearchIcon />
-                  </RankForm>
-                </Rank>
-              ))}
-            </RankArea>
-            <AddButton setPlayerList={setPlayerList} text="등수 추가하기" />
-          </>
-        ) : null}
+        <RankAndWeight>
+          {isRank ? (
+            <>
+              <RankArea>
+                {playerList.map((player, index) => (
+                  <Rank key={index}>
+                    <RankName>{index + 1}등</RankName>
+                    <RankForm
+                      onClick={() => {
+                        setRankIndex(index);
+                        router.push(`/contest/player-search/${id}`);
+                      }}
+                    >
+                      <RankInput value={player.playerName} readOnly />
+                      <SearchIcon />
+                    </RankForm>
+                  </Rank>
+                ))}
+              </RankArea>
+              <AddButton setPlayerList={setPlayerList} text="등수 추가하기" />
+            </>
+          ) : (
+            <>
+              <AwardArea>
+                {awardNameList.map((awardName, index) => (
+                  <Award key={index}>
+                    <AwardTitle>상 이름</AwardTitle>
+                    <AwardForm>
+                      <AwardInput
+                        value={awardName}
+                        onChange={(e) => handleInputChange(e, index)}
+                        placeholder="수상 이름을 입력해주세요."
+                      />
+                    </AwardForm>
+                    <AwardForm
+                      onClick={() => {
+                        setAwardIndex(index);
+                        router.push(`/contest/player-search/${id}`);
+                      }}
+                    >
+                      <AwardInput
+                        value={awardList[index].playerName}
+                        placeholder="선수 검색"
+                        readOnly
+                      />
+                      <SearchIcon />
+                    </AwardForm>
+                  </Award>
+                ))}
+              </AwardArea>
+              <AddButton
+                setAwardList={setAwardList}
+                setAwardNameList={setAwardNameList}
+                text="시상 추가하기"
+              />
+            </>
+          )}
+        </RankAndWeight>
+        <DocumentArea>
+          <DocumentToggle onClick={() => setPermit((current) => !current)}>
+            <CheckIcon active={permit} />
+            <CheckText>공문서 간편 자동발급 허용</CheckText>
+          </DocumentToggle>
+          <CheckContent>
+            선수가 시상내역에 관한 공문서 발급 요청시 자동으로 공문서가 발급되는
+            서비스입니다. 공문서의 내용 및 디자인 변경을 원하시면 마이페이지의
+            공문서 탭에서 수정해주세요. [이동]
+          </CheckContent>
+        </DocumentArea>
       </ContentPaddingArea>
-      <NavBar navText="입력 완료" active={true} />
+      <NavBar navText="입력 완료" active={permit} />
     </PageWrapper>
   );
 };
