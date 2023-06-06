@@ -41,7 +41,7 @@ export const InputContent = styled.input`
   border-radius: 12px;
   margin-top: 5px;
   margin-bottom: -18px;
-  width: 335px;
+  width: 100%;
   height: 45px;
   left: 20px;
   top: 147px;

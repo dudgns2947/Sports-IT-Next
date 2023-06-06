@@ -32,7 +32,7 @@ const Text = styled.div`
 `;
 
 const SliderImage = styled.img`
-  width: 40%;
+  width: 20%;
   height: auto;
   border-radius: 10px;
   margin-right: 10px;
@@ -52,7 +52,11 @@ const MainPagePost: React.FC<MainPagePostProps> = ({ userName, imageUrls }) => {
         <AiOutlineRight />
       </Header>
       <SliderContainer onScroll={handleScroll}>
-        {imageUrls ? imageUrls.map((imageUrl, index) => <SliderImage key={index} src={imageUrl} />) : null}
+        {imageUrls
+          ? imageUrls.map((imageUrl, index) => (
+              <SliderImage key={index} src={imageUrl} />
+            ))
+          : null}
       </SliderContainer>
     </Wrapper>
   );

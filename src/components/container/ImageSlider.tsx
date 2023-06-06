@@ -11,6 +11,7 @@ const SliderContainer = styled.div`
 `;
 
 const SliderContent = styled.div`
+  width: 100%;
   display: flex;
   transition: transform 0.5s ease-in-out;
 `;
@@ -33,7 +34,9 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
 
   return (
     <SliderContainer>
-      <SliderContent style={{ transform: `translateX(-${currentImage * 100}%)` }}>
+      <SliderContent
+        style={{ transform: `translateX(-${currentImage * 100}%)` }}
+      >
         {images.map((imageUrl, index) => (
           <SliderImage key={index} src={imageUrl} alt="Slider" />
         ))}

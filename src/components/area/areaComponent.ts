@@ -11,6 +11,11 @@ export const ContentPaddingArea = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  padding: 15px;
+  padding: 0 15px;
   padding-bottom: 18%;
+`;
+
+export const ContentColumnArea = styled(ContentPaddingArea)`
+  display: flex;
+  flex-direction: column;
 `;

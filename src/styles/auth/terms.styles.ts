@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { AiFillCheckCircle, AiOutlineCheck, AiOutlineRight } from "react-icons/ai";
+import {
+  AiFillCheckCircle,
+  AiOutlineCheck,
+  AiOutlineRight,
+} from "react-icons/ai";
 
 export const TextArea = styled.div`
   display: flex;

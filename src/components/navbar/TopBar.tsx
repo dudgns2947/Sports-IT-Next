@@ -8,9 +8,7 @@ const TopBar = () => {
     <S.TopBar>
       <S.SearchForm>
         <S.SearchInput type="text" placeholder="통합 검색" />
-        <S.SearchButton>
-          <S.SearchIcon />
-        </S.SearchButton>
+        <S.SearchIcon />
       </S.SearchForm>
       <S.ButtonArea>
         <S.AlarmButton />

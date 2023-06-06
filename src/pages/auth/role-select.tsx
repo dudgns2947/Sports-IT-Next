@@ -7,42 +7,57 @@ import * as S from "../../styles/auth/role-select.styles";
 import Link from "next/link";
 import NavBar from "@component/components/navbar/NavBar";
 import Head from "next/head";
+import {
+  ContentArea,
+  ContentColumnArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
+import { PageWrapper } from "@component/components/container/container";
 
 const RoleSelect = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
   console.log(role);
   return (
-    <>
+    <PageWrapper>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <S.RoleSelectContainer>
-        <GoBackHeader />
+
+      <GoBackHeader />
+      <ContentColumnArea>
         <S.QuestionArea>
           <S.QuestionText>주최자 이신가요?</S.QuestionText>
           <S.QuestionText>체육인 이신가요?</S.QuestionText>
         </S.QuestionArea>
         <S.SelectArea>
-          <S.SpoitorButton onClick={() => setRole("ROLE_INSTITUTION")} role={role}>
+          <S.SpoitorButton
+            onClick={() => setRole("ROLE_INSTITUTION")}
+            role={role}
+          >
             <S.SporitorSelectIcon role={role} />
             <S.RoleArea>
               <S.Role>주최자</S.Role>
-              <S.RoleDescription>대회를 개최하고 관리하고 싶어요.</S.RoleDescription>
+              <S.RoleDescription>
+                대회를 개최하고 관리하고 싶어요.
+              </S.RoleDescription>
             </S.RoleArea>
           </S.SpoitorButton>
           <S.SportyButton onClick={() => setRole("ROLE_USER")} role={role}>
             <S.SportySelectIcon role={role} />
             <S.RoleArea>
               <S.Role>체육인</S.Role>
-              <S.RoleDescription>대회에 참여하고 정보를 얻고 싶어요.</S.RoleDescription>
+              <S.RoleDescription>
+                대회에 참여하고 정보를 얻고 싶어요.
+              </S.RoleDescription>
             </S.RoleArea>
           </S.SportyButton>
         </S.SelectArea>
-        <Link href="/auth/event-select">
-          <NavBar navText="다음" active={true} />
-        </Link>
-      </S.RoleSelectContainer>
-    </>
+      </ContentColumnArea>
+
+      <Link href="/auth/event-select">
+        <NavBar navText="다음" active={true} />
+      </Link>
+    </PageWrapper>
   );
 };
 

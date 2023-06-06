@@ -13,14 +13,14 @@ export const TopWrapper = styled.div`
 export const TopBar = styled.div`
   top: 0%;
   display: flex;
-  padding: 14px 0px;
+  padding: 14px 15px;
   justify-content: center;
   align-items: center;
 `;
 
 export const SearchForm = styled.form`
   /* width: 375px; */
-  width: 80%;
+  width: 88%;
   height: 40px;
   position: relative;
 `;
@@ -65,7 +65,7 @@ export const SearchButton = styled.button``;
 
 export const SearchIcon = styled(BiSearch)`
   position: absolute;
-  right: 30px;
+  right: 3%;
   top: 8px;
   width: 27px;
   height: 27px;
@@ -85,7 +85,7 @@ export const MyPageButton = styled(FaRegUser)`
 
 export const ButtonArea = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  width: 60px;
+  width: 12%;
 `;

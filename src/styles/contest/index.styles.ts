@@ -19,6 +19,7 @@ export const TopWrapper = styled.div`
 `;
 
 export const TopBar = styled.div`
+  width: 100%;
   top: 0%;
   display: flex;
   padding: 14px 0px;
@@ -28,7 +29,8 @@ export const TopBar = styled.div`
 
 export const SearchForm = styled.form`
   /* width: 375px; */
-  width: 80%;
+  width: 88%;
+  /* background-color: blue; */
   height: 40px;
   position: relative;
 `;
@@ -36,7 +38,7 @@ export const SearchForm = styled.form`
 export const FilterButtonArea = styled.div`
   width: 100%;
   height: 45px;
-  margin: 0px 20px;
+  /* margin: 0px 20px; */
   display: flex;
 `;
 
@@ -60,7 +62,7 @@ export const TotalButton = styled.button<TotalButtonProps>`
 `;
 
 export const SearchInput = styled.input`
-  width: 95%;
+  width: 100%;
   height: 40px;
   background: #f9f9fa;
   border-radius: 12px;
@@ -74,7 +76,7 @@ export const SearchButton = styled.button``;
 
 export const SearchIcon = styled(BiSearch)`
   position: absolute;
-  right: 30px;
+  right: 3%;
   top: 8px;
   width: 27px;
   height: 27px;
@@ -235,9 +237,9 @@ export const PlusIcons = styled(AiOutlinePlus)`
 
 export const ButtonArea = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  width: 60px;
+  width: 12%;
 `;
 
 export const SeeMoreArea = styled.div`

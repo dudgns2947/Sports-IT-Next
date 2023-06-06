@@ -6,7 +6,12 @@ import Seo from "@component/components/Seo";
 import Link from "next/link";
 import { PageWrapper } from "@component/components/container/container";
 import { useRecoilState } from "recoil";
-import { appTermAtom, marketingOptInAtom, privacyPolicyAtom, thirdPartyAtom } from "@component/atoms/termAtom";
+import {
+  appTermAtom,
+  marketingOptInAtom,
+  privacyPolicyAtom,
+  thirdPartyAtom,
+} from "@component/atoms/termAtom";
 import Head from "next/head";
 
 const Terms = () => {
@@ -48,35 +53,50 @@ const Terms = () => {
           </S.TotalAgree>
           <S.Term>
             <S.TermLeftArea>
-              <S.TermIcon agree={appTerm} onClick={() => setAppTerm((current) => !current)} />
+              <S.TermIcon
+                agree={appTerm}
+                onClick={() => setAppTerm((current) => !current)}
+              />
               <S.TermText>스포츠잇 이용약관(필수)</S.TermText>
             </S.TermLeftArea>
             <S.TermPageIcon />
           </S.Term>
           <S.Term>
             <S.TermLeftArea>
-              <S.TermIcon agree={privacyPolicy} onClick={() => setPrivacyPolicy((current) => !current)} />
+              <S.TermIcon
+                agree={privacyPolicy}
+                onClick={() => setPrivacyPolicy((current) => !current)}
+              />
               <S.TermText>개인정보 처리방침(필수)</S.TermText>
             </S.TermLeftArea>
             <S.TermPageIcon />
           </S.Term>
           <S.Term>
             <S.TermLeftArea>
-              <S.TermIcon agree={thirdParty} onClick={() => setThirdParty((current) => !current)} />
+              <S.TermIcon
+                agree={thirdParty}
+                onClick={() => setThirdParty((current) => !current)}
+              />
               <S.TermText>개인정보 제 3자 제공 동의(필수)</S.TermText>
             </S.TermLeftArea>
             <S.TermPageIcon />
           </S.Term>
           <S.Term>
             <S.TermLeftArea>
-              <S.TermIcon agree={marketingOpt} onClick={() => setMarketingOpt((current) => !current)} />
+              <S.TermIcon
+                agree={marketingOpt}
+                onClick={() => setMarketingOpt((current) => !current)}
+              />
               <S.TermText>마케팅 수신 동의(선택)</S.TermText>
             </S.TermLeftArea>
             <S.TermPageIcon />
           </S.Term>
         </S.TermArea>
         <Link href="/auth/signup-success">
-          <NavBar navText="다음" active={appTerm && privacyPolicy && thirdParty && marketingOpt} />
+          <NavBar
+            navText="다음"
+            active={appTerm && privacyPolicy && thirdParty && marketingOpt}
+          />
         </Link>
       </PageWrapper>
     </>

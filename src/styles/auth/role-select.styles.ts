@@ -14,7 +14,7 @@ export const QuestionArea = styled.div`
   display: flex;
   flex-direction: column;
   height: 40%;
-  padding: 25% 0 0 20px;
+  padding-top: 5%;
 `;
 
 export const QuestionText = styled.span`
@@ -28,8 +28,8 @@ export const SelectArea = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 10px;
-  height: 45%;
+  /* padding: 0 10px; */
+  height: 60%;
 `;
 
 export const SpoitorButton = styled.button<IRole>`
@@ -37,22 +37,24 @@ export const SpoitorButton = styled.button<IRole>`
   justify-content: flex-start;
   align-items: center;
   border: 2px solid;
-  border-color: ${(props) => (props.role === "ROLE_INSTITUTION" ? "#212121" : "#EDEDED")};
+  border-color: ${(props) =>
+    props.role === "ROLE_INSTITUTION" ? "#212121" : "#EDEDED"};
   border-radius: 12px;
-  width: 335px;
+  width: 100%;
   height: 100px;
   margin-bottom: 5px;
-  padding-left: 20px;
   cursor: pointer;
   background-color: #ffffff;
 `;
 
 export const SportyButton = styled(SpoitorButton)`
-  border-color: ${(props) => (props.role === "ROLE_USER" ? "#212121" : "#EDEDED")};
+  border-color: ${(props) =>
+    props.role === "ROLE_USER" ? "#212121" : "#EDEDED"};
 `;
 
 export const SporitorSelectIcon = styled(AiFillCheckCircle)<IRole>`
-  color: ${(props) => (props.role === "ROLE_INSTITUTION" ? "#212121" : "#EDEDED")};
+  color: ${(props) =>
+    props.role === "ROLE_INSTITUTION" ? "#212121" : "#EDEDED"};
   height: 20px;
   width: 20px;
   margin-right: 10px;
