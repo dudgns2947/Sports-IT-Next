@@ -112,3 +112,12 @@ export interface IWeightSectorList {
   sectorList: IWeightSector[];
   surveyList: null;
 }
+
+export interface ToggleProps {
+  active: boolean;
+}
+
+export interface PlayerInfo {
+  playerName: string;
+  playerId: number;
+}

@@ -1,6 +1,7 @@
 import {
   IWeightSector,
   IWeightSectorList,
+  PlayerInfo,
 } from "@component/interfaces/contestInterface";
 import { IEvent } from "@component/interfaces/eventInterface";
 import { WeightCost } from "@component/interfaces/weightCostInterface";
@@ -193,5 +194,45 @@ export const selectContestNameAtom = atom<string>({
 
 export const applyContestIdAtom = atom<string>({
   key: "applyContestId",
+  default: "",
+});
+
+export const playerListAtom = atom<PlayerInfo[]>({
+  key: "playerList",
+  default: [],
+});
+
+export const rankIndexAtom = atom({
+  key: "rankIndex",
+  default: 0,
+});
+
+export const awardNameListAtom = atom<string[]>({
+  key: "awardNameList",
+  default: [],
+});
+
+export const awardListAtom = atom<PlayerInfo[]>({
+  key: "awardList",
+  default: [],
+});
+
+export const awardIndexAtom = atom({
+  key: "awardIndex",
+  default: 0,
+});
+
+export const isRankAtom = atom({
+  key: "isRank",
+  default: true,
+});
+
+export const resultSectorAtom = atom({
+  key: "resultSector",
+  default: "",
+});
+
+export const resultWeightAtom = atom({
+  key: "resultWeight",
   default: "",
 });

@@ -17,6 +17,7 @@ import BottomBar from "@component/components/navbar/BottomBar";
 import Contest from "@component/components/contest/Contest";
 import { roleAtom } from "@component/atoms/roleAtom";
 import { useInfiniteQuery } from "react-query";
+import { useInView } from "react-intersection-observer";
 import Head from "next/head";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 
@@ -29,7 +30,7 @@ const Options = [
 ];
 
 const Index = () => {
-  const { register, handleSubmit, formState } = useForm<ISearchInput>();
+  const { register, handleSubmit, setValue } = useForm<ISearchInput>();
   const [keyword, setKeyword] = useState("");
   const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
   const [orderBy, setOrderBy] = useState("createdDate");
@@ -39,6 +40,7 @@ const Index = () => {
   const token = useRecoilValue(userTokenAtom);
   const role = useRecoilValue(roleAtom);
   const [isFresh, setIsFresh] = useState(true);
+  const [ref, inView] = useInView();
 
   const router = useRouter();
 
@@ -124,7 +126,10 @@ const Index = () => {
   // }, [fetchNextPage]);
 
   const onValid = (data: ISearchInput) => {
+    setIsFresh(true);
+    setPage(0);
     setKeyword(data.keyword);
+    setValue("keyword", "");
   };
 
   const onClickTotal = () => {
@@ -260,33 +265,91 @@ const Index = () => {
     }
   }, [page, size]);
 
+  useEffect(() => {
+    if (inView && contestList.length !== 0) {
+      console.log("get more data !");
+      setIsFresh(false);
+      setPage((current) => current + 1);
+    }
+  }, [inView]);
+
   return (
-    <>
+      <>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <PageWrapper>
-        <Seo title="대회" />
-        <S.Container>
-          <S.TopWrapper>
-            <S.TopBar>
-              <S.SearchForm onSubmit={handleSubmit(onValid)}>
-                <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
-                <S.SearchButton>
-                  <S.SearchIcon />
-                </S.SearchButton>
-              </S.SearchForm>
-              <S.ButtonArea>
-                <S.AlarmButton />
-                <S.MyPageButton onClick={() => router.push("/mypage")} />
-              </S.ButtonArea>
-            </S.TopBar>
+    <PageWrapper>
+      <Seo title="대회" />
+      <S.Container>
+        <S.TopWrapper>
+          <S.TopBar>
+            <S.SearchForm onSubmit={handleSubmit(onValid)}>
+              <S.SearchInput
+                {...register("keyword")}
+                type="text"
+                placeholder="통합 검색"
+              />
+              <S.SearchButton>
+                <S.SearchIcon />
+              </S.SearchButton>
+            </S.SearchForm>
+            <S.ButtonArea>
+              <S.AlarmButton />
+              <S.MyPageButton onClick={() => router.push("/mypage")} />
+            </S.ButtonArea>
+          </S.TopBar>
 
-            <S.FilterButtonArea>
-              <S.TotalButton
-                active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
-                onClick={onClickTotal}
-              >
+          <S.FilterButtonArea>
+            <S.TotalButton
+              active={
+                filterBy.includes("recruitingEnd") &&
+                filterBy.includes("totalPrize") &&
+                filterBy.includes("recommend")
+              }
+              onClick={onClickTotal}
+            >
+              전체
+            </S.TotalButton>
+            <FilterButton
+              setIsFresh={setIsFresh}
+              setPage={setPage}
+              filterBy={filterBy}
+              setFilterBy={setFilterBy}
+              filterKeyWord="recruitingEnd"
+              filterContent="마감 임박 ⏰"
+            />
+            <FilterButton
+              setIsFresh={setIsFresh}
+              setPage={setPage}
+              filterBy={filterBy}
+              setFilterBy={setFilterBy}
+              filterKeyWord="totalPrize"
+              filterContent="높은 상금 💰"
+            />
+            <FilterButton
+              setIsFresh={setIsFresh}
+              setPage={setPage}
+              filterBy={filterBy}
+              setFilterBy={setFilterBy}
+              filterKeyWord="recommend"
+              filterContent="추천 대회 🏆"
+            />
+          </S.FilterButtonArea>
+        </S.TopWrapper>
+
+        <S.ContentArea>
+          <S.OrderArea>
+            <S.Filter>
+              <S.FilterIcon />
+              <S.OrderText>필터</S.OrderText>
+            </S.Filter>
+            <S.Order>
+              <S.OrderSelect
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                  setIsFresh(true);
+                  setPage(0);
+                  setOrderBy(e.currentTarget.value);
+                }}              >
                 전체
               </S.TotalButton>
               <FilterButton
@@ -422,24 +485,33 @@ const Index = () => {
                 );
               })}
             </div> */}
-              {contestList
-                ? contestList.map((contest) => (
-                    <Contest
-                      key={contest.competitionId}
-                      posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
-                      competitionId={contest.competitionId}
-                      competitionType={contest.competitionType}
-                      name={contest.name}
-                      host={contest.host}
-                      recruitingEnd={contest.recruitingEnd}
-                    />
-                  ))
-                : null}
-              <S.SeeMoreArea
-                onClick={() => {
-                  setIsFresh(false);
-                  setPage((current) => current + 1);
-                }}
+            {contestList
+              ? contestList.map((contest) => (
+                  <Contest
+                    key={contest.competitionId}
+                    posterImageUrl={
+                      contest.posters[0] ? contest.posters[0].posterUrl : ""
+                    }
+                    competitionId={contest.competitionId}
+                    competitionType={contest.competitionType}
+                    name={contest.name}
+                    host={contest.host}
+                    recruitingEnd={contest.recruitingEnd}
+                  />
+                ))
+              : null}
+            <S.SeeMoreArea
+              ref={ref}
+              // onClick={() => {
+              //   setIsFresh(false);
+              //   setPage((current) => current + 1);
+              // }}
+            >
+              {/* <S.SeeMoreButton>더보기</S.SeeMoreButton> */}
+            </S.SeeMoreArea>
+            {role === "ROLE_INSTITUTION" ? (
+              <S.RegisterButton
+                onClick={() => router.push("register/event-select")}
               >
                 <S.SeeMoreButton>더보기</S.SeeMoreButton>
               </S.SeeMoreArea>

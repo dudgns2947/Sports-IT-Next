@@ -1,10 +1,15 @@
 import React, { SetStateAction } from "react";
 import styled from "styled-components";
 import { BsPlusLg } from "react-icons/bs";
+import { PlayerInfo } from "@component/interfaces/contestInterface";
+import { MdTempleBuddhist } from "react-icons/md";
 
 interface AddButtonProps {
   text: string;
   setValue?: React.Dispatch<SetStateAction<boolean>>;
+  setPlayerList?: React.Dispatch<SetStateAction<PlayerInfo[]>>;
+  setAwardNameList?: React.Dispatch<SetStateAction<string[]>>;
+  setAwardList?: React.Dispatch<SetStateAction<PlayerInfo[]>>;
 }
 
 const AddArea = styled.div`
@@ -13,6 +18,8 @@ const AddArea = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 15px;
+  padding-bottom: 50px;
+  cursor: pointer;
 `;
 
 const AddIconArea = styled.div`
@@ -40,12 +47,32 @@ const AddText = styled.span`
   color: #212121;
 `;
 
-const AddButton = ({ text, setValue }: AddButtonProps) => {
+const AddButton = ({
+  text,
+  setValue,
+  setPlayerList,
+  setAwardNameList,
+  setAwardList,
+}: AddButtonProps) => {
   return (
     <AddArea
       onClick={() => {
         if (setValue) {
           setValue((current) => !current);
+        }
+        if (setPlayerList) {
+          setPlayerList((current) => {
+            const tempList = [...current];
+            tempList.push({ playerName: "", playerId: 0 });
+            return tempList;
+          });
+        }
+        if (setAwardNameList && setAwardList) {
+          setAwardNameList((current) => [...current, ""]);
+          setAwardList((current) => [
+            ...current,
+            { playerId: 0, playerName: "" },
+          ]);
         }
       }}
     >
