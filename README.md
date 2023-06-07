@@ -85,7 +85,7 @@
   </thead>
   <tbody>
     <tr>
-      <td align="center">Devops</td>
+      <td align="center">PM</td>
       <td align="center">Database, Back-End</td>
       <td align="center">Mobile, Back-End</td>
       <td align="center">Front-End</td>
