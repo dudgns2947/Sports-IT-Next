@@ -12,6 +12,7 @@ export const TopWrapper = styled.div`
 
 export const TopBar = styled.div`
   top: 0%;
+  width: 100%;
   display: flex;
   padding: 14px 15px;
   justify-content: center;
@@ -20,7 +21,7 @@ export const TopBar = styled.div`
 
 export const SearchForm = styled.form`
   /* width: 375px; */
-  width: 88%;
+  width: 85%;
   height: 40px;
   position: relative;
 `;
@@ -51,7 +52,7 @@ export const TotalButton = styled.button<TotalButtonProps>`
 `;
 
 export const SearchInput = styled.input`
-  width: 95%;
+  width: 100%;
   height: 40px;
   background: #f9f9fa;
   border-radius: 12px;
@@ -65,7 +66,7 @@ export const SearchButton = styled.button``;
 
 export const SearchIcon = styled(BiSearch)`
   position: absolute;
-  right: 3%;
+  right: 2%;
   top: 8px;
   width: 27px;
   height: 27px;
@@ -87,5 +88,5 @@ export const ButtonArea = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 12%;
+  width: 15%;
 `;
