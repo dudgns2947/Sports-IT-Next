@@ -18,6 +18,7 @@ const SliderContent = styled.div`
 
 const SliderImage = styled.img`
   width: 100%;
+  background-color: blue;
   height: auto;
 `;
 

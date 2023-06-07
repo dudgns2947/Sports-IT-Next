@@ -1,5 +1,8 @@
 import Seo from "@component/components/Seo";
-import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
@@ -9,6 +12,9 @@ import ProfileTab from "@component/components/profile/ProfileTab";
 import React from "react";
 import styled from "styled-components";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useSetRecoilState } from "recoil";
+import { userTokenAtom } from "@component/atoms/tokenAtom";
 
 const LogoutArea = styled.div`
   height: 60px;
@@ -22,9 +28,13 @@ const LogoutArea = styled.div`
   background-color: black;
   color: white;
   border-radius: 5px;
+  margin-bottom: 18%;
+  cursor: pointer;
 `;
 
 const Setting = () => {
+  const router = useRouter();
+  const setUserToken = useSetRecoilState(userTokenAtom);
   return (
     <>
       <Head>
@@ -34,7 +44,11 @@ const Setting = () => {
         <GoBackHeader title="설정" />
         <Seo title="설정" />
         <ContentPaddingArea>
-          <ProfileTab imgUrl="/images/example/Post1.png" userName="이준수" userEmail="young@naver.com" />
+          <ProfileTab
+            imgUrl="/images/example/Post1.png"
+            userName="이준수"
+            userEmail="young@naver.com"
+          />
           <NavTitle content="계정 관리" />
           <NavTab url="/" content="비밀번호 재설정" />
           <NavTab url="/" content="휴대폰 번호 재설정" />
@@ -44,7 +58,14 @@ const Setting = () => {
           <NavTab url="/" content="약관 및 정책" />
           <NavTab url="/" content="오픈소스 라이센스" />
           <NavTab url="/" content="회원 탈퇴하기" />
-          <LogoutArea>로그아웃</LogoutArea>
+          <LogoutArea
+            onClick={() => {
+              setUserToken("");
+              router.push("/auth/login");
+            }}
+          >
+            로그아웃
+          </LogoutArea>
         </ContentPaddingArea>
         <BottomBar />
       </PageWrapper>

@@ -46,4 +46,5 @@ export const HeaderTitleWhite = styled(HeaderTitle)`
 export const HeaderSettingIcon = styled(IoSettingsOutline)`
   width: 25px;
   height: 25px;
+  cursor: pointer;
 `;

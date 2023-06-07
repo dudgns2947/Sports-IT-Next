@@ -7,7 +7,7 @@ interface ProfileProps {
   favorite: string;
 }
 const Wrapper = styled.div`
-  width: 15%;
+  width: 20%;
   display: inline-block;
   text-align: center;
   margin-right: 20px;

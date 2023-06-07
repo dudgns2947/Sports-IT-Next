@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 const Header = styled.div`
@@ -32,7 +32,7 @@ const Text = styled.div`
 `;
 
 const SliderImage = styled.img`
-  width: 20%;
+  width: 25%;
   height: auto;
   border-radius: 10px;
   margin-right: 10px;

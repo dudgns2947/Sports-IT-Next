@@ -33,7 +33,7 @@ const ArrowIcon = styled(AiOutlineRight)`
 const NavTab = ({ url, content }: NavTabProps) => {
   const router = useRouter();
   return (
-    <NavTabArea onClick={() => router.push(url)}>
+    <NavTabArea onClick={() => alert("준비중인 기능입니다 :)")}>
       <NavTabText>{content}</NavTabText>
       <ArrowIcon />
     </NavTabArea>
