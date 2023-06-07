@@ -136,7 +136,7 @@
 
 <br/>
 
-## 프로젝트 기능 & 페이지 구성 📱
+## 📱 프로젝트 기능 & 페이지 구성 
 
 > 메인 / 대회 / 단체 및 선수 페이지
  <img height="600px" width="100%" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/87849920/314707c8-4d01-4728-98ff-c2c6d961feb1"/>
