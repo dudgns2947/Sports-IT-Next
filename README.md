@@ -212,7 +212,72 @@ $ npm install
 
 $ npm run dev
 ```
-   
+
+## Deploy
+```
+$ git clone https://github.com/PlayMaker-S/Sports-IT-Next.git
+
+$ cd Sports-IT-Next
+```
+
+```
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+$ source ~/.bashrc
+
+$ nvm install --lts # 18.16.0
+
+$ nvm use v.18.16.0
+
+$ (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
+
+& $env:Temp\GoogleCloudSDKInstaller.exe
+    
+$ gcloud init
+
+$ gcloud app deploy # Setting the app.yaml & cloudbuild.yaml
+```
+
+
+## DockerFile
+```
+# 의존성 빌드 단계
+FROM node:16-alpine AS deps
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm ci --production
+
+# 앱 빌드 단계
+FROM node:16-alpine AS builder
+
+WORKDIR /app
+
+COPY . .
+COPY --from=deps /app/node_modules ./node_modules
+
+RUN npm run build
+
+# 최종 단계
+FROM node:16-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV production
+
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+EXPOSE 8080
+
+CMD ["npm", "start"]
+
+```
 
 ## 📖 COMMIT CONVENTION
 
