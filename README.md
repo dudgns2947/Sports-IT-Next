@@ -23,6 +23,13 @@
 
 <br/>
 
+## ☑️배포 주소
+- 웹사이트 : www.sports-it.co.kr (DNS 연결중)
+
+- 프론트엔드 배포 주소 : http://sports-it-platform.du.r.appspot.com
+
+<br/>
+
 ## 🛠️ 기술 스택
 ### Environment
 <div align=left>
@@ -42,6 +49,7 @@
    <img src="https://img.shields.io/badge/React Query-FF4154?style=for-the-badge&logo=React Query&logoColor=white">
   <img src="https://img.shields.io/badge/React Hook Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white">
   <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
+  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
   
   
 </div>
@@ -53,6 +61,14 @@
   <img src="https://img.shields.io/badge/Google Meet-00897B?style=for-the-badge&logo=googlemeet&logoColor=white">
   <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white">
   </div>
+
+### CI/CD
+<div align=left>
+  <img src="https://img.shields.io/badge/Google Cloud Platform-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+  <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white">
+  
+</div>
 
 <br/>
 
@@ -180,6 +196,7 @@
 For building and running the application you need :
 + node.js 18.16.0
 + npm 8.3.1
++ Google Cloud SDK 433.0.1
 
 ## Installation
 ```
