@@ -236,3 +236,8 @@ export const resultWeightAtom = atom({
   key: "resultWeight",
   default: "",
 });
+
+export const keywordAtom = atom({
+  key: "keyword",
+  default: "",
+});

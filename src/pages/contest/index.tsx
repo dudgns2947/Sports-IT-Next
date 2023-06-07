@@ -24,6 +24,7 @@ import { roleAtom } from "@component/atoms/roleAtom";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import Head from "next/head";
+import { keywordAtom } from "@component/atoms/contestAtom";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 
 type OrderType = "viewCount" | "createdDate" | "scrapCount";
@@ -35,8 +36,8 @@ const Options = [
 ];
 
 const Index = () => {
-  const { register, handleSubmit, setValue } = useForm<ISearchInput>();
-  const [keyword, setKeyword] = useState("");
+  const { register, handleSubmit, setValue, watch } = useForm<ISearchInput>();
+  const [keyword, setKeyword] = useRecoilState(keywordAtom);
   const [filterBy, setFilterBy] = useState<FilterType[]>([
     "PLANNING",
     "RECRUITING",
@@ -306,7 +307,14 @@ const Index = () => {
               placeholder="통합 검색"
             />
             {/* <S.SearchButton> */}
-            <S.SearchIcon />
+            <S.SearchIcon
+              onClick={() => {
+                setIsFresh(true);
+                setPage(0);
+                setKeyword(watch().keyword);
+                setValue("keyword", "");
+              }}
+            />
             {/* </S.SearchButton> */}
           </S.SearchForm>
           <S.ButtonArea>
