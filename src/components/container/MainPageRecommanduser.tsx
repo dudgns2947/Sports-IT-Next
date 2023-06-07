@@ -6,7 +6,7 @@ import Profile from "./Profile";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px 0 10px 0;
+  margin: 30px 0 20% 0;
 `;
 
 const Header = styled.div`
@@ -70,7 +70,16 @@ const MainPageRecommanduser: React.FC = () => {
         <AiOutlineRight />
       </Header>
       <SliderContainer onScroll={handleScroll}>
-        {infos ? infos.map((info, index) => <Profile key={index} imageUrl={info.url} name={info.name} favorite={info.favorite} />) : null}
+        {infos
+          ? infos.map((info, index) => (
+              <Profile
+                key={index}
+                imageUrl={info.url}
+                name={info.name}
+                favorite={info.favorite}
+              />
+            ))
+          : null}
       </SliderContainer>
     </Wrapper>
   );

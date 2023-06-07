@@ -38,9 +38,9 @@ export default function Home() {
   ];
   const iconProps = [
     ["/images/icon/Icon1.png", "대회", "contest"],
-    ["/images/icon/Icon2.png", "선수등록", "player-registration"],
+    ["/images/icon/Icon2.png", "선수등록", "/"],
     ["/images/icon/Icon3.png", "공문서", "document"],
-    ["/images/icon/Icon4.png", "통계", "statistics"],
+    ["/images/icon/Icon4.png", "통계", "/"],
   ];
   const iamgeUrls = [
     "/images/example/Post1.png",

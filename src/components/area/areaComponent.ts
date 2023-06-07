@@ -12,7 +12,7 @@ export const ContentPaddingArea = styled.div`
   height: 100%;
   overflow: auto;
   padding: 0 15px;
-  padding-bottom: 10%;
+  padding-bottom: 5%;
 `;
 
 export const ContentColumnArea = styled(ContentPaddingArea)`

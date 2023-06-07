@@ -1,4 +1,7 @@
-import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
@@ -22,7 +25,7 @@ const TransformArea = styled.div`
   align-items: center;
   background: #f9f9fa;
   border-radius: 14px;
-  width: 93%;
+  width: 100%;
   height: 72px;
   padding: 14px 17px;
 `;
@@ -59,13 +62,14 @@ const TransformButton = styled.button`
   font-size: 14px;
   line-height: 20px;
   background-color: #fd3446;
+  cursor: pointer;
 `;
 
 const iconProps = [
-  ["/images/logo/contest.png", "대회", "contest"],
+  ["/images/logo/contest.png", "대회", "/mypage"],
   ["/images/logo/document.png", "공문서", "document"],
-  ["/images/logo/coupon.png", "쿠폰", "coupon"],
-  ["/images/logo/point.png", "포인트", "point"],
+  ["/images/logo/coupon.png", "쿠폰", "/mypage"],
+  ["/images/logo/point.png", "포인트", "/mypage"],
 ];
 
 const MyPage = () => {
@@ -79,17 +83,28 @@ const MyPage = () => {
         <GoBackHeader title="마이페이지" setting={true} />
         <Seo title="마이페이지" />
         <ContentPaddingArea>
-          <ProfileTab imgUrl="/images/example/Post1.png" userName="이준수" userEmail="yuk@naver.com" />
+          <ProfileTab
+            imgUrl="/images/example/Post1.png"
+            userName="이준수"
+            userEmail="yuk@naver.com"
+          />
           <TransformArea>
             <TransformTextArea>
               <TransformBoldText>주최자로 전환</TransformBoldText>
               <TransformLightText>대회 개최하고 관리하기</TransformLightText>
             </TransformTextArea>
-            <TransformButton>전환</TransformButton>
+            <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>
+              전환
+            </TransformButton>
           </TransformArea>
           <IconContainer>
             {iconProps.map((iconProp, index) => (
-              <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
+              <CustomButton
+                key={index}
+                imageUrl={iconProp[0]}
+                buttonName={iconProp[1]}
+                routeUrl={iconProp[2]}
+              />
             ))}
           </IconContainer>
           <NavTitle content="나의 스포티" />

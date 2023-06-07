@@ -29,6 +29,7 @@ const NavCard = styled.div`
   padding-bottom: 5px;
   left: 10px;
   bottom: 24px;
+  cursor: pointer;
 `;
 
 const NavText = styled.span`
@@ -89,27 +90,15 @@ const BottomBar = () => {
         <TrophyIcon />
         <NavText>대회</NavText>
       </NavCard>
-      <NavCard
-        onClick={() => {
-          router.push("/");
-        }}
-      >
+      <NavCard onClick={() => alert("준비중인 기능입니다 :)")}>
         <SharpIcon />
         <NavText>탐색</NavText>
       </NavCard>
-      <NavCard
-        onClick={() => {
-          router.push("/");
-        }}
-      >
+      <NavCard onClick={() => alert("준비중인 기능입니다 :)")}>
         <MessageIcon />
         <NavText>메시지</NavText>
       </NavCard>
-      <NavCard
-        onClick={() => {
-          router.push("/");
-        }}
-      >
+      <NavCard onClick={() => alert("준비중인 기능입니다 :)")}>
         <SquaresIcon />
         <NavText>FEEL IT</NavText>
       </NavCard>
