@@ -18,4 +18,5 @@ export const ContentPaddingArea = styled.div`
 export const ContentColumnArea = styled(ContentPaddingArea)`
   display: flex;
   flex-direction: column;
+  padding-top: 12%;
 `;
