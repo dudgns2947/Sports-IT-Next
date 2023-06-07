@@ -1,6 +1,6 @@
 import styled from "styled-components";
 export const Banner = styled.div`
-  text-align : center;
+  text-align: center;
   display: flex;
 `;
 export const CustomMenu = styled.div`
@@ -9,12 +9,18 @@ export const CustomMenu = styled.div`
   justify-content: center;
 `;
 export const IconContainer = styled.div`
-  display : flex;
+  display: flex;
   justify-content: space-around;
-  margin-top : 20px;
+  margin-top: 20px;
 `;
 export const Divider = styled.div`
-width: 100%;
-height: 5px;
-background-color: #F9F9FA;
+  width: 100%;
+  height: 5px;
+  background-color: #f9f9fa;
+`;
+
+export const AdvertiseImage = styled.img`
+  width: 100%;
+  height: 8%;
+  cursor: pointer;
 `;

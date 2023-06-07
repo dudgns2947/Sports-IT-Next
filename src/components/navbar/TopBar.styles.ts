@@ -82,6 +82,7 @@ export const AlarmButton = styled(FaRegBell)`
 export const MyPageButton = styled(FaRegUser)`
   width: 22px;
   height: 22px;
+  cursor: pointer;
 `;
 
 export const ButtonArea = styled.div`

@@ -32,7 +32,7 @@ const Text = styled.div`
 `;
 
 const SliderImage = styled.img`
-  width: 20%;
+  width: 25%;
   height: auto;
   border-radius: 10px;
   margin-right: 10px;

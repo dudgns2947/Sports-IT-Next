@@ -28,6 +28,7 @@ import { baseApi } from "@component/api/utils/instance";
 import { useRecoilValue } from "recoil";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Contest from "@component/components/contest/Contest";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const images = [
@@ -59,6 +60,7 @@ export default function Home() {
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(3);
+  const router = useRouter();
 
   async function getContest(contestProps: IContestParams) {
     const response = await baseApi.get("competitions/slice", {
@@ -103,7 +105,11 @@ export default function Home() {
         <ContentPaddingArea>
           <S.CustomMenu>
             <S.Banner>
-              <ImageSlider images={images} />
+              {/* <ImageSlider images={images} /> */}
+              <S.AdvertiseImage
+                onClick={() => router.push("/contest")}
+                src="/images/logo/advertise.png"
+              />
             </S.Banner>
             <S.IconContainer>
               {iconProps

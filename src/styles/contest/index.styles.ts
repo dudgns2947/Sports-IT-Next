@@ -87,11 +87,13 @@ export const SearchIcon = styled(BiSearch)`
 export const AlarmButton = styled(FaRegBell)`
   width: 23px;
   height: 23px;
+  cursor: pointer;
 `;
 
 export const MyPageButton = styled(FaRegUser)`
   width: 22px;
   height: 22px;
+  cursor: pointer;
 `;
 
 export const ContentArea = styled.div`

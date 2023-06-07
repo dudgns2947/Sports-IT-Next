@@ -11,7 +11,7 @@ const TopBar = () => {
         <S.SearchIcon />
       </S.SearchForm>
       <S.ButtonArea>
-        <S.AlarmButton />
+        <S.AlarmButton onClick={() => router.push("/alarm")} />
         <S.MyPageButton onClick={() => router.push("/mypage")} />
       </S.ButtonArea>
     </S.TopBar>
