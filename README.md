@@ -165,7 +165,7 @@
 
 
 > 대회 참가 페이지
- <img height="450px" width="100%" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/87849920/435f67e2-dc90-4444-bde2-09aecbe9a464"/>
+ <img height="450px" width="100%" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/87849920/c41b34f2-d38d-4d95-b5d8-c91177cb5d34"/>
 
 
 
