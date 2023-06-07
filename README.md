@@ -93,17 +93,17 @@
     <tr>
       <td align="center">
         <a target="_blank" href="#">
-          <img alt height="180px" width="180px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/4aad5a3c-06e0-48f8-8ce9-9d8da11dce1e"/>
+          <img alt height="180px" width="150px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/53550993/904ff29e-2971-474a-be8c-95b30cd90770" />
         </a>
       </td>
       <td align="center">
         <a target="_blank" href="#">
-          <img alt height="180px" width="180px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/b8f4b142-b6b6-4490-abe4-7adf0aaa1453"/>
+          <img alt height="180px" width="150px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/b8f4b142-b6b6-4490-abe4-7adf0aaa1453"/>
         </a>
       </td>
       <td align="center">
         <a target="_blank" href="#">
-          <img alt height="180px" width="180px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/d2551821-0ff4-4f78-ba8c-2506c06c86cc"/>
+          <img alt height="180px" width="150px" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/56084058/d2551821-0ff4-4f78-ba8c-2506c06c86cc"/>
         </a>
       </td>
       <td align="center">
