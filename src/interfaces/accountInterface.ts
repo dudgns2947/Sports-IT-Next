@@ -7,6 +7,11 @@ export interface ISignupForm {
   pwCheck: string;
 }
 
+export interface ICheckEmailForm {
+  isDuplicated: boolean;
+  message: string;
+}
+
 export interface ISignupProps {
   email: string;
   pw: string;
@@ -19,4 +24,8 @@ export interface ISignupProps {
 export interface ILoginProps {
   loginId: string;
   pw: string;
+}
+
+export interface ICheckEmailProps {
+  email: string;
 }

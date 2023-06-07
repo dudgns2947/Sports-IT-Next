@@ -9,6 +9,13 @@ import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
 import Script from "next/script";
 import { Hydrate } from "react-query/hydration";
+import { use } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { set } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { userTokenAtom } from "@component/atoms/tokenAtom";
+import { type } from "os";
 
 // _app.tsx는 모든 페이지에 공통적으로 적용될 내용을 작성 및 서버로부터 요청이 왔을 때 가장 먼저 실행되며,
 // 페이지에 적용할 공통 레이아웃을 설정하는 역할을 한다.
@@ -29,6 +36,29 @@ import { Hydrate } from "react-query/hydration";
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [token, setToken] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    //로그인 페이지가 아니면
+    if (router.pathname !== "/auth/login" && typeof window !== "undefined") {
+      const StoredToken = window.localStorage.getItem("jwt");
+      if (!StoredToken) {
+        router.push("/auth/login");
+        alert("로그인이 필요한 페이지입니다.");
+      }
+    }
+  }, []);
+
+  // 토큰이 변경될 때마다 토큰을 로컬 스토리지에 저장
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("jwt", token);
+    } else {
+      localStorage.removeItem("jwt");
+    }
+  }, [token]);
+
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>

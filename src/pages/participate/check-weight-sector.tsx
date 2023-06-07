@@ -106,6 +106,7 @@ const ChoiceRole = () => {
   useEffect(() => {
     getSector();
   }, []);
+
   return (
     <>
       <Head>

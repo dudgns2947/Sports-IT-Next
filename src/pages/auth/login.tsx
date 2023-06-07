@@ -67,11 +67,21 @@ const Login = () => {
       console.log("Login Success !", res);
       setUserToken(res.data.token);
       setUserRole(res.data.role[0].roleName);
+      window.localStorage.setItem("role", res.data.role[0].roleName);
       console.log(userToken);
       console.log(userRole);
+      if (res.data.token) {
+        window.localStorage.setItem("jwt", res.data.token);
+      } else {
+        alert("로그인 토큰정보를 받아오지 못했습니다. ");
+        router.push("/auth/login");
+      }
       router.push("/");
     },
-    onError: (res) => console.log("Error !", res),
+    onError: (res) => {
+      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+      console.log("Error !", res);
+    },
   });
 
   const onValid = (data: ILoginProps) => {
@@ -87,6 +97,10 @@ const Login = () => {
     } else if (formState.errors.pw) {
       alert(`${formState.errors?.pw?.message}`);
     }
+  };
+
+  const notValidClick = () => {
+    alert("준비중인 기능입니다.");
   };
 
   return (
@@ -113,16 +127,16 @@ const Login = () => {
           <Link href="/auth/role-select">
             <S.AccountPanelText>회원가입</S.AccountPanelText>
           </Link>
-          <Link href="/">
+          <Link href="/auth/findinfo">
             <S.AccountPanelText>아이디/비밀번호 찾기</S.AccountPanelText>
           </Link>
         </S.AccountPanel>
         <S.EasyLoginArea>
-          <Link href="/">
-            <S.EasyLoginImage width={60} height={60} src="/images/logo/KakaoLoginLogo.png" alt="Google Logo" />
+          <Link href="/auth/login">
+            <S.EasyLoginImage width={60} height={60} src="/images/logo/KakaoLoginLogo.png" alt="Google Logo" onClick={notValidClick} />
           </Link>
-          <Link href="/">
-            <S.EasyLoginImage width={60} height={60} src="/images/logo/GoogleLoginLogo.png" alt="Google" />
+          <Link href="/auth/login">
+            <S.EasyLoginImage width={60} height={60} src="/images/logo/GoogleLoginLogo.png" alt="Google" onClick={notValidClick} />
           </Link>
         </S.EasyLoginArea>
         <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} />
