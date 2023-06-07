@@ -144,17 +144,17 @@
 
 
 > 대회 개최 페이지
- <img height="500px" width="100%" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/87849920/45a95651-56e8-4373-b6ea-c62f0ce7531a"/>
+ <img height="450px" width="100%" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/87849920/45a95651-56e8-4373-b6ea-c62f0ce7531a"/>
 
 
 
 > 대회 참가 페이지
- <img height="500px" width="100%" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/87849920/435f67e2-dc90-4444-bde2-09aecbe9a464"/>
+ <img height="450px" width="100%" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/87849920/435f67e2-dc90-4444-bde2-09aecbe9a464"/>
 
 
 
 > 공문서 발급 페이지
- <img height="500px" width="100%" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/87849920/95101a65-1c30-4809-81ec-ec83d598ace4"/>
+ <img height="450px" width="100%" alt="sport-it_logo" src="https://github.com/PlayMaker-S/Sports-IT-Next/assets/87849920/95101a65-1c30-4809-81ec-ec83d598ace4"/>
 
 <br/>
 
