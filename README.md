@@ -23,7 +23,7 @@
 
 <br/>
 
-## ☑️배포 주소
+## ☑️ 배포 주소
 - 웹사이트 : www.sports-it.co.kr (DNS 연결중)
 
 - 프론트엔드 배포 주소 : http://sports-it-platform.du.r.appspot.com
