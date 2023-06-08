@@ -8,11 +8,7 @@ import { loginPost } from "@component/api/account/accountApi";
 import { useRouter } from "next/router";
 import { ILoginProps } from "@component/interfaces/accountInterface";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import {
-  userEmailAtom,
-  userNameAtom,
-  userTokenAtom,
-} from "@component/atoms/tokenAtom";
+import { userEmailAtom, userNameAtom, userTokenAtom } from "@component/atoms/tokenAtom";
 import styled, { keyframes, css } from "styled-components";
 import { useEffect, useState } from "react";
 import Head from "next/head";
@@ -121,12 +117,7 @@ const Login = () => {
       <S.LoginContainer>
         <Seo title="로그인" />
         <S.ImageArea>
-          <S.LogoImage
-            width={86}
-            height={74}
-            src="/images/logo/AppLogo.png"
-            alt="App logo"
-          />
+          <S.LogoImage width={189} height={128} src="/images/logo/AppLogo_korean.png" alt="App logo" />
         </S.ImageArea>
         <S.Form onSubmit={handleSubmit(onValid, onInvalid)}>
           <S.Input
@@ -172,11 +163,7 @@ const Login = () => {
             />
           </Link> */}
         </S.EasyLoginArea>
-        <SplashImage
-          src="/images/splash.jpg"
-          alt="splash"
-          isVisible={isVisible}
-        />
+        <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} />
       </S.LoginContainer>
     </>
   );

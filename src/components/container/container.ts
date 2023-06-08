@@ -15,4 +15,5 @@ export const PageWrapper = styled.div`
   justify-content: space-between;
   position: relative;
   overflow: auto;
+  padding-bottom: 10%;
 `;

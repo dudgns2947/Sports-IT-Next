@@ -63,11 +63,7 @@ const PostFindPW = async (email: string, number: string) => {
   );
   console.log(response);
   const isSuccess = response.data.success;
-  if (isSuccess) {
-    alert(response.data.message);
-  } else {
-    alert("잘못 입력하였습니다.");
-  }
+  alert(response.data.message);
 };
 
 const FindId = () => {

@@ -17,12 +17,7 @@ const TopBar = () => {
           router.push("/contest");
         }}
       >
-        <S.SearchInput
-          value={tempKeyword}
-          onChange={(e) => setTempKeyword(e.currentTarget.value)}
-          type="text"
-          placeholder="통합 검색"
-        />
+        <S.SearchInput value={tempKeyword} onChange={(e) => setTempKeyword(e.currentTarget.value)} type="text" placeholder="통합 검색" />
         <S.SearchIcon
           onClick={() => {
             setKeyword(tempKeyword);

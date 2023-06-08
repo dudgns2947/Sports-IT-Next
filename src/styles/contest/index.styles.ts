@@ -23,13 +23,13 @@ export const TopBar = styled.div`
   top: 0%;
   display: flex;
   padding: 14px 15px;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 export const SearchForm = styled.form`
   /* width: 375px; */
-  width: 85%;
+  width: 75%;
   /* background-color: blue; */
   height: 40px;
   position: relative;
@@ -85,14 +85,14 @@ export const SearchIcon = styled(BiSearch)`
 `;
 
 export const AlarmButton = styled(FaRegBell)`
-  width: 23px;
-  height: 23px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
 `;
 
 export const MyPageButton = styled(FaRegUser)`
-  width: 22px;
-  height: 22px;
+  width: 27px;
+  height: 27px;
   cursor: pointer;
 `;
 
@@ -243,7 +243,7 @@ export const ButtonArea = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 15%;
+  width: 25%;
 `;
 
 export const SeeMoreArea = styled.div`

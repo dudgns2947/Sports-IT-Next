@@ -18,9 +18,10 @@
     "paths": {
       "@component/*": ["./src/*"],
       "@pages/*": ["./pages/*"],
-      "@public/*": ["./public/*"]
+      "@public/*": ["./public/*"],
+      "@images/*": ["./public/images/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/**/*.d.ts"],
   "exclude": ["node_modules"]
 }
