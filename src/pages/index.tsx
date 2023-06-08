@@ -126,7 +126,14 @@ export default function Home() {
             </S.IconContainer>
           </S.CustomMenu>
           <S.Divider />
-          <MainPagePost userName={userName} imageUrls={iamgeUrls} />
+          <MainPagePost
+            userName={
+              typeof window !== "undefined"
+                ? window.localStorage.getItem("name")!
+                : userName
+            }
+            imageUrls={iamgeUrls}
+          />
           <MainPageCompetition />
           {contestList
             ? contestList.map((contest) => (

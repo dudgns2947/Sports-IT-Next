@@ -75,6 +75,8 @@ const Login = () => {
       setUserRole(res.data.role[0].roleName);
       setUserName(res.data.name);
       setUserEmail(res.data.email);
+      window.localStorage.setItem("name", res.data.name);
+      window.localStorage.setItem("email", res.data.email);
       window.localStorage.setItem("role", res.data.role[0].roleName);
       console.log(userToken);
       console.log(userRole);

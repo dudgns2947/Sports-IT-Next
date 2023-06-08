@@ -1,5 +1,8 @@
 import Seo from "@component/components/Seo";
-import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
@@ -44,6 +47,8 @@ const Setting = () => {
       if (typeof window !== "undefined") {
         window.localStorage.removeItem("token");
         window.localStorage.removeItem("role");
+        window.localStorage.removeItem("name");
+        window.localStorage.removeItem("email");
         setUserToken("");
         router.reload();
         router.push("/");
