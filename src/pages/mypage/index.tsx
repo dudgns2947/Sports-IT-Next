@@ -1,4 +1,7 @@
-import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
@@ -94,8 +97,12 @@ const iconProps = [
 
 const MyPage = () => {
   const userRole = useRecoilValue(roleAtom);
-  const userName = useRecoilValue(userNameAtom);
-  const userEmail = useRecoilValue(userEmailAtom);
+  // const userName = useRecoilValue(userNameAtom);
+  // const userEmail = useRecoilValue(userEmailAtom);
+  const userName =
+    typeof window !== "undefined" && localStorage.getItem("name");
+  const userEmail =
+    typeof window !== "undefined" && localStorage.getItem("email");
   //local storage에 저장된 토큰을 가져온다.
   const token = typeof window !== "undefined" && localStorage.getItem("jwt");
   const router = useRouter();
@@ -110,8 +117,12 @@ const MyPage = () => {
         <ContentPaddingArea>
           <ProfileTab
             imgUrl="/images/example/Post1.png"
-            userName={token !== null ? userName : "로그인 후 이용할 수 있습니다."}
-            userEmail={userEmail}
+            userName={
+              token !== null
+                ? (userName as string)
+                : "로그인 후 이용할 수 있습니다."
+            }
+            userEmail={token !== null ? (userEmail as string) : ""}
           />
           {token ? (
             <>
@@ -119,14 +130,25 @@ const MyPage = () => {
                 <TransformArea>
                   <TransformTextArea>
                     <TransformBoldText>주최자로 전환</TransformBoldText>
-                    <TransformLightText>대회 개최하고 관리하기</TransformLightText>
+                    <TransformLightText>
+                      대회 개최하고 관리하기
+                    </TransformLightText>
                   </TransformTextArea>
-                  <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
+                  <TransformButton
+                    onClick={() => alert("준비중인 기능입니다 :)")}
+                  >
+                    전환
+                  </TransformButton>
                 </TransformArea>
               ) : null}
               <IconContainer>
                 {iconProps.map((iconProp, index) => (
-                  <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
+                  <CustomButton
+                    key={index}
+                    imageUrl={iconProp[0]}
+                    buttonName={iconProp[1]}
+                    routeUrl={iconProp[2]}
+                  />
                 ))}
               </IconContainer>
               <NavTitle content="나의 스포티" />
@@ -136,7 +158,9 @@ const MyPage = () => {
             </>
           ) : (
             <LoginNavArea>
-              <LoginNavButton onClick={() => router.push("/auth/login")}>로그인 페이지로 이동</LoginNavButton>
+              <LoginNavButton onClick={() => router.push("/auth/login")}>
+                로그인 페이지로 이동
+              </LoginNavButton>
             </LoginNavArea>
           )}
         </ContentPaddingArea>

@@ -32,7 +32,11 @@ const ContestDetail = () => {
   const [selectContestName, setSelectContestName] = useRecoilState(
     selectContestNameAtom
   );
-  const role = useRecoilValue(roleAtom);
+  const [hostName, setHostName] = useState("");
+  const role =
+    typeof window !== "undefined" ? window.localStorage.getItem("role") : "";
+  const name =
+    typeof window !== "undefined" ? window.localStorage.getItem("name") : "";
 
   const getDday = (timestamp: number) => {
     // 주어진 타임스탬프 값을 Date 객체로 변환
@@ -71,6 +75,7 @@ const ContestDetail = () => {
     });
     console.log(response.data);
     setContest(response.data);
+    setHostName(response.data.host.name);
     setTemplateID(response.data.templateID);
     setSelectContestID(response.data.competitionId);
     setSelectContestName(response.data.name);
@@ -151,7 +156,7 @@ const ContestDetail = () => {
           {/* <S.IconArea>
             <S.MessageIcon />
           </S.IconArea> */}
-          {role === "ROLE_INSTITUTION" ? (
+          {role === "ROLE_INSTITUTION" && hostName === name ? (
             <S.ResultButton
               onClick={() => router.push(`/contest/result/${id}`)}
             >
