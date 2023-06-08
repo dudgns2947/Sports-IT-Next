@@ -35,7 +35,7 @@ import { BoldText, BoldTextArea } from "@component/components/text/boldText";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import Head from "next/head";
@@ -83,7 +83,11 @@ const SectorAndWeight = () => {
 
   const [posterList, setPosterList] = useRecoilState(contestPosterList);
 
-  const token = window.localStorage.getItem("jwt");
+  let token: string | null = "";
+
+  if (typeof window !== "undefined") {
+    token = window.localStorage.getItem("jwt");
+  }
 
   function eventToEnglish(event: string | undefined) {
     if (event === "축구") return "SOCCER";
@@ -183,16 +187,19 @@ const SectorAndWeight = () => {
       }
     );
     console.log(response2);
-    const response3 = await baseApi.post(
-      `/image/poster/${response2.data.result.competitionId}`,
-      createFormData(posterList, "posters"),
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log(response3);
+    if (posterList.length !== 0) {
+      const response3 = await baseApi.post(
+        `/image/poster/${response2.data.result.competitionId}`,
+        createFormData(posterList, "posters"),
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response3);
+    }
+
     if (ruleFiles.length !== 0) {
       const response4 = await baseApi.post(
         `/agreement/upload/${response2.data.result.competitionId}`,

@@ -112,7 +112,7 @@ const ContestDetail = () => {
               src={
                 contest.posters[0]
                   ? contest?.posters[0].posterUrl
-                  : "/images/logo/AppLogo_black.png"
+                  : "/images/logo/replace_poster.png"
               }
             />
             <S.DetailWrapper>
