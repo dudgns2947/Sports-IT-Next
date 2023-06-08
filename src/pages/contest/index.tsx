@@ -373,9 +373,7 @@ const Index = () => {
                 contestList.map((contest) => (
                   <Contest
                     key={contest.competitionId}
-                    posterImageUrl={
-                      contest.posters[0] ? contest.posters[0].posterUrl : ""
-                    }
+                    posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
                     competitionId={contest.competitionId}
                     competitionType={contest.competitionType}
                     name={contest.name}
