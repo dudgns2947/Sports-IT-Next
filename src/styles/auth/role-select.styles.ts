@@ -14,7 +14,7 @@ export const QuestionArea = styled.div`
   display: flex;
   flex-direction: column;
   height: 40%;
-  padding-top: 10%;
+  padding-top: 5%;
 `;
 
 export const QuestionText = styled.span`
@@ -37,7 +37,8 @@ export const SpoitorButton = styled.button<IRole>`
   justify-content: flex-start;
   align-items: center;
   border: 2px solid;
-  border-color: ${(props) => (props.role === "ROLE_INSTITUTION" ? "#212121" : "#EDEDED")};
+  border-color: ${(props) =>
+    props.role === "ROLE_INSTITUTION" ? "#212121" : "#EDEDED"};
   border-radius: 12px;
   width: 100%;
   height: 100px;
@@ -47,11 +48,13 @@ export const SpoitorButton = styled.button<IRole>`
 `;
 
 export const SportyButton = styled(SpoitorButton)`
-  border-color: ${(props) => (props.role === "ROLE_USER" ? "#212121" : "#EDEDED")};
+  border-color: ${(props) =>
+    props.role === "ROLE_USER" ? "#212121" : "#EDEDED"};
 `;
 
 export const SporitorSelectIcon = styled(AiFillCheckCircle)<IRole>`
-  color: ${(props) => (props.role === "ROLE_INSTITUTION" ? "#212121" : "#EDEDED")};
+  color: ${(props) =>
+    props.role === "ROLE_INSTITUTION" ? "#212121" : "#EDEDED"};
   height: 20px;
   width: 20px;
   margin-right: 10px;
