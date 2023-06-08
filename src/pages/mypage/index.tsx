@@ -89,7 +89,7 @@ const LoginNavButton = styled.div`
 `;
 
 const iconProps = [
-  ["/images/logo/contest.png", "대회", "/mypage"],
+  ["/images/logo/contest.png", "대회", "/mypage/contest"],
   ["/images/logo/document.png", "공문서", "document"],
   ["/images/logo/coupon.png", "쿠폰", "/mypage"],
   ["/images/logo/point.png", "포인트", "/mypage"],
