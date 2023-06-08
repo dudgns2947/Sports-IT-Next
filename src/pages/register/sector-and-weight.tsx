@@ -21,7 +21,10 @@ import {
 } from "@component/atoms/contestAtom";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
-import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import AddButton from "@component/components/button/AddButton";
 import SurveyCard from "@component/components/card/SurveyCard";
 import SurveyEndCard from "@component/components/card/SurveyEndCard";
@@ -49,28 +52,38 @@ interface IResponseOne {
 }
 
 const SectorAndWeight = () => {
-  const [weightSectors, setWeightSectors] = useRecoilState(contestWeightSectors);
+  const [weightSectors, setWeightSectors] =
+    useRecoilState(contestWeightSectors);
   const [contestName, setContestName] = useRecoilState(contestNameAtom);
-  const [contestStartDate, setContestStartDate] = useRecoilState(contestStartDateAtom);
-  const [contestEndDate, setContestEndDate] = useRecoilState(contestEndDateAtom);
-  const [recruitingStart, setRecruitingStart] = useRecoilState(contestRecruitingStartAtom);
-  const [recruitingEnd, setRecruitingEnd] = useRecoilState(contestRecruitingEndAtom);
+  const [contestStartDate, setContestStartDate] =
+    useRecoilState(contestStartDateAtom);
+  const [contestEndDate, setContestEndDate] =
+    useRecoilState(contestEndDateAtom);
+  const [recruitingStart, setRecruitingStart] = useRecoilState(
+    contestRecruitingStartAtom
+  );
+  const [recruitingEnd, setRecruitingEnd] = useRecoilState(
+    contestRecruitingEndAtom
+  );
   const [totalPrize, setTotalPrize] = useRecoilState(contestTotalPrizeAtom);
   const [content, setContent] = useRecoilState(contestContentAtom);
   const [location, setLocation] = useRecoilState(contestLocationAtom);
-  const [locationDetail, setLocationDetail] = useRecoilState(contestLocationDetailAtom);
+  const [locationDetail, setLocationDetail] = useRecoilState(
+    contestLocationDetailAtom
+  );
   const [maxPlayer, setMaxPlayer] = useRecoilState(contestMaxPlayerAtom);
   const [maxViewer, setMaxViewer] = useRecoilState(contestMaxViewerAtom);
   const eventSelector = useRecoilValue(contestEventSelector);
 
-  const [ruleFileNames, setRuleFileNames] = useRecoilState(contestRuleFileNames);
+  const [ruleFileNames, setRuleFileNames] =
+    useRecoilState(contestRuleFileNames);
   const [ruleFiles, setRuleFiles] = useRecoilState(contestRuleFiles);
   const [ruleUrlNames, setRuleUrlNames] = useRecoilState(contestRuleUrlNames);
   const [ruleUrls, setRuleUrls] = useRecoilState(contestRuleUrls);
 
   const [posterList, setPosterList] = useRecoilState(contestPosterList);
 
-  const token = useRecoilValue(userTokenAtom);
+  const token = window.localStorage.getItem("jwt");
 
   function eventToEnglish(event: string | undefined) {
     if (event === "축구") return "SOCCER";
@@ -170,22 +183,29 @@ const SectorAndWeight = () => {
       }
     );
     console.log(response2);
-    const response3 = await baseApi.post(`/image/poster/${response2.data.result.competitionId}`, createFormData(posterList, "posters"), {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(response3);
-    const response4 = await baseApi.post(
-      `/agreement/upload/${response2.data.result.competitionId}`,
-      createFormData(ruleFiles, "agreements"),
+    const response3 = await baseApi.post(
+      `/image/poster/${response2.data.result.competitionId}`,
+      createFormData(posterList, "posters"),
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-    console.log(response4);
+    console.log(response3);
+    if (ruleFiles.length !== 0) {
+      const response4 = await baseApi.post(
+        `/agreement/upload/${response2.data.result.competitionId}`,
+        createFormData(ruleFiles, "agreements"),
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response4);
+    }
+
     const response5 = await baseApi.post(
       `/agreement/save/${response2.data.result.competitionId}`,
       createRuleUrlForm(ruleUrlNames, ruleUrls),
@@ -198,27 +218,27 @@ const SectorAndWeight = () => {
     console.log(response5);
   }
   // const contestStartDate
-  console.log(contestName);
-  console.log(eventSelector);
-  console.log(contestStartDate);
-  console.log(contestEndDate);
-  console.log(recruitingStart);
-  console.log(recruitingEnd);
-  console.log(maxPlayer);
-  console.log(maxViewer);
-  console.log(totalPrize);
-  console.log(content);
-  console.log(location);
-  console.log(locationDetail);
+  // console.log(contestName);
+  // console.log(eventSelector);
+  // console.log(contestStartDate);
+  // console.log(contestEndDate);
+  // console.log(recruitingStart);
+  // console.log(recruitingEnd);
+  // console.log(maxPlayer);
+  // console.log(maxViewer);
+  // console.log(totalPrize);
+  // console.log(content);
+  // console.log(location);
+  // console.log(locationDetail);
   console.log(token);
-  console.log(weightSectors);
+  // console.log(weightSectors);
 
-  console.log(ruleFileNames);
-  console.log(ruleFiles);
-  console.log(ruleUrlNames);
-  console.log(ruleUrls);
+  // console.log(ruleFileNames);
+  // console.log(ruleFiles);
+  // console.log(ruleUrlNames);
+  // console.log(ruleUrls);
 
-  console.log(posterList);
+  // console.log(posterList);
 
   // createFormData(posterList, "posters");
 
