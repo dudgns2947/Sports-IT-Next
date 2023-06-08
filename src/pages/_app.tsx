@@ -41,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     //로그인 페이지가 아니면
-    if (router.pathname !== "/auth/login" && typeof window !== "undefined") {
+    if (!router.pathname.startsWith("/auth") && typeof window !== "undefined") {
       const StoredToken = window.localStorage.getItem("jwt");
       if (!StoredToken) {
         router.push("/auth/login");
