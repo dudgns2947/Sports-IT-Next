@@ -3,7 +3,7 @@ import { AiFillCamera, AiFillCloseCircle } from "react-icons/ai";
 import { Input } from "./headcount.styles";
 
 export const LargeInput = styled.textarea`
-  width: 335px;
+  width: 100%;
   height: 400px;
   font-size: 14px;
   font-weight: 400;
