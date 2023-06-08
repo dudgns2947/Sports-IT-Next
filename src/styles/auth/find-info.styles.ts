@@ -1,6 +1,7 @@
 import { IRole } from "@component/interfaces/roleInterface";
 import { AiFillCheckCircle } from "react-icons/ai";
 import styled from "styled-components";
+import { baseApi } from "@component/api/utils/instance";
 
 export const RoleSelectContainer = styled.div`
   display: flex;
@@ -44,6 +45,7 @@ export const SpoitorButton = styled.button<IRole>`
   margin-bottom: 5px;
   cursor: pointer;
   background-color: #ffffff;
+  padding-left: 7%;
 `;
 
 export const SportyButton = styled(SpoitorButton)`
@@ -65,6 +67,7 @@ export const RoleArea = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  margin-left: 3%;
 `;
 
 export const RoleAreaTitle = styled.div``;
