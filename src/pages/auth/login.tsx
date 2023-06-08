@@ -151,7 +151,7 @@ const Login = () => {
           </Link>
         </S.AccountPanel>
         <S.EasyLoginArea>
-          <Link href="/auth/login">
+          {/* <Link href="/auth/login">
             <S.EasyLoginImage
               width={60}
               height={60}
@@ -168,7 +168,7 @@ const Login = () => {
               alt="Google"
               onClick={notValidClick}
             />
-          </Link>
+          </Link> */}
         </S.EasyLoginArea>
         <SplashImage
           src="/images/splash.jpg"
