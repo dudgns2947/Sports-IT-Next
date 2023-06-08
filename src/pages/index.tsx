@@ -10,20 +10,13 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ImageSlider from "@component/components/container/ImageSlider";
 import CustomButton from "@component/components/button/Custombutton";
-import {
-  ContentArea,
-  ContentPaddingArea,
-} from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import MainPagePost from "@component/components/container/mainpagepost";
 import qs from "qs";
 import BottomBar from "@component/components/navbar/BottomBar";
 import MainPageRecommanduser from "@component/components/container/MainPageRecommanduser";
 import MainPageCompetition from "@component/components/container/MainPageCompetition";
-import {
-  FilterType,
-  IContestInfo,
-  IContestParams,
-} from "@component/interfaces/contestInterface";
+import { FilterType, IContestInfo, IContestParams } from "@component/interfaces/contestInterface";
 import { baseApi } from "@component/api/utils/instance";
 import { useRecoilValue } from "recoil";
 import { userNameAtom, userTokenAtom } from "@component/atoms/tokenAtom";
@@ -31,11 +24,7 @@ import Contest from "@component/components/contest/Contest";
 import { useRouter } from "next/router";
 
 export default function Home() {
-  const images = [
-    "/images/logo/advertise.png",
-    "/images/logo/advertise.png",
-    "/images/logo/advertise.png",
-  ];
+  const images = ["/images/logo/advertise.png", "/images/logo/advertise.png", "/images/logo/advertise.png"];
   const iconProps = [
     ["/images/icon/Icon1.png", "대회", "contest"],
     ["/images/icon/Icon2.png", "선수등록", "/"],
@@ -48,7 +37,6 @@ export default function Home() {
     "/images/example/Post1.png",
     "/images/example/Post2.png",
   ];
-
   const [scrollposition, setScrollPosition] = useState<number>(0);
   const [contestList, setContestList] = useState<IContestInfo[]>([]);
   const token = useRecoilValue(userTokenAtom);
@@ -58,6 +46,7 @@ export default function Home() {
     "PLANNING",
     "RECRUITING",
   ]);
+
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(3);
@@ -107,20 +96,12 @@ export default function Home() {
           <S.CustomMenu>
             <S.Banner>
               {/* <ImageSlider images={images} /> */}
-              <S.AdvertiseImage
-                onClick={() => router.push("/contest")}
-                src="/images/logo/advertise.png"
-              />
+              <S.AdvertiseImage onClick={() => router.push("/contest")} src="/images/logo/advertise.png" />
             </S.Banner>
             <S.IconContainer>
               {iconProps
                 ? iconProps.map((iconProp, index) => (
-                    <CustomButton
-                      key={index}
-                      imageUrl={iconProp[0]}
-                      buttonName={iconProp[1]}
-                      routeUrl={iconProp[2]}
-                    />
+                    <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
                   ))
                 : null}
             </S.IconContainer>
@@ -135,6 +116,7 @@ export default function Home() {
                   posterImageUrl={
                     contest.posters[0] ? contest.posters[0].posterUrl : ""
                   }
+
                   competitionId={contest.competitionId}
                   competitionType={contest.competitionType}
                   name={contest.name}

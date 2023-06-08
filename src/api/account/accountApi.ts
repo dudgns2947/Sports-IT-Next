@@ -1,8 +1,9 @@
-import { ILoginProps, ISignupProps } from "@component/interfaces/accountInterface";
+import { ILoginProps, ISignupProps, ICheckEmailProps } from "@component/interfaces/accountInterface";
 import { baseApi } from "../utils/instance";
 
 const SIGNUP_URI = "signup";
 const LOGIN_URI = "authenticate";
+const CHECK_EMAIL_URI = "member/checkEmail";
 
 export const loginPost = (loginProps: ILoginProps) =>
   baseApi.post(LOGIN_URI, {
@@ -18,6 +19,11 @@ export const signupPost = (signupProps: ISignupProps) =>
     memberType: signupProps.memberType,
     phone: signupProps.phone,
     activated: signupProps.activated,
+  });
+
+export const checkEmail = (checkEmailProps: ICheckEmailProps) =>
+  baseApi.post(CHECK_EMAIL_URI, {
+    email: checkEmailProps.email,
   });
 
 // export const signupPost = async (signupProps: ISignupProps) => {

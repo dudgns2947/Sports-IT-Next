@@ -13,8 +13,8 @@ export const RoleSelectContainer = styled.div`
 export const QuestionArea = styled.div`
   display: flex;
   flex-direction: column;
-  height: 40%;
-  padding-top: 10%;
+  height: 30%;
+  padding-top: 5%;
 `;
 
 export const QuestionText = styled.span`

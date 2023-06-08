@@ -3,14 +3,9 @@ import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
-import {
-  FilterType,
-  IContestInfo,
-  IContestParams,
-  ISearchInput,
-} from "@component/interfaces/contestInterface";
+import { FilterType, IContestInfo, IContestParams, ISearchInput } from "@component/interfaces/contestInterface";
 import React, { use, useEffect, useRef, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, SetRecoilState } from "recoil";
 import { AiOutlineDown } from "react-icons/ai";
 import { FiFilter } from "react-icons/fi";
 import * as S from "../../styles/contest/index.styles";
@@ -38,16 +33,21 @@ const Options = [
 const Index = () => {
   const { register, handleSubmit, setValue, watch } = useForm<ISearchInput>();
   const [keyword, setKeyword] = useRecoilState(keywordAtom);
-  const [filterBy, setFilterBy] = useState<FilterType[]>([
-    "PLANNING",
-    "RECRUITING",
-  ]);
+  const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
   const [contestList, setContestList] = useState<IContestInfo[]>([]);
-  const token = useRecoilValue(userTokenAtom);
-  const role = useRecoilValue(roleAtom);
+  const [token, setToken] = useRecoilState(userTokenAtom);
+  const [role, setRole] = useRecoilState(roleAtom);
+  if (typeof window !== "undefined") {
+    let role: string | null = window.localStorage.getItem("role");
+    if (role === null) {
+      role = "ROLE_USER";
+    }
+    setToken(window.localStorage.getItem("token"));
+    setRole(role as "ROLE_USER" | "ROLE_INSTITUTION");
+  }
   const [isFresh, setIsFresh] = useState(true);
   const [ref, inView] = useInView();
 
@@ -96,9 +96,7 @@ const Index = () => {
     // setContestList(response.data.content);
     await console.log(contestList);
   }
-  async function getContestData(
-    offset: number = 0
-  ): Promise<{ rows: IContestInfo[]; nextOffset: number }> {
+  async function getContestData(offset: number = 0): Promise<{ rows: IContestInfo[]; nextOffset: number }> {
     const response = await baseApi.get("competitions/slice", {
       headers: {
         Authorization: `Bearer $token}`,
@@ -146,21 +144,13 @@ const Index = () => {
   const onClickTotal = () => {
     setIsFresh(true);
     setPage(0);
-    if (
-      filterBy.includes("recruitingEnd") &&
-      filterBy.includes("totalPrize") &&
-      filterBy.includes("recommend")
-    ) {
+    if (filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")) {
       let newFilterBy = [...filterBy];
       newFilterBy = newFilterBy.filter((item) => item !== "recruitingEnd");
       newFilterBy = newFilterBy.filter((item) => item !== "totalPrize");
       newFilterBy = newFilterBy.filter((item) => item !== "recommend");
       setFilterBy(newFilterBy);
-    } else if (
-      filterBy.includes("recruitingEnd") ||
-      filterBy.includes("totalPrize") ||
-      filterBy.includes("recommend")
-    ) {
+    } else if (filterBy.includes("recruitingEnd") || filterBy.includes("totalPrize") || filterBy.includes("recommend")) {
       let newFilterBy = [...filterBy];
       if (!newFilterBy.includes("recruitingEnd")) {
         newFilterBy.push("recruitingEnd");
@@ -301,11 +291,7 @@ const Index = () => {
         <Seo title="대회" />
         <S.TopBar>
           <S.SearchForm onSubmit={handleSubmit(onValid)}>
-            <S.SearchInput
-              {...register("keyword")}
-              type="text"
-              placeholder="통합 검색"
-            />
+            <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
             {/* <S.SearchButton> */}
             <S.SearchIcon
               onClick={() => {
@@ -326,11 +312,7 @@ const Index = () => {
           <S.TopWrapper>
             <S.FilterButtonArea>
               <S.TotalButton
-                active={
-                  filterBy.includes("recruitingEnd") &&
-                  filterBy.includes("totalPrize") &&
-                  filterBy.includes("recommend")
-                }
+                active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
                 onClick={onClickTotal}
               >
                 전체
@@ -407,9 +389,7 @@ const Index = () => {
             </S.ContestArea>
             <S.SeeMoreArea ref={ref}></S.SeeMoreArea>
             {role === "ROLE_INSTITUTION" ? (
-              <S.RegisterButton
-                onClick={() => router.push("register/event-select")}
-              >
+              <S.RegisterButton onClick={() => router.push("register/event-select")}>
                 <S.PlusIcons />
                 대회 개최하기
               </S.RegisterButton>

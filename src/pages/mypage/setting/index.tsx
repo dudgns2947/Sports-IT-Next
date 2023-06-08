@@ -1,8 +1,5 @@
 import Seo from "@component/components/Seo";
-import {
-  ContentArea,
-  ContentPaddingArea,
-} from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
@@ -41,6 +38,20 @@ const Setting = () => {
   const setUserToken = useSetRecoilState(userTokenAtom);
   const userName = useRecoilValue(userNameAtom);
   const userEmail = useRecoilValue(userEmailAtom);
+
+  function LogoutButton() {
+    const logout = async () => {
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("role");
+        setUserToken("");
+        router.reload();
+        router.push("/");
+      }
+    };
+    logout();
+  }
+
   return (
     <>
       <Head>
@@ -55,6 +66,7 @@ const Setting = () => {
             userName={userName}
             userEmail={userEmail}
           />
+
           <NavTitle content="계정 관리" />
           <NavTab url="/" content="비밀번호 재설정" />
           <NavTab url="/" content="휴대폰 번호 재설정" />
@@ -66,8 +78,8 @@ const Setting = () => {
           <NavTab url="/" content="회원 탈퇴하기" />
           <LogoutArea
             onClick={() => {
-              setUserToken("");
-              router.push("/auth/login");
+              LogoutButton();
+              alert("로그아웃 되었습니다.");
             }}
           >
             로그아웃
