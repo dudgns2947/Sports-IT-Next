@@ -34,6 +34,11 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/images/faviconpng.png" />
+          <meta name="apple-mobile-web-app-title" content="스포츠잇" />
+          <meta name="application-name" content="스포츠잇" />
+          <meta name="description" content="사람과 스포츠를 잇다, 스포츠잇" />
           <Script async src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" />
         </Head>
         <body>
