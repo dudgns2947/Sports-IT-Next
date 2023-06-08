@@ -45,13 +45,13 @@ const Setting = () => {
   function LogoutButton() {
     const logout = async () => {
       if (typeof window !== "undefined") {
-        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("jwt");
         window.localStorage.removeItem("role");
         window.localStorage.removeItem("name");
         window.localStorage.removeItem("email");
         setUserToken("");
-        router.reload();
-        router.push("/");
+        // router.reload();
+        router.push("/auth/login");
       }
     };
     logout();
