@@ -73,6 +73,8 @@ const Login = () => {
       console.log("Login Success !", res);
       setUserToken(res.data.token);
       setUserRole(res.data.role[0].roleName);
+      setUserName(res.data.name);
+      setUserEmail(res.data.email);
       window.localStorage.setItem("role", res.data.role[0].roleName);
       console.log(userToken);
       console.log(userRole);
@@ -150,10 +152,22 @@ const Login = () => {
         </S.AccountPanel>
         <S.EasyLoginArea>
           <Link href="/auth/login">
-            <S.EasyLoginImage width={60} height={60} src="/images/logo/KakaoLoginLogo.png" alt="Google Logo" onClick={notValidClick} />
+            <S.EasyLoginImage
+              width={60}
+              height={60}
+              src="/images/logo/KakaoLoginLogo.png"
+              alt="Google Logo"
+              onClick={notValidClick}
+            />
           </Link>
           <Link href="/auth/login">
-            <S.EasyLoginImage width={60} height={60} src="/images/logo/GoogleLoginLogo.png" alt="Google" onClick={notValidClick} />
+            <S.EasyLoginImage
+              width={60}
+              height={60}
+              src="/images/logo/GoogleLoginLogo.png"
+              alt="Google"
+              onClick={notValidClick}
+            />
           </Link>
         </S.EasyLoginArea>
         <SplashImage
