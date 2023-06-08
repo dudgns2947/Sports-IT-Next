@@ -3,7 +3,7 @@ import { GrShareOption } from "react-icons/gr";
 import { TbMessageCircle2 } from "react-icons/tb";
 
 export const ContestArea = styled.div`
-  padding-bottom: 40px;
+  padding-bottom: 20%;
 `;
 
 export const Contest = styled.div`

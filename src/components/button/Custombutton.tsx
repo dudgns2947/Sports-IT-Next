@@ -40,7 +40,11 @@ const ButtonText = styled.span`
   font-weight: bold;
 `;
 
-const CustomButton: React.FC<CustomButtonProps> = ({ imageUrl, buttonName, routeUrl }) => {
+const CustomButton: React.FC<CustomButtonProps> = ({
+  imageUrl,
+  buttonName,
+  routeUrl,
+}) => {
   const router = useRouter();
   return (
     <ButtonWrapper onClick={() => router.push(routeUrl)}>
