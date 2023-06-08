@@ -19,7 +19,7 @@ import MainPageCompetition from "@component/components/container/MainPageCompeti
 import { FilterType, IContestInfo, IContestParams } from "@component/interfaces/contestInterface";
 import { baseApi } from "@component/api/utils/instance";
 import { useRecoilValue } from "recoil";
-import { userTokenAtom } from "@component/atoms/tokenAtom";
+import { userNameAtom, userTokenAtom } from "@component/atoms/tokenAtom";
 import Contest from "@component/components/contest/Contest";
 import { useRouter } from "next/router";
 
@@ -31,13 +31,22 @@ export default function Home() {
     ["/images/icon/Icon3.png", "공문서", "document"],
     ["/images/icon/Icon4.png", "통계", "/"],
   ];
-  const iamgeUrls = ["/images/example/Post1.png", "/images/example/Post2.png", "/images/example/Post1.png", "/images/example/Post2.png"];
-  const userName = "이준수";
+  const iamgeUrls = [
+    "/images/example/Post1.png",
+    "/images/example/Post2.png",
+    "/images/example/Post1.png",
+    "/images/example/Post2.png",
+  ];
   const [scrollposition, setScrollPosition] = useState<number>(0);
   const [contestList, setContestList] = useState<IContestInfo[]>([]);
   const token = useRecoilValue(userTokenAtom);
   const [keyword, setKeyword] = useState("");
-  const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
+  const userName = useRecoilValue(userNameAtom);
+  const [filterBy, setFilterBy] = useState<FilterType[]>([
+    "PLANNING",
+    "RECRUITING",
+  ]);
+
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(3);
@@ -104,7 +113,10 @@ export default function Home() {
             ? contestList.map((contest) => (
                 <Contest
                   key={contest.competitionId}
-                  posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
+                  posterImageUrl={
+                    contest.posters[0] ? contest.posters[0].posterUrl : ""
+                  }
+
                   competitionId={contest.competitionId}
                   competitionType={contest.competitionType}
                   name={contest.name}

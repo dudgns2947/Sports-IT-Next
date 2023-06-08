@@ -10,8 +10,12 @@ import React from "react";
 import styled from "styled-components";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useSetRecoilState } from "recoil";
-import { userTokenAtom } from "@component/atoms/tokenAtom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  userEmailAtom,
+  userNameAtom,
+  userTokenAtom,
+} from "@component/atoms/tokenAtom";
 
 const LogoutArea = styled.div`
   height: 60px;
@@ -21,7 +25,7 @@ const LogoutArea = styled.div`
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
-  margin: 5px 0 10px 0;
+  margin: 15px 0 10px 0;
   background-color: black;
   color: white;
   border-radius: 5px;
@@ -32,6 +36,8 @@ const LogoutArea = styled.div`
 const Setting = () => {
   const router = useRouter();
   const setUserToken = useSetRecoilState(userTokenAtom);
+  const userName = useRecoilValue(userNameAtom);
+  const userEmail = useRecoilValue(userEmailAtom);
 
   function LogoutButton() {
     const logout = async () => {
@@ -45,6 +51,7 @@ const Setting = () => {
     };
     logout();
   }
+
   return (
     <>
       <Head>
@@ -54,7 +61,12 @@ const Setting = () => {
         <GoBackHeader title="설정" />
         <Seo title="설정" />
         <ContentPaddingArea>
-          <ProfileTab imgUrl="/images/example/Post1.png" userName="이준수" userEmail="young@naver.com" />
+          <ProfileTab
+            imgUrl="/images/example/Post1.png"
+            userName={userName}
+            userEmail={userEmail}
+          />
+
           <NavTitle content="계정 관리" />
           <NavTab url="/" content="비밀번호 재설정" />
           <NavTab url="/" content="휴대폰 번호 재설정" />

@@ -7,8 +7,12 @@ import { useMutation } from "react-query";
 import { loginPost } from "@component/api/account/accountApi";
 import { useRouter } from "next/router";
 import { ILoginProps } from "@component/interfaces/accountInterface";
-import { useRecoilState } from "recoil";
-import { userTokenAtom } from "@component/atoms/tokenAtom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  userEmailAtom,
+  userNameAtom,
+  userTokenAtom,
+} from "@component/atoms/tokenAtom";
 import styled, { keyframes, css } from "styled-components";
 import { useEffect, useState } from "react";
 import Head from "next/head";
@@ -19,6 +23,8 @@ const Login = () => {
   const [userToken, setUserToken] = useRecoilState(userTokenAtom);
   const [isVisible, setIsVisible] = useState(true);
   const [userRole, setUserRole] = useRecoilState(roleAtom);
+  const setUserName = useSetRecoilState(userNameAtom);
+  const setUserEmail = useSetRecoilState(userEmailAtom);
   const router = useRouter();
 
   const fadeOut = keyframes`
@@ -111,7 +117,12 @@ const Login = () => {
       <S.LoginContainer>
         <Seo title="로그인" />
         <S.ImageArea>
-          <S.LogoImage width={86} height={74} src="/images/logo/AppLogo.png" alt="App logo" />
+          <S.LogoImage
+            width={86}
+            height={74}
+            src="/images/logo/AppLogo.png"
+            alt="App logo"
+          />
         </S.ImageArea>
         <S.Form onSubmit={handleSubmit(onValid, onInvalid)}>
           <S.Input
@@ -120,7 +131,13 @@ const Login = () => {
             })}
             placeholder="아이디(이메일)"
           ></S.Input>
-          <S.Input {...register("pw", { required: "비밀번호는 필수 입력사항 입니다." })} type="password" placeholder="비밀번호"></S.Input>
+          <S.Input
+            {...register("pw", {
+              required: "비밀번호는 필수 입력사항 입니다.",
+            })}
+            type="password"
+            placeholder="비밀번호"
+          ></S.Input>
           <S.SubmitButton>로그인</S.SubmitButton>
         </S.Form>
         <S.AccountPanel>
@@ -139,7 +156,11 @@ const Login = () => {
             <S.EasyLoginImage width={60} height={60} src="/images/logo/GoogleLoginLogo.png" alt="Google" onClick={notValidClick} />
           </Link>
         </S.EasyLoginArea>
-        <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} />
+        <SplashImage
+          src="/images/splash.jpg"
+          alt="splash"
+          isVisible={isVisible}
+        />
       </S.LoginContainer>
     </>
   );

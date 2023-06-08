@@ -369,19 +369,23 @@ const Index = () => {
             </S.OrderArea>
 
             <S.ContestArea>
-              {contestList
-                ? contestList.map((contest) => (
-                    <Contest
-                      key={contest.competitionId}
-                      posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
-                      competitionId={contest.competitionId}
-                      competitionType={contest.competitionType}
-                      name={contest.name}
-                      host={contest.host}
-                      recruitingEnd={contest.recruitingEnd}
-                    />
-                  ))
-                : null}
+              {contestList.length !== 0 ? (
+                contestList.map((contest) => (
+                  <Contest
+                    key={contest.competitionId}
+                    posterImageUrl={
+                      contest.posters[0] ? contest.posters[0].posterUrl : ""
+                    }
+                    competitionId={contest.competitionId}
+                    competitionType={contest.competitionType}
+                    name={contest.name}
+                    host={contest.host}
+                    recruitingEnd={contest.recruitingEnd}
+                  />
+                ))
+              ) : (
+                <S.ContestNullArea>조회된 대회가 없습니다.</S.ContestNullArea>
+              )}
             </S.ContestArea>
             <S.SeeMoreArea ref={ref}></S.SeeMoreArea>
             {role === "ROLE_INSTITUTION" ? (

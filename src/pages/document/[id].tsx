@@ -1,5 +1,8 @@
 import Seo from "@component/components/Seo";
-import { ContentArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import CloseHeader from "@component/components/header/CloseHeader";
 import React from "react";
@@ -24,6 +27,12 @@ const DownloadButton = styled.button`
   color: #ffffff;
 `;
 
+const DocumentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const Document = () => {
   return (
     <>
@@ -33,10 +42,12 @@ const Document = () => {
       <PageWrapper>
         <Seo title="공문서" />
         <CloseHeader />
-        <ContentArea>
-          <DocumentImage src="/images/example/Document1.png" />
-          <DownloadButton>PDF 문서로 다운로드</DownloadButton>
-        </ContentArea>
+        <ContentPaddingArea>
+          <DocumentWrapper>
+            <DocumentImage src="/images/example/Document1.png" />
+            <DownloadButton>PDF 문서로 다운로드</DownloadButton>
+          </DocumentWrapper>
+        </ContentPaddingArea>
       </PageWrapper>
     </>
   );

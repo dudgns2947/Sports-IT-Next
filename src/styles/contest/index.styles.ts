@@ -97,6 +97,8 @@ export const MyPageButton = styled(FaRegUser)`
 `;
 
 export const ContentArea = styled.div`
+  height: 100%;
+  width: 100%;
   padding: 0 20px;
 `;
 
@@ -269,3 +271,13 @@ export const FilterIcon = styled(FiFilter)`
 export const ArrowIcon = styled(AiOutlineDown)`
   margin-left: 5px;
 `;
+
+export const ContestNullArea = styled.div`
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ContestNullText = styled.span``;

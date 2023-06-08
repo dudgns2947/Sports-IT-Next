@@ -1,5 +1,8 @@
 import Seo from "@component/components/Seo";
-import { ContentArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import ContestCard from "@component/components/contest/ContestCard";
 import Document from "@component/components/document/Document";
@@ -24,7 +27,7 @@ const ContestDocument = () => {
       <PageWrapper>
         <Seo title="공문서 발급" />
         <GoBackHeader title="공문서 발급" />
-        <ContentArea>
+        <ContentPaddingArea>
           <ContestCard
             tags={["팔씨름", "스포츠", "대회"]}
             scrap={true}
@@ -43,7 +46,7 @@ const ContestDocument = () => {
             <Document name="대회 입상 확인증" documentId={6} />
             <Document name="선수 참가 확인증" documentId={6} />
           </DocumentArea>
-        </ContentArea>
+        </ContentPaddingArea>
         <NavBar navText="선택" active={true} />
       </PageWrapper>
     </>

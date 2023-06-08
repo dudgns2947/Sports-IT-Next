@@ -1,5 +1,8 @@
 import Seo from "@component/components/Seo";
-import { ContentArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import ContestCard from "@component/components/contest/ContestCard";
 import GoBackHeader from "@component/components/header/GoBackHeader";
@@ -27,11 +30,12 @@ const BoldText = styled.span`
 
 const SearchInputArea = styled.div`
   position: relative;
+  width: 100%;
   margin-bottom: 10px;
 `;
 
 const SearchInput = styled.input`
-  width: 335px;
+  width: 100%;
   height: 45px;
   border: 1px solid #ededed;
   border-radius: 8px;
@@ -51,13 +55,17 @@ const Index = () => {
       <PageWrapper>
         <Seo title="공문서 발급" />
         <GoBackHeader title="공문서 발급" />
-        <ContentArea>
+        <ContentPaddingArea>
           <BoldTextArea>
             <BoldText>대회를</BoldText>
             <BoldText>선택해주세요.</BoldText>
           </BoldTextArea>
           <SearchInputArea>
-            <SearchInput value={keyword} placeholder="대회 검색" onChange={(e) => setKeyword(e.currentTarget.value)} />
+            <SearchInput
+              value={keyword}
+              placeholder="대회 검색"
+              onChange={(e) => setKeyword(e.currentTarget.value)}
+            />
             <SearchIcon />
           </SearchInputArea>
           <ContestArea>
@@ -78,7 +86,7 @@ const Index = () => {
               contestId={11}
             />
           </ContestArea>
-        </ContentArea>
+        </ContentPaddingArea>
       </PageWrapper>
     </>
   );
