@@ -95,6 +95,7 @@ const iconProps = [
 
 const MyPage = () => {
   const userRole = useRecoilValue(roleAtom);
+  console.log("userRole :", userRole);
   // const userName = useRecoilValue(userNameAtom);
   // const userEmail = useRecoilValue(userEmailAtom);
   const [userName, setUserName] = useState("");
@@ -141,7 +142,15 @@ const MyPage = () => {
               </TransformTextArea>
               <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
             </TransformArea>
-          ) : null}
+          ) : (
+            <TransformArea>
+              <TransformTextArea>
+                <TransformBoldText>체육인으로 전환</TransformBoldText>
+                <TransformLightText>대회 참여하기</TransformLightText>
+              </TransformTextArea>
+              <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
+            </TransformArea>
+          )}
           <IconContainer>
             {iconProps.map((iconProp, index) => (
               <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
