@@ -4,6 +4,7 @@ import {
   awardListAtom,
   awardNameListAtom,
   isRankAtom,
+  participantsAtom,
   playerListAtom,
   rankIndexAtom,
   resultSectorAtom,
@@ -28,6 +29,7 @@ import styled from "styled-components";
 import AddButton from "@component/components/button/AddButton";
 import { useRouter } from "next/router";
 import * as S from "../../../styles/contest/result-input.styles";
+import { headers } from "next/dist/client/components/headers";
 
 const dumyData = [
   {
@@ -78,6 +80,8 @@ const Result = () => {
   const [awardNameList, setAwardNameList] = useRecoilState(awardNameListAtom);
   const [awardInput, setAwardInput] = useState("");
   const [awardIndex, setAwardIndex] = useRecoilState(awardIndexAtom);
+  const [participants, setParticipants] = useRecoilState(participantsAtom);
+
   const [permit, setPermit] = useState(false);
 
   const router = useRouter();
@@ -88,9 +92,65 @@ const Result = () => {
     const response2 = await baseApi.get(
       `/competitions/template/${response1.data.templateID}`
     );
+    console.log(response1);
+    const response3 = await baseApi.get(
+      `/competitions/${response1.data.competitionId}/participants`
+    );
+    console.log(response3);
     console.log(response2.data.result.sectors);
     setSectors(response2.data.result.sectors);
+    setParticipants(response3.data.result);
     // setSector(response2.data.result.sectors[0].title);
+  }
+
+  async function postResult() {
+    if (typeof window !== "undefined") {
+      if (isRank) {
+        const response = await baseApi.post(
+          "https://sports-it-test.store/api/competitionResult",
+          {
+            info: playerList.map((player, index) => {
+              return {
+                uid: player.playerId,
+                content: `${index + 1}등`,
+                competitionId: id,
+              };
+            }),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+        console.log(response);
+        if (response.data === "Success") {
+          router.back();
+        }
+      } else {
+        const response = await baseApi.post(
+          "https://sports-it-test.store/api/competitionResult",
+          {
+            info: awardList.map((award, index) => {
+              return {
+                uid: award.playerId,
+                content: awardNameList[index],
+                competitionId: id,
+              };
+            }),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+        console.log(response);
+        if (response.data === "Success") {
+          router.back();
+        }
+      }
+    }
   }
 
   useEffect(() => {
@@ -237,7 +297,9 @@ const Result = () => {
           </S.CheckContent>
         </S.DocumentArea>
       </ContentPaddingArea>
-      <NavBar navText="입력 완료" active={permit} />
+      <div onClick={postResult}>
+        <NavBar navText="입력 완료" active={permit} />
+      </div>
     </PageWrapper>
   );
 };

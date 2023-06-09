@@ -92,7 +92,7 @@ const Result = () => {
       window.localStorage.getItem("role") === "ROLE_INSTITUTION" &&
       window.localStorage.getItem("name") === hostName ? (
         <Link href={`/contest/result-input/${id}`}>
-          <NavBar navText="입력 완료" active={true} />
+          <NavBar navText="대회 결과입력" active={true} />
         </Link>
       ) : null}
     </PageWrapper>

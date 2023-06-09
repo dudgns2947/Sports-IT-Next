@@ -9,6 +9,9 @@ import PlayerProfile from "@component/components/profile/PlayerProfile";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
+import { useRecoilState } from "recoil";
+import { participantsAtom } from "@component/atoms/contestAtom";
+import index from "@component/pages/register";
 
 const dumyData = [
   {
@@ -67,6 +70,7 @@ const SearchIcon = styled(BiSearch)`
 
 const PlayerSearch = () => {
   const [keyword, setKeyword] = useState("");
+  const [participants, setParticipants] = useRecoilState(participantsAtom);
   return (
     <PageWrapper>
       <Seo title="선수 검색" />
@@ -80,17 +84,17 @@ const PlayerSearch = () => {
           />
           <SearchIcon />
         </SearchArea>
-        {dumyData
-          ? dumyData
-              .filter((dataList) => dataList.playerName.includes(keyword))
-              .map((data) => (
+        {participants
+          ? participants
+              .filter((dataList) => dataList.userName.includes(keyword))
+              .map((data, index) => (
                 <PlayerProfile
-                  key={data.uid}
-                  profileImageUrl={data.profileImage}
-                  playerName={data.playerName}
+                  key={index}
+                  profileImageUrl={data.profileImg}
+                  playerName={data.userName}
                   uid={data.uid}
-                  sector={data.sector}
-                  weight={data.weight}
+                  sector={data.sectorTitle}
+                  weight={data.subSectorName}
                 />
               ))
           : null}
