@@ -40,12 +40,15 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
-    //로그인 페이지가 아니면
+    //로그인관련 페이지가 아니면
     if (!router.pathname.startsWith("/auth") && typeof window !== "undefined") {
       const StoredToken = window.localStorage.getItem("jwt");
       if (!StoredToken) {
         router.push("/auth/login");
         alert("로그인이 필요한 페이지입니다.");
+      } else {
+        setToken(StoredToken);
+        localStorage.setItem("jwt", StoredToken);
       }
     }
   }, []);
@@ -54,8 +57,6 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (token) {
       localStorage.setItem("jwt", token);
-    } else {
-      localStorage.removeItem("jwt");
     }
   }, [token]);
 

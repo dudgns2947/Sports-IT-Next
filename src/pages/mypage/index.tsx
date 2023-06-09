@@ -3,7 +3,7 @@ import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
 import NavBar from "@component/components/navbar/NavBar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IconContainer } from "../../styles/index.styles";
 import CustomButton from "@component/components/button/Custombutton";
 import styled from "styled-components";
@@ -15,9 +15,10 @@ import NavTab from "@component/components/navbar/NavTab";
 import ProfileTab from "@component/components/profile/ProfileTab";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { roleAtom } from "@component/atoms/roleAtom";
 import { userEmailAtom, userNameAtom } from "@component/atoms/tokenAtom";
+import { set } from "react-hook-form";
 
 const TransformArea = styled.div`
   display: flex;
@@ -96,11 +97,28 @@ const MyPage = () => {
   const userRole = useRecoilValue(roleAtom);
   // const userName = useRecoilValue(userNameAtom);
   // const userEmail = useRecoilValue(userEmailAtom);
-  const userName = typeof window !== "undefined" && localStorage.getItem("name");
-  const userEmail = typeof window !== "undefined" && localStorage.getItem("email");
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+
   //local storage에 저장된 토큰을 가져온다.
   const token = typeof window !== "undefined" && localStorage.getItem("jwt");
+  const StoredUserName = typeof window !== "undefined" && localStorage.getItem("name");
+  const StoredUserEmail = typeof window !== "undefined" && localStorage.getItem("email");
+
+  useEffect(() => {
+    setUserName((StoredUserName as string) ?? "");
+    setUserEmail((StoredUserEmail as string) ?? "");
+    //local storage에 이름 및 email 재저장
+  }, []);
+
+  if (token !== null && typeof window !== "undefined") {
+    localStorage.setItem("name", userName);
+    localStorage.setItem("email", userEmail);
+  }
+
+  console.log("userName and UesrEmail :", StoredUserName, StoredUserEmail);
   const router = useRouter();
+
   return (
     <>
       <Head>
@@ -115,37 +133,28 @@ const MyPage = () => {
             userName={token !== null ? (userName as string) : "로그인 후 이용할 수 있습니다."}
             userEmail={token !== null ? (userEmail as string) : ""}
           />
-          {token ? (
-            <>
-              {userRole === "ROLE_USER" ? (
-                <TransformArea>
-                  <TransformTextArea>
-                    <TransformBoldText>주최자로 전환</TransformBoldText>
-                    <TransformLightText>대회 개최하고 관리하기</TransformLightText>
-                  </TransformTextArea>
-                  <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
-                </TransformArea>
-              ) : null}
-              <IconContainer>
-                {iconProps.map((iconProp, index) => (
-                  <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
-                ))}
-              </IconContainer>
-              <NavTitle content="나의 스포티" />
-              <NavTab url="/" content="결제 내역" />
-              <NavTab url="/" content="스크랩" />
-              <NavTab url="/" content="프리미엄 구독 신청" />
-            </>
-          ) : (
-            <LoginNavArea>
-              <LoginNavButton onClick={() => router.push("/auth/login")}>로그인 페이지로 이동</LoginNavButton>
-            </LoginNavArea>
-          )}
+          {userRole === "ROLE_USER" ? (
+            <TransformArea>
+              <TransformTextArea>
+                <TransformBoldText>주최자로 전환</TransformBoldText>
+                <TransformLightText>대회 개최하고 관리하기</TransformLightText>
+              </TransformTextArea>
+              <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
+            </TransformArea>
+          ) : null}
+          <IconContainer>
+            {iconProps.map((iconProp, index) => (
+              <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
+            ))}
+          </IconContainer>
+          <NavTitle content="나의 스포티" />
+          <NavTab url="/" content="결제 내역" />
+          <NavTab url="/" content="스크랩" />
+          <NavTab url="/" content="프리미엄 구독 신청" />
         </ContentPaddingArea>
         <BottomBar />
       </PageWrapper>
     </>
   );
 };
-
 export default MyPage;
