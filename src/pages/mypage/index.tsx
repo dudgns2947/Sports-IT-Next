@@ -15,9 +15,10 @@ import NavTab from "@component/components/navbar/NavTab";
 import ProfileTab from "@component/components/profile/ProfileTab";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { roleAtom } from "@component/atoms/roleAtom";
 import { userEmailAtom, userNameAtom } from "@component/atoms/tokenAtom";
+import { set } from "react-hook-form";
 
 const TransformArea = styled.div`
   display: flex;
@@ -121,44 +122,39 @@ const MyPage = () => {
         <ContentPaddingArea>
           <ProfileTab
             imgUrl="/images/example/Post1.png"
-
-            userName={
-              token !== null ? userName : "로그인 후 이용할 수 있습니다."
-            }
+            userName={token !== null ? userName : "로그인 후 이용할 수 있습니다."}
             userEmail={token !== null ? userEmail : ""}
-
           />
-          {token ? (
-            <>
-              {userRole === "ROLE_USER" ? (
-                <TransformArea>
-                  <TransformTextArea>
-                    <TransformBoldText>주최자로 전환</TransformBoldText>
-                    <TransformLightText>대회 개최하고 관리하기</TransformLightText>
-                  </TransformTextArea>
-                  <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
-                </TransformArea>
-              ) : null}
-              <IconContainer>
-                {iconProps.map((iconProp, index) => (
-                  <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
-                ))}
-              </IconContainer>
-              <NavTitle content="나의 스포티" />
-              <NavTab url="/" content="결제 내역" />
-              <NavTab url="/" content="스크랩" />
-              <NavTab url="/" content="프리미엄 구독 신청" />
-            </>
+          {userRole === "ROLE_USER" ? (
+            <TransformArea>
+              <TransformTextArea>
+                <TransformBoldText>주최자로 전환</TransformBoldText>
+                <TransformLightText>대회 개최하고 관리하기</TransformLightText>
+              </TransformTextArea>
+              <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
+            </TransformArea>
           ) : (
-            <LoginNavArea>
-              <LoginNavButton onClick={() => router.push("/auth/login")}>로그인 페이지로 이동</LoginNavButton>
-            </LoginNavArea>
+            <TransformArea>
+              <TransformTextArea>
+                <TransformBoldText>체육인으로 전환</TransformBoldText>
+                <TransformLightText>대회 참여하기</TransformLightText>
+              </TransformTextArea>
+              <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
+            </TransformArea>
           )}
+          <IconContainer>
+            {iconProps.map((iconProp, index) => (
+              <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
+            ))}
+          </IconContainer>
+          <NavTitle content="나의 스포티" />
+          <NavTab url="/" content="결제 내역" />
+          <NavTab url="/" content="스크랩" />
+          <NavTab url="/" content="프리미엄 구독 신청" />
         </ContentPaddingArea>
         <BottomBar />
       </PageWrapper>
     </>
   );
 };
-
 export default MyPage;

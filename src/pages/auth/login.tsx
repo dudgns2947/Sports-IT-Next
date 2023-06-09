@@ -74,7 +74,9 @@ const Login = () => {
       window.localStorage.setItem("name", res.data.name);
       window.localStorage.setItem("email", res.data.email);
       window.localStorage.setItem("role", res.data.role[0].roleName);
-      console.log(userToken);
+      console.log("유저이름 :", window.localStorage.getItem("name"));
+      console.log("유저이메일 :", window.localStorage.getItem("email"));
+      console.log("유저권한 :", window.localStorage.getItem("role"));
       console.log(userRole);
       if (res.data.token) {
         window.localStorage.setItem("jwt", res.data.token);
