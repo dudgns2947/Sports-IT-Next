@@ -19,12 +19,13 @@ export const LogoImage = styled(Image)``;
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 327px;
+  align-items: center;
+  width: 100vw;
 `;
 
 export const Input = styled.input`
   height: 50px;
-  width: 100%;
+  width: 90%;
   padding-left: 12px;
   border: 1px solid #eaeaea;
   background-color: #f9f9fa;
@@ -35,7 +36,7 @@ export const Input = styled.input`
 
 export const SubmitButton = styled.button`
   height: 60px;
-  width: 100%;
+  width: 90%;
   padding: 5px 15px;
   background-color: #222428;
   border-radius: 12px;

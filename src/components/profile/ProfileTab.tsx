@@ -23,6 +23,7 @@ const UserName = styled.span`
   font-weight: 600;
   font-size: 20px;
   line-height: 20px;
+  margin-bottom: 5px;
   color: #212121;
 `;
 

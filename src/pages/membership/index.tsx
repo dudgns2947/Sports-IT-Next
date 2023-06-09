@@ -21,7 +21,7 @@ export default function Component() {
       <div className="w-screen  bg-black flex flex-col items-center text-white pb-32">
         <div className="w-full flex pt-5 pb-5 pr-5 pl-5">
           <div className="flex-[1]" onClick={(e) => router.back()}>
-            <Image alt="prev_gary" src={"/prev_gray.png"}></Image>
+            <Image alt="prev_gary" width={5} height={5} src={"/images/icon/prev_gary.png"}></Image>
           </div>
           <div className="flex-[9] flex justify-center" style={{ position: "relative", left: "-3vw" }}>
             멤버십 가입
@@ -48,7 +48,7 @@ export default function Component() {
                 </div>
               </div>
               <div className="">
-                <Image alt="membership" src={"/join_membership/card.png"}></Image>
+                <Image alt="membership" width={10} height={10} src={"/images/join_membership/card.png"}></Image>
               </div>
             </div>
             <div className="w-full py-4 px-4 rounded-lg bg-[#212121] flex justify-between">
@@ -61,7 +61,7 @@ export default function Component() {
                 </div>
               </div>
               <div className="">
-                <Image alt="mebership_sale" src={"/join_membership/sale.png"}></Image>
+                <Image alt="mebership_sale" width={10} height={10} src={"/images/icon/join_membership.png"}></Image>
               </div>
             </div>
             <div className="w-full py-4 px-4 rounded-lg bg-[#212121] flex justify-between">
@@ -73,7 +73,7 @@ export default function Component() {
                 </div>
               </div>
               <div className="">
-                <Image alt="membership_community" src={"/join_membership/community.png"}></Image>
+                <Image alt="membership_community" width={10} height={10} src={"/images/join_membership/community.png"}></Image>
               </div>
             </div>
           </div>
