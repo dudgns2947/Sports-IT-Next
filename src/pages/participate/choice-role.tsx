@@ -89,8 +89,8 @@ const ChoiceRole = () => {
           <NavBar
             navText="다음"
             active={
-              (applyRole === "PLAYER" && player >= 0) ||
-              (applyRole === "VIEWER" && viewer >= 0)
+              (applyRole === "PLAYER" && player > 0) ||
+              (applyRole === "VIEWER" && viewer > 0)
             }
           />
         </Link>
