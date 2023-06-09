@@ -50,7 +50,9 @@ export default function Home() {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(3);
   const router = useRouter();
-  const name = typeof window !== "undefined" ? window.localStorage.getItem("name") : "";
+
+  const [name, setName] = useState("");
+
 
   async function getContest(contestProps: IContestParams) {
     const response = await baseApi.get("competitions/slice", {
@@ -83,6 +85,12 @@ export default function Home() {
       size: size,
     });
   }, [keyword, filterBy, orderBy, page, size]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setName(window.localStorage.getItem("name") as string);
+    }
+  }, []);
 
   return (
     <>

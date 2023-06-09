@@ -94,32 +94,23 @@ const iconProps = [
 ];
 
 const MyPage = () => {
-  const userRole = useRecoilValue(roleAtom);
-  console.log("userRole :", userRole);
-  // const userName = useRecoilValue(userNameAtom);
-  // const userEmail = useRecoilValue(userEmailAtom);
+  const [userRole, setUserRole] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [token, setToken] = useState("");
 
-  //local storage에 저장된 토큰을 가져온다.
-  const token = typeof window !== "undefined" && localStorage.getItem("jwt");
-  const StoredUserName = typeof window !== "undefined" && localStorage.getItem("name");
-  const StoredUserEmail = typeof window !== "undefined" && localStorage.getItem("email");
-
-  useEffect(() => {
-    setUserName((StoredUserName as string) ?? "");
-    setUserEmail((StoredUserEmail as string) ?? "");
-    //local storage에 이름 및 email 재저장
-  }, []);
-
-  if (token !== null && typeof window !== "undefined") {
-    localStorage.setItem("name", userName);
-    localStorage.setItem("email", userEmail);
-  }
-
-  console.log("userName and UesrEmail :", StoredUserName, StoredUserEmail);
   const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setUserRole(localStorage.getItem("role")!);
+      setUserName(localStorage.getItem("name")!);
+      setUserEmail(localStorage.getItem("email")!);
+      setToken(localStorage.getItem("jwt")!);
+    }
+  }, []);
+
+  console.log(userRole);
   return (
     <>
       <Head>
@@ -131,8 +122,8 @@ const MyPage = () => {
         <ContentPaddingArea>
           <ProfileTab
             imgUrl="/images/example/Post1.png"
-            userName={token !== null ? (userName as string) : "로그인 후 이용할 수 있습니다."}
-            userEmail={token !== null ? (userEmail as string) : ""}
+            userName={token !== null ? userName : "로그인 후 이용할 수 있습니다."}
+            userEmail={token !== null ? userEmail : ""}
           />
           {userRole === "ROLE_USER" ? (
             <TransformArea>
