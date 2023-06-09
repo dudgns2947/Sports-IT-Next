@@ -32,11 +32,14 @@ import {
 } from "@component/interfaces/imp";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { applyRoleAtom } from "@component/atoms/roleAtom";
 
 const Payment = () => {
   const [insuranceCheck, setInsuranceCheck] = useState(false);
   const token = useRecoilValue(userTokenAtom);
   const [contest, setContest] = useState<IContestInfo>();
+  const competitionId = useRecoilValue(selectContestIdAtom);
+  const applyRole = useRecoilValue(applyRoleAtom);
   const selectSectors = useRecoilValue(selectSectorAtom);
   const selectSubSectors = useRecoilValue(selectSubSectorAtom);
   const selectContestId = useRecoilValue(selectContestIdAtom);
@@ -47,42 +50,207 @@ const Payment = () => {
   const [finalPayment, setFinalPayment] = useRecoilState(finalPaymentAtom);
   const [applyContestId, setApplyContestId] =
     useRecoilState(applyContestIdAtom);
+
+  const [form, setForm] = useState("");
   const router = useRouter();
 
-  function callback(response: RequestPayResponse) {
+  async function callback(response: RequestPayResponse) {
     const { success, error_msg } = response;
 
     if (success) {
       setApplyContestId(response.merchant_uid);
       setFinalPayment(response.paid_amount as number);
-      router.push("/participate/apply-success");
-      console.log(response);
-      console.log(success);
+      // router.push("/participate/apply-success");
+      console.log(finalPayment);
+      if (typeof window !== "undefined") {
+        const response3 = await baseApi.post(
+          `/payment/complete`,
+          {
+            imp_uid: "imp22742363",
+            amount: finalPayment,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+        console.log(response3);
+
+        const response4 = await baseApi.post(
+          `/competitions/${competitionId}/join?joinType=${applyRole}`,
+          {
+            uid: null,
+            competitionId: null,
+            formId: form,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+        console.log(response4);
+
+        if (response4.data.success === true) {
+          router.push("/participate/apply-success");
+        }
+      }
+
+      // console.log(response);
+      // console.log(success);
     } else {
       alert(`결제 실패: ${error_msg}`);
     }
   }
 
-  function onClickPayment() {
-    const { IMP } = window;
-    IMP?.init("imp22742363");
-
-    const data: RequestPayParams = {
-      pg: "kakaopay", // PG사 : https://portone.gitbook.io/docs/sdk/javascript-sdk/payrq#undefined-1 참고
-      pay_method: "trans", // 결제수단
-      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: finalPayment === 0 ? totalPayment : finalPayment, // 결제금액
-      name: "Sports-it 대회신청 결제", // 주문명
-      buyer_name: "홍길동", // 구매자 이름
-      buyer_tel: "01012341234", // 구매자 전화번호
-      buyer_email: "example@example", // 구매자 이메일
-      buyer_addr: "신사동 661-16", // 구매자 주소
-      buyer_postcode: "06018", // 구매자 우편번호
-      m_redirect_url:
-        "http://sports-it-platform.du.r.appspot.com/participate/apply-success",
+  async function onClickPayment() {
+    const requestData = {
+      sectors: [...new Set(selectSectors)].map((sector) => {
+        return {
+          title: sector,
+          subSectors: selectSubSectors
+            .filter((subSector) => subSector.startsWith(sector))
+            .map((item) => {
+              return {
+                name: getPostFix(item),
+                checked: true,
+              };
+            }),
+        };
+      }),
+      vat: payment * 0.1,
+      fee: payment * 0.03,
+      insurance: insuranceCheck ? 5000 : 0,
+      answers: null,
     };
+    console.log(requestData);
 
-    IMP?.request_pay(data, callback);
+    if (typeof window !== "undefined") {
+      try {
+        const response = await baseApi.post(
+          `/competitions/${competitionId}/join/format?joinType=${applyRole}`,
+          requestData,
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+        console.log(response);
+        setForm(response.data.form);
+
+        if (response.data.amount > 0) {
+          const response2 = await baseApi.post(
+            `/payment/record`,
+            {
+              imp_uid: "imp22742363",
+              amount: response.data.amount,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+              },
+            }
+          );
+          console.log(response2);
+
+          const { IMP } = window;
+          IMP?.init("imp22742363");
+
+          const data: RequestPayParams = {
+            pg: "kakaopay", // PG사 : https://portone.gitbook.io/docs/sdk/javascript-sdk/payrq#undefined-1 참고
+            pay_method: "trans", // 결제수단
+            merchant_uid: response2.data.response.merchant_uid, // 주문번호
+            amount: response2.data.response.amount, // 결제금액
+            name: "Sports-it 대회신청 결제", // 주문명
+            buyer_name: "홍길동", // 구매자 이름
+            buyer_tel: "01012341234", // 구매자 전화번호
+            buyer_email: "example@example", // 구매자 이메일
+            buyer_addr: "신사동 661-16", // 구매자 주소
+            buyer_postcode: "06018", // 구매자 우편번호
+            m_redirect_url:
+              "http://sports-it-platform.du.r.appspot.com/participate/apply-success",
+          };
+
+          IMP?.request_pay(data, callback);
+
+          // const response3 = await baseApi.post(
+          //   `/payment/complete`,
+          //   {
+          //     imp_uid: "imp22742363",
+          //     amount: response.data.amount,
+          //   },
+          //   {
+          //     headers: {
+          //       Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+          //     },
+          //   }
+          // );
+          // console.log(response3);
+
+          // const response4 = await baseApi.post(
+          //   `/competitions/${competitionId}/join?joinType=${applyRole}`,
+          //   {
+          //     uid: null,
+          //     competitionId: null,
+          //     formId: response.data.form,
+          //   },
+          //   {
+          //     headers: {
+          //       Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+          //     },
+          //   }
+          // );
+          // console.log(response4);
+
+          // if (response4.data.success === true) {
+          //   router.push("/participate/apply-success");
+          // }
+        } else {
+          const response5 = await baseApi.post(
+            `/competitions/${competitionId}/join?joinType=${applyRole}`,
+            {
+              uid: null,
+              competitionId: null,
+              formId: response.data.form,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+              },
+            }
+          );
+          console.log(response5);
+
+          if (response5.data.success === true) {
+            router.push("/participate/apply-success");
+          }
+        }
+      } catch (e: any) {
+        alert(e.response.data.message);
+      }
+    }
+
+    // const { IMP } = window;
+    // IMP?.init("imp22742363");
+
+    // const data: RequestPayParams = {
+    //   pg: "kakaopay", // PG사 : https://portone.gitbook.io/docs/sdk/javascript-sdk/payrq#undefined-1 참고
+    //   pay_method: "trans", // 결제수단
+    //   merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+    //   amount: finalPayment === 0 ? totalPayment : finalPayment, // 결제금액
+    //   name: "Sports-it 대회신청 결제", // 주문명
+    //   buyer_name: "홍길동", // 구매자 이름
+    //   buyer_tel: "01012341234", // 구매자 전화번호
+    //   buyer_email: "example@example", // 구매자 이메일
+    //   buyer_addr: "신사동 661-16", // 구매자 주소
+    //   buyer_postcode: "06018", // 구매자 우편번호
+    //   m_redirect_url:
+    //     "http://sports-it-platform.du.r.appspot.com/participate/apply-success",
+    // };
+
+    // IMP?.request_pay(data, callback);
   }
 
   async function getContestDetail(id: number) {
@@ -122,7 +290,9 @@ const Payment = () => {
         <GoBackHeader title="대회 신청" />
         <ContentPaddingArea>
           <Contest
-            posterImageUrl={contest?.posters[0].posterUrl as string}
+            posterImageUrl={
+              contest?.posters[0] ? contest?.posters[0].posterUrl : ""
+            }
             competitionId={contest?.competitionId as number}
             competitionType={contest?.competitionType as string}
             name={contest?.name as string}

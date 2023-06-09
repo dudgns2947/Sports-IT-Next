@@ -1,5 +1,5 @@
 export type RoleAtomType = "ROLE_INSTITUTION" | "ROLE_USER" | "ROLE_ADMIN";
-export type ApplyRoleAtomType = "PLAYER" | "VIEWER";
+export type ApplyRoleAtomType = "player" | "viewer";
 
 export interface IRole {
   role: RoleAtomType;
