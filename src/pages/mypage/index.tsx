@@ -6,7 +6,7 @@ import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
 import NavBar from "@component/components/navbar/NavBar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IconContainer } from "../../styles/index.styles";
 import CustomButton from "@component/components/button/Custombutton";
 import styled from "styled-components";
@@ -96,16 +96,22 @@ const iconProps = [
 ];
 
 const MyPage = () => {
-  const userRole = useRecoilValue(roleAtom);
-  // const userName = useRecoilValue(userNameAtom);
-  // const userEmail = useRecoilValue(userEmailAtom);
-  const userName =
-    typeof window !== "undefined" && localStorage.getItem("name");
-  const userEmail =
-    typeof window !== "undefined" && localStorage.getItem("email");
-  //local storage에 저장된 토큰을 가져온다.
-  const token = typeof window !== "undefined" && localStorage.getItem("jwt");
+  const [userRole, setUserRole] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [token, setToken] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setUserRole(localStorage.getItem("role")!);
+      setUserName(localStorage.getItem("name")!);
+      setUserEmail(localStorage.getItem("email")!);
+      setToken(localStorage.getItem("jwt")!);
+    }
+  }, []);
+
+  console.log(userRole);
   return (
     <>
       <Head>
@@ -118,11 +124,9 @@ const MyPage = () => {
           <ProfileTab
             imgUrl="/images/example/Post1.png"
             userName={
-              token !== null
-                ? (userName as string)
-                : "로그인 후 이용할 수 있습니다."
+              token !== null ? userName : "로그인 후 이용할 수 있습니다."
             }
-            userEmail={token !== null ? (userEmail as string) : ""}
+            userEmail={token !== null ? userEmail : ""}
           />
           {token ? (
             <>
