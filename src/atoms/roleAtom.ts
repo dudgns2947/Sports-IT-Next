@@ -11,5 +11,5 @@ export const roleAtom = atom<RoleAtomType>({
 
 export const applyRoleAtom = atom<ApplyRoleAtomType>({
   key: "applyRole",
-  default: "PLAYER",
+  default: "player",
 });
