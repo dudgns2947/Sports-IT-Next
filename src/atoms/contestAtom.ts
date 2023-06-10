@@ -1,4 +1,5 @@
 import {
+  IParticipant,
   IWeightSector,
   IWeightSectorList,
   PlayerInfo,
@@ -240,4 +241,9 @@ export const resultWeightAtom = atom({
 export const keywordAtom = atom({
   key: "keyword",
   default: "",
+});
+
+export const participantsAtom = atom<IParticipant[]>({
+  key: "participants",
+  default: [],
 });

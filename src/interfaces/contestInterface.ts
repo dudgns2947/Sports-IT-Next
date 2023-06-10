@@ -121,3 +121,11 @@ export interface PlayerInfo {
   playerName: string;
   playerId: number;
 }
+
+export interface IParticipant {
+  userName: string;
+  uid: number;
+  sectorTitle: string;
+  subSectorName: string;
+  profileImg: string;
+}

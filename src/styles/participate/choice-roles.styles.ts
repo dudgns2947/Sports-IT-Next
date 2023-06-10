@@ -15,7 +15,7 @@ export const QuestionArea = styled.div`
   display: flex;
   flex-direction: column;
   height: 40%;
-  padding: 25% 0 0 20px;
+  padding: 15% 20px 10% 20px;
 `;
 
 export const QuestionText = styled.span`
@@ -29,7 +29,7 @@ export const SelectArea = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 20px;
   height: 45%;
 `;
 
@@ -38,9 +38,9 @@ export const SpoitorButton = styled.button<IApplyRole>`
   justify-content: flex-start;
   align-items: center;
   border: 2px solid;
-  border-color: ${(props) => (props.role === "PLAYER" ? "#212121" : "#EDEDED")};
+  border-color: ${(props) => (props.role === "player" ? "#212121" : "#EDEDED")};
   border-radius: 12px;
-  width: 89%;
+  width: 100%;
   height: 100px;
   margin-bottom: 5px;
   padding-left: 20px;
@@ -49,18 +49,18 @@ export const SpoitorButton = styled.button<IApplyRole>`
 `;
 
 export const SportyButton = styled(SpoitorButton)`
-  border-color: ${(props) => (props.role === "VIEWER" ? "#212121" : "#EDEDED")};
+  border-color: ${(props) => (props.role === "viewer" ? "#212121" : "#EDEDED")};
 `;
 
 export const SporitorSelectIcon = styled(AiFillCheckCircle)<IApplyRole>`
-  color: ${(props) => (props.role === "PLAYER" ? "#212121" : "#EDEDED")};
+  color: ${(props) => (props.role === "player" ? "#212121" : "#EDEDED")};
   height: 20px;
   width: 20px;
   margin-right: 10px;
 `;
 
 export const SportySelectIcon = styled(SporitorSelectIcon)`
-  color: ${(props) => (props.role === "VIEWER" ? "#212121" : "#EDEDED")};
+  color: ${(props) => (props.role === "viewer" ? "#212121" : "#EDEDED")};
 `;
 
 export const RoleArea = styled.div`

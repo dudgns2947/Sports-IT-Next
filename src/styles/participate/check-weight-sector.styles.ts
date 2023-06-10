@@ -83,13 +83,14 @@ export const SurveyCheckBox = styled.input`
   font-weight: 600;
   appearance: none;
   border: max(1.3px, 0.1em) #eaeaea solid;
-  border-radius: 50%;
+  border-radius: 0;
   width: 1em;
   height: 1em;
   transition: border 0.1s ease-in-out;
   &:checked {
     border: 0.35em solid #fd3446;
     padding: 2px;
+    background-color: #fd3446;
   }
   &:focus-visible {
     outline-offset: max(1.5px, 0, 1em);

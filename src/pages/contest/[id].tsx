@@ -160,7 +160,7 @@ const ContestDetail = () => {
             <S.ResultButton
               onClick={() => router.push(`/contest/result/${id}`)}
             >
-              대회 결과입력
+              대회 결과확인
             </S.ResultButton>
           ) : (
             <S.ApplyButton

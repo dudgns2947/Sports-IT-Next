@@ -9,6 +9,7 @@ import NavBar from "../../components/navbar/NavBar";
 import Head from "next/head";
 import { selectContestIdAtom } from "@component/atoms/contestAtom";
 import { baseApi } from "@component/api/utils/instance";
+import { useRouter } from "next/router";
 
 const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
@@ -19,6 +20,7 @@ const ChoiceRole = () => {
   const token =
     typeof window !== "undefined" ? window.localStorage.getItem("jwt") : "";
   console.log(applyRole);
+  const router = useRouter();
 
   async function getAvailabe() {
     if (typeof window !== "undefined") {
@@ -37,6 +39,7 @@ const ChoiceRole = () => {
         setViewer(parseInt(response.data.result.availableViewer));
       } catch (e: any) {
         alert(e.response.data.message);
+        router.back();
       }
     }
   }
@@ -57,7 +60,7 @@ const ChoiceRole = () => {
         </S.QuestionArea>
         <S.SelectArea>
           <S.SpoitorButton
-            onClick={() => setApplyRole("PLAYER")}
+            onClick={() => setApplyRole("player")}
             role={applyRole}
           >
             <S.SporitorSelectIcon role={applyRole} />
@@ -72,7 +75,7 @@ const ChoiceRole = () => {
             </S.RoleArea>
           </S.SpoitorButton>
           <S.SportyButton
-            onClick={() => setApplyRole("VIEWER")}
+            onClick={() => setApplyRole("viewer")}
             role={applyRole}
           >
             <S.SportySelectIcon role={applyRole} />
@@ -89,8 +92,8 @@ const ChoiceRole = () => {
           <NavBar
             navText="다음"
             active={
-              (applyRole === "PLAYER" && player >= 0) ||
-              (applyRole === "VIEWER" && viewer >= 0)
+              (applyRole === "player" && player > 0) ||
+              (applyRole === "viewer" && viewer > 0)
             }
           />
         </Link>
