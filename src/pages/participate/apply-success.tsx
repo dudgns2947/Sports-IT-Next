@@ -4,14 +4,18 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import SuccessIcon from "../../../public/images/icon/Icon5.png";
-import { useRecoilValue } from "recoil";
-import { applyContestIdAtom, finalPaymentAtom, selectContestNameAtom } from "@component/atoms/contestAtom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  applyContestIdAtom,
+  finalPaymentAtom,
+  selectContestNameAtom,
+} from "@component/atoms/contestAtom";
 import Head from "next/head";
 
 const ApplySuccess = () => {
-  const finalPayment = useRecoilValue(finalPaymentAtom);
   const selectContestName = useRecoilValue(selectContestNameAtom);
   const applyContestId = useRecoilValue(applyContestIdAtom);
+  const [finalPayment, setFinalPayment] = useRecoilState(finalPaymentAtom);
   return (
     <>
       <Head>
@@ -19,7 +23,11 @@ const ApplySuccess = () => {
       </Head>
       <S.SuccessContainer>
         <S.QuestionArea>
-          <Image src={SuccessIcon} alt="Success Image" style={{ width: "100px", height: "94.25px", marginBottom: "20px" }} />
+          <Image
+            src={SuccessIcon}
+            alt="Success Image"
+            style={{ width: "100px", height: "94.25px", marginBottom: "20px" }}
+          />
           <S.QuestionText>대회 신청서가</S.QuestionText>
           <S.QuestionText>등록되었습니다!</S.QuestionText>
         </S.QuestionArea>
@@ -37,7 +45,7 @@ const ApplySuccess = () => {
             <S.DetailContent>{selectContestName}</S.DetailContent>
           </S.DetailContainer>
         </S.DetailArea>
-        <Link href="/contest">
+        <Link onClick={() => setFinalPayment(0)} href="/contest">
           <S.BottomFooter>확인</S.BottomFooter>
         </Link>
       </S.SuccessContainer>

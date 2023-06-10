@@ -8,12 +8,13 @@ import Contest from "@component/components/contest/Contest";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import NavBar from "@component/components/navbar/NavBar";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as S from "../../styles/participate/payment.styles";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   applyContestIdAtom,
   finalPaymentAtom,
+  participateFormAtom,
   participateSectors,
   paymentCostAtom,
   selectContestIdAtom,
@@ -33,6 +34,11 @@ import {
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { applyRoleAtom } from "@component/atoms/roleAtom";
+import {
+  appTermAtom,
+  privacyPolicyAtom,
+  thirdPartyAtom,
+} from "@component/atoms/termAtom";
 
 const Payment = () => {
   const [insuranceCheck, setInsuranceCheck] = useState(false);
@@ -40,8 +46,9 @@ const Payment = () => {
   const [contest, setContest] = useState<IContestInfo>();
   const competitionId = useRecoilValue(selectContestIdAtom);
   const applyRole = useRecoilValue(applyRoleAtom);
-  const selectSectors = useRecoilValue(selectSectorAtom);
-  const selectSubSectors = useRecoilValue(selectSubSectorAtom);
+  const [selectSectors, setSelectSectors] = useRecoilState(selectSectorAtom);
+  const [selectSubSectors, setSelectSubSectors] =
+    useRecoilState(selectSubSectorAtom);
   const selectContestId = useRecoilValue(selectContestIdAtom);
   const [payment, setPayment] = useRecoilState(paymentCostAtom);
   const [sectors, setSectors] = useRecoilState(participateSectors);
@@ -50,8 +57,12 @@ const Payment = () => {
   const [finalPayment, setFinalPayment] = useRecoilState(finalPaymentAtom);
   const [applyContestId, setApplyContestId] =
     useRecoilState(applyContestIdAtom);
+  const [appTerm, setAppTerm] = useRecoilState(appTermAtom);
+  const [privacyPolicy, setPrivacyPolicy] = useRecoilState(privacyPolicyAtom);
+  const [thirdParty, setThirdParty] = useRecoilState(thirdPartyAtom);
 
-  const [form, setForm] = useState("");
+  const ref = useRef(null);
+  const [form, setForm] = useRecoilState(participateFormAtom);
   const router = useRouter();
 
   async function callback(response: RequestPayResponse) {
@@ -60,14 +71,21 @@ const Payment = () => {
     if (success) {
       setApplyContestId(response.merchant_uid);
       setFinalPayment(response.paid_amount as number);
+      console.log(response);
+      console.log(success);
+      console.log(ref.current);
       // router.push("/participate/apply-success");
       console.log(finalPayment);
       if (typeof window !== "undefined") {
         const response3 = await baseApi.post(
           `/payment/complete`,
           {
-            imp_uid: "imp22742363",
-            amount: finalPayment,
+            imp_uid: response.imp_uid,
+            merchant_uid: response.merchant_uid,
+            amount: response.paid_amount,
+            paymentType: response.pg_provider,
+            status: response.status,
+            content: response.name,
           },
           {
             headers: {
@@ -76,13 +94,14 @@ const Payment = () => {
           }
         );
         console.log(response3);
+        console.log(ref.current);
 
         const response4 = await baseApi.post(
           `/competitions/${competitionId}/join?joinType=${applyRole}`,
           {
             uid: null,
             competitionId: null,
-            formId: form,
+            formId: ref.current,
           },
           {
             headers: {
@@ -94,6 +113,13 @@ const Payment = () => {
 
         if (response4.data.success === true) {
           router.push("/participate/apply-success");
+          setPayment(0);
+          setFinalPayment(response.paid_amount as number);
+          setAppTerm(false);
+          setPrivacyPolicy(false);
+          setThirdParty(false);
+          setSelectSectors([]);
+          setSelectSubSectors([]);
         }
       }
 
@@ -138,6 +164,8 @@ const Payment = () => {
           }
         );
         console.log(response);
+        console.log(response.data.form);
+        ref.current = response.data.form;
         setForm(response.data.form);
 
         if (response.data.amount > 0) {
@@ -225,6 +253,13 @@ const Payment = () => {
 
           if (response5.data.success === true) {
             router.push("/participate/apply-success");
+            setPayment(0);
+            setFinalPayment(response.data.amount);
+            setAppTerm(false);
+            setPrivacyPolicy(false);
+            setThirdParty(false);
+            setSelectSectors([]);
+            setSelectSubSectors([]);
           }
         }
       } catch (e: any) {
