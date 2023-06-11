@@ -85,8 +85,8 @@ const Index = () => {
       <GoBackHeader title="결제 내역" />
       <ContentPaddingArea>
         {payList.length > 0 ? (
-          payList.map((pay) => (
-            <PayRecord>
+          payList.map((pay, index) => (
+            <PayRecord key={index}>
               <PayContent>{pay.content}</PayContent>
               <PayType>결제 방식 : {pay.paymentType}</PayType>
               <PayAmount>결제 금액 : {pay.amount}원</PayAmount>
