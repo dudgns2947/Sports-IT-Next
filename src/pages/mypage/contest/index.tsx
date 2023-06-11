@@ -73,18 +73,31 @@ const Index = () => {
     if (typeof window !== "undefined") {
       console.log(window.localStorage.getItem("jwt"));
       try {
-        const response = await baseApi.get(
-          `competitions/join/slice/${window.localStorage.getItem(
-            "uid"
-          )}?page=${page}&size=${size}`,
-          {
-            headers: {
-              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-            },
-          }
-        );
-        console.log(response);
-        setMyContestList(response.data.result.content);
+        if (window.localStorage.getItem("role") === "ROLE_USER") {
+          const response = await baseApi.get(
+            `competitions/join/slice/${window.localStorage.getItem(
+              "uid"
+            )}?page=${page}&size=${size}`,
+            {
+              headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+              },
+            }
+          );
+          console.log(response);
+          setMyContestList(response.data.result.content);
+        } else {
+          const response = await baseApi.get(
+            `competitions/all/slice/${window.localStorage.getItem(
+              "uid"
+            )}?page=${page}&size=${size}`,
+            {
+              headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+              },
+            }
+          );
+        }
       } catch (e: any) {
         alert(e.response.data.message);
         router.back();
