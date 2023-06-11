@@ -1,4 +1,7 @@
-import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
@@ -122,7 +125,9 @@ const MyPage = () => {
         <ContentPaddingArea>
           <ProfileTab
             imgUrl="/images/example/Post1.png"
-            userName={token !== null ? userName : "로그인 후 이용할 수 있습니다."}
+            userName={
+              token !== null ? userName : "로그인 후 이용할 수 있습니다."
+            }
             userEmail={token !== null ? userEmail : ""}
           />
           {userRole === "ROLE_USER" ? (
@@ -131,7 +136,9 @@ const MyPage = () => {
                 <TransformBoldText>주최자로 전환</TransformBoldText>
                 <TransformLightText>대회 개최하고 관리하기</TransformLightText>
               </TransformTextArea>
-              <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
+              <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>
+                전환
+              </TransformButton>
             </TransformArea>
           ) : (
             <TransformArea>
@@ -139,18 +146,25 @@ const MyPage = () => {
                 <TransformBoldText>체육인으로 전환</TransformBoldText>
                 <TransformLightText>대회 참여하기</TransformLightText>
               </TransformTextArea>
-              <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>전환</TransformButton>
+              <TransformButton onClick={() => alert("준비중인 기능입니다 :)")}>
+                전환
+              </TransformButton>
             </TransformArea>
           )}
           <IconContainer>
             {iconProps.map((iconProp, index) => (
-              <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
+              <CustomButton
+                key={index}
+                imageUrl={iconProp[0]}
+                buttonName={iconProp[1]}
+                routeUrl={iconProp[2]}
+              />
             ))}
           </IconContainer>
           <NavTitle content="나의 스포티" />
-          <NavTab url="/" content="결제 내역" />
-          <NavTab url="/" content="스크랩" />
-          <NavTab url="/" content="프리미엄 구독 신청" />
+          <NavTab url="/mypage/payment" content="결제 내역" />
+          <NavTab url="/mypage" content="스크랩" />
+          <NavTab url="/mypage" content="프리미엄 구독 신청" />
         </ContentPaddingArea>
         <BottomBar />
       </PageWrapper>

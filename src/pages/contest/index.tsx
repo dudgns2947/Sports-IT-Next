@@ -3,7 +3,12 @@ import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
-import { FilterType, IContestInfo, IContestParams, ISearchInput } from "@component/interfaces/contestInterface";
+import {
+  FilterType,
+  IContestInfo,
+  IContestParams,
+  ISearchInput,
+} from "@component/interfaces/contestInterface";
 import React, { use, useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue, SetRecoilState } from "recoil";
 import { AiOutlineDown } from "react-icons/ai";
@@ -33,7 +38,10 @@ const Options = [
 const Index = () => {
   const { register, handleSubmit, setValue, watch } = useForm<ISearchInput>();
   const [keyword, setKeyword] = useRecoilState(keywordAtom);
-  const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
+  const [filterBy, setFilterBy] = useState<FilterType[]>([
+    "PLANNING",
+    "RECRUITING",
+  ]);
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
@@ -54,25 +62,32 @@ const Index = () => {
   const router = useRouter();
 
   async function getContest(contestProps: IContestParams) {
-    const response = await baseApi.get("competitions/slice", {
-      headers: {
-        Authorization: `Bearer ${contestProps.token}`,
-      },
-      params: {
-        keyword: contestProps.keyword,
-        filterBy: contestProps.filterBy,
-        orderBy: contestProps.orderBy,
-        page: contestProps.page,
-        size: contestProps.size,
-      },
-      paramsSerializer: (params) => {
-        return qs.stringify(params, { arrayFormat: "repeat" });
-      },
-    });
-    console.log(response);
-    // setContestList((current) => [...current, ...response.data.content]);
-    setContestList(response.data.content);
-    await console.log(contestList);
+    if (typeof window !== "undefined") {
+      try {
+        const response = await baseApi.get("competitions/slice", {
+          headers: {
+            Authorization: `Bearer ${contestProps.token}`,
+          },
+          params: {
+            keyword: contestProps.keyword,
+            filterBy: contestProps.filterBy,
+            orderBy: contestProps.orderBy,
+            page: contestProps.page,
+            size: contestProps.size,
+          },
+          paramsSerializer: (params) => {
+            return qs.stringify(params, { arrayFormat: "repeat" });
+          },
+        });
+        console.log(response);
+        // setContestList((current) => [...current, ...response.data.content]);
+        setContestList(response.data.content);
+        await console.log(contestList);
+      } catch (e) {
+        alert(e);
+        router.back();
+      }
+    }
   }
 
   async function getContestMore(contestProps: IContestParams) {
@@ -96,43 +111,6 @@ const Index = () => {
     // setContestList(response.data.content);
     await console.log(contestList);
   }
-  async function getContestData(offset: number = 0): Promise<{ rows: IContestInfo[]; nextOffset: number }> {
-    const response = await baseApi.get("competitions/slice", {
-      headers: {
-        Authorization: `Bearer $token}`,
-      },
-      params: {
-        keyword: keyword,
-        filterBy: filterBy,
-        orderBy: orderBy,
-        page: offset,
-        size: size,
-      },
-      paramsSerializer: (params) => {
-        return qs.stringify(params, { arrayFormat: "repeat" });
-      },
-    });
-    return { rows: response.data.content, nextOffset: offset + 1 };
-  }
-
-  // const { data, fetchNextPage, hasNextPage, isLoading, isError } =
-  //   useInfiniteQuery<IContestInfo[]>(
-  //     ["contests"],
-  //     ({ pageParam = 0 }) => getContestData(pageParam),
-  //     {
-  //       getNextPageParam: (lastPage, allPosts) => {
-  //         if (!lastPage.length) return;
-
-  //         return {
-  //           page: allPosts.length + 1,
-  //         };
-  //       },
-  //     }
-  //   );
-
-  // useEffect(() => {
-  //   fetchNextPage();
-  // }, [fetchNextPage]);
 
   const onValid = (data: ISearchInput) => {
     setIsFresh(true);
@@ -144,13 +122,21 @@ const Index = () => {
   const onClickTotal = () => {
     setIsFresh(true);
     setPage(0);
-    if (filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")) {
+    if (
+      filterBy.includes("recruitingEnd") &&
+      filterBy.includes("totalPrize") &&
+      filterBy.includes("recommend")
+    ) {
       let newFilterBy = [...filterBy];
       newFilterBy = newFilterBy.filter((item) => item !== "recruitingEnd");
       newFilterBy = newFilterBy.filter((item) => item !== "totalPrize");
       newFilterBy = newFilterBy.filter((item) => item !== "recommend");
       setFilterBy(newFilterBy);
-    } else if (filterBy.includes("recruitingEnd") || filterBy.includes("totalPrize") || filterBy.includes("recommend")) {
+    } else if (
+      filterBy.includes("recruitingEnd") ||
+      filterBy.includes("totalPrize") ||
+      filterBy.includes("recommend")
+    ) {
       let newFilterBy = [...filterBy];
       if (!newFilterBy.includes("recruitingEnd")) {
         newFilterBy.push("recruitingEnd");
@@ -170,85 +156,6 @@ const Index = () => {
       setFilterBy(newFilterBy);
     }
   };
-
-  // async function fetchServerPage(
-  //   limit: number,
-  //   offset: number = 0
-  // ): Promise<{ rows: string[]; nextOffset: number }> {
-  //   // const rows = new Array(limit)
-  //   //   .fill(0)
-  //   //   .map((e, i) => `Async loaded row #${i + offset + limit}`);
-
-  //   // await new Promise((r) => setTimeout(r, 500));
-  //   const response = await baseApi.get("competitions/slice", {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     params: {
-  //       keyword: keyword,
-  //       filterBy: filterBy,
-  //       orderBy: orderBy,
-  //       page: offset,
-  //       size: size,
-  //     },
-  //     paramsSerializer: (params) => {
-  //       return qs.stringify(params, { arrayFormat: "repeat" });
-  //     },
-  //   });
-  //   console.log(response);
-  //   setContestList(response.data.content);
-
-  //   return { rows, nextOffset: offset + 1 };
-  // }
-
-  // const {
-  //   status,
-  //   data,
-  //   error,
-  //   isFetching,
-  //   isFetchingNextPage,
-  //   fetchNextPage,
-  //   hasNextPage,
-  // } = useInfiniteQuery("contests", (ctx) => getContestData(ctx.pageParam), {
-  //   getNextPageParam: (_lastGroup, groups) => groups.length,
-  // });
-
-  // const allRows = data ? data.pages.flatMap((d) => d.rows) : [];
-
-  // const parentRef = useRef(null);
-
-  // const rowVirtualizer = useVirtualizer({
-  //   count: hasNextPage ? allRows.length + 1 : allRows.length,
-  //   getScrollElement: () => parentRef.current as Element | null,
-  //   estimateSize: () => 100,
-  //   overscan: 5,
-  // });
-
-  // useEffect(() => {
-  //   const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
-
-  //   if (!lastItem) {
-  //     return;
-  //   }
-  //   if (
-  //     lastItem.index >= allRows.length - 1 &&
-  //     hasNextPage &&
-  //     !isFetchingNextPage
-  //   ) {
-  //     fetchNextPage();
-  //   }
-  // }, [
-  //   hasNextPage,
-  //   fetchNextPage,
-  //   allRows.length,
-  //   isFetchingNextPage,
-  //   rowVirtualizer.getVirtualItems(),
-  //   keyword,
-  //   filterBy,
-  //   orderBy,
-  //   page,
-  //   size,
-  // ]);
 
   useEffect(() => {
     getContest({
@@ -291,7 +198,11 @@ const Index = () => {
         <Seo title="대회" />
         <S.TopBar>
           <S.SearchForm onSubmit={handleSubmit(onValid)}>
-            <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
+            <S.SearchInput
+              {...register("keyword")}
+              type="text"
+              placeholder="통합 검색"
+            />
             {/* <S.SearchButton> */}
             <S.SearchIcon
               onClick={() => {
@@ -312,7 +223,11 @@ const Index = () => {
           <S.TopWrapper>
             <S.FilterButtonArea>
               <S.TotalButton
-                active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
+                active={
+                  filterBy.includes("recruitingEnd") &&
+                  filterBy.includes("totalPrize") &&
+                  filterBy.includes("recommend")
+                }
                 onClick={onClickTotal}
               >
                 전체
@@ -373,7 +288,9 @@ const Index = () => {
                 contestList.map((contest) => (
                   <Contest
                     key={contest.competitionId}
-                    posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
+                    posterImageUrl={
+                      contest.posters[0] ? contest.posters[0].posterUrl : ""
+                    }
                     competitionId={contest.competitionId}
                     competitionType={contest.competitionType}
                     name={contest.name}
@@ -387,7 +304,9 @@ const Index = () => {
             </S.ContestArea>
             <S.SeeMoreArea ref={ref}></S.SeeMoreArea>
             {role === "ROLE_INSTITUTION" ? (
-              <S.RegisterButton onClick={() => router.push("register/event-select")}>
+              <S.RegisterButton
+                onClick={() => router.push("register/event-select")}
+              >
                 <S.PlusIcons />
                 대회 개최하기
               </S.RegisterButton>

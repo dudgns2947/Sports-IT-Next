@@ -133,6 +133,7 @@ export const IconArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const ApplyButton = styled.button`
@@ -141,6 +142,7 @@ export const ApplyButton = styled.button`
   background: #222428;
   border-radius: 6px;
   color: #ffffff;
+  cursor: pointer;
 `;
 
 export const ResultButton = styled(ApplyButton)`

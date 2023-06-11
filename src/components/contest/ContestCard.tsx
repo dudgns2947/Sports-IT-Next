@@ -5,9 +5,8 @@ import { useRouter } from "next/router";
 
 const Contest = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 20px 0;
-  cursor: pointer;
+  /* flex-direction: column; */
+  align-items: center;
 `;
 
 const ContestTopArea = styled.div`
@@ -71,6 +70,19 @@ const ScrapActiveIcon = styled(AiFillHeart)`
   color: #fd3446;
 `;
 
+const ContestImage = styled.img`
+  width: 72px;
+  height: 96px;
+  margin-right: 17px;
+`;
+
+const RightArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  cursor: pointer;
+`;
+
 interface ContestCardProps {
   tags: string[];
   scrap: boolean;
@@ -78,6 +90,7 @@ interface ContestCardProps {
   host: string;
   date: string;
   contestId: number;
+  imageUrl?: string;
 }
 
 const ContestCard = ({
@@ -87,21 +100,25 @@ const ContestCard = ({
   host,
   date,
   contestId,
+  imageUrl,
 }: ContestCardProps) => {
   const router = useRouter();
   return (
-    <Contest onClick={() => router.push(`/document/contest/${contestId}`)}>
-      <ContestTopArea>
-        <TagArea>
-          {tags.map((tag, index) => (
-            <Tag key={index}>{tag}</Tag>
-          ))}
-        </TagArea>
-        {scrap ? <ScrapActiveIcon /> : <ScrapIcon />}
-      </ContestTopArea>
-      <ContestTitle>{title}</ContestTitle>
-      <ContestHost>{host}</ContestHost>
-      <ContestDate>{date}</ContestDate>
+    <Contest onClick={() => router.push(`/contest/${contestId}`)}>
+      <ContestImage src={imageUrl} />
+      <RightArea>
+        <ContestTopArea>
+          <TagArea>
+            {tags.map((tag, index) => (
+              <Tag key={index}>{tag}</Tag>
+            ))}
+          </TagArea>
+          {/* {scrap ? <ScrapActiveIcon /> : <ScrapIcon />} */}
+        </ContestTopArea>
+        <ContestTitle>{title}</ContestTitle>
+        <ContestHost>{host}</ContestHost>
+        <ContestDate>{date}</ContestDate>
+      </RightArea>
     </Contest>
   );
 };
