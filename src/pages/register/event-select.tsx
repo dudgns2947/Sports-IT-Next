@@ -3,17 +3,54 @@ import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import React, { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { SelectArea, Text, TextArea } from "../../styles/auth/event-select.styles";
+import {
+  SelectArea,
+  Text,
+  TextArea,
+} from "../../styles/auth/event-select.styles";
 import EventSelectButton from "@component/components/button/EventSelectButton";
 import Link from "next/link";
 import NavBar from "@component/components/navbar/NavBar";
 import * as S from "../../styles/register/contest-info.styles";
-import { contestEventAtom, contestEventCountAtom, contestEventSelector } from "@component/atoms/contestAtom";
+import {
+  contestEventAtom,
+  contestEventCountAtom,
+  contestEventSelector,
+} from "@component/atoms/contestAtom";
 import Head from "next/head";
+import styled from "styled-components";
+import { useRouter } from "next/router";
+
+const LinkText = styled.span`
+  font-size: 14px;
+  color: #e05e6d;
+  border-bottom: 1px solid #e05e6d;
+  cursor: pointer;
+`;
+
+export const BottomArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  margin-bottom: 10%;
+`;
+
+interface BottomTextProps {
+  count: number;
+}
+
+export const BottomText = styled.span<BottomTextProps>`
+  /* color: #747474; */
+  color: ${(props) => (props.count > 5 ? "#E05E6D" : "#747474")};
+  margin-bottom: 7px;
+`;
 
 const EventSelect = () => {
   const [contestEvents, setContestEvents] = useRecoilState(contestEventAtom);
   const [count, setCount] = useRecoilState(contestEventCountAtom);
+  const router = useRouter();
 
   console.log(contestEvents);
   return (
@@ -39,6 +76,12 @@ const EventSelect = () => {
             ></EventSelectButton>
           ))}
         </SelectArea>
+        <BottomArea>
+          <BottomText count={count}>종목을 1개 선택해주세요.</BottomText>
+          <LinkText onClick={() => router.push("/event-apply")}>
+            찾으시는 종목이 없으신가요?
+          </LinkText>
+        </BottomArea>
         <Link href="/register/headcount">
           <NavBar navText="다음" active={count === 1 ? true : false} />
         </Link>

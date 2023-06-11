@@ -167,6 +167,7 @@ const Payment = () => {
         console.log(response.data.form);
         ref.current = response.data.form;
         setForm(response.data.form);
+        window.localStorage.setItem("form", response.data.form);
 
         if (response.data.amount > 0) {
           const response2 = await baseApi.post(
@@ -182,6 +183,12 @@ const Payment = () => {
             }
           );
           console.log(response2);
+
+          setFinalPayment(response2.data.response.amount);
+          window.localStorage.setItem(
+            "finalPayment",
+            response2.data.response.amount
+          );
 
           const { IMP } = window;
           IMP?.init("imp22742363");

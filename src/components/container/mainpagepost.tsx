@@ -21,6 +21,7 @@ const Header = styled.div`
 
 const SliderContainer = styled.div`
   width: 100%;
+  display: flex;
   overflow-x: scroll;
   white-space: nowrap;
   margin-top: 20px;
@@ -52,7 +53,11 @@ const MainPagePost: React.FC<MainPagePostProps> = ({ userName, imageUrls }) => {
         <AiOutlineRight />
       </Header>
       <SliderContainer onScroll={handleScroll}>
-        {imageUrls ? imageUrls.map((imageUrl, index) => <SliderImage key={index} src={imageUrl} />) : null}
+        {imageUrls
+          ? imageUrls.map((imageUrl, index) => (
+              <SliderImage key={index} src={imageUrl} />
+            ))
+          : null}
       </SliderContainer>
     </Wrapper>
   );
