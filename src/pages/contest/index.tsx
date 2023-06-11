@@ -3,12 +3,7 @@ import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
-import {
-  FilterType,
-  IContestInfo,
-  IContestParams,
-  ISearchInput,
-} from "@component/interfaces/contestInterface";
+import { FilterType, IContestInfo, IContestParams, ISearchInput } from "@component/interfaces/contestInterface";
 import React, { use, useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue, SetRecoilState } from "recoil";
 import { AiOutlineDown } from "react-icons/ai";
@@ -38,10 +33,7 @@ const Options = [
 const Index = () => {
   const { register, handleSubmit, setValue, watch } = useForm<ISearchInput>();
   const [keyword, setKeyword] = useRecoilState(keywordAtom);
-  const [filterBy, setFilterBy] = useState<FilterType[]>([
-    "PLANNING",
-    "RECRUITING",
-  ]);
+  const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
@@ -122,21 +114,13 @@ const Index = () => {
   const onClickTotal = () => {
     setIsFresh(true);
     setPage(0);
-    if (
-      filterBy.includes("recruitingEnd") &&
-      filterBy.includes("totalPrize") &&
-      filterBy.includes("recommend")
-    ) {
+    if (filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")) {
       let newFilterBy = [...filterBy];
       newFilterBy = newFilterBy.filter((item) => item !== "recruitingEnd");
       newFilterBy = newFilterBy.filter((item) => item !== "totalPrize");
       newFilterBy = newFilterBy.filter((item) => item !== "recommend");
       setFilterBy(newFilterBy);
-    } else if (
-      filterBy.includes("recruitingEnd") ||
-      filterBy.includes("totalPrize") ||
-      filterBy.includes("recommend")
-    ) {
+    } else if (filterBy.includes("recruitingEnd") || filterBy.includes("totalPrize") || filterBy.includes("recommend")) {
       let newFilterBy = [...filterBy];
       if (!newFilterBy.includes("recruitingEnd")) {
         newFilterBy.push("recruitingEnd");
@@ -198,11 +182,7 @@ const Index = () => {
         <Seo title="대회" />
         <S.TopBar>
           <S.SearchForm onSubmit={handleSubmit(onValid)}>
-            <S.SearchInput
-              {...register("keyword")}
-              type="text"
-              placeholder="통합 검색"
-            />
+            <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
             {/* <S.SearchButton> */}
             <S.SearchIcon
               onClick={() => {
@@ -223,11 +203,7 @@ const Index = () => {
           <S.TopWrapper>
             <S.FilterButtonArea>
               <S.TotalButton
-                active={
-                  filterBy.includes("recruitingEnd") &&
-                  filterBy.includes("totalPrize") &&
-                  filterBy.includes("recommend")
-                }
+                active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
                 onClick={onClickTotal}
               >
                 전체
@@ -288,9 +264,7 @@ const Index = () => {
                 contestList.map((contest) => (
                   <Contest
                     key={contest.competitionId}
-                    posterImageUrl={
-                      contest.posters[0] ? contest.posters[0].posterUrl : ""
-                    }
+                    posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
                     competitionId={contest.competitionId}
                     competitionType={contest.competitionType}
                     name={contest.name}
@@ -304,9 +278,7 @@ const Index = () => {
             </S.ContestArea>
             <S.SeeMoreArea ref={ref}></S.SeeMoreArea>
             {role === "ROLE_INSTITUTION" ? (
-              <S.RegisterButton
-                onClick={() => router.push("register/event-select")}
-              >
+              <S.RegisterButton onClick={() => router.push("register/event-select")}>
                 <S.PlusIcons />
                 대회 개최하기
               </S.RegisterButton>

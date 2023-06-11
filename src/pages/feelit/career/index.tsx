@@ -4,6 +4,8 @@ import { NextComponentType } from "next";
 import { useRouter } from "next/router";
 import z from "zod";
 import GoBackHeader from "@component/components/header/GoBackHeader";
+import useSWR from "swr";
+import { baseApi } from "@component/api/utils/instance";
 
 export const carrerType = z.array(z.object({ title: z.string(), duration: z.string() }));
 export type careerType = z.infer<typeof carrerType>;

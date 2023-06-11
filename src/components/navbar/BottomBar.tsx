@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import styled from "styled-components";
 import { RiHomeLine } from "react-icons/ri";
 import { AiOutlineTrophy } from "react-icons/ai";
@@ -6,6 +6,12 @@ import { MdOutlineNumbers } from "react-icons/md";
 import { TbMessageCircle2 } from "react-icons/tb";
 import { HiOutlineSquares2X2 } from "react-icons/hi2";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { userIdAtom } from "@component/atoms/tokenAtom";
+import { roleAtom } from "@component/atoms/roleAtom";
+import { set } from "react-hook-form";
+import { ApplyRoleAtomType, RoleAtomType } from "@component/interfaces/roleInterface";
 
 const BottomBarWrapper = styled.div`
   display: flex;
@@ -70,7 +76,19 @@ const SquaresIcon = styled(HiOutlineSquares2X2)`
   margin-bottom: 3px;
 `;
 
+// const UserID = typeof window !== "undefined" && window.localStorage.getItem("userId");
+
 const BottomBar = () => {
+  const [UserID, setUserID] = useRecoilState(userIdAtom);
+  const [UserRole, setUserRole] = useRecoilState(roleAtom);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setUserID(localStorage.getItem("uid"));
+      setUserRole(localStorage.getItem("role") as RoleAtomType);
+    }
+  }, []);
+
   const router = useRouter();
   return (
     <BottomBarWrapper>
@@ -98,7 +116,14 @@ const BottomBar = () => {
         <MessageIcon />
         <NavText>메시지</NavText>
       </NavCard>
-      <NavCard onClick={() => alert("준비중인 기능입니다 :)")}>
+      <NavCard
+        onClick={() => {
+          // router.push(`/feelit/${UserID}`);
+          {
+            UserRole === "ROLE_INSTITUTION" ? router.push(`/feelit/123456`) : router.push(`/feelit/123457`);
+          } // 임시로 123456, 123457로 설정
+        }}
+      >
         <SquaresIcon />
         <NavText>FEEL IT</NavText>
       </NavCard>

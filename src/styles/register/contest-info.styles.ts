@@ -8,6 +8,10 @@ export const SmallInput = styled(Input)`
 
 export const LargeInput = styled(Input)`
   height: 100%;
+  color: black;
+  ::placeholder {
+    color: #aeaeae;
+  }
 `;
 
 export const SmallInputWrapper = styled.div``;

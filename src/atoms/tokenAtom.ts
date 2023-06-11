@@ -14,3 +14,8 @@ export const userEmailAtom = atom({
   key: "userEmail",
   default: "",
 });
+
+export const userIdAtom = atom<null | string>({
+  key: "userId",
+  default: "",
+});

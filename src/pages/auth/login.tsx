@@ -8,11 +8,7 @@ import { loginPost } from "@component/api/account/accountApi";
 import { useRouter } from "next/router";
 import { ILoginProps } from "@component/interfaces/accountInterface";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import {
-  userEmailAtom,
-  userNameAtom,
-  userTokenAtom,
-} from "@component/atoms/tokenAtom";
+import { userEmailAtom, userNameAtom, userTokenAtom, userIdAtom } from "@component/atoms/tokenAtom";
 import styled, { keyframes, css } from "styled-components";
 import { useEffect, useState } from "react";
 import Head from "next/head";
@@ -23,6 +19,7 @@ const Login = () => {
   const [userToken, setUserToken] = useRecoilState(userTokenAtom);
   const [isVisible, setIsVisible] = useState(true);
   const [userRole, setUserRole] = useRecoilState(roleAtom);
+  const [userID, setUserID] = useRecoilState(userIdAtom);
   const setUserName = useSetRecoilState(userNameAtom);
   const setUserEmail = useSetRecoilState(userEmailAtom);
   const router = useRouter();
@@ -75,6 +72,7 @@ const Login = () => {
       setUserRole(res.data.role[0].roleName);
       setUserName(res.data.name);
       setUserEmail(res.data.email);
+      setUserID(res.data.uid);
       window.localStorage.setItem("name", res.data.name);
       window.localStorage.setItem("email", res.data.email);
       window.localStorage.setItem("role", res.data.role[0].roleName);
@@ -82,6 +80,7 @@ const Login = () => {
       console.log("유저이름 :", window.localStorage.getItem("name"));
       console.log("유저이메일 :", window.localStorage.getItem("email"));
       console.log("유저권한 :", window.localStorage.getItem("role"));
+      console.log("유저아이디 :", window.localStorage.getItem("uid"));
       console.log(userRole);
       if (res.data.token) {
         window.localStorage.setItem("jwt", res.data.token);
@@ -124,12 +123,7 @@ const Login = () => {
       <S.LoginContainer>
         <Seo title="로그인" />
         <S.ImageArea>
-          <S.LogoImage
-            width={189}
-            height={128}
-            src="/images/logo/AppLogo_korean.png"
-            alt="App logo"
-          />
+          <S.LogoImage width={189} height={128} src="/images/logo/AppLogo_korean.png" alt="App logo" />
         </S.ImageArea>
         <S.Form onSubmit={handleSubmit(onValid, onInvalid)}>
           <S.Input
@@ -175,11 +169,7 @@ const Login = () => {
             />
           </Link> */}
         </S.EasyLoginArea>
-        <SplashImage
-          src="/images/splash.jpg"
-          alt="splash"
-          isVisible={isVisible}
-        />
+        <SplashImage src="/images/splash.jpg" alt="splash" isVisible={isVisible} />
       </S.LoginContainer>
     </>
   );

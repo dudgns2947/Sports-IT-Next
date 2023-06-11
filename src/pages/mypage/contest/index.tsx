@@ -74,29 +74,19 @@ const Index = () => {
       console.log(window.localStorage.getItem("jwt"));
       try {
         if (window.localStorage.getItem("role") === "ROLE_USER") {
-          const response = await baseApi.get(
-            `competitions/join/slice/${window.localStorage.getItem(
-              "uid"
-            )}?page=${page}&size=${size}`,
-            {
-              headers: {
-                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-              },
-            }
-          );
+          const response = await baseApi.get(`competitions/join/slice/${window.localStorage.getItem("uid")}?page=${page}&size=${size}`, {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          });
           console.log(response);
           setMyContestList(response.data.result.content);
         } else {
-          const response = await baseApi.get(
-            `competitions/all/slice/${window.localStorage.getItem(
-              "uid"
-            )}?page=${page}&size=${size}`,
-            {
-              headers: {
-                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-              },
-            }
-          );
+          const response = await baseApi.get(`competitions/all/slice/${window.localStorage.getItem("uid")}?page=${page}&size=${size}`, {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          });
         }
       } catch (e: any) {
         alert(e.response.data.message);
@@ -122,11 +112,7 @@ const Index = () => {
       <GoBackHeader title="내가 참가한 대회" />
       <ContentPaddingArea>
         <SearchInputArea>
-          <SearchInput
-            value={keyword}
-            placeholder="대회 검색"
-            onChange={(e) => setKeyword(e.currentTarget.value)}
-          />
+          <SearchInput value={keyword} placeholder="대회 검색" onChange={(e) => setKeyword(e.currentTarget.value)} />
           <SearchIcon />
         </SearchInputArea>
         {/* <ContestArea> */}
@@ -143,9 +129,7 @@ const Index = () => {
                 date={getFormattedDate(myContest.joinDate)}
                 contestId={myContest.competition.competitionId}
                 imageUrl={
-                  myContest.competition.posters.length > 0
-                    ? myContest.competition.posters[0].posterUrl
-                    : "/images/logo/replace_poster.png"
+                  myContest.competition.posters.length > 0 ? myContest.competition.posters[0].posterUrl : "/images/logo/replace_poster.png"
                 }
               />
             ))

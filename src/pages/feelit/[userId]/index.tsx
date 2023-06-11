@@ -6,6 +6,8 @@ import { organizationType, userTypeOrganization, userTypeSportsman, usersDbMock 
 import { Sportsman } from "@component/components/feel-it/Sportsman";
 import { Organization } from "@component/components/feel-it/Organization";
 import { tabForOrganization, tabForSportsman } from "@component/libs/static_data";
+import useSWR from "swr";
+import { baseApi } from "@component/api/utils/instance";
 
 type userlinksType = {
   type: string;
@@ -45,9 +47,9 @@ export default function Component() {
     if (!userdata) {
       throw new Error("유저 아이디를 찾을 수 없음");
     }
-    if (userdata && userdata.userType === "체육인") {
+    if (userdata && userdata.userType === "ROLE_USER") {
       setCurrentTab(tabForSportsman.at(0)!.name as tabForSportsmanType);
-    } else if (userdata && userdata.userType === "주최자") {
+    } else if (userdata && userdata.userType === "ROLE_INSTITUTION") {
       setCurrentTab(tabForOrganization.at(0)!.name as tabForOrganizationType);
     } else {
       throw new Error("유저 데이터포멧 이상");
@@ -69,7 +71,7 @@ export default function Component() {
   const changeDefaultTab = (tabname: everyTabType) => setCurrentTab(tabname);
 
   const pageUserInfoLatest =
-    pageUserInfo?.userType === "주최자" && newAddress && latiuteUpdated && longituteUpdated && AddressNameUpdated
+    pageUserInfo?.userType === "ROLE_INSTITUTION" && newAddress && latiuteUpdated && longituteUpdated && AddressNameUpdated
       ? {
           ...pageUserInfo,
           address: newAddress,
@@ -79,9 +81,9 @@ export default function Component() {
         }
       : pageUserInfo;
 
-  const isOrganizationPage = status === "success" && pageUserInfoLatest && pageUserInfoLatest.userType === "주최자" && currentTab;
+  const isOrganizationPage = status === "success" && pageUserInfoLatest && pageUserInfoLatest.userType === "ROLE_INSTITUTION" && currentTab;
 
-  const isSportsmanPage = status === "success" && pageUserInfoLatest && pageUserInfoLatest.userType === "체육인" && currentTab;
+  const isSportsmanPage = status === "success" && pageUserInfoLatest && pageUserInfoLatest.userType === "ROLE_USER" && currentTab;
 
   console.log(pageUserInfoLatest);
 

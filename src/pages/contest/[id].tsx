@@ -1,10 +1,7 @@
 import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
-import {
-  ContentArea,
-  ContentPaddingArea,
-} from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import Contest from "@component/components/contest/Contest";
 import ContestInfo from "@component/components/contest/ContestInfo";
@@ -14,12 +11,10 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import * as S from "../../styles/contest/[id].styles";
-import {
-  selectContestIdAtom,
-  selectContestNameAtom,
-  templateIdAtom,
-} from "@component/atoms/contestAtom";
+import { selectContestIdAtom, selectContestNameAtom, templateIdAtom } from "@component/atoms/contestAtom";
 import { roleAtom } from "@component/atoms/roleAtom";
+import { Map } from "@component/components/map/Map";
+import { fetchGeoCoding } from "@component/components/map/AddressToGeo";
 import { async } from "rxjs";
 
 const ContestDetail = () => {
@@ -29,16 +24,13 @@ const ContestDetail = () => {
   const [joined, setJoined] = useState(false);
   const [contest, setContest] = useState<IContestInfo>();
   const [templateID, setTemplateID] = useRecoilState(templateIdAtom);
-  const [selectContestID, setSelectContestID] =
-    useRecoilState(selectContestIdAtom);
-  const [selectContestName, setSelectContestName] = useRecoilState(
-    selectContestNameAtom
-  );
+  const [selectContestID, setSelectContestID] = useRecoilState(selectContestIdAtom);
+  const [selectContestName, setSelectContestName] = useRecoilState(selectContestNameAtom);
   const [hostName, setHostName] = useState("");
-  const role =
-    typeof window !== "undefined" ? window.localStorage.getItem("role") : "";
-  const name =
-    typeof window !== "undefined" ? window.localStorage.getItem("name") : "";
+  const role = typeof window !== "undefined" ? window.localStorage.getItem("role") : "";
+  const name = typeof window !== "undefined" ? window.localStorage.getItem("name") : "";
+  const [latitude, setLatitude] = useState<string>("") || "";
+  const [longitude, setLongitude] = useState<string>("") || "";
 
   const getDday = (timestamp: number) => {
     // 주어진 타임스탬프 값을 Date 객체로 변환
@@ -92,6 +84,7 @@ const ContestDetail = () => {
           response.data.result.name
         );
         setJoined(response.data.joined);
+        return response.data.result;
       }
     } catch (e) {
       alert(e);
@@ -121,7 +114,7 @@ const ContestDetail = () => {
     try {
       if (typeof window !== "undefined") {
         await navigator.clipboard.writeText(window.location.href);
-        alert("URL이 클립보드 복사 되었습니다 !");
+        alert("클립보드에 URL이 복사 되었습니다 !");
       }
     } catch (e) {
       alert(e);
@@ -133,8 +126,26 @@ const ContestDetail = () => {
       const { id } = router.query;
       if (!id) return;
       getContestDetail(parseInt(id as string));
+      getCoordinates();
     }
   }, [router.isReady]);
+
+  async function getCoordinates() {
+    if (contest?.location) {
+      const coordinates = await fetchGeoCoding(contest?.location);
+      console.log(coordinates);
+      if (coordinates && coordinates.x && coordinates.y) {
+        console.log(coordinates.x, coordinates.y);
+        setLatitude(coordinates.x);
+        setLongitude(coordinates.y);
+      }
+    }
+  }
+
+  useEffect(() => {
+    getCoordinates();
+    console.log("coordinate :", latitude, longitude);
+  }, [contest?.location, latitude, longitude]);
 
   return (
     <PageWrapper>
@@ -145,9 +156,7 @@ const ContestDetail = () => {
           <S.ContestArea>
             <S.ContestInfo>
               <S.ContestTagArea>
-                {contest.competitionType === "FREE" ? null : (
-                  <S.PremiumTag>프리미엄</S.PremiumTag>
-                )}
+                {contest.competitionType === "FREE" ? null : <S.PremiumTag>프리미엄</S.PremiumTag>}
                 <S.Tag>스포츠</S.Tag>
                 <S.Tag>대회</S.Tag>
               </S.ContestTagArea>
@@ -156,26 +165,14 @@ const ContestDetail = () => {
                 <S.ContestHostName>{contest.host.name}</S.ContestHostName>
                 <S.PremiumLogo src="/images/logo/premiumLogo.png" />
               </S.ContestHostArea>
-              <S.ContestDday>
-                {getDday(Date.parse(contest.endDate) / 1000)}
-              </S.ContestDday>
+              <S.ContestDday>{getDday(Date.parse(contest.endDate) / 1000)}</S.ContestDday>
             </S.ContestInfo>
-            <S.PosterImage
-              src={
-                contest.posters[0]
-                  ? contest?.posters[0].posterUrl
-                  : "/images/logo/replace_poster.png"
-              }
-            />
+            <S.PosterImage src={contest.posters[0] ? contest?.posters[0].posterUrl : "/images/logo/replace_poster.png"} />
             <S.DetailWrapper>
               <S.DetailTitle>모집 기간</S.DetailTitle>
               <S.DetailContent>
-                {getMonth(contest.recruitingStart)}월{" "}
-                {getDay(contest.recruitingStart)}일 (
-                {getDayOfWeek(contest.recruitingStart)}) ~{" "}
-                {getMonth(contest.recruitingEnd)}월{" "}
-                {getDay(contest.recruitingEnd)}일 (
-                {getDayOfWeek(contest.recruitingEnd)})
+                {getMonth(contest.recruitingStart)}월 {getDay(contest.recruitingStart)}일 ({getDayOfWeek(contest.recruitingStart)}) ~{" "}
+                {getMonth(contest.recruitingEnd)}월 {getDay(contest.recruitingEnd)}일 ({getDayOfWeek(contest.recruitingEnd)})
               </S.DetailContent>
             </S.DetailWrapper>
             <S.DetailWrapper>
@@ -187,6 +184,7 @@ const ContestDetail = () => {
               <S.DetailContent>
                 {contest.location} {contest.locationDetail}
               </S.DetailContent>
+              <Map latitude={parseFloat("127.0403496")} longitude={parseFloat("37.2815219")} addressName={contest?.location!} />
             </S.DetailWrapper>
             <S.DetailWrapper>
               <S.DetailTitle>상세 정보</S.DetailTitle>
@@ -204,21 +202,11 @@ const ContestDetail = () => {
             <S.MessageIcon />
           </S.IconArea> */}
           {role === "ROLE_INSTITUTION" && hostName === name ? (
-            <S.ResultButton
-              onClick={() => router.push(`/contest/result/${id}`)}
-            >
-              대회 결과확인
-            </S.ResultButton>
+            <S.ResultButton onClick={() => router.push(`/contest/result/${id}`)}>대회 결과확인</S.ResultButton>
           ) : joined ? (
-            <S.ApplyButton onClick={() => cencelContest()}>
-              대회 취소하기
-            </S.ApplyButton>
+            <S.ApplyButton onClick={() => cencelContest()}>대회 취소하기</S.ApplyButton>
           ) : (
-            <S.ApplyButton
-              onClick={() => router.push("/participate/choice-role")}
-            >
-              대회 신청하기
-            </S.ApplyButton>
+            <S.ApplyButton onClick={() => router.push("/participate/choice-role")}>대회 신청하기</S.ApplyButton>
           )}
           {/* <S.ApplyButton
             onClick={() => router.push("/participate/choice-role")}
