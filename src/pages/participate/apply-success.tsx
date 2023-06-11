@@ -54,6 +54,7 @@ const ApplySuccess = () => {
             )}`,
             {
               imp_uid: query.imp_uid,
+              merchant_uid: query.merchant_uid,
               amount: window.localStorage.getItem("finalPayment"),
             },
             {
@@ -129,7 +130,13 @@ const ApplySuccess = () => {
           </S.DetailContainer>
           <S.DetailContainer>
             <S.DetailTitle>대회명</S.DetailTitle>
-            <S.DetailContent>{selectContestName}</S.DetailContent>
+            <S.DetailContent>
+              {selectContestName !== ""
+                ? selectContestName
+                : typeof window !== "undefined"
+                ? window.localStorage.getItem("selectCompetitionName")
+                : ""}
+            </S.DetailContent>
           </S.DetailContainer>
         </S.DetailArea>
         <Link onClick={() => setFinalPayment(0)} href="/contest">
