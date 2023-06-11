@@ -82,6 +82,10 @@ const ContestDetail = () => {
         setHostName(response.data.result.host.name);
         setTemplateID(response.data.result.templateID);
         setSelectContestID(response.data.result.competitionId);
+        window.localStorage.setItem(
+          "selectCompetitionId",
+          response.data.result.competitionId
+        );
         setSelectContestName(response.data.result.name);
         setJoined(response.data.joined);
       }

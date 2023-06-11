@@ -60,7 +60,10 @@ const ChoiceRole = () => {
         </S.QuestionArea>
         <S.SelectArea>
           <S.SpoitorButton
-            onClick={() => setApplyRole("player")}
+            onClick={() => {
+              setApplyRole("player");
+              window.localStorage.setItem("applyRole", "player");
+            }}
             role={applyRole}
           >
             <S.SporitorSelectIcon role={applyRole} />
@@ -75,7 +78,10 @@ const ChoiceRole = () => {
             </S.RoleArea>
           </S.SpoitorButton>
           <S.SportyButton
-            onClick={() => setApplyRole("viewer")}
+            onClick={() => {
+              setApplyRole("viewer");
+              window.localStorage.setItem("applyRole", "viewer");
+            }}
             role={applyRole}
           >
             <S.SportySelectIcon role={applyRole} />
