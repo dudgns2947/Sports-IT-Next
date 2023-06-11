@@ -10,7 +10,12 @@ import { useRouter } from "next/router";
 import { SubmitButton } from "@component/components/button/buttonComponent";
 import AddButton from "@component/components/button/AddButton";
 import { useRecoilState } from "recoil";
-import { contestRuleFileNames, contestRuleFiles, contestRuleUrlNames, contestRuleUrls } from "@component/atoms/contestAtom";
+import {
+  contestRuleFileNames,
+  contestRuleFiles,
+  contestRuleUrlNames,
+  contestRuleUrls,
+} from "@component/atoms/contestAtom";
 import Head from "next/head";
 
 const RulesAndTerms = () => {
@@ -19,7 +24,8 @@ const RulesAndTerms = () => {
   const [willAdd, setWillAdd] = useState(false);
   const [url, setUrl] = useState("");
   const [file, setFile] = useState<File>();
-  const [ruleFileNames, setRuleFileNames] = useRecoilState(contestRuleFileNames);
+  const [ruleFileNames, setRuleFileNames] =
+    useRecoilState(contestRuleFileNames);
   const [ruleFiles, setRuleFiles] = useRecoilState(contestRuleFiles);
   const [ruleUrlNames, setRuleUrlNames] = useRecoilState(contestRuleUrlNames);
   const [ruleUrls, setRuleUrls] = useRecoilState(contestRuleUrls);
@@ -103,9 +109,13 @@ const RulesAndTerms = () => {
                   </S.DataWrapper>
                   <S.DeleteButton
                     onClick={() => {
-                      setRuleFiles((current) => current.slice(0, index).concat(current.slice(index + 1)));
+                      setRuleFiles((current) =>
+                        current.slice(0, index).concat(current.slice(index + 1))
+                      );
 
-                      setRuleFileNames((curr) => curr.slice(0, index).concat(curr.slice(index + 1)));
+                      setRuleFileNames((curr) =>
+                        curr.slice(0, index).concat(curr.slice(index + 1))
+                      );
                     }}
                   />
                 </S.DataArea>
@@ -120,9 +130,13 @@ const RulesAndTerms = () => {
                   </S.DataWrapper>
                   <S.DeleteButton
                     onClick={() => {
-                      setRuleUrls((current) => current.slice(0, index).concat(current.slice(index + 1)));
+                      setRuleUrls((current) =>
+                        current.slice(0, index).concat(current.slice(index + 1))
+                      );
 
-                      setRuleUrlNames((curr) => curr.slice(0, index).concat(curr.slice(index + 1)));
+                      setRuleUrlNames((curr) =>
+                        curr.slice(0, index).concat(curr.slice(index + 1))
+                      );
                     }}
                   />
                 </S.DataArea>
@@ -132,17 +146,30 @@ const RulesAndTerms = () => {
             <S.UploadForm>
               <S.TitleArea>
                 <S.Title>규정 혹은 약관 이름</S.Title>
-                <S.LoadRulesArea onClick={() => router.push("/register/load-rules")}>
+                <S.LoadRulesArea
+                  onClick={() => router.push("/register/load-rules")}
+                >
                   <S.LoadRulesText>규정 불러오기</S.LoadRulesText>
                   <S.LoadRulesIcon />
                 </S.LoadRulesArea>
               </S.TitleArea>
-              <Input value={inputText} onChange={(e) => setInputText(e.currentTarget.value)} placeholder="내용을 입력해주세요." required />
+              <Input
+                value={inputText}
+                onChange={(e) => setInputText(e.currentTarget.value)}
+                placeholder="내용을 입력해주세요."
+                required
+              />
               <S.SelectArea>
-                <S.FileSelectButton onClick={() => setFileUpload(true)} active={fileUpload}>
+                <S.FileSelectButton
+                  onClick={() => setFileUpload(true)}
+                  active={fileUpload}
+                >
                   파일 업로드
                 </S.FileSelectButton>
-                <S.UrlSelectButton onClick={() => setFileUpload(false)} active={!fileUpload}>
+                <S.UrlSelectButton
+                  onClick={() => setFileUpload(false)}
+                  active={!fileUpload}
+                >
                   URL
                 </S.UrlSelectButton>
               </S.SelectArea>
@@ -154,8 +181,12 @@ const RulesAndTerms = () => {
                     </S.UploadNoticeWrapper>
                   ) : (
                     <S.UploadNoticeWrapper>
-                      <S.UploadNotice>참가자에게 동의를 받기 위한</S.UploadNotice>
-                      <S.UploadNotice>규정 혹은 약관이 있다면 등록해주세요.</S.UploadNotice>
+                      <S.UploadNotice>
+                        참가자에게 동의를 받기 위한
+                      </S.UploadNotice>
+                      <S.UploadNotice>
+                        규정 혹은 약관이 있다면 등록해주세요.
+                      </S.UploadNotice>
                     </S.UploadNoticeWrapper>
                   )}
 
@@ -170,23 +201,38 @@ const RulesAndTerms = () => {
                       <S.PlusIcon />
                       <S.FileUploadText>파일 첨부</S.FileUploadText>
                     </S.FileUploadButton>
-                    <SubmitButton onClick={onClickFileSubmit}>등록</SubmitButton>
-                    <S.FileInput type="file" id="file" onChange={onFileChange} />
+                    <SubmitButton onClick={onClickFileSubmit}>
+                      등록
+                    </SubmitButton>
+                    <S.FileInput
+                      type="file"
+                      id="file"
+                      onChange={onFileChange}
+                    />
                   </div>
                 </S.FileUploadArea>
               ) : (
                 <S.UrlUploadArea>
                   <S.UploadNotice>참가자에게 동의를 받기 위한</S.UploadNotice>
-                  <S.UploadNotice>규정 혹은 약관의 링크가 있다면 등록해주세요.</S.UploadNotice>
+                  <S.UploadNotice>
+                    규정 혹은 약관의 링크가 있다면 등록해주세요.
+                  </S.UploadNotice>
                   <S.UrlInputArea>
-                    <ShortInput value={url} placeholder="ex) www.google.com" onChange={(e) => setUrl(e.currentTarget.value)} />
+                    <ShortInput
+                      value={url}
+                      placeholder="ex) www.google.com"
+                      onChange={(e) => setUrl(e.currentTarget.value)}
+                    />
                     <SubmitButton onClick={onClickUrlSubmit}>등록</SubmitButton>
                   </S.UrlInputArea>
                 </S.UrlUploadArea>
               )}
             </S.UploadForm>
           ) : (
-            <AddButton setValue={setWillAdd} text="규정 / 약관 추가하기"></AddButton>
+            <AddButton
+              setValue={setWillAdd}
+              text="규정 / 약관 추가하기"
+            ></AddButton>
           )}
         </S.ContentArea>
         <Link href="/register/sector-and-weight">

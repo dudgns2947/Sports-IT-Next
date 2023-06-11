@@ -31,43 +31,6 @@ import { useRouter } from "next/router";
 import * as S from "../../../styles/contest/result-input.styles";
 import { headers } from "next/dist/client/components/headers";
 
-const dumyData = [
-  {
-    cost: 1000,
-    expandCost: 10000,
-    multi: true,
-    subSectors: [
-      {
-        name: "-70kg",
-      },
-      {
-        name: "-80kg",
-      },
-      {
-        name: "-90kg",
-      },
-    ],
-    title: "부문 1",
-  },
-  {
-    cost: 1000,
-    expandCost: 10000,
-    multi: true,
-    subSectors: [
-      {
-        name: "-70kg",
-      },
-      {
-        name: "-80kg",
-      },
-      {
-        name: "-90kg",
-      },
-    ],
-    title: "부문 2",
-  },
-];
-
 const Result = () => {
   const [sectors, setSectors] = useState<IWeightSector[]>([]);
   const [sector, setSector] = useRecoilState(resultSectorAtom);
@@ -171,6 +134,10 @@ const Result = () => {
           router.back();
         }
       }
+      setAwardList([]);
+      setAwardNameList([]);
+      setPlayerList([]);
+      setRankIndex(0);
     }
   }
 

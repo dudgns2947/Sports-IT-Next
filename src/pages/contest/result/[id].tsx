@@ -14,14 +14,79 @@ import {
   resultSectorAtom,
   resultWeightAtom,
 } from "@component/atoms/contestAtom";
+import styled from "styled-components";
+
+const ResultImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 27px;
+  margin-right: 14px;
+`;
+
+const ResultArea = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ResultCard = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 20px;
+`;
+
+const ResultName = styled.span`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #222428;
+  margin-bottom: 2px;
+`;
+
+const ResultContent = styled.span`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #747474;
+`;
+
+const ResultContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+interface IResult {
+  competitionId: number | null;
+  content: string;
+  historyDate: string;
+  name: string;
+  uid: number | null;
+}
 
 const Result = () => {
   const [sectors, setSectors] = useState<IWeightSector[]>([]);
   const [sector, setSector] = useRecoilState(resultSectorAtom);
   const [weight, setWeight] = useRecoilState(resultWeightAtom);
+  const [results, setResults] = useState<IResult[]>([]);
   const [hostName, setHostName] = useState("");
   const router = useRouter();
   const id = router.query.id;
+
+  async function getResult() {
+    if (typeof window !== "undefined") {
+      try {
+        const response = await baseApi.get(`/competitions/result/${id}`, {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+          },
+        });
+        console.log(response);
+        setResults(response.data);
+      } catch (e) {
+        alert("오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
+        router.back();
+      }
+    }
+  }
 
   async function getSector() {
     if (typeof window !== "undefined") {
@@ -57,6 +122,7 @@ const Result = () => {
       const { id } = router.query;
       if (!id) return;
       getSector();
+      getResult();
     }
     // if (!router.isReady) return;
   }, [router.isReady]);
@@ -103,6 +169,17 @@ const Result = () => {
                   ))}
           </S.SelectBox>
         </S.SelectArea>
+        <ResultArea>
+          {results.map((result, index) => (
+            <ResultCard key={index}>
+              <ResultImage src="/images/logo/gold.webp" />
+              <ResultContentWrapper>
+                <ResultName>{result.name}</ResultName>
+                <ResultContent>{result.content}</ResultContent>
+              </ResultContentWrapper>
+            </ResultCard>
+          ))}
+        </ResultArea>
       </ContentPaddingArea>
       {typeof window !== "undefined" &&
       window.localStorage.getItem("role") === "ROLE_INSTITUTION" &&
