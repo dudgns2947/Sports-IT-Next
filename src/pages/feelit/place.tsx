@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 import z from "zod";
 import Image from "next/image";
+import GoBackHeader from "@component/components/header/GoBackHeader";
 
 const geoCodingSchema = z.object({
   status: z.string(),
@@ -62,7 +63,7 @@ const Component: React.FC = () => {
   };
 
   const fetchGeoCoding = async () => {
-    const res = await fetch(`../../api/naver_api?keyword=${address}`).then((r) => r.json());
+    const res = await fetch(`/api/naver_api?keyword=${address}`).then((r) => r.json());
     setIsNaverApiLoading(false);
 
     const dataForMap = geoCodingSchema.parse(res.data);
@@ -73,16 +74,18 @@ const Component: React.FC = () => {
 
     const x = dataForMap.addresses.at(0)?.x;
     const y = dataForMap.addresses.at(0)?.y;
-    if (!x || !y) {
+    const addressName = dataForMap.addresses.at(0)?.roadAddress;
+    if (!x || !y || !addressName) {
       retry();
       return;
     }
 
     router.push({
-      pathname: `/feel-it/${userId}`,
+      pathname: `/feelit/${userId}`,
       query: {
         longitute: parseFloat(x),
         latitude: parseFloat(y),
+        addressName: addressName,
         newAddress: address,
       },
     });
@@ -110,38 +113,37 @@ const Component: React.FC = () => {
     }
   }
 
-  function initializeDaumPostcode() {
-    new window.daum.Postcode({
-      width: "100%",
-      oncomplete: async function (data: any) {
-        foldDaumPostcode();
-        setIsNaverApiLoading(true);
-        setAddress(data.roadAddress);
-      },
-    }).embed(daumWrapperRef.current);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const script = document.createElement("script");
+      script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+      script.onload = initializeDaumPostcode;
+      document.head.appendChild(script);
+    }
+  }, []);
 
-    if (daumWrapperRef.current) {
-      daumWrapperRef.current.style.display = "block";
+  function initializeDaumPostcode() {
+    if (typeof window !== "undefined" && window.daum && window.daum.Postcode) {
+      new window.daum.Postcode({
+        width: "100%",
+        oncomplete: async function (data: any) {
+          foldDaumPostcode();
+          setIsNaverApiLoading(true);
+          setAddress(data.roadAddress);
+        },
+      }).embed(daumWrapperRef.current);
+
+      if (daumWrapperRef.current) {
+        daumWrapperRef.current.style.display = "block";
+      }
     }
   }
 
   return (
     <div className="w-[100vw]">
-      <div className="w-full flex pt-5 pb-5 pr-5 pl-5">
-        <div
-          className="flex-[1]"
-          onClick={(e) => {
-            foldDaumPostcode();
-            router.back();
-          }}
-        >
-          <Image alt="" src="/@pubilc/images/icon/x_btn.png" width={5} height={5}></Image>
-        </div>
-        <div className="flex-[9] text-lg flex justify-center" style={{ position: "relative", left: "-5vw" }}>
-          장소 검색
-        </div>
-      </div>
-      {isNaverApiLoading && <Image alt="loading" src="@pubilc/images/icon/loading.gif"></Image>}
+      <GoBackHeader title="장소 검색" />
+
+      {isNaverApiLoading && <Image alt="loading" priority width={300} height={300} src="/images/icon/loading.gif"></Image>}
       <div
         id="wrap"
         ref={daumWrapperRef}

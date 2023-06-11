@@ -39,7 +39,7 @@ export default class MyDocument extends Document {
           <meta name="apple-mobile-web-app-title" content="스포츠잇" />
           <meta name="application-name" content="스포츠잇" />
           <meta name="description" content="사람과 스포츠를 잇다, 스포츠잇" />
-          <Script async src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" />
+          <script async src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         </Head>
         <body>
           <Main />

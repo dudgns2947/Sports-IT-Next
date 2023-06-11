@@ -30,7 +30,8 @@ const naverAPI = async (req: NextApiRequest, res: NextApiResponse) => {
     })
       .then((r) => r.json())
       .catch((error) => {
-        throw Error(error);
+        console.log(error);
+        res.status(500).json({ status: "fail", message: "네이버 지도 API 호출에 실패했습니다." });
       });
 
     res.json({

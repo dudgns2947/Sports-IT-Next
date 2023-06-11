@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: false,
   distDir: "build",
+  images: {
+    domains: ["picsum.photos"],
+  },
   // exportTrailingSlash: true,
 };
 
