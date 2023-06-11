@@ -16,6 +16,7 @@ import {
   ContentArea,
   ContentPaddingArea,
 } from "@component/components/area/areaComponent";
+import { useRouter } from "next/router";
 
 const SearchArea = styled.div`
   display: flex;
@@ -45,6 +46,7 @@ const EventSelect = () => {
   const [keyword, setKeyword] = useState("");
   const [events, setEvents] = useRecoilState<IEvent>(eventAtom);
   const [count, setCount] = useRecoilState<number>(eventCountAtom);
+  const router = useRouter();
   console.log(events);
   return (
     <>
@@ -84,7 +86,9 @@ const EventSelect = () => {
             <S.BottomText count={count}>
               5개까지 선택 가능합니다.({count}/5)
             </S.BottomText>
-            <S.LinkText>찾으시는 종목이 없으신가요?</S.LinkText>
+            <S.LinkText onClick={() => router.push("/event-apply")}>
+              찾으시는 종목이 없으신가요?
+            </S.LinkText>
           </S.BottomArea>
         </ContentPaddingArea>
 

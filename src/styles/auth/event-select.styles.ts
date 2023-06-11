@@ -35,6 +35,7 @@ export const BottomArea = styled.div`
   justify-content: center;
   align-items: center;
   height: 10%;
+  margin-bottom: 10%;
 `;
 
 export const BottomText = styled.span<BottomTextProps>`
@@ -47,4 +48,5 @@ export const LinkText = styled.span`
   font-size: 14px;
   color: #e05e6d;
   border-bottom: 1px solid #e05e6d;
+  cursor: pointer;
 `;
