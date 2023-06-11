@@ -109,6 +109,17 @@ const ContestDetail = () => {
     }
   }
 
+  async function copyURL() {
+    try {
+      if (typeof window !== "undefined") {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("URL이 클립보드 복사 되었습니다 !");
+      }
+    } catch (e) {
+      alert(e);
+    }
+  }
+
   useEffect(() => {
     if (router.isReady) {
       const { id } = router.query;
@@ -178,7 +189,7 @@ const ContestDetail = () => {
       </ContentPaddingArea>
       <S.ApplyWrapper>
         <S.ApplyBar>
-          <S.IconArea>
+          <S.IconArea onClick={() => copyURL()}>
             <S.ShareIcon />
           </S.IconArea>
           {/* <S.IconArea>
