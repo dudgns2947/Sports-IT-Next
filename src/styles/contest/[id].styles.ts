@@ -141,6 +141,7 @@ export const ApplyButton = styled.button`
   background: #222428;
   border-radius: 6px;
   color: #ffffff;
+  cursor: pointer;
 `;
 
 export const ResultButton = styled(ApplyButton)`

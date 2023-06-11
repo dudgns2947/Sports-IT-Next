@@ -2,7 +2,13 @@ import React from "react";
 import * as S from "./GoBackHeaderStyles";
 import { useRouter } from "next/router";
 
-const GoBackHeader = ({ title, setting = false }: { title?: string; setting?: boolean }) => {
+const GoBackHeader = ({
+  title,
+  setting = false,
+}: {
+  title?: string;
+  setting?: boolean;
+}) => {
   const router = useRouter();
   return (
     <S.Header>
@@ -12,7 +18,11 @@ const GoBackHeader = ({ title, setting = false }: { title?: string; setting?: bo
       <S.TitleArea>
         <S.HeaderTitle>{title}</S.HeaderTitle>
       </S.TitleArea>
-      <S.IconArea>{setting ? <S.HeaderSettingIcon onClick={() => router.push(`/mypage/setting`)} /> : null}</S.IconArea>
+      <S.IconArea>
+        {setting ? (
+          <S.HeaderSettingIcon onClick={() => router.push(`/mypage/setting`)} />
+        ) : null}
+      </S.IconArea>
     </S.Header>
   );
 };

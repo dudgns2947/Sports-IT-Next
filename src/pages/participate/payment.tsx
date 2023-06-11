@@ -78,7 +78,7 @@ const Payment = () => {
       console.log(finalPayment);
       if (typeof window !== "undefined") {
         const response3 = await baseApi.post(
-          `/payment/complete`,
+          `/payment/complete/${selectContestId}`,
           {
             imp_uid: response.imp_uid,
             merchant_uid: response.merchant_uid,
@@ -191,7 +191,7 @@ const Payment = () => {
             pay_method: "trans", // 결제수단
             merchant_uid: response2.data.response.merchant_uid, // 주문번호
             amount: response2.data.response.amount, // 결제금액
-            name: "Sports-it 대회신청 결제", // 주문명
+            name: contest?.name, // 주문명
             buyer_name: "홍길동", // 구매자 이름
             buyer_tel: "01012341234", // 구매자 전화번호
             buyer_email: "example@example", // 구매자 이메일
@@ -202,39 +202,6 @@ const Payment = () => {
           };
 
           IMP?.request_pay(data, callback);
-
-          // const response3 = await baseApi.post(
-          //   `/payment/complete`,
-          //   {
-          //     imp_uid: "imp22742363",
-          //     amount: response.data.amount,
-          //   },
-          //   {
-          //     headers: {
-          //       Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-          //     },
-          //   }
-          // );
-          // console.log(response3);
-
-          // const response4 = await baseApi.post(
-          //   `/competitions/${competitionId}/join?joinType=${applyRole}`,
-          //   {
-          //     uid: null,
-          //     competitionId: null,
-          //     formId: response.data.form,
-          //   },
-          //   {
-          //     headers: {
-          //       Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-          //     },
-          //   }
-          // );
-          // console.log(response4);
-
-          // if (response4.data.success === true) {
-          //   router.push("/participate/apply-success");
-          // }
         } else {
           const response5 = await baseApi.post(
             `/competitions/${competitionId}/join?joinType=${applyRole}`,
@@ -263,44 +230,44 @@ const Payment = () => {
           }
         }
       } catch (e: any) {
-        alert(e.response.data.message);
+        alert("오류가 발생했습니다. 다시 시도해주세요.");
+        setPayment(0);
+        setAppTerm(false);
+        setPrivacyPolicy(false);
+        setThirdParty(false);
+        setSelectSectors([]);
+        setSelectSubSectors([]);
+        router.replace(`/contest/${selectContestId}`);
       }
     }
-
-    // const { IMP } = window;
-    // IMP?.init("imp22742363");
-
-    // const data: RequestPayParams = {
-    //   pg: "kakaopay", // PG사 : https://portone.gitbook.io/docs/sdk/javascript-sdk/payrq#undefined-1 참고
-    //   pay_method: "trans", // 결제수단
-    //   merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-    //   amount: finalPayment === 0 ? totalPayment : finalPayment, // 결제금액
-    //   name: "Sports-it 대회신청 결제", // 주문명
-    //   buyer_name: "홍길동", // 구매자 이름
-    //   buyer_tel: "01012341234", // 구매자 전화번호
-    //   buyer_email: "example@example", // 구매자 이메일
-    //   buyer_addr: "신사동 661-16", // 구매자 주소
-    //   buyer_postcode: "06018", // 구매자 우편번호
-    //   m_redirect_url:
-    //     "http://sports-it-platform.du.r.appspot.com/participate/apply-success",
-    // };
-
-    // IMP?.request_pay(data, callback);
   }
 
   async function getContestDetail(id: number) {
-    const response = await baseApi.get(`/competitions/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(response.data);
-    setContest(response.data);
-    const response2 = await baseApi.get(
-      `/competitions/template/${response.data.templateID}`
-    );
-    console.log(response2.data.result.sectors);
-    setSectors(response2.data.result.sectors);
+    try {
+      if (typeof window !== "undefined") {
+        const response = await baseApi.get(`/competitions/${id}`, {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+          },
+        });
+        console.log(response.data);
+        setContest(response.data.result);
+        const response2 = await baseApi.get(
+          `/competitions/template/${response.data.result.templateID}`
+        );
+        console.log(response2.data.result.sectors);
+        setSectors(response2.data.result.sectors);
+      }
+    } catch (e) {
+      alert("오류가 발생했습니다. 다시 시도해주세요.");
+      setPayment(0);
+      setAppTerm(false);
+      setPrivacyPolicy(false);
+      setThirdParty(false);
+      setSelectSectors([]);
+      setSelectSubSectors([]);
+      router.replace(`/contest/${selectContestId}`);
+    }
   }
 
   function getPostFix(str: string) {
@@ -326,7 +293,9 @@ const Payment = () => {
         <ContentPaddingArea>
           <Contest
             posterImageUrl={
-              contest?.posters[0] ? contest?.posters[0].posterUrl : ""
+              contest?.posters && contest?.posters.length > 0
+                ? contest?.posters[0].posterUrl
+                : ""
             }
             competitionId={contest?.competitionId as number}
             competitionType={contest?.competitionType as string}

@@ -24,16 +24,32 @@ const Result = () => {
   const id = router.query.id;
 
   async function getSector() {
-    const response1 = await baseApi.get(`/competitions/${id}`);
-    const response2 = await baseApi.get(
-      `/competitions/template/${response1.data.templateID}`
-    );
-    console.log(response1);
-    console.log(response2);
-    console.log(response2.data.result.sectors);
-    setHostName(response1.data.host.name);
-    setSectors(response2.data.result.sectors);
-    // setSector(response2.data.result.sectors[0].title);
+    if (typeof window !== "undefined") {
+      try {
+        const response1 = await baseApi.get(`/competitions/${id}`, {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+          },
+        });
+        const response2 = await baseApi.get(
+          `/competitions/template/${response1.data.result.templateID}`,
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+        console.log(response1);
+        console.log(response2);
+        console.log(response2.data.result.sectors);
+        setHostName(response1.data.result.host.name);
+        setSectors(response2.data.result.sectors);
+        // setSector(response2.data.result.sectors[0].title);
+      } catch (e) {
+        alert(e);
+        router.back();
+      }
+    }
   }
 
   useEffect(() => {
