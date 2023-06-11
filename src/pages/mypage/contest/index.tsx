@@ -1,10 +1,15 @@
+import { baseApi } from "@component/api/utils/instance";
 import Seo from "@component/components/Seo";
 import { ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import ContestCard from "@component/components/contest/ContestCard";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import { SearchIcon } from "@component/components/navbar/TopBar.styles";
-import React, { useState } from "react";
+import { IPoster } from "@component/interfaces/contestInterface";
+import { IHost } from "@component/interfaces/contestInterface";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
 
 const SearchInputArea = styled.div`
@@ -23,8 +28,80 @@ const SearchInput = styled.input`
 
 const ContestArea = styled.div``;
 
+const SeeMoreArea = styled.div`
+  height: 50px;
+  margin: 20px 0 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+interface ICompetition {
+  competitionId: number;
+  host: IHost;
+  name: string;
+  posters: IPoster[];
+  sportCategory: string;
+  startDate: string;
+}
+
+interface IMyContestList {
+  competition: ICompetition;
+  joinDate: string;
+  type: string;
+}
+
 const Index = () => {
+  const [myContestList, setMyContestList] = useState<IMyContestList[]>([]);
   const [keyword, setKeyword] = useState("");
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(15);
+  const [ref, inView] = useInView();
+  const router = useRouter();
+
+  function getFormattedDate(inputString: string) {
+    const date = new Date(inputString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+    const day = date.getDate();
+
+    return `${year}년 ${month}월 ${day}일`;
+  }
+
+  async function getMyContest() {
+    if (typeof window !== "undefined") {
+      console.log(window.localStorage.getItem("jwt"));
+      try {
+        const response = await baseApi.get(
+          `competitions/join/slice/${window.localStorage.getItem(
+            "uid"
+          )}?page=${page}&size=${size}`,
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+        console.log(response);
+        setMyContestList(response.data.result.content);
+      } catch (e: any) {
+        alert(e.response.data.message);
+        router.back();
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (inView && myContestList.length !== 0) {
+      console.log("get more data !");
+      setPage((current) => current + 1);
+    }
+  }, [inView]);
+
+  useEffect(() => {
+    getMyContest();
+  }, [page, size]);
+
   return (
     <PageWrapper>
       <Seo title="참가한 대회" />
@@ -39,7 +116,24 @@ const Index = () => {
           <SearchIcon />
         </SearchInputArea>
         <ContestArea>
-          <ContestCard
+          {myContestList
+            .filter((contest) => contest.competition.name.includes(keyword))
+            .map((myContest) => (
+              <ContestCard
+                tags={["스포츠", "대회"]}
+                scrap={false}
+                title={myContest.competition.name}
+                host={myContest.competition.host.name}
+                date={getFormattedDate(myContest.joinDate)}
+                contestId={myContest.competition.competitionId}
+                imageUrl={
+                  myContest.competition.posters.length > 0
+                    ? myContest.competition.posters[0].posterUrl
+                    : "/images/logo/replace_poster.png"
+                }
+              />
+            ))}
+          {/* <ContestCard
             tags={["팔씨름", "스포츠", "대회"]}
             scrap={true}
             title="제 26회 대한민국 팔씨름 연맹 주최 국가대표 선발전"
@@ -54,8 +148,9 @@ const Index = () => {
             host="(사)대한 탁구 연맹"
             date="2023년 3월 20일"
             contestId={11}
-          />
+          /> */}
         </ContestArea>
+        <SeeMoreArea ref={ref}></SeeMoreArea>
       </ContentPaddingArea>
     </PageWrapper>
   );
