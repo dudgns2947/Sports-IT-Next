@@ -57,7 +57,9 @@ export const Term = styled.div`
   padding: 10px 30px 10px 0;
 `;
 
-export const TermLeftArea = styled.div``;
+export const TermLeftArea = styled.div`
+  display: flex;
+`;
 
 export const TermIcon = styled(AiOutlineCheck)<AgreeIconProps>`
   width: 18px;
