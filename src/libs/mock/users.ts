@@ -1,3 +1,4 @@
+import { get } from "http";
 import useSWR from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -12,14 +13,36 @@ export function useUser(userId: string) {
   };
 }
 
+//locat storage에서 user 정보를 가져온다.
+export const getUser = () => {
+  let userRole: string;
+  let userName: string;
+  let userEmail: string;
+  if (typeof window !== "undefined") {
+    userRole = localStorage.getItem("role") as string;
+    userName = localStorage.getItem("name") as string;
+    userEmail = localStorage.getItem("email") as string;
+  } else {
+    userRole = "ROLE_INSTITUTION";
+    userName = "김영훈";
+    userEmail = "dudgns2947@ajou.ac.kr";
+  }
+
+  return {
+    userRole,
+    userName,
+    userEmail,
+  };
+};
+
 export const userTypeOrganization = {
   userId: "123456",
   userType: "ROLE_INSTITUTION" as const,
-  name: "사단법인 대한팔씨름연맹",
-  description: "대한팔씨름연맹",
-  followers: 4560001,
-  following: 235,
-  membership: 1700,
+  name: getUser().userName,
+  description: getUser().userEmail,
+  followers: 11,
+  following: 27,
+  membership: 0,
   email: "karmwrestling@gmail.com",
   phone: "010-8802-5105",
   address: "서울특별시 성북구 동소문로26길 17,지하 1층 (동선동 3가)",
@@ -59,11 +82,11 @@ export const userTypeOrganization = {
 export const userTypeSportsman = {
   userId: "123457",
   userType: "ROLE_USER" as const,
-  name: "김영훈",
-  description: "함께 운동 소통해요!",
-  followers: 1234567,
-  following: 12345,
-  membership: 3,
+  name: getUser().userName,
+  description: getUser().userEmail,
+  followers: 5,
+  following: 8,
+  membership: 0,
   physical: {
     height: 180,
     weight: 89,

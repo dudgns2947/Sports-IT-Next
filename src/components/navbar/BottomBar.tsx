@@ -9,6 +9,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { userIdAtom } from "@component/atoms/tokenAtom";
+import { roleAtom } from "@component/atoms/roleAtom";
+import { set } from "react-hook-form";
+import { ApplyRoleAtomType, RoleAtomType } from "@component/interfaces/roleInterface";
 
 const BottomBarWrapper = styled.div`
   display: flex;
@@ -77,10 +80,12 @@ const SquaresIcon = styled(HiOutlineSquares2X2)`
 
 const BottomBar = () => {
   const [UserID, setUserID] = useRecoilState(userIdAtom);
+  const [UserRole, setUserRole] = useRecoilState(roleAtom);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setUserID(localStorage.getItem("uid"));
+      setUserRole(localStorage.getItem("role") as RoleAtomType);
     }
   }, []);
 
@@ -113,7 +118,10 @@ const BottomBar = () => {
       </NavCard>
       <NavCard
         onClick={() => {
-          router.push(`/feelit/${UserID}`);
+          // router.push(`/feelit/${UserID}`);
+          {
+            UserRole === "ROLE_INSTITUTION" ? router.push(`/feelit/123456`) : router.push(`/feelit/123457`);
+          } // 임시로 123456, 123457로 설정
         }}
       >
         <SquaresIcon />

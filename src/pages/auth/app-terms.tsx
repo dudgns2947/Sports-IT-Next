@@ -6,6 +6,9 @@ const AppTerms = () => {
   return (
     <PageWrapper>
       <Seo title="스포츠잇 이용약관" />
+      <div>
+        <span></span>
+      </div>
     </PageWrapper>
   );
 };
