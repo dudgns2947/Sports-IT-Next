@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { set } from "react-hook-form";
 import { useRecoilState } from "recoil";
-import { userTokenAtom } from "@component/atoms/tokenAtom";
+import { userTokenAtom, userIdAtom } from "@component/atoms/tokenAtom";
 import { type } from "os";
 import "@component/styles/global.css";
 
@@ -39,18 +39,32 @@ import "@component/styles/global.css";
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
   const [token, setToken] = useState("");
+  const [userId, setUserId] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     //로그인관련 페이지가 아니면
     if (!router.pathname.startsWith("/auth") && typeof window !== "undefined") {
       const StoredToken = window.localStorage.getItem("jwt");
+      const StoredUserId = window.localStorage.getItem("uid");
       if (!StoredToken) {
         router.push("/auth/login");
         alert("로그인이 필요한 페이지입니다.");
       } else {
         setToken(StoredToken);
+        setUserId(StoredUserId!);
+        console.log("StoredUserId", userId);
         localStorage.setItem("jwt", StoredToken);
+        localStorage.setItem("uid", StoredUserId!);
+      }
+    }
+
+    // 체육인(ROLE_USER)이 /register 페이지에 접속한다면
+    if (router.pathname.startsWith("/register") && typeof window !== "undefined") {
+      const StoredRole = window.localStorage.getItem("role");
+      console.log("StoredRole", StoredRole);
+      if (StoredRole === "ROLE_USER") {
+        router.push("/contest");
       }
     }
   }, []);
@@ -59,8 +73,9 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (token) {
       localStorage.setItem("jwt", token);
+      localStorage.setItem("uid", userId);
     }
-  }, [token]);
+  }, [token, userId]);
 
   return (
     <RecoilRoot>

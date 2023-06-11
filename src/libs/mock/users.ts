@@ -1,6 +1,20 @@
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+export function useUser(userId: string) {
+  const { data, error } = useSWR(`/api/member/all/${userId}`, fetcher);
+
+  return {
+    user: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
+
 export const userTypeOrganization = {
   userId: "123456",
-  userType: "주최자" as const,
+  userType: "ROLE_INSTITUTION" as const,
   name: "사단법인 대한팔씨름연맹",
   description: "대한팔씨름연맹",
   followers: 4560001,
@@ -44,7 +58,7 @@ export const userTypeOrganization = {
 
 export const userTypeSportsman = {
   userId: "123457",
-  userType: "체육인" as const,
+  userType: "ROLE_USER" as const,
   name: "김영훈",
   description: "함께 운동 소통해요!",
   followers: 1234567,

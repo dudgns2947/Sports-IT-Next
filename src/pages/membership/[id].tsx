@@ -87,7 +87,7 @@ export default function Component() {
         </div>
         <div className="flex fixed bottom-0 left-0 w-screen h-[6em] z-[100] bg-[#FD3446] text-white place-items-center">
           <div className="w-full flex flex-col justify-center items-center">
-            <div className="pb-8 border-solid font-medium text-lg" onClick={(e) => alert("준비중입니다")}>
+            <div className="pb-8 border-solid font-medium text-lg" onClick={(e) => alert("준비중인 기능입니다.")}>
               멤버십 가입하기
             </div>
           </div>
