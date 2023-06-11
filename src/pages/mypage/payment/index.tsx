@@ -3,6 +3,7 @@ import Seo from "@component/components/Seo";
 import { ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
+import { ContestNullArea } from "@component/styles/contest/index.styles";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -50,7 +51,7 @@ const PayType = styled.span`
 const PayAmount = styled(PayType)``;
 
 const Index = () => {
-  const [payList, setPayList] = useState<IPayList[]>();
+  const [payList, setPayList] = useState<IPayList[]>([]);
   const router = useRouter();
 
   async function getMyPayment() {
@@ -83,20 +84,17 @@ const Index = () => {
       <Seo title="결제 내역" />
       <GoBackHeader title="결제 내역" />
       <ContentPaddingArea>
-        {payList
-          ? payList.map((pay) => (
-              <PayRecord>
-                <PayContent>{pay.content}</PayContent>
-                <PayType>결제 방식 : {pay.paymentType}</PayType>
-                <PayAmount>결제 금액 : {pay.amount}원</PayAmount>
-              </PayRecord>
-            ))
-          : null}
-        <PayRecord>
-          <PayContent>Sports-it 대회신청 결제</PayContent>
-          <PayType>결제 방식 : 카카오</PayType>
-          <PayAmount>52000원</PayAmount>
-        </PayRecord>
+        {payList.length > 0 ? (
+          payList.map((pay) => (
+            <PayRecord>
+              <PayContent>{pay.content}</PayContent>
+              <PayType>결제 방식 : {pay.paymentType}</PayType>
+              <PayAmount>결제 금액 : {pay.amount}원</PayAmount>
+            </PayRecord>
+          ))
+        ) : (
+          <ContestNullArea>결제 내역이 존재하지 않습니다.</ContestNullArea>
+        )}
       </ContentPaddingArea>
     </PageWrapper>
   );

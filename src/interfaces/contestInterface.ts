@@ -128,4 +128,5 @@ export interface IParticipant {
   sectorTitle: string;
   subSectorName: string;
   profileImg: string;
+  phone: string;
 }

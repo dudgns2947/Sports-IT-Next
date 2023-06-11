@@ -95,6 +95,7 @@ const PlayerSearch = () => {
                   uid={data.uid}
                   sector={data.sectorTitle}
                   weight={data.subSectorName}
+                  phone={data.phone}
                 />
               ))
           : null}

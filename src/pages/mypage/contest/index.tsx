@@ -7,6 +7,7 @@ import GoBackHeader from "@component/components/header/GoBackHeader";
 import { SearchIcon } from "@component/components/navbar/TopBar.styles";
 import { IPoster } from "@component/interfaces/contestInterface";
 import { IHost } from "@component/interfaces/contestInterface";
+import { ContestNullArea } from "@component/styles/contest/index.styles";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -115,8 +116,9 @@ const Index = () => {
           />
           <SearchIcon />
         </SearchInputArea>
-        <ContestArea>
-          {myContestList
+        {/* <ContestArea> */}
+        {myContestList.length > 0 ? (
+          myContestList
             .filter((contest) => contest.competition.name.includes(keyword))
             .map((myContest) => (
               <ContestCard
@@ -132,24 +134,11 @@ const Index = () => {
                     : "/images/logo/replace_poster.png"
                 }
               />
-            ))}
-          {/* <ContestCard
-            tags={["팔씨름", "스포츠", "대회"]}
-            scrap={true}
-            title="제 26회 대한민국 팔씨름 연맹 주최 국가대표 선발전"
-            host="(사)대한 팔씨름 연맹"
-            date="2023년 3월 13일"
-            contestId={12}
-          />
-          <ContestCard
-            tags={["탁구", "스포츠"]}
-            scrap={false}
-            title="22-33 탁구 세계 선수권 대회"
-            host="(사)대한 탁구 연맹"
-            date="2023년 3월 20일"
-            contestId={11}
-          /> */}
-        </ContestArea>
+            ))
+        ) : (
+          <ContestNullArea>참가한 대회가 존재하지 않습니다.</ContestNullArea>
+        )}
+        {/* </ContestArea> */}
         <SeeMoreArea ref={ref}></SeeMoreArea>
       </ContentPaddingArea>
     </PageWrapper>
