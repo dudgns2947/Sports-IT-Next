@@ -1,7 +1,7 @@
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Input, InputArea, InputTitle } from "../../styles/register/headcount.styles";
 import NavBar from "@component/components/navbar/NavBar";
@@ -17,8 +17,13 @@ import {
   contestRecruitingStartAtom,
   contestStartDateAtom,
   contestTotalPrizeAtom,
+  contestLatitudeAtom,
+  contestLongitudeAtom,
 } from "@component/atoms/contestAtom";
 import Head from "next/head";
+import { Router, useRouter } from "next/router";
+import { Map } from "@component/components/feel-it/Map";
+import { set } from "react-hook-form";
 
 const ContestInfo = () => {
   const [contestName, setContestName] = useRecoilState(contestNameAtom);
@@ -27,17 +32,42 @@ const ContestInfo = () => {
   const [recruitingStart, setRecruitingStart] = useRecoilState(contestRecruitingStartAtom);
   const [recruitingEnd, setRecruitingEnd] = useRecoilState(contestRecruitingEndAtom);
   const [totalPrize, setTotalPrize] = useRecoilState(contestTotalPrizeAtom);
-  const [location, setLocation] = useRecoilState(contestLocationAtom);
+  const [location, setLocation] = useRecoilState(contestLocationAtom) || "";
   const [locationDetail, setLocationDetail] = useRecoilState(contestLocationDetailAtom);
+  const [CurrentLongitute, setCurrentLongitute] = useRecoilState(contestLatitudeAtom) || "";
+  const [CurrentLatitude, setCurrentLatitude] = useRecoilState(contestLongitudeAtom) || "";
 
-  console.log(contestName);
-  console.log(startDate);
-  console.log(endDate);
-  console.log(recruitingStart);
-  console.log(recruitingEnd);
-  console.log(totalPrize);
-  console.log(location);
-  console.log(locationDetail);
+  const router = useRouter();
+
+  const useRouteMappingLocation = () => {
+    const longitute = router.query.longitute;
+    const latitude = router.query.latitude;
+    const newAddress = router.query.newAddress;
+
+    useEffect(() => {
+      setLocation(newAddress ? (newAddress as string) : "");
+      setCurrentLongitute(longitute ? (longitute as string) : "");
+      setCurrentLatitude(latitude ? (latitude as string) : "");
+      router.query.longitute &&
+        setTimeout(() => {
+          window.scrollTo(0, 500);
+        }, 100);
+    }, [router.query.longitute]);
+
+    return { longitute, latitude, newAddress };
+  };
+
+  const { longitute, latitude, newAddress } = useRouteMappingLocation();
+
+  useEffect(() => {
+    if (newAddress) {
+      console.log("newAddress", newAddress);
+      console.log("longitute", longitute);
+      console.log("latitude", latitude);
+    } else {
+      console.log("주소 매핑실패");
+    }
+  }, [newAddress]);
   return (
     <>
       <Head>
@@ -84,9 +114,19 @@ const ContestInfo = () => {
           </InputArea>
           <InputArea>
             <InputTitle>개최 장소</InputTitle>
-            <Input type="text" placeholder="장소 검색" onChange={(e) => setLocation(e.currentTarget.value)} />
+            <Input
+              type="text"
+              placeholder="장소 검색"
+              onClick={() => {
+                router.push("/register/contest-location");
+              }}
+              value={location!}
+            />
             <Input type="text" placeholder="상세 주소 입력" onChange={(e) => setLocationDetail(e.currentTarget.value)} />
           </InputArea>
+          {location ? (
+            <Map latitude={parseFloat(CurrentLatitude!)} longitude={parseFloat(CurrentLongitute!)} addressName={location!} />
+          ) : null}
           {/* </S.InputWrapper> */}
         </ContentPaddingArea>
 

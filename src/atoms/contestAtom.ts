@@ -1,9 +1,4 @@
-import {
-  IParticipant,
-  IWeightSector,
-  IWeightSectorList,
-  PlayerInfo,
-} from "@component/interfaces/contestInterface";
+import { IParticipant, IWeightSector, IWeightSectorList, PlayerInfo } from "@component/interfaces/contestInterface";
 import { IEvent } from "@component/interfaces/eventInterface";
 import { WeightCost } from "@component/interfaces/weightCostInterface";
 
@@ -75,10 +70,7 @@ export const weightcostAtom = atom<WeightCost>({
 
 export const contestEventSelector = selector({
   key: "contestEventSelector",
-  get: ({ get }) =>
-    Object.keys(get(contestEventAtom)).find(
-      (key) => get(contestEventAtom)[key] === true
-    ),
+  get: ({ get }) => Object.keys(get(contestEventAtom)).find((key) => get(contestEventAtom)[key] === true),
 });
 
 export const contestNameAtom = atom<string | null>({
@@ -123,6 +115,16 @@ export const contestLocationAtom = atom<string | null>({
 
 export const contestLocationDetailAtom = atom<string | null>({
   key: "contestLocationDetail",
+  default: "",
+});
+
+export const contestLongitudeAtom = atom<string | null>({
+  key: "contestLongitude",
+  default: "",
+});
+
+export const contestLatitudeAtom = atom<string | null>({
+  key: "contestLatitude",
   default: "",
 });
 
@@ -188,10 +190,7 @@ export const paymentCostAtom = atom<number>({
 
 export const totalPaymentAtom = selector({
   key: "totalPayment",
-  get: ({ get }) =>
-    get(paymentCostAtom) +
-    get(paymentCostAtom) * 0.1 +
-    get(paymentCostAtom) * 0.03,
+  get: ({ get }) => get(paymentCostAtom) + get(paymentCostAtom) * 0.1 + get(paymentCostAtom) * 0.03,
 });
 
 export const finalPaymentAtom = atom({

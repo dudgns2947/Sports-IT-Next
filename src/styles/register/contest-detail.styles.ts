@@ -9,11 +9,14 @@ export const LargeInput = styled.textarea`
   font-weight: 400;
   line-height: 23px;
   padding: 14px 15px;
-  color: #aeaeae;
+  color: black;
   margin-bottom: 8px;
   background-color: #f9f9fa;
   border: 1px solid #ededed;
   border-radius: 8px;
+  ::placeholder {
+    color: #aeaeae;
+  }
 `;
 
 export const InputWrapper = styled.div`

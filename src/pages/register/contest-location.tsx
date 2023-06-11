@@ -47,16 +47,6 @@ const Component: React.FC = () => {
   const [isNaverApiLoading, setIsNaverApiLoading] = useState(false);
 
   const router = useRouter();
-  const userId =
-    typeof router.query.userId === "string"
-      ? router.query.userId
-      : typeof window === "object" && new URLSearchParams(window.location.search).get("userId")
-      ? new URLSearchParams(window.location.search).get("userId")
-      : null;
-
-  if (typeof window === "object" && !userId) {
-    alert("유저 ID를 찾을 수 없습니다");
-  }
 
   const retry = () => {
     alert("다시 시도해주세요");
@@ -82,7 +72,7 @@ const Component: React.FC = () => {
     }
 
     router.push({
-      pathname: `/feelit/${userId}`,
+      pathname: `/register/contest-info`,
       query: {
         longitute: parseFloat(x),
         latitude: parseFloat(y),

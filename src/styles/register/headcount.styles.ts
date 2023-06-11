@@ -24,10 +24,13 @@ export const InputArea = styled.div`
 `;
 
 export const InputTitle = styled.h3`
-  color: #212121;
+  color: black;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
+  ::placeholder {
+    color: #aeaeae;
+  }
 `;
 
 export const Input = styled.input`
@@ -36,10 +39,13 @@ export const Input = styled.input`
   font-size: 14px;
   font-weight: 400;
   padding: 14px 15px;
-  color: #aeaeae;
+  color: black;
   background-color: #f9f9fa;
   margin-bottom: 8px;
   border-radius: 10px;
+  ::placeholder {
+    color: #aeaeae;
+  }
 `;
 
 export const ErrorMessage = styled.span`
