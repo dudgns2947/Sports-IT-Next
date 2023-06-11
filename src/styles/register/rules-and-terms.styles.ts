@@ -80,13 +80,14 @@ export const LoadRulesIcon = styled(MdArrowForwardIos)`
 export const SelectArea = styled.div`
   display: flex;
   margin: 20px 0;
+  width: 100%;
 `;
 
 export const FileSelectButton = styled.button<SelectButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 168px;
+  width: 50%;
   height: 45px;
   border-radius: 6px 0px 0px 6px;
   border: 1px solid #212121;
