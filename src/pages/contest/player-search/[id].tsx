@@ -13,37 +13,6 @@ import { useRecoilState } from "recoil";
 import { participantsAtom } from "@component/atoms/contestAtom";
 import index from "@component/pages/register";
 
-const dumyData = [
-  {
-    profileImage: "",
-    playerName: "김영훈",
-    sector: "프로",
-    weight: "-70kg",
-    uid: 11,
-  },
-  {
-    profileImage: "",
-    playerName: "신우현",
-    sector: "노비스",
-    weight: "-78kg",
-    uid: 12,
-  },
-  {
-    profileImage: "",
-    playerName: "공명규",
-    sector: "노비스",
-    weight: "-86kg",
-    uid: 14,
-  },
-  {
-    profileImage: "",
-    playerName: "이준수",
-    sector: "하비",
-    weight: "-63kg",
-    uid: 15,
-  },
-];
-
 const SearchArea = styled.div`
   display: flex;
   width: 100%;
