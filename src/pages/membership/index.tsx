@@ -4,6 +4,20 @@ import { NextComponentType } from "next";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
+import styled from "styled-components";
+import GoBackHeader from "@component/components/header/GoBackHeader";
+import NavTab from "@component/components/navbar/NavBar";
+
+const MembershipWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  padding-bottom: 100;
+`;
 
 export default function Component() {
   const router = useRouter();
@@ -18,15 +32,8 @@ export default function Component() {
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="w-screen  bg-black flex flex-col items-center text-white pb-32">
-        <div className="w-full flex pt-5 pb-5 pr-5 pl-5">
-          <div className="flex-[1]" onClick={(e) => router.back()}>
-            <Image alt="prev_gary" width={5} height={5} src={"/images/icon/prev_gary.png"}></Image>
-          </div>
-          <div className="flex-[9] flex justify-center" style={{ position: "relative", left: "-3vw" }}>
-            멤버십 가입
-          </div>
-        </div>
+      <MembershipWrapper>
+        <GoBackHeader title="멤버십가입" />
         <div className="w-full pt-11 pl-5 pr-5">
           <div className="flex flex-col gap-2">
             <div className="text-3xl font-medium" style={{ fontFamily: "Pretendard" }}>
@@ -48,7 +55,7 @@ export default function Component() {
                 </div>
               </div>
               <div className="">
-                <Image alt="membership" width={10} height={10} src={"/images/join_membership/card.png"}></Image>
+                <img src={"/images/join_membership/card.png"}></img>
               </div>
             </div>
             <div className="w-full py-4 px-4 rounded-lg bg-[#212121] flex justify-between">
@@ -61,7 +68,7 @@ export default function Component() {
                 </div>
               </div>
               <div className="">
-                <Image alt="mebership_sale" width={10} height={10} src={"/images/icon/join_membership.png"}></Image>
+                <img src={"/images/join_membership/sale.png"}></img>
               </div>
             </div>
             <div className="w-full py-4 px-4 rounded-lg bg-[#212121] flex justify-between">
@@ -73,19 +80,19 @@ export default function Component() {
                 </div>
               </div>
               <div className="">
-                <Image alt="membership_community" width={10} height={10} src={"/images/join_membership/community.png"}></Image>
+                <img src={"/images/join_membership/community.png"}></img>
               </div>
             </div>
           </div>
         </div>
         <div className="flex fixed bottom-0 left-0 w-screen h-[6em] z-[100] bg-[#FD3446] text-white place-items-center">
           <div className="w-full flex flex-col justify-center items-center">
-            <div className="pb-8 border-b-4 border-solid border-slate-200 font-medium" onClick={(e) => alert("준비중입니다")}>
+            <div className="pb-8 border-solid font-medium text-lg" onClick={(e) => alert("준비중입니다")}>
               멤버십 가입하기
             </div>
           </div>
         </div>
-      </div>
+      </MembershipWrapper>
     </>
   );
 }

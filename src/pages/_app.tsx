@@ -16,6 +16,7 @@ import { set } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import { type } from "os";
+import "@component/styles/global.css";
 
 // _app.tsx는 모든 페이지에 공통적으로 적용될 내용을 작성 및 서버로부터 요청이 왔을 때 가장 먼저 실행되며,
 // 페이지에 적용할 공통 레이아웃을 설정하는 역할을 한다.
@@ -33,9 +34,10 @@ import { type } from "os";
 // + 파일명.module.css 파일 형태를 제외한 모든 나머지 css파일들은 _app.js에서만 import해와서 사용해야 한다. (글로벌 css간의 충돌을 피하기 위해서이다.)
 // https://nextjs.org/docs/messages/css-global
 
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient());
   const [token, setToken] = useState("");
   const router = useRouter();
 
