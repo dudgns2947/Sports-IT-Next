@@ -20,11 +20,13 @@ import {
   templateIdAtom,
 } from "@component/atoms/contestAtom";
 import { roleAtom } from "@component/atoms/roleAtom";
+import { async } from "rxjs";
 
 const ContestDetail = () => {
   const router = useRouter();
   const id = router.query.id;
   const token = useRecoilValue(userTokenAtom);
+  const [joined, setJoined] = useState(false);
   const [contest, setContest] = useState<IContestInfo>();
   const [templateID, setTemplateID] = useRecoilState(templateIdAtom);
   const [selectContestID, setSelectContestID] =
@@ -68,17 +70,54 @@ const ContestDetail = () => {
   };
 
   async function getContestDetail(id: number) {
-    const response = await baseApi.get(`/competitions/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(response.data);
-    setContest(response.data);
-    setHostName(response.data.host.name);
-    setTemplateID(response.data.templateID);
-    setSelectContestID(response.data.competitionId);
-    setSelectContestName(response.data.name);
+    try {
+      if (typeof window !== "undefined") {
+        const response = await baseApi.get(`/competitions/${id}`, {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+          },
+        });
+        console.log(response.data);
+        setContest(response.data.result);
+        setHostName(response.data.result.host.name);
+        setTemplateID(response.data.result.templateID);
+        setSelectContestID(response.data.result.competitionId);
+        setSelectContestName(response.data.result.name);
+        setJoined(response.data.joined);
+      }
+    } catch (e) {
+      alert(e);
+      router.back();
+    }
+  }
+
+  async function cencelContest() {
+    if (confirm("정말 취소하시겠습니까?")) {
+      if (typeof window !== "undefined") {
+        const response = await baseApi.delete("/competitions/join", {
+          data: {
+            uid: window.localStorage.getItem("uid"),
+            competitionId: id,
+          },
+        });
+        console.log(response);
+        if (response.data.success) {
+          alert("대회 참가가 취소되었습니다 !");
+          router.back();
+        }
+      }
+    }
+  }
+
+  async function copyURL() {
+    try {
+      if (typeof window !== "undefined") {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("URL이 클립보드 복사 되었습니다 !");
+      }
+    } catch (e) {
+      alert(e);
+    }
   }
 
   useEffect(() => {
@@ -150,7 +189,7 @@ const ContestDetail = () => {
       </ContentPaddingArea>
       <S.ApplyWrapper>
         <S.ApplyBar>
-          <S.IconArea>
+          <S.IconArea onClick={() => copyURL()}>
             <S.ShareIcon />
           </S.IconArea>
           {/* <S.IconArea>
@@ -162,6 +201,10 @@ const ContestDetail = () => {
             >
               대회 결과확인
             </S.ResultButton>
+          ) : joined ? (
+            <S.ApplyButton onClick={() => cencelContest()}>
+              대회 취소하기
+            </S.ApplyButton>
           ) : (
             <S.ApplyButton
               onClick={() => router.push("/participate/choice-role")}

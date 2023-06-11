@@ -88,19 +88,40 @@ const Result = () => {
   const id = router.query.id;
 
   async function getSector() {
-    const response1 = await baseApi.get(`/competitions/${id}`);
-    const response2 = await baseApi.get(
-      `/competitions/template/${response1.data.templateID}`
-    );
-    console.log(response1);
-    const response3 = await baseApi.get(
-      `/competitions/${response1.data.competitionId}/participants`
-    );
-    console.log(response3);
-    console.log(response2.data.result.sectors);
-    setSectors(response2.data.result.sectors);
-    setParticipants(response3.data.result);
-    // setSector(response2.data.result.sectors[0].title);
+    if (typeof window !== "undefined") {
+      try {
+        const response1 = await baseApi.get(`/competitions/${id}`, {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+          },
+        });
+        const response2 = await baseApi.get(
+          `/competitions/template/${response1.data.result.templateID}`,
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+        console.log(response1);
+        const response3 = await baseApi.get(
+          `/competitions/${response1.data.result.competitionId}/participants`,
+          {
+            headers: {
+              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+            },
+          }
+        );
+        console.log(response3);
+        console.log(response2.data.result.sectors);
+        setSectors(response2.data.result.sectors);
+        setParticipants(response3.data.result);
+        // setSector(response2.data.result.sectors[0].title);
+      } catch (e) {
+        alert(e);
+        router.back();
+      }
+    }
   }
 
   async function postResult() {

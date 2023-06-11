@@ -56,6 +56,7 @@ interface PlayerProfileProps {
   uid: number;
   sector: string;
   weight: string;
+  phone: string;
 }
 
 const PlayerProfile = ({
@@ -64,6 +65,7 @@ const PlayerProfile = ({
   uid,
   sector,
   weight,
+  phone,
 }: PlayerProfileProps) => {
   const [playerList, setPlayerList] = useRecoilState(playerListAtom);
   const [rankIndex, setRankIndex] = useRecoilState(rankIndexAtom);
@@ -94,9 +96,11 @@ const PlayerProfile = ({
     >
       <PlayerImage src={"/images/example/Post1.png"} />
       <PlayerInfo>
-        <PlayerName>{playerName}</PlayerName>
+        <PlayerName>
+          {playerName}(#{phone})
+        </PlayerName>
         <SectorAndWeight>
-          <PlaySector>{sector}</PlaySector>
+          <PlaySector>{sector} / </PlaySector>
           <PlayerWeight>{weight}</PlayerWeight>
         </SectorAndWeight>
       </PlayerInfo>
