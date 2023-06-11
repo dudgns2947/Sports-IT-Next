@@ -49,10 +49,12 @@ const ApplySuccess = () => {
       if (typeof window !== "undefined") {
         try {
           const response = await baseApi.post(
-            `/payment/complete/${selectContestId}`,
+            `/payment/complete/${window.localStorage.getItem(
+              "selectCompetitionId"
+            )}`,
             {
               imp_uid: query.imp_uid,
-              amount: finalPayment,
+              amount: window.localStorage.getItem("finalPayment"),
             },
             {
               headers: {
@@ -62,11 +64,13 @@ const ApplySuccess = () => {
           );
           console.log(response);
           const response2 = await baseApi.post(
-            `/competitions/${selectContestId}/join?joinType=${applyRole}`,
+            `/competitions/${window.localStorage.getItem(
+              "selectCompetitionId"
+            )}/join?joinType=${window.localStorage.getItem("applyRole")}`,
             {
               uid: null,
               competitionId: null,
-              formId: form,
+              formId: window.localStorage.getItem("form"),
             },
             {
               headers: {
