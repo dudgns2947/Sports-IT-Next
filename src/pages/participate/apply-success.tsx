@@ -95,6 +95,7 @@ const ApplySuccess = () => {
     if (router.isReady) {
       const query = router.query;
       if (!query) return;
+      postResult();
     }
   }, [router.isReady]);
 
