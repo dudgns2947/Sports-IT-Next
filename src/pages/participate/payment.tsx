@@ -182,6 +182,7 @@ const Payment = () => {
             }
           );
           console.log(response2);
+          setFinalPayment(response2.data.response.amount);
 
           const { IMP } = window;
           IMP?.init("imp22742363");

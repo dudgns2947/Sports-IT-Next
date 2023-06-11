@@ -47,13 +47,9 @@ const Terms = () => {
         setAgreements(response.data.agreements);
         setSectors(response.data.template.sectors);
       } catch (e: any) {
-        if (e.response?.data) {
-          alert(e.response.data.message);
-          router.back();
-        } else {
-          alert("오류가 발생하였습니다. 나중에 다시 시도해주세요.");
-          router.back();
-        }
+        console.log(e);
+        alert("오류가 발생하였습니다. 나중에 다시 시도해주세요.");
+        router.back();
       }
     }
   }
