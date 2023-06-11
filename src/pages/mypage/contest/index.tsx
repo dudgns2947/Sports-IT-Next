@@ -120,8 +120,9 @@ const Index = () => {
         {myContestList.length > 0 ? (
           myContestList
             .filter((contest) => contest.competition.name.includes(keyword))
-            .map((myContest) => (
+            .map((myContest, index) => (
               <ContestCard
+                key={index}
                 tags={["스포츠", "대회"]}
                 scrap={false}
                 title={myContest.competition.name}
