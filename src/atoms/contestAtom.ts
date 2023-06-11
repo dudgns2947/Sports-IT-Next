@@ -247,3 +247,8 @@ export const participantsAtom = atom<IParticipant[]>({
   key: "participants",
   default: [],
 });
+
+export const participateFormAtom = atom({
+  key: "participateForm",
+  default: "",
+});

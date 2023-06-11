@@ -18,6 +18,7 @@ import {
   selectContestIdAtom,
 } from "@component/atoms/contestAtom";
 import { applyRoleAtom } from "@component/atoms/roleAtom";
+import { useRouter } from "next/router";
 
 const Terms = () => {
   const [appTerm, setAppTerm] = useRecoilState(appTermAtom);
@@ -27,6 +28,8 @@ const Terms = () => {
   const [sectors, setSectors] = useRecoilState(participateSectors);
   const competitionId = useRecoilValue(selectContestIdAtom);
   const applyRole = useRecoilValue(applyRoleAtom);
+
+  const router = useRouter();
 
   async function getFormat() {
     if (typeof window !== "undefined") {
@@ -44,7 +47,13 @@ const Terms = () => {
         setAgreements(response.data.agreements);
         setSectors(response.data.template.sectors);
       } catch (e: any) {
-        alert(e.response.data.message);
+        if (e.response?.data) {
+          alert(e.response.data.message);
+          router.back();
+        } else {
+          alert("오류가 발생하였습니다. 나중에 다시 시도해주세요.");
+          router.back();
+        }
       }
     }
   }
