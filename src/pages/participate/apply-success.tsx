@@ -56,6 +56,9 @@ const ApplySuccess = () => {
               imp_uid: query.imp_uid,
               merchant_uid: query.merchant_uid,
               amount: window.localStorage.getItem("finalPayment"),
+              paymentType: "kakaopay",
+              status: "paid",
+              content: window.localStorage.getItem("selectCompetitionName"),
             },
             {
               headers: {
