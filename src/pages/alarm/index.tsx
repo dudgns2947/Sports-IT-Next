@@ -162,7 +162,7 @@ const Alarm = () => {
             활동
           </ToggleTab>
         </ToggleBar>
-        {!activity
+        {!activity && notiList && notiList.length > 0
           ? notiList.map((noti: any, index) => (
               <AlarmCard
                 key={index}
@@ -175,7 +175,8 @@ const Alarm = () => {
                 </AlarmInfo>
               </AlarmCard>
             ))
-          : actiList.map((acti: any, index) => (
+          : activity && actiList && actiList.length > 0
+          ? actiList.map((acti: any, index) => (
               <AlarmCard
                 key={index}
                 onClick={() => postCheck(getLast(acti.link), acti.id)}
@@ -186,7 +187,8 @@ const Alarm = () => {
                   <AlarmHost>{acti.sender.name}</AlarmHost>
                 </AlarmInfo>
               </AlarmCard>
-            ))}
+            ))
+          : null}
       </ContentArea>
     </PageWrapper>
   );
