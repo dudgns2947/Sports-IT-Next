@@ -89,7 +89,7 @@ const Index = () => {
           setMyContestList(response.data.result.content);
         } else {
           const response = await baseApi.get(
-            `competitions/all/${window.localStorage.getItem(
+            `competitions/all/slice/${window.localStorage.getItem(
               "uid"
             )}?page=${page}&size=${size}`,
             {
@@ -102,7 +102,7 @@ const Index = () => {
           console.log(response);
         }
       } catch (e: any) {
-        alert(e.response.data.message);
+        alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
         router.back();
       }
     }
