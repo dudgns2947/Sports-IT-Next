@@ -18,17 +18,21 @@ export const getUser = () => {
   let userRole: string;
   let userName: string;
   let userEmail: string;
+  let userID: string;
   if (typeof window !== "undefined") {
+    userID = localStorage.getItem("uid") as string;
     userRole = localStorage.getItem("role") as string;
     userName = localStorage.getItem("name") as string;
     userEmail = localStorage.getItem("email") as string;
   } else {
+    userID = "123456";
     userRole = "ROLE_INSTITUTION";
     userName = "김영훈";
     userEmail = "dudgns2947@ajou.ac.kr";
   }
 
   return {
+    userID,
     userRole,
     userName,
     userEmail,
@@ -36,14 +40,14 @@ export const getUser = () => {
 };
 
 export const userTypeOrganization = {
-  userId: "123456",
+  userId: getUser().userID,
   userType: "ROLE_INSTITUTION" as const,
   name: getUser().userName,
   description: getUser().userEmail,
   followers: 11,
   following: 27,
   membership: 0,
-  email: "karmwrestling@gmail.com",
+  email: getUser().userEmail,
   phone: "010-8802-5105",
   address: "서울특별시 성북구 동소문로26길 17,지하 1층 (동선동 3가)",
   addressName: "동소문로26길 17",
@@ -80,7 +84,7 @@ export const userTypeOrganization = {
 };
 
 export const userTypeSportsman = {
-  userId: "123457",
+  userId: getUser().userID,
   userType: "ROLE_USER" as const,
   name: getUser().userName,
   description: getUser().userEmail,
