@@ -1,9 +1,11 @@
+import { baseApi } from "@component/api/utils/instance";
 import Seo from "@component/components/Seo";
 import { ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import { Text } from "@component/styles/auth/event-select.styles";
 import { TextArea } from "@component/styles/auth/event-select.styles";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import styled from "styled-components";
 
@@ -48,6 +50,20 @@ const ApplyButton = styled.div`
 
 const Index = () => {
   const [keyword, setKeyword] = useState("");
+  const router = useRouter();
+
+  async function postEvent() {
+    try {
+      const response = await baseApi.post("/category/customCategory", {
+        name: keyword,
+      });
+      console.log(response);
+      alert("종목 신청이 완료되었습니다 !");
+      router.back();
+    } catch (e) {
+      alert("오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");
+    }
+  }
   return (
     <PageWrapper>
       <Seo title="종목 신청" />
@@ -66,7 +82,7 @@ const Index = () => {
           />
         </SearchArea>
         <ApplyButtonArea>
-          <ApplyButton>종목 신청</ApplyButton>
+          <ApplyButton onClick={() => postEvent()}>종목 신청</ApplyButton>
         </ApplyButtonArea>
       </ContentPaddingArea>
     </PageWrapper>
