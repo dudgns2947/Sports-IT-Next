@@ -89,7 +89,7 @@ const Index = () => {
           setMyContestList(response.data.result.content);
         } else {
           const response = await baseApi.get(
-            `competitions/all/slice/${window.localStorage.getItem(
+            `competitions/all/${window.localStorage.getItem(
               "uid"
             )}?page=${page}&size=${size}`,
             {
