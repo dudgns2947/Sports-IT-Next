@@ -9,7 +9,7 @@ declare global {
 
 const MapWrapper = styled.div`
   width: 100%;
-  height: 10vh;
+  height: 15vh;
   margin: 1em 0;
   opacity: 0.8 !important;
   color: black;
