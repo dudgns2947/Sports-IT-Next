@@ -166,7 +166,7 @@ const Index = () => {
   }, [page, size]);
 
   useEffect(() => {
-    if (inView && contestList.length !== 0) {
+    if (inView && contestList && contestList.length !== 0) {
       console.log("get more data !");
       setIsFresh(false);
       setPage((current) => current + 1);
@@ -260,7 +260,7 @@ const Index = () => {
             </S.OrderArea>
 
             <S.ContestArea>
-              {contestList.length !== 0 ? (
+              {contestList && contestList.length !== 0 ? (
                 contestList.map((contest) => (
                   <Contest
                     key={contest.competitionId}

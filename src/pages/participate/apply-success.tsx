@@ -125,7 +125,14 @@ const ApplySuccess = () => {
         <S.DetailArea>
           <S.DetailContainer>
             <S.DetailTitle>결제금액</S.DetailTitle>
-            <S.DetailMoney>{finalPayment}원</S.DetailMoney>
+            <S.DetailMoney>
+              {finalPayment !== 0
+                ? finalPayment
+                : typeof window !== "undefined"
+                ? window.localStorage.getItem("finalPayment")
+                : 0}
+              원
+            </S.DetailMoney>
           </S.DetailContainer>
           <S.DetailContainer>
             <S.DetailTitle>주문번호</S.DetailTitle>
