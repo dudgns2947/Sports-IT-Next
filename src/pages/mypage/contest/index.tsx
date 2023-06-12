@@ -54,6 +54,7 @@ interface IMyContestList {
 
 const Index = () => {
   const [myContestList, setMyContestList] = useState<IMyContestList[]>([]);
+  const [registerContest, setRegisterContest] = useState<ICompetition[]>([]);
   const [keyword, setKeyword] = useState("");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(15);
@@ -69,27 +70,39 @@ const Index = () => {
     return `${year}년 ${month}월 ${day}일`;
   }
 
-  async function getMyContest() {
+  async function getMyContest({ page, size }: { page: number; size: number }) {
     if (typeof window !== "undefined") {
       console.log(window.localStorage.getItem("jwt"));
       try {
         if (window.localStorage.getItem("role") === "ROLE_USER") {
-          const response = await baseApi.get(`competitions/join/slice/${window.localStorage.getItem("uid")}?page=${page}&size=${size}`, {
-            headers: {
-              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-            },
-          });
+          const response = await baseApi.get(
+            `competitions/join/slice/${window.localStorage.getItem(
+              "uid"
+            )}?page=${page}&size=${size}`,
+            {
+              headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+              },
+            }
+          );
           console.log(response);
           setMyContestList(response.data.result.content);
         } else {
-          const response = await baseApi.get(`competitions/all/slice/${window.localStorage.getItem("uid")}?page=${page}&size=${size}`, {
-            headers: {
-              Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
-            },
-          });
+          const response = await baseApi.get(
+            `competitions/all/slice/${window.localStorage.getItem(
+              "uid"
+            )}?page=${page}&size=${size}`,
+            {
+              headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+              },
+            }
+          );
+          setRegisterContest(response.data.result.content);
+          console.log(response);
         }
       } catch (e: any) {
-        alert(e.response.data.message);
+        alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
         router.back();
       }
     }
@@ -103,16 +116,34 @@ const Index = () => {
   }, [inView]);
 
   useEffect(() => {
-    getMyContest();
+    getMyContest({ page: page, size: size });
   }, [page, size]);
 
   return (
     <PageWrapper>
-      <Seo title="참가한 대회" />
-      <GoBackHeader title="내가 참가한 대회" />
+      <Seo
+        title={
+          typeof window !== "undefined" &&
+          window.localStorage.getItem("role") === "ROLE_USER"
+            ? "참가 대회"
+            : "개최 대회"
+        }
+      />
+      <GoBackHeader
+        title={
+          typeof window !== "undefined" &&
+          window.localStorage.getItem("role") === "ROLE_USER"
+            ? "내가 참가한 대회"
+            : "내가 개최한 대회"
+        }
+      />
       <ContentPaddingArea>
         <SearchInputArea>
-          <SearchInput value={keyword} placeholder="대회 검색" onChange={(e) => setKeyword(e.currentTarget.value)} />
+          <SearchInput
+            value={keyword}
+            placeholder="대회 검색"
+            onChange={(e) => setKeyword(e.currentTarget.value)}
+          />
           <SearchIcon />
         </SearchInputArea>
         {/* <ContestArea> */}
@@ -129,14 +160,37 @@ const Index = () => {
                 date={getFormattedDate(myContest.joinDate)}
                 contestId={myContest.competition.competitionId}
                 imageUrl={
-                  myContest.competition.posters.length > 0 ? myContest.competition.posters[0].posterUrl : "/images/logo/replace_poster.png"
+                  myContest.competition.posters.length > 0
+                    ? myContest.competition.posters[0].posterUrl
+                    : "/images/logo/replace_poster.png"
                 }
               />
             ))
-        ) : (
+        ) : registerContest.length > 0 ? (
+          registerContest
+            .filter((contest) => contest.name.includes(keyword))
+            .map((item, index) => (
+              <ContestCard
+                key={index}
+                tags={["스포츠", "대회"]}
+                scrap={false}
+                title={item.name}
+                host={item.host.name}
+                date={getFormattedDate(item.startDate)}
+                contestId={item.competitionId}
+                imageUrl={
+                  item.posters.length > 0
+                    ? item.posters[0].posterUrl
+                    : "/images/logo/replace_poster.png"
+                }
+              />
+            ))
+        ) : typeof window !== "undefined" &&
+          window.localStorage.getItem("role") === "ROLE_USER" ? (
           <ContestNullArea>참가한 대회가 존재하지 않습니다.</ContestNullArea>
+        ) : (
+          <ContestNullArea>개최한 대회가 존재하지 않습니다.</ContestNullArea>
         )}
-        {/* </ContestArea> */}
         <SeeMoreArea ref={ref}></SeeMoreArea>
       </ContentPaddingArea>
     </PageWrapper>
