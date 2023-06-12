@@ -40,7 +40,7 @@ export const getUser = () => {
 };
 
 export const userTypeOrganization = {
-  userId: getUser().userID,
+  userId: "123456",
   userType: "ROLE_INSTITUTION" as const,
   name: getUser().userName,
   description: getUser().userEmail,
@@ -84,7 +84,7 @@ export const userTypeOrganization = {
 };
 
 export const userTypeSportsman = {
-  userId: getUser().userID,
+  userId: "123457",
   userType: "ROLE_USER" as const,
   name: getUser().userName,
   description: getUser().userEmail,

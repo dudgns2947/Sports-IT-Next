@@ -2,7 +2,7 @@ import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
 import React from "react";
 import GoBackHeader from "@component/components/header/GoBackHeader";
-import { ContentArea } from "@component/components/area/areaComponent";
+import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
 import * as S from "../../styles/auth/find-info.styles";
 
 const ThirdPartyProvision = () => {
@@ -10,7 +10,7 @@ const ThirdPartyProvision = () => {
     <PageWrapper>
       <Seo title="개인정보 제3자 제공 동의" />
       <GoBackHeader title="개인정보 제3자 제공동의" />
-      <ContentArea>
+      <ContentPaddingArea>
         <S.QuestionArea>
           <S.QuestionText>다음과 같이 개인정보를</S.QuestionText>
           <S.QuestionText>제3자에게 제공합니다.</S.QuestionText>
@@ -18,7 +18,7 @@ const ThirdPartyProvision = () => {
         <h3
           style={{
             fontWeight: "bold",
-            fontSize: "1.2rem",
+            fontSize: "0.9rem",
             marginBottom: "1rem",
           }}
         >
@@ -27,7 +27,7 @@ const ThirdPartyProvision = () => {
         <h3
           style={{
             fontWeight: "bold",
-            fontSize: "1.2rem",
+            fontSize: "0.9rem",
             marginBottom: "1rem",
           }}
         >
@@ -36,7 +36,7 @@ const ThirdPartyProvision = () => {
         <h3
           style={{
             fontWeight: "bold",
-            fontSize: "1.2rem",
+            fontSize: "0.9rem",
             marginBottom: "1rem",
           }}
         >
@@ -45,13 +45,13 @@ const ThirdPartyProvision = () => {
         <h3
           style={{
             fontWeight: "bold",
-            fontSize: "1.2rem",
+            fontSize: "0.9rem",
             marginBottom: "1rem",
           }}
         >
           4. 제공받는 자의 보유 및 이용기간 : 회원탈퇴 시 또는 개인정보 제3자 제공 철회 시까지
         </h3>
-      </ContentArea>
+      </ContentPaddingArea>
     </PageWrapper>
   );
 };

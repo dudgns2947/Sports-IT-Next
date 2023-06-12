@@ -84,6 +84,7 @@ const ContestInfo = () => {
               type="text"
               placeholder="ex) 제 1회 스포츠잇 대표 선발전"
               onChange={(e) => setContestName(e.currentTarget.value)}
+              value={contestName!}
             ></Input>
           </InputArea>
           {/* <InputArea>

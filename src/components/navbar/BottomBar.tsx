@@ -118,9 +118,9 @@ const BottomBar = () => {
       </NavCard>
       <NavCard
         onClick={() => {
-          {
-            router.push(`/feelit/${UserID}`);
-          }
+          // {
+          //   router.push(`/feelit/${UserID}`);
+          // }
 
           {
             UserRole === "ROLE_INSTITUTION" ? router.push(`/feelit/123456`) : router.push(`/feelit/123457`);
