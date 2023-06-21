@@ -32,6 +32,16 @@ import { Router, useRouter } from "next/router";
 import { Map } from "@component/components/feel-it/Map";
 import { set } from "react-hook-form";
 
+function transformDate(input: string) {
+  const date = new Date(input);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  const formattedDateString = `${year}-${month}-${day}`;
+  return formattedDateString;
+}
+
 const ContestInfo = () => {
   const [contestName, setContestName] = useRecoilState(contestNameAtom);
   const [startDate, setStartDate] = useRecoilState(contestStartDateAtom);
@@ -114,6 +124,7 @@ const ContestInfo = () => {
                   setStartDate(new Date(e.currentTarget.value).toISOString())
                 }
                 type="date"
+                value={transformDate(startDate!)}
               />
               <S.Text>부터</S.Text>
               <S.SmallInput
@@ -121,6 +132,7 @@ const ContestInfo = () => {
                   setEndDate(new Date(e.currentTarget.value).toISOString())
                 }
                 type="date"
+                value={transformDate(endDate!)}
               />
               <S.Text>까지</S.Text>
             </S.SmallInputWrapper>
@@ -135,6 +147,7 @@ const ContestInfo = () => {
                   )
                 }
                 type="date"
+                value={transformDate(recruitingStart!)}
               />
               <S.Text>부터</S.Text>
               <S.SmallInput
@@ -144,6 +157,7 @@ const ContestInfo = () => {
                   )
                 }
                 type="date"
+                value={transformDate(recruitingEnd!)}
               />
               <S.Text>까지</S.Text>
             </S.SmallInputWrapper>
@@ -158,6 +172,7 @@ const ContestInfo = () => {
                   ? setTotalPrize(parseInt(e.currentTarget.value))
                   : 0
               }
+              value={totalPrize!}
             />
           </InputArea>
           <InputArea>
