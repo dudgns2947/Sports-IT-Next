@@ -102,6 +102,7 @@ const ContestCard = ({
   date,
   contestId,
   imageUrl,
+  document = false,
 }: ContestCardProps) => {
   const router = useRouter();
   return (
