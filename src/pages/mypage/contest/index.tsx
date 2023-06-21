@@ -5,7 +5,11 @@ import { PageWrapper } from "@component/components/container/container";
 import ContestCard from "@component/components/contest/ContestCard";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import { SearchIcon } from "@component/components/navbar/TopBar.styles";
-import { IPoster } from "@component/interfaces/contestInterface";
+import {
+  ICompetition,
+  IMyContestList,
+  IPoster,
+} from "@component/interfaces/contestInterface";
 import { IHost } from "@component/interfaces/contestInterface";
 import { ContestNullArea } from "@component/styles/contest/index.styles";
 import { useRouter } from "next/router";
@@ -36,21 +40,6 @@ const SeeMoreArea = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-interface ICompetition {
-  competitionId: number;
-  host: IHost;
-  name: string;
-  posters: IPoster[];
-  sportCategory: string;
-  startDate: string;
-}
-
-interface IMyContestList {
-  competition: ICompetition;
-  joinDate: string;
-  type: string;
-}
 
 const Index = () => {
   const [myContestList, setMyContestList] = useState<IMyContestList[]>([]);

@@ -29,12 +29,12 @@ const ContestDocument = () => {
         <GoBackHeader title="공문서 발급" />
         <ContentPaddingArea>
           <ContestCard
-            tags={["팔씨름", "스포츠", "대회"]}
-            scrap={true}
-            title="제 26회 대한민국 팔씨름 연맹 주최 국가대표 선발전"
-            host="(사)대한 팔씨름 연맹"
-            date="2023년 3월 13일"
-            contestId={12}
+            tags={["스포츠", "대회"]}
+            scrap={false}
+            title="2023 수원배 전국 유소년 야구대회"
+            host="신우현"
+            date="2023년 6월 21일"
+            contestId={2728}
           />
           <DocumentArea>
             <Document name="대회 참여 확인증" documentId={6} />

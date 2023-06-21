@@ -91,6 +91,7 @@ interface ContestCardProps {
   date: string;
   contestId: number;
   imageUrl?: string;
+  document?: boolean;
 }
 
 const ContestCard = ({
@@ -104,7 +105,13 @@ const ContestCard = ({
 }: ContestCardProps) => {
   const router = useRouter();
   return (
-    <Contest onClick={() => router.push(`/contest/${contestId}`)}>
+    <Contest
+      onClick={() => {
+        document
+          ? router.push(`/document/contest/${contestId}`)
+          : router.push(`/contest/${contestId}`);
+      }}
+    >
       <ContestImage src={imageUrl} />
       <RightArea>
         <ContestTopArea>

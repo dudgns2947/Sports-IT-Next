@@ -8,9 +8,17 @@ import ContestCard from "@component/components/contest/ContestCard";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import { Input } from "@component/components/input/inputComponent";
 import { SearchIcon } from "@component/components/navbar/TopBar.styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Head from "next/head";
+import {
+  ICompetition,
+  IMyContestList,
+} from "@component/interfaces/contestInterface";
+import { useInView } from "react-intersection-observer";
+import { useRouter } from "next/router";
+import { ContestNullArea } from "@component/styles/contest/index.styles";
+import { baseApi } from "@component/api/utils/instance";
 
 const BoldTextArea = styled.div`
   display: flex;
@@ -45,8 +53,80 @@ const SearchInput = styled.input`
 
 const ContestArea = styled.div``;
 
+const SeeMoreArea = styled.div`
+  height: 50px;
+  margin: 20px 0 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Index = () => {
   const [keyword, setKeyword] = useState("");
+  const [myContestList, setMyContestList] = useState<IMyContestList[]>([]);
+  const [registerContest, setRegisterContest] = useState<ICompetition[]>([]);
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(15);
+  const [ref, inView] = useInView();
+  const router = useRouter();
+
+  function getFormattedDate(inputString: string) {
+    const date = new Date(inputString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
+    const day = date.getDate();
+
+    return `${year}년 ${month}월 ${day}일`;
+  }
+
+  async function getMyContest({ page, size }: { page: number; size: number }) {
+    if (typeof window !== "undefined") {
+      console.log(window.localStorage.getItem("jwt"));
+      try {
+        if (window.localStorage.getItem("role") === "ROLE_USER") {
+          const response = await baseApi.get(
+            `competitions/join/slice/${window.localStorage.getItem(
+              "uid"
+            )}?page=${page}&size=${size}`,
+            {
+              headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+              },
+            }
+          );
+          console.log(response);
+          setMyContestList(response.data.result.content);
+        } else {
+          const response = await baseApi.get(
+            `competitions/all/${window.localStorage.getItem(
+              "uid"
+            )}?page=${page}&size=${size}`,
+            {
+              headers: {
+                Authorization: `Bearer ${window.localStorage.getItem("jwt")}`,
+              },
+            }
+          );
+          setRegisterContest(response.data.result.content);
+          console.log(response);
+        }
+      } catch (e: any) {
+        alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        router.back();
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (inView && myContestList.length !== 0) {
+      console.log("get more data !");
+      setPage((current) => current + 1);
+    }
+  }, [inView]);
+
+  useEffect(() => {
+    getMyContest({ page: page, size: size });
+  }, [page, size]);
   return (
     <>
       <Head>
@@ -69,22 +149,57 @@ const Index = () => {
             <SearchIcon />
           </SearchInputArea>
           <ContestArea>
-            <ContestCard
-              tags={["팔씨름", "스포츠", "대회"]}
-              scrap={true}
-              title="제 26회 대한민국 팔씨름 연맹 주최 국가대표 선발전"
-              host="(사)대한 팔씨름 연맹"
-              date="2023년 3월 13일"
-              contestId={12}
-            />
-            <ContestCard
-              tags={["탁구", "스포츠"]}
-              scrap={false}
-              title="22-33 탁구 세계 선수권 대회"
-              host="(사)대한 탁구 연맹"
-              date="2023년 3월 20일"
-              contestId={11}
-            />
+            {myContestList.length > 0 ? (
+              myContestList
+                .filter((contest) => contest.competition.name.includes(keyword))
+                .map((myContest, index) => (
+                  <ContestCard
+                    key={index}
+                    tags={["스포츠", "대회"]}
+                    scrap={false}
+                    title={myContest.competition.name}
+                    host={myContest.competition.host.name}
+                    date={getFormattedDate(myContest.joinDate)}
+                    contestId={myContest.competition.competitionId}
+                    imageUrl={
+                      myContest.competition.posters.length > 0
+                        ? myContest.competition.posters[0].posterUrl
+                        : "/images/logo/replace_poster.png"
+                    }
+                    document={true}
+                  />
+                ))
+            ) : registerContest.length > 0 ? (
+              registerContest
+                .filter((contest) => contest.name.includes(keyword))
+                .map((item, index) => (
+                  <ContestCard
+                    key={index}
+                    tags={["스포츠", "대회"]}
+                    scrap={false}
+                    title={item.name}
+                    host={item.host.name}
+                    date={getFormattedDate(item.startDate)}
+                    contestId={item.competitionId}
+                    imageUrl={
+                      item.posters.length > 0
+                        ? item.posters[0].posterUrl
+                        : "/images/logo/replace_poster.png"
+                    }
+                    document={true}
+                  />
+                ))
+            ) : typeof window !== "undefined" &&
+              window.localStorage.getItem("role") === "ROLE_USER" ? (
+              <ContestNullArea>
+                참가한 대회가 존재하지 않습니다.
+              </ContestNullArea>
+            ) : (
+              <ContestNullArea>
+                개최한 대회가 존재하지 않습니다.
+              </ContestNullArea>
+            )}
+            <SeeMoreArea ref={ref}></SeeMoreArea>
           </ContestArea>
         </ContentPaddingArea>
       </PageWrapper>

@@ -130,3 +130,18 @@ export interface IParticipant {
   profileImg: string;
   phone: string;
 }
+
+export interface ICompetition {
+  competitionId: number;
+  host: IHost;
+  name: string;
+  posters: IPoster[];
+  sportCategory: string;
+  startDate: string;
+}
+
+export interface IMyContestList {
+  competition: ICompetition;
+  joinDate: string;
+  type: string;
+}
