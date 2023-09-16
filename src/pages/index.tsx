@@ -10,13 +10,20 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ImageSlider from "@component/components/container/ImageSlider";
 import CustomButton from "@component/components/button/Custombutton";
-import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import MainPagePost from "@component/components/container/mainpagepost";
 import qs from "qs";
 import BottomBar from "@component/components/navbar/BottomBar";
 import MainPageRecommanduser from "@component/components/container/MainPageRecommanduser";
 import MainPageCompetition from "@component/components/container/MainPageCompetition";
-import { FilterType, IContestInfo, IContestParams } from "@component/interfaces/contestInterface";
+import {
+  FilterType,
+  IContestInfo,
+  IContestParams,
+} from "@component/interfaces/contestInterface";
 import { baseApi } from "@component/api/utils/instance";
 import { useRecoilValue } from "recoil";
 import { userNameAtom, userTokenAtom } from "@component/atoms/tokenAtom";
@@ -26,7 +33,11 @@ import { useRouter } from "next/router";
 // reset
 
 export default function Home() {
-  const images = ["/images/logo/advertise.png", "/images/logo/advertise.png", "/images/logo/advertise.png"];
+  const images = [
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+  ];
   const iconProps = [
     ["/images/icon/Icon1.png", "대회", "contest"],
     ["/images/icon/Icon2.png", "선수등록", "/"],
@@ -44,7 +55,10 @@ export default function Home() {
   const token = useRecoilValue(userTokenAtom);
   const [keyword, setKeyword] = useState("");
   const userName = useRecoilValue(userNameAtom);
-  const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
+  const [filterBy, setFilterBy] = useState<FilterType[]>([
+    "PLANNING",
+    "RECRUITING",
+  ]);
 
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
@@ -52,7 +66,6 @@ export default function Home() {
   const router = useRouter();
 
   const [name, setName] = useState("");
-
 
   async function getContest(contestProps: IContestParams) {
     const response = await baseApi.get("competitions/slice", {
@@ -76,14 +89,14 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getContest({
-      token: token,
-      keyword: keyword,
-      filterBy: filterBy,
-      orderBy: orderBy,
-      page: page,
-      size: size,
-    });
+    // getContest({
+    //   token: token,
+    //   keyword: keyword,
+    //   filterBy: filterBy,
+    //   orderBy: orderBy,
+    //   page: page,
+    //   size: size,
+    // });
   }, [keyword, filterBy, orderBy, page, size]);
 
   useEffect(() => {
@@ -93,23 +106,74 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <S.WebContainer>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <PageWrapper>
+
+      <S.Header>
+        <S.HeaderTopArea>
+          <Image
+            src="/images/logo/web_text_logo.png"
+            width={142}
+            height={22}
+            alt="text_logo"
+            style={{ cursor: "pointer" }}
+            onClick={() => router.push("/")}
+          />
+          <nav>
+            <Link href="/login">
+              <S.GrayNavText>로그인</S.GrayNavText>
+            </Link>
+            <Link href="/signup">
+              <S.GrayNavText>회원가입</S.GrayNavText>
+            </Link>
+          </nav>
+        </S.HeaderTopArea>
+        <S.HeaderBottomArea>
+          <nav>
+            <Link href="/">
+              <S.BlackNavText>대회</S.BlackNavText>
+            </Link>
+            <Link href="/">
+              <S.BlackNavText>선수등록</S.BlackNavText>
+            </Link>
+            <Link href="/">
+              <S.BlackNavText>공문서</S.BlackNavText>
+            </Link>
+            <Link href="/">
+              <S.BlackNavText>통계</S.BlackNavText>
+            </Link>
+            <Link href="/">
+              <S.BlackNavText>피드</S.BlackNavText>
+            </Link>
+          </nav>
+          <div>
+            <S.BlackNavText>직접 대회를 개최 해보세요!</S.BlackNavText>
+            <S.RegisterNavButton>대회 개최하기</S.RegisterNavButton>
+          </div>
+        </S.HeaderBottomArea>
+      </S.Header>
+      {/* <PageWrapper>
         <TopBar />
         <Seo title="메인 페이지" />
         <ContentPaddingArea>
           <S.CustomMenu>
             <S.Banner>
-              {/* <ImageSlider images={images} /> */}
-              <S.AdvertiseImage onClick={() => router.push("/contest")} src="/images/logo/advertise.png" />
+              <S.AdvertiseImage
+                onClick={() => router.push("/contest")}
+                src="/images/logo/advertise.png"
+              />
             </S.Banner>
             <S.IconContainer>
               {iconProps
                 ? iconProps.map((iconProp, index) => (
-                    <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
+                    <CustomButton
+                      key={index}
+                      imageUrl={iconProp[0]}
+                      buttonName={iconProp[1]}
+                      routeUrl={iconProp[2]}
+                    />
                   ))
                 : null}
             </S.IconContainer>
@@ -121,7 +185,9 @@ export default function Home() {
             ? contestList.map((contest) => (
                 <Contest
                   key={contest.competitionId}
-                  posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
+                  posterImageUrl={
+                    contest.posters[0] ? contest.posters[0].posterUrl : ""
+                  }
                   competitionId={contest.competitionId}
                   competitionType={contest.competitionType}
                   name={contest.name}
@@ -134,8 +200,8 @@ export default function Home() {
           <MainPageRecommanduser />
         </ContentPaddingArea>
         <BottomBar />
-      </PageWrapper>
-    </>
+      </PageWrapper> */}
+    </S.WebContainer>
   );
 }
 // getServerSideProps(완전한 SSR) ⭐️
