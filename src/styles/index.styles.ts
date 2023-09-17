@@ -28,6 +28,51 @@ export const AdvertiseImage = styled.img`
 export const WebContainer = styled.div`
   width: 1920px;
   height: 4276px;
+
+  .slider {
+    height: 618px;
+    background-color: black;
+    padding: 0 240px;
+    display: flex;
+  }
+  .red-area {
+    height: 100px;
+    background-color: #fd3446;
+    padding: 0 240px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .red-inside-area {
+    width: 1440px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 240px;
+  }
+  .red-inside-area span {
+    color: #ffffff;
+  }
+  .white-mid-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+  }
+  .white-small-text {
+    font-size: 14px;
+    color: #ffffff;
+  }
+  .signup-white-btn {
+    width: 227px;
+    height: 55px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+  }
 `;
 
 export const Header = styled.header`
@@ -75,5 +120,3 @@ export const RegisterNavButton = styled.button`
   font-size: 15px;
   font-weight: bold;
 `;
-
-export const AuthNavContainer = styled.nav``;

@@ -132,7 +132,7 @@ export default function Home() {
         </S.HeaderTopArea>
         <S.HeaderBottomArea>
           <nav>
-            <Link href="/">
+            <Link href="/contest">
               <S.BlackNavText>대회</S.BlackNavText>
             </Link>
             <Link href="/">
@@ -150,10 +150,28 @@ export default function Home() {
           </nav>
           <div>
             <S.BlackNavText>직접 대회를 개최 해보세요!</S.BlackNavText>
-            <S.RegisterNavButton>대회 개최하기</S.RegisterNavButton>
+            <S.RegisterNavButton>
+              <Link href="/">대회 개최하기</Link>
+            </S.RegisterNavButton>
           </div>
         </S.HeaderBottomArea>
       </S.Header>
+      <div className="slider"></div>
+      <div className="red-area">
+        <div className="red-inside-area">
+          <div>
+            <p className="white-mid-text">
+              지금 바로 새롭고 다양한 대회들을 만나보세요
+            </p>
+            <p className="white-small-text">
+              지금 핫한 대회가 당신을 기다립니다!
+            </p>
+          </div>
+          <Link href="/signup">
+            <button className="signup-white-btn">회원가입 하기</button>
+          </Link>
+        </div>
+      </div>
       {/* <PageWrapper>
         <TopBar />
         <Seo title="메인 페이지" />
