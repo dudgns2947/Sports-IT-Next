@@ -27,4 +27,14 @@ export const AdvertiseImage = styled.img`
 
 export const WebContainer = styled.div`
   width: 100%;
+  .content {
+    padding-top: 112px;
+    height: 100vh;
+  }
+`;
+
+export const CategoryTitle = styled.h1``;
+
+export const ContestArea = styled.div`
+  display: flex;
 `;

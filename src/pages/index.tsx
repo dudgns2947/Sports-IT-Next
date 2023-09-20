@@ -32,7 +32,8 @@ import { useRouter } from "next/router";
 import Header from "@component/components/web/header/Header";
 import Footer from "@component/components/web/footer/Footer";
 import Slider from "@component/components/web/slider/Slider";
-import RedArea from "@component/components/web/red-area/RedArea";
+import RedArea from "@component/components/web/area/RedArea";
+import TextArea from "@component/components/web/area/TextArea";
 
 // reset
 
@@ -115,22 +116,28 @@ export default function Home() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Header />
-      <div
-        style={{
-          paddingTop: "112px",
-          height: "100vh",
-        }}
-      >
+      <section className="content">
         <Slider />
         <RedArea />
+        <TextArea
+          textList={[
+            "체육회, 동호회, 공공기관, 학교가 선택한",
+            "간편 스포츠 운영관리 서비스를 만날 수 있습니다.",
+          ]}
+        />
         <div>
-          <span>체육회, 동호회, 공공기관, 학교가 선택한</span>
-          <br />
-          <span>간편 스포츠 운영관리 서비스를 만날 수 있습니다.</span>
+          <S.CategoryTitle>지금 핫한 대회</S.CategoryTitle>
+          <S.ContestArea></S.ContestArea>
         </div>
-        <div></div>
+        <TextArea
+          textList={[
+            "어떤 대회에 참여해야할지 모르겠다면?",
+            "사용자 맞춤 추천을 통해",
+            "직접 경험해 보세요!",
+          ]}
+        />
         <Footer />
-      </div>
+      </section>
       {/* <PageWrapper>
         <TopBar />
         <Seo title="메인 페이지" />
