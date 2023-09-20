@@ -10,23 +10,39 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ImageSlider from "@component/components/container/ImageSlider";
 import CustomButton from "@component/components/button/Custombutton";
-import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import MainPagePost from "@component/components/container/mainpagepost";
 import qs from "qs";
 import BottomBar from "@component/components/navbar/BottomBar";
 import MainPageRecommanduser from "@component/components/container/MainPageRecommanduser";
 import MainPageCompetition from "@component/components/container/MainPageCompetition";
-import { FilterType, IContestInfo, IContestParams } from "@component/interfaces/contestInterface";
+import {
+  FilterType,
+  IContestInfo,
+  IContestParams,
+} from "@component/interfaces/contestInterface";
 import { baseApi } from "@component/api/utils/instance";
 import { useRecoilValue } from "recoil";
 import { userNameAtom, userTokenAtom } from "@component/atoms/tokenAtom";
-import Contest from "@component/components/contest/Contest";
 import { useRouter } from "next/router";
+import Header from "@component/components/web/header/Header";
+import Footer from "@component/components/web/footer/Footer";
+import Slider from "@component/components/web/slider/Slider";
+import RedArea from "@component/components/web/area/RedArea";
+import TextArea from "@component/components/web/area/TextArea";
+import ContestCard from "@component/components/web/contest/Contest";
 
 // reset
 
 export default function Home() {
-  const images = ["/images/logo/advertise.png", "/images/logo/advertise.png", "/images/logo/advertise.png"];
+  const images = [
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+    "/images/logo/advertise.png",
+  ];
   const iconProps = [
     ["/images/icon/Icon1.png", "대회", "contest"],
     ["/images/icon/Icon2.png", "선수등록", "/"],
@@ -44,7 +60,10 @@ export default function Home() {
   const token = useRecoilValue(userTokenAtom);
   const [keyword, setKeyword] = useState("");
   const userName = useRecoilValue(userNameAtom);
-  const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
+  const [filterBy, setFilterBy] = useState<FilterType[]>([
+    "PLANNING",
+    "RECRUITING",
+  ]);
 
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
@@ -52,7 +71,6 @@ export default function Home() {
   const router = useRouter();
 
   const [name, setName] = useState("");
-
 
   async function getContest(contestProps: IContestParams) {
     const response = await baseApi.get("competitions/slice", {
@@ -76,14 +94,14 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getContest({
-      token: token,
-      keyword: keyword,
-      filterBy: filterBy,
-      orderBy: orderBy,
-      page: page,
-      size: size,
-    });
+    // getContest({
+    //   token: token,
+    //   keyword: keyword,
+    //   filterBy: filterBy,
+    //   orderBy: orderBy,
+    //   page: page,
+    //   size: size,
+    // });
   }, [keyword, filterBy, orderBy, page, size]);
 
   useEffect(() => {
@@ -93,23 +111,98 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <S.WebContainer>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <PageWrapper>
+      <Header />
+      <section className="content">
+        <Slider />
+        <RedArea />
+        <TextArea
+          textList={[
+            "체육회, 동호회, 공공기관, 학교가 선택한",
+            "간편 스포츠 운영관리 서비스를 만날 수 있습니다.",
+          ]}
+        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <S.CategoryTitle>지금 핫한 대회</S.CategoryTitle>
+            <S.ContestArea>
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+            </S.ContestArea>
+          </div>
+        </div>
+        <TextArea
+          textList={[
+            "어떤 대회에 참여해야할지 모르겠다면?",
+            "사용자 맞춤 추천을 통해",
+            "직접 경험해 보세요!",
+          ]}
+        />
+        <Footer />
+      </section>
+      {/* <PageWrapper>
         <TopBar />
         <Seo title="메인 페이지" />
         <ContentPaddingArea>
           <S.CustomMenu>
             <S.Banner>
-              {/* <ImageSlider images={images} /> */}
-              <S.AdvertiseImage onClick={() => router.push("/contest")} src="/images/logo/advertise.png" />
+              <S.AdvertiseImage
+                onClick={() => router.push("/contest")}
+                src="/images/logo/advertise.png"
+              />
             </S.Banner>
             <S.IconContainer>
               {iconProps
                 ? iconProps.map((iconProp, index) => (
-                    <CustomButton key={index} imageUrl={iconProp[0]} buttonName={iconProp[1]} routeUrl={iconProp[2]} />
+                    <CustomButton
+                      key={index}
+                      imageUrl={iconProp[0]}
+                      buttonName={iconProp[1]}
+                      routeUrl={iconProp[2]}
+                    />
                   ))
                 : null}
             </S.IconContainer>
@@ -121,7 +214,9 @@ export default function Home() {
             ? contestList.map((contest) => (
                 <Contest
                   key={contest.competitionId}
-                  posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
+                  posterImageUrl={
+                    contest.posters[0] ? contest.posters[0].posterUrl : ""
+                  }
                   competitionId={contest.competitionId}
                   competitionType={contest.competitionType}
                   name={contest.name}
@@ -134,8 +229,8 @@ export default function Home() {
           <MainPageRecommanduser />
         </ContentPaddingArea>
         <BottomBar />
-      </PageWrapper>
-    </>
+      </PageWrapper> */}
+    </S.WebContainer>
   );
 }
 // getServerSideProps(완전한 SSR) ⭐️

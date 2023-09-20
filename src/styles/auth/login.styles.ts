@@ -1,4 +1,7 @@
-import { Container, PageWrapper } from "@component/components/container/container";
+import {
+  Container,
+  PageWrapper,
+} from "@component/components/container/container";
 import styled from "styled-components";
 import Image from "next/image";
 import splash from "@public/images/splash.jpg";
