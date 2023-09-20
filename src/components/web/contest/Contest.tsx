@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import * as S from "./Contest.style";
 
-const Contest = ({
+const ContestCard = ({
   posterImageUrl,
   competitionId,
   competitionType,
@@ -33,14 +33,15 @@ const Contest = ({
     >
       {showImage === false ? null : (
         <Image
-          src={
-            posterImageUrl ? posterImageUrl : "/images/logo/replace_poster.png"
-          }
+          src={posterImageUrl ? posterImageUrl : "/images/contest/example2.png"}
           width={300}
           height={300}
           alt="poster-image"
           style={{
             borderRadius: "10px",
+            width: "300px",
+            height: "300px",
+            marginBottom: "15px",
           }}
         />
       )}
@@ -59,4 +60,4 @@ const Contest = ({
   );
 };
 
-export default Contest;
+export default ContestCard;

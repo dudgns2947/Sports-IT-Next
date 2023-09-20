@@ -33,8 +33,22 @@ export const WebContainer = styled.div`
   }
 `;
 
-export const CategoryTitle = styled.h1``;
+export const CategoryTitle = styled.h1`
+  font-size: 20px;
+  font-weight: bold;
+  color: #101c33;
+  margin-bottom: 10px;
+`;
 
 export const ContestArea = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media only screen and (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;

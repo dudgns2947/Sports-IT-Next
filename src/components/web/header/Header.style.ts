@@ -37,6 +37,12 @@ export const BlackNavText = styled.span`
   margin-right: 20px;
 `;
 
+export const BlackText = styled(BlackNavText)`
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
 export const HeaderBottomArea = styled(HeaderTopArea)``;
 
 export const RegisterNavButton = styled.button`

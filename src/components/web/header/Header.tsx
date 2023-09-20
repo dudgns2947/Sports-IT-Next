@@ -45,7 +45,7 @@ const Header = () => {
           </Link>
         </nav>
         <div>
-          <S.BlackNavText>직접 대회를 개최 해보세요!</S.BlackNavText>
+          <S.BlackText>직접 대회를 개최 해보세요!</S.BlackText>
           <S.RegisterNavButton>
             <Link href="/">대회 개최하기</Link>
           </S.RegisterNavButton>
