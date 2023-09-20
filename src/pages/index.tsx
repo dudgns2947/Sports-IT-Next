@@ -29,6 +29,10 @@ import { useRecoilValue } from "recoil";
 import { userNameAtom, userTokenAtom } from "@component/atoms/tokenAtom";
 import Contest from "@component/components/contest/Contest";
 import { useRouter } from "next/router";
+import Header from "@component/components/web/header/Header";
+import Footer from "@component/components/web/footer/Footer";
+import Slider from "@component/components/web/slider/Slider";
+import RedArea from "@component/components/web/red-area/RedArea";
 
 // reset
 
@@ -110,160 +114,22 @@ export default function Home() {
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <S.Header>
-        <S.HeaderTopArea>
-          <Image
-            src="/images/logo/web_text_logo.png"
-            width={142}
-            height={22}
-            alt="text_logo"
-            style={{ cursor: "pointer" }}
-            onClick={() => router.push("/")}
-          />
-          <nav>
-            <Link href="/login">
-              <S.GrayNavText>로그인</S.GrayNavText>
-            </Link>
-            <Link href="/signup">
-              <S.GrayNavText>회원가입</S.GrayNavText>
-            </Link>
-          </nav>
-        </S.HeaderTopArea>
-        <S.HeaderBottomArea>
-          <nav>
-            <Link href="/contest">
-              <S.BlackNavText>대회</S.BlackNavText>
-            </Link>
-            <Link href="/">
-              <S.BlackNavText>선수등록</S.BlackNavText>
-            </Link>
-            <Link href="/">
-              <S.BlackNavText>공문서</S.BlackNavText>
-            </Link>
-            <Link href="/">
-              <S.BlackNavText>통계</S.BlackNavText>
-            </Link>
-            <Link href="/">
-              <S.BlackNavText>피드</S.BlackNavText>
-            </Link>
-          </nav>
-          <div>
-            <S.BlackNavText>직접 대회를 개최 해보세요!</S.BlackNavText>
-            <S.RegisterNavButton>
-              <Link href="/">대회 개최하기</Link>
-            </S.RegisterNavButton>
-          </div>
-        </S.HeaderBottomArea>
-      </S.Header>
+      <Header />
       <div
         style={{
           paddingTop: "112px",
           height: "100vh",
         }}
       >
-        <div className="slider"></div>
-        <div className="red-area">
-          <div className="red-inside-area">
-            <div className="text-area">
-              <p className="white-mid-text">
-                지금 바로 새롭고 다양한 대회들을 만나보세요
-              </p>
-              <p className="white-small-text">
-                지금 핫한 대회가 당신을 기다립니다!
-              </p>
-            </div>
-            <Link href="/signup">
-              <button className="signup-white-btn">회원가입 하기</button>
-            </Link>
-          </div>
+        <Slider />
+        <RedArea />
+        <div>
+          <span>체육회, 동호회, 공공기관, 학교가 선택한</span>
+          <br />
+          <span>간편 스포츠 운영관리 서비스를 만날 수 있습니다.</span>
         </div>
-        <S.Footer>
-          <div className="info-area">
-            <Image
-              src="/images/logo/web_text_logo.png"
-              width={142}
-              height={22}
-              alt="text_logo"
-            />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: "104px",
-              }}
-            >
-              <Image
-                src="/images/logo/stunning.png"
-                width={92}
-                height={12}
-                alt="stunning_logo"
-              />
-              <div>
-                <S.NavRow>
-                  <p>
-                    <span>대표</span>
-                    <span>김영훈</span>
-                  </p>
-                  <p>
-                    <span>서비스명</span>
-                    <span>스포츠잇</span>
-                  </p>
-                </S.NavRow>
-                <S.NavRow>
-                  <p>
-                    <span>사업자번호</span>
-                    <span>120-87-69298</span>
-                  </p>
-                  <p>
-                    <span>통신판매</span>
-                    <span>제2011-서울강남-01864</span>
-                  </p>
-                  <p>
-                    <span>직업정보제공</span>
-                    <span>emailme@gmail.com</span>
-                  </p>
-                </S.NavRow>
-                <S.NavRow>
-                  <p>
-                    <span>주소</span>
-                    <span>
-                      서울시 강남구 봉은사로 112길 6, 익성빌딩 2층(삼성동)
-                    </span>
-                  </p>
-                </S.NavRow>
-              </div>
-
-              <span
-                style={{
-                  color: "#AEAEAE",
-                }}
-              >
-                Copyright.© 2023 PLAYMAKERS. All rights reserved
-              </span>
-            </div>
-          </div>
-          <S.FooterNav>
-            <Link href="/">
-              <span>회사소개</span>
-            </Link>
-            <Link href="/">
-              <span>공지사항</span>
-            </Link>
-            <Link href="/">
-              <span>개인정보처리방침</span>
-            </Link>
-            <Link href="/">
-              <span>사업자 확인</span>
-            </Link>
-            <Link href="/">
-              <span>이용약관</span>
-            </Link>
-            <Link href="/">
-              <span style={{ border: "none" }}>광고 문의</span>
-            </Link>
-          </S.FooterNav>
-        </S.Footer>
+        <div></div>
+        <Footer />
       </div>
       {/* <PageWrapper>
         <TopBar />
