@@ -195,3 +195,11 @@ export const ReviewSlider = styled(ContestArea)`
     grid-template-columns: repeat(3, 1fr);
   }
 `;
+
+export const PartnerContainer = styled.div`
+  padding: 30px 0;
+  background-color: #747474;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

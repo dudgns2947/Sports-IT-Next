@@ -310,6 +310,35 @@ export default function Home() {
             />
           </S.ReviewSlider>
         </S.ReviewContainer>
+        <S.PartnerContainer>
+          <Image
+            width={100}
+            height={10}
+            style={{
+              margin: "0 40px",
+            }}
+            src="/images/logo/silvis.png"
+            alt="partner-image"
+          />
+          <Image
+            width={100}
+            height={10}
+            style={{
+              margin: "0 40px",
+            }}
+            src="/images/logo/kaf.png"
+            alt="partner-image"
+          />
+          <Image
+            width={100}
+            height={10}
+            style={{
+              margin: "0 40px",
+            }}
+            src="/images/logo/jungle.png"
+            alt="partner-image"
+          />
+        </S.PartnerContainer>
         <Footer />
       </section>
       {/* <PageWrapper>
