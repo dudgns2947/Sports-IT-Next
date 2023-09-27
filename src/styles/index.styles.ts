@@ -172,3 +172,12 @@ export const WhiteTextWrapper = styled(FlexColumn)`
 export const GrayTextWrapper = styled(FlexColumn)`
   margin-bottom: 50px;
 `;
+
+export const ReviewContainer = styled.div`
+  width: 100%;
+  height: 700px;
+  background-color: #e9ebed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
