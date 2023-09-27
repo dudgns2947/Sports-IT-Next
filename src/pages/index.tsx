@@ -34,6 +34,8 @@ import Slider from "@component/components/web/slider/Slider";
 import RedArea from "@component/components/web/area/RedArea";
 import TextArea from "@component/components/web/area/TextArea";
 import ContestCard from "@component/components/web/contest/Contest";
+import { Tag, TagArea } from "@component/components/web/contest/Contest.style";
+import Organization from "@component/components/organization/Organization";
 
 // reset
 
@@ -125,14 +127,12 @@ export default function Home() {
             "간편 스포츠 운영관리 서비스를 만날 수 있습니다.",
           ]}
         />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <div>
+        <S.ContestContainer>
+          <div
+            style={{
+              marginBottom: "30px",
+            }}
+          >
             <S.CategoryTitle>지금 핫한 대회</S.CategoryTitle>
             <S.ContestArea>
               <ContestCard
@@ -173,7 +173,8 @@ export default function Home() {
               />
             </S.ContestArea>
           </div>
-        </div>
+          <S.SeeMoreButton>더 많은 대회 보기</S.SeeMoreButton>
+        </S.ContestContainer>
         <TextArea
           textList={[
             "어떤 대회에 참여해야할지 모르겠다면?",
@@ -181,6 +182,75 @@ export default function Home() {
             "직접 경험해 보세요!",
           ]}
         />
+        <S.ContestContainer>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <div
+              style={{
+                marginRight: "40px",
+              }}
+            >
+              <S.CategoryTitle>실시간 내 주변 대회</S.CategoryTitle>
+              <S.ContestAreaTwo>
+                <ContestCard
+                  posterImageUrl=""
+                  competitionId={1}
+                  competitionType="FREE"
+                  name="제 26회 팔씨름 국가대표 선발전"
+                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                  recruitingEnd="2023-09-25"
+                  showImage={true}
+                />
+                <ContestCard
+                  posterImageUrl=""
+                  competitionId={1}
+                  competitionType="FREE"
+                  name="제 26회 팔씨름 국가대표 선발전"
+                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                  recruitingEnd="2023-09-25"
+                  showImage={true}
+                />
+                <ContestCard
+                  posterImageUrl=""
+                  competitionId={1}
+                  competitionType="FREE"
+                  name="제 26회 팔씨름 국가대표 선발전"
+                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                  recruitingEnd="2023-09-25"
+                  showImage={true}
+                />
+                <ContestCard
+                  posterImageUrl=""
+                  competitionId={1}
+                  competitionType="FREE"
+                  name="제 26회 팔씨름 국가대표 선발전"
+                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                  recruitingEnd="2023-09-25"
+                  showImage={true}
+                />
+              </S.ContestAreaTwo>
+            </div>
+            <S.OrganizationSearchContainer>
+              <S.CategoryHeader>
+                <S.CategoryTitle>단체 찾기</S.CategoryTitle>
+                <S.SeeMoreNav>
+                  <S.SeeMoreText>더보기</S.SeeMoreText>
+                  <S.SeeMoreIcon />
+                </S.SeeMoreNav>
+              </S.CategoryHeader>
+              <div>
+                <Organization
+                  name="대한체육회"
+                  categories={["팔씨름", "씨름", "수영"]}
+                />
+              </div>
+            </S.OrganizationSearchContainer>
+          </div>
+        </S.ContestContainer>
+
         <Footer />
       </section>
       {/* <PageWrapper>

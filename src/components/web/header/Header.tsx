@@ -18,10 +18,10 @@ const Header = () => {
           onClick={() => router.push("/")}
         />
         <nav>
-          <Link href="/login">
+          <Link href="/auth/login">
             <S.GrayNavText>로그인</S.GrayNavText>
           </Link>
-          <Link href="/signup">
+          <Link href="/auth/signup">
             <S.GrayNavText>회원가입</S.GrayNavText>
           </Link>
         </nav>

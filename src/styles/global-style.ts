@@ -41,8 +41,9 @@ export const GlobalStyle = createGlobalStyle`
 }
   body {
     line-height: 1;
-    width: 100vw;
+    width: 100%;
     height: 100%;
+    overflow-x: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
