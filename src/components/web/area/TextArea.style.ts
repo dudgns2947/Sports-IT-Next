@@ -4,7 +4,7 @@ export const TextArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5% 10%;
+  padding: 10% 10%;
   span {
     font-size: 26px;
     font-weight: bold;

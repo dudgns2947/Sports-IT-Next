@@ -6,6 +6,7 @@ export const ContestContainer = styled.div`
   flex-direction: column;
   height: 416px;
   width: 300px;
+  cursor: pointer;
 `;
 
 export const TagArea = styled.div`

@@ -13,6 +13,9 @@ import CustomButton from "@component/components/button/Custombutton";
 import {
   ContentArea,
   ContentPaddingArea,
+  FlexColumn,
+  FlexColumnCenter,
+  FlexColumnRowCenter,
 } from "@component/components/area/areaComponent";
 import MainPagePost from "@component/components/container/mainpagepost";
 import qs from "qs";
@@ -34,6 +37,9 @@ import Slider from "@component/components/web/slider/Slider";
 import RedArea from "@component/components/web/area/RedArea";
 import TextArea from "@component/components/web/area/TextArea";
 import ContestCard from "@component/components/web/contest/Contest";
+import { Tag, TagArea } from "@component/components/web/contest/Contest.style";
+import Organization from "@component/components/web/organization/Organization";
+import Review from "@component/components/web/review/Review";
 
 // reset
 
@@ -125,14 +131,12 @@ export default function Home() {
             "간편 스포츠 운영관리 서비스를 만날 수 있습니다.",
           ]}
         />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <div>
+        <S.ContestContainer>
+          <div
+            style={{
+              marginBottom: "30px",
+            }}
+          >
             <S.CategoryTitle>지금 핫한 대회</S.CategoryTitle>
             <S.ContestArea>
               <ContestCard
@@ -173,7 +177,8 @@ export default function Home() {
               />
             </S.ContestArea>
           </div>
-        </div>
+          <S.SeeMoreButton>더 많은 대회 보기</S.SeeMoreButton>
+        </S.ContestContainer>
         <TextArea
           textList={[
             "어떤 대회에 참여해야할지 모르겠다면?",
@@ -181,6 +186,159 @@ export default function Home() {
             "직접 경험해 보세요!",
           ]}
         />
+        <S.ContestContainer>
+          <S.DividedArea>
+            <S.RealTimeContest>
+              <S.CategoryHeader>
+                <S.CategoryTitle>실시간 내 주변 대회</S.CategoryTitle>
+                <S.SeeMoreNav>
+                  <S.SeeMoreText>더보기</S.SeeMoreText>
+                  <S.SeeMoreIcon />
+                </S.SeeMoreNav>
+              </S.CategoryHeader>
+
+              <S.ContestAreaTwo>
+                <ContestCard
+                  posterImageUrl=""
+                  competitionId={1}
+                  competitionType="FREE"
+                  name="제 26회 팔씨름 국가대표 선발전"
+                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                  recruitingEnd="2023-09-25"
+                  showImage={true}
+                />
+                <ContestCard
+                  posterImageUrl=""
+                  competitionId={1}
+                  competitionType="FREE"
+                  name="제 26회 팔씨름 국가대표 선발전"
+                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                  recruitingEnd="2023-09-25"
+                  showImage={true}
+                />
+                <ContestCard
+                  posterImageUrl=""
+                  competitionId={1}
+                  competitionType="FREE"
+                  name="제 26회 팔씨름 국가대표 선발전"
+                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                  recruitingEnd="2023-09-25"
+                  showImage={true}
+                />
+              </S.ContestAreaTwo>
+            </S.RealTimeContest>
+            <S.OrganizationSearchContainer>
+              <S.CategoryHeader>
+                <S.CategoryTitle>단체 찾기</S.CategoryTitle>
+                <S.SeeMoreNav>
+                  <S.SeeMoreText>더보기</S.SeeMoreText>
+                  <S.SeeMoreIcon />
+                </S.SeeMoreNav>
+              </S.CategoryHeader>
+              <FlexColumn>
+                <Organization
+                  name="대한체육회"
+                  categories={["팔씨름", "씨름", "수영"]}
+                />
+                <Organization
+                  name="대한체육회"
+                  categories={["팔씨름", "씨름", "수영"]}
+                />
+              </FlexColumn>
+            </S.OrganizationSearchContainer>
+          </S.DividedArea>
+        </S.ContestContainer>
+        <S.DocumentContainer>
+          <FlexColumnCenter>
+            <S.WhiteTextWrapper>
+              <S.WhiteText>쉽고, 간편하게</S.WhiteText>
+              <S.WhiteText>공문서 발급을 받아보세요!</S.WhiteText>
+            </S.WhiteTextWrapper>
+            <S.GrayTextWrapper>
+              <S.GrayText>1분 안에 공문서 발급받고</S.GrayText>
+              <S.GrayText>자신만의 포트폴리오를 꾸며보세요.</S.GrayText>
+            </S.GrayTextWrapper>
+            <S.RedNavButton>공문서 발급 받기</S.RedNavButton>
+          </FlexColumnCenter>
+          <Image
+            src="/images/logo/document2.png"
+            height={300}
+            width={450}
+            alt=""
+          />
+        </S.DocumentContainer>
+        <S.ReviewContainer>
+          <FlexColumnRowCenter>
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: "bold",
+                marginBottom: "20px",
+              }}
+            >
+              체육인들의 니즈를 파악한 서비스
+            </span>
+            <span
+              style={{
+                fontSize: "40px",
+                fontWeight: "bold",
+                color: "#212121",
+                marginBottom: "70px",
+              }}
+            >
+              스포츠잇과 함께한 사람들
+            </span>
+          </FlexColumnRowCenter>
+          <S.ReviewSlider>
+            <Review
+              title="그랑프리 선수를 위한 선물, 베어런 ‘경영, 창업, 진로 컨설팅’"
+              content="2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다. 2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다."
+              name="스포츠잇"
+              subName="운동의 모든 것, 김영훈 총회장"
+            />
+            <Review
+              title="그랑프리 선수를 위한 선물, 베어런 ‘경영, 창업, 진로 컨설팅’"
+              content="2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다. 2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다."
+              name="스포츠잇"
+              subName="운동의 모든 것, 김영훈 총회장"
+            />
+            <Review
+              title="그랑프리 선수를 위한 선물, 베어런 ‘경영, 창업, 진로 컨설팅’"
+              content="2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다. 2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다."
+              name="스포츠잇"
+              subName="운동의 모든 것, 김영훈 총회장"
+            />
+          </S.ReviewSlider>
+        </S.ReviewContainer>
+        <S.PartnerContainer>
+          <Image
+            width={100}
+            height={10}
+            style={{
+              margin: "0 40px",
+            }}
+            src="/images/logo/silvis.png"
+            alt="partner-image"
+          />
+          <Image
+            width={100}
+            height={10}
+            style={{
+              margin: "0 40px",
+            }}
+            src="/images/logo/kaf.png"
+            alt="partner-image"
+          />
+          <Image
+            width={100}
+            height={10}
+            style={{
+              margin: "0 40px",
+            }}
+            src="/images/logo/jungle.png"
+            alt="partner-image"
+          />
+        </S.PartnerContainer>
         <Footer />
       </section>
       {/* <PageWrapper>
