@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { BiChevronRight } from "react-icons/bi";
+import { FlexColumn } from "@component/components/area/areaComponent";
 
 export const Banner = styled.div`
   text-align: center;
@@ -113,4 +114,61 @@ export const SeeMoreIcon = styled(BiChevronRight)`
   width: 12px;
   height: 12px;
   color: #747474;
+`;
+
+export const DividedArea = styled.div`
+  display: flex;
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+export const RealTimeContest = styled.div`
+  margin-bottom: 40px;
+  margin-right: 40px;
+  @media only screen and (max-width: 768px) {
+    margin-right: 0;
+  }
+`;
+
+export const DocumentContainer = styled.div`
+  background-color: #1b1b1b;
+  height: 460px;
+  width: 100%;
+  display: flex;
+  padding: 0 10%;
+  justify-content: space-between;
+`;
+
+export const WhiteText = styled.span`
+  font-size: 40px;
+  color: #ffffff;
+  margin-bottom: 5px;
+  font-weight: bold;
+`;
+
+export const GrayText = styled.span`
+  font-size: 24px;
+  color: #aeaeae;
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+export const RedNavButton = styled.button`
+  width: 305px;
+  height: 55px;
+  border-radius: 4px;
+  background-color: #fd3446;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const WhiteTextWrapper = styled(FlexColumn)`
+  margin-bottom: 10px;
+`;
+
+export const GrayTextWrapper = styled(FlexColumn)`
+  margin-bottom: 50px;
 `;

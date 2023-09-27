@@ -13,6 +13,8 @@ import CustomButton from "@component/components/button/Custombutton";
 import {
   ContentArea,
   ContentPaddingArea,
+  FlexColumn,
+  FlexColumnCenter,
 } from "@component/components/area/areaComponent";
 import MainPagePost from "@component/components/container/mainpagepost";
 import qs from "qs";
@@ -35,7 +37,7 @@ import RedArea from "@component/components/web/area/RedArea";
 import TextArea from "@component/components/web/area/TextArea";
 import ContestCard from "@component/components/web/contest/Contest";
 import { Tag, TagArea } from "@component/components/web/contest/Contest.style";
-import Organization from "@component/components/organization/Organization";
+import Organization from "@component/components/web/organization/Organization";
 
 // reset
 
@@ -183,16 +185,8 @@ export default function Home() {
           ]}
         />
         <S.ContestContainer>
-          <div
-            style={{
-              display: "flex",
-            }}
-          >
-            <div
-              style={{
-                marginRight: "40px",
-              }}
-            >
+          <S.DividedArea>
+            <S.RealTimeContest>
               <S.CategoryHeader>
                 <S.CategoryTitle>실시간 내 주변 대회</S.CategoryTitle>
                 <S.SeeMoreNav>
@@ -229,17 +223,8 @@ export default function Home() {
                   recruitingEnd="2023-09-25"
                   showImage={true}
                 />
-                <ContestCard
-                  posterImageUrl=""
-                  competitionId={1}
-                  competitionType="FREE"
-                  name="제 26회 팔씨름 국가대표 선발전"
-                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                  recruitingEnd="2023-09-25"
-                  showImage={true}
-                />
               </S.ContestAreaTwo>
-            </div>
+            </S.RealTimeContest>
             <S.OrganizationSearchContainer>
               <S.CategoryHeader>
                 <S.CategoryTitle>단체 찾기</S.CategoryTitle>
@@ -248,12 +233,7 @@ export default function Home() {
                   <S.SeeMoreIcon />
                 </S.SeeMoreNav>
               </S.CategoryHeader>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
+              <FlexColumn>
                 <Organization
                   name="대한체육회"
                   categories={["팔씨름", "씨름", "수영"]}
@@ -262,11 +242,29 @@ export default function Home() {
                   name="대한체육회"
                   categories={["팔씨름", "씨름", "수영"]}
                 />
-              </div>
+              </FlexColumn>
             </S.OrganizationSearchContainer>
-          </div>
+          </S.DividedArea>
         </S.ContestContainer>
-
+        <S.DocumentContainer>
+          <FlexColumnCenter>
+            <S.WhiteTextWrapper>
+              <S.WhiteText>쉽고, 간편하게</S.WhiteText>
+              <S.WhiteText>공문서 발급을 받아보세요!</S.WhiteText>
+            </S.WhiteTextWrapper>
+            <S.GrayTextWrapper>
+              <S.GrayText>1분 안에 공문서 발급받고</S.GrayText>
+              <S.GrayText>자신만의 포트폴리오를 꾸며보세요.</S.GrayText>
+            </S.GrayTextWrapper>
+            <S.RedNavButton>공문서 발급 받기</S.RedNavButton>
+          </FlexColumnCenter>
+          <Image
+            src="/images/logo/document2.png"
+            height={300}
+            width={450}
+            alt=""
+          />
+        </S.DocumentContainer>
         <Footer />
       </section>
       {/* <PageWrapper>

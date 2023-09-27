@@ -20,3 +20,12 @@ export const ContentColumnArea = styled(ContentPaddingArea)`
   flex-direction: column;
   padding-top: 12%;
 `;
+
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const FlexColumnCenter = styled(FlexColumn)`
+  justify-content: center;
+`;

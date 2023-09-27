@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { Tag, TagArea } from "../web/contest/Contest.style";
+import { Tag, TagArea } from "../contest/Contest.style";
 import * as S from "./Organization.style";
 
 const Organization = ({
