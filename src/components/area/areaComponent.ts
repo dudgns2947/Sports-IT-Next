@@ -29,3 +29,7 @@ export const FlexColumn = styled.div`
 export const FlexColumnCenter = styled(FlexColumn)`
   justify-content: center;
 `;
+
+export const FlexColumnRowCenter = styled(FlexColumnCenter)`
+  align-items: center;
+`;

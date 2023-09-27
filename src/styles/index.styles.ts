@@ -175,9 +175,23 @@ export const GrayTextWrapper = styled(FlexColumn)`
 
 export const ReviewContainer = styled.div`
   width: 100%;
-  height: 700px;
-  background-color: #e9ebed;
+
+  padding: 10% 0;
+  background-color: #f5f6f7;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const ReviewSlider = styled(ContestArea)`
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  @media only screen and (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media only screen and (min-width: 1440px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;

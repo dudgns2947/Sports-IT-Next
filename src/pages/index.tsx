@@ -15,6 +15,7 @@ import {
   ContentPaddingArea,
   FlexColumn,
   FlexColumnCenter,
+  FlexColumnRowCenter,
 } from "@component/components/area/areaComponent";
 import MainPagePost from "@component/components/container/mainpagepost";
 import qs from "qs";
@@ -267,18 +268,47 @@ export default function Home() {
           />
         </S.DocumentContainer>
         <S.ReviewContainer>
-          <div>
-            <span>체육인들의 니즈를 파악한 서비스</span>
-            <span>스포츠잇과 함께한 사람들</span>
-          </div>
-          <div>
+          <FlexColumnRowCenter>
+            <span
+              style={{
+                fontSize: "18px",
+                fontWeight: "bold",
+                marginBottom: "20px",
+              }}
+            >
+              체육인들의 니즈를 파악한 서비스
+            </span>
+            <span
+              style={{
+                fontSize: "40px",
+                fontWeight: "bold",
+                color: "#212121",
+                marginBottom: "70px",
+              }}
+            >
+              스포츠잇과 함께한 사람들
+            </span>
+          </FlexColumnRowCenter>
+          <S.ReviewSlider>
             <Review
               title="그랑프리 선수를 위한 선물, 베어런 ‘경영, 창업, 진로 컨설팅’"
               content="2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다. 2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다."
               name="스포츠잇"
               subName="운동의 모든 것, 김영훈 총회장"
             />
-          </div>
+            <Review
+              title="그랑프리 선수를 위한 선물, 베어런 ‘경영, 창업, 진로 컨설팅’"
+              content="2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다. 2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다."
+              name="스포츠잇"
+              subName="운동의 모든 것, 김영훈 총회장"
+            />
+            <Review
+              title="그랑프리 선수를 위한 선물, 베어런 ‘경영, 창업, 진로 컨설팅’"
+              content="2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다. 2022년 70여 개의 전국 대회 그랑프리 후원사 베어런의 커리어엔진 경영 창업 진로 컨설팅을 통해 선수들의 고민스러운 경영과 창업 진로 고민 등의 문제 해결에 도움을 받았습니다."
+              name="스포츠잇"
+              subName="운동의 모든 것, 김영훈 총회장"
+            />
+          </S.ReviewSlider>
         </S.ReviewContainer>
         <Footer />
       </section>
