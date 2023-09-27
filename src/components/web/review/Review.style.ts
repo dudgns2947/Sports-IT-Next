@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ReviewContainer = styled.article`
-  width: 503px;
+  width: 460px;
   height: 250px;
   padding: 24px;
   border-radius: 10px;

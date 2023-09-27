@@ -12,13 +12,15 @@ const Footer = () => {
           width={142}
           height={22}
           alt="text_logo"
+          style={{
+            marginBottom: "30px",
+          }}
         />
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            height: "104px",
           }}
         >
           <Image
@@ -26,6 +28,9 @@ const Footer = () => {
             width={92}
             height={12}
             alt="stunning_logo"
+            style={{
+              marginBottom: "20px",
+            }}
           />
           <div>
             <S.NavRow>
@@ -65,6 +70,7 @@ const Footer = () => {
           <span
             style={{
               color: "#AEAEAE",
+              marginTop: "10px",
             }}
           >
             Copyright.© 2023 PLAYMAKERS. All rights reserved
@@ -72,24 +78,28 @@ const Footer = () => {
         </div>
       </div>
       <S.FooterNav>
-        <Link href="/">
-          <span>회사소개</span>
-        </Link>
-        <Link href="/">
-          <span>공지사항</span>
-        </Link>
-        <Link href="/">
-          <span>개인정보처리방침</span>
-        </Link>
-        <Link href="/">
-          <span>사업자 확인</span>
-        </Link>
-        <Link href="/">
-          <span>이용약관</span>
-        </Link>
-        <Link href="/">
-          <span style={{ border: "none" }}>광고 문의</span>
-        </Link>
+        <div className="top-nav">
+          <Link href="/">
+            <span>회사소개</span>
+          </Link>
+          <Link href="/">
+            <span>공지사항</span>
+          </Link>
+          <Link href="/">
+            <span>개인정보처리방침</span>
+          </Link>
+        </div>
+        <div className="down-nav">
+          <Link href="/">
+            <span>사업자 확인</span>
+          </Link>
+          <Link href="/">
+            <span>이용약관</span>
+          </Link>
+          <Link href="/">
+            <span style={{ border: "none" }}>광고 문의</span>
+          </Link>
+        </div>
       </S.FooterNav>
     </S.Footer>
   );
