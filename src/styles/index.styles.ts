@@ -95,6 +95,7 @@ export const OrganizationSearchContainer = styled.div`
 export const CategoryHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 `;
 
 export const SeeMoreNav = styled.div`

@@ -193,7 +193,14 @@ export default function Home() {
                 marginRight: "40px",
               }}
             >
-              <S.CategoryTitle>실시간 내 주변 대회</S.CategoryTitle>
+              <S.CategoryHeader>
+                <S.CategoryTitle>실시간 내 주변 대회</S.CategoryTitle>
+                <S.SeeMoreNav>
+                  <S.SeeMoreText>더보기</S.SeeMoreText>
+                  <S.SeeMoreIcon />
+                </S.SeeMoreNav>
+              </S.CategoryHeader>
+
               <S.ContestAreaTwo>
                 <ContestCard
                   posterImageUrl=""
@@ -241,7 +248,16 @@ export default function Home() {
                   <S.SeeMoreIcon />
                 </S.SeeMoreNav>
               </S.CategoryHeader>
-              <div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Organization
+                  name="대한체육회"
+                  categories={["팔씨름", "씨름", "수영"]}
+                />
                 <Organization
                   name="대한체육회"
                   categories={["팔씨름", "씨름", "수영"]}
