@@ -339,8 +339,8 @@ export default function Home() {
             alt="partner-image"
           />
         </S.PartnerContainer>
-        <Footer />
       </section>
+      <Footer />
       {/* <PageWrapper>
         <TopBar />
         <Seo title="메인 페이지" />
