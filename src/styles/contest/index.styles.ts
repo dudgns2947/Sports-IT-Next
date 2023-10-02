@@ -133,13 +133,13 @@ export const OrderText = styled.span`
   line-height: 20px;
 `;
 
-export const ContestArea = styled.div`
-  /* position: fixed; */
-  overflow: auto;
-  height: 100%;
-  width: 100%;
-  /* padding-bottom: 50px; */
-`;
+// export const ContestArea = styled.div`
+//   /* position: fixed; */
+//   overflow: auto;
+//   height: 100%;
+//   width: 100%;
+//   /* padding-bottom: 50px; */
+// `;
 
 export const Contest = styled.div`
   display: flex;
@@ -285,8 +285,11 @@ export const ContestNullText = styled.span``;
 export const AsideContainer = styled.aside`
   border: 1px solid #e9ebed;
   border-radius: 10px;
-  width: 261px;
+  width: 200px;
   padding: 30px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 20px;
 `;
 
 export const AsideContent = styled.div`
@@ -326,5 +329,21 @@ export const FilterInput = styled.input`
     background-size: 100% 100%;
     background-position: 50%;
     background-repeat: no-repeat;
+  }
+`;
+
+export const ContestArea = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  @media only screen and (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media only screen and (min-width: 1440px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 `;

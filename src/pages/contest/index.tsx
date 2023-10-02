@@ -25,9 +25,10 @@ import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import Head from "next/head";
 import { keywordAtom } from "@component/atoms/contestAtom";
-import { WebContainer } from "@component/styles/index.styles";
+import { ContestAreaTwo, WebContainer } from "@component/styles/index.styles";
 import Header from "@component/components/web/header/Header";
 import Footer from "@component/components/web/footer/Footer";
+import ContestCard from "@component/components/web/contest/Contest";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 
 type OrderType = "viewCount" | "createdDate" | "scrapCount";
@@ -202,6 +203,9 @@ const Index = () => {
         <main
           style={{
             padding: "0 10%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
           }}
         >
           <S.AsideContainer>
@@ -275,7 +279,46 @@ const Index = () => {
               </S.FilterLabel>
             </S.AsideContent>
           </S.AsideContainer>
-          <section></section>
+          <section>
+            <S.ContestArea>
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+            </S.ContestArea>
+          </section>
         </main>
         <Footer />
       </WebContainer>
