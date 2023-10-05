@@ -12,6 +12,7 @@ export const Header = styled.header`
   position: fixed;
   top: 0;
   background-color: #ffffff;
+  z-index: 1;
 `;
 
 export const HeaderTopArea = styled.div`

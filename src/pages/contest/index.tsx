@@ -202,7 +202,7 @@ const Index = () => {
         <Header />
         <main
           style={{
-            padding: "0 10%",
+            padding: "0 13%",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-start",

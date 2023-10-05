@@ -337,13 +337,13 @@ export const ContestArea = styled.div`
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: auto;
   grid-gap: 20px;
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 868px) {
     grid-template-columns: repeat(1, 1fr);
   }
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: 1124px) {
     grid-template-columns: repeat(2, 1fr);
   }
-  @media only screen and (min-width: 1440px) {
+  @media only screen and (min-width: 1540px) {
     grid-template-columns: repeat(3, 1fr);
   }
 `;

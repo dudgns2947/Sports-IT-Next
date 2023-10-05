@@ -66,14 +66,11 @@ export default function Home() {
   const token = useRecoilValue(userTokenAtom);
   const [keyword, setKeyword] = useState("");
   const userName = useRecoilValue(userNameAtom);
-  const [filterBy, setFilterBy] = useState<FilterType[]>([
-    "PLANNING",
-    "RECRUITING",
-  ]);
+  const [filterBy, setFilterBy] = useState<FilterType[]>(["IN_PROGRESS"]);
 
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(3);
+  const [size, setSize] = useState(10);
   const router = useRouter();
 
   const [name, setName] = useState("");
@@ -95,19 +92,19 @@ export default function Home() {
       },
     });
     console.log(response);
-    setContestList(response.data.content);
+    setContestList(response.data.result.content);
     await console.log(contestList);
   }
 
   useEffect(() => {
-    // getContest({
-    //   token: token,
-    //   keyword: keyword,
-    //   filterBy: filterBy,
-    //   orderBy: orderBy,
-    //   page: page,
-    //   size: size,
-    // });
+    getContest({
+      token: token,
+      keyword: keyword,
+      filterBy: filterBy,
+      orderBy: orderBy,
+      page: page,
+      size: size,
+    });
   }, [keyword, filterBy, orderBy, page, size]);
 
   useEffect(() => {
@@ -115,6 +112,8 @@ export default function Home() {
       setName(window.localStorage.getItem("name") as string);
     }
   }, []);
+
+  console.log(contestList);
 
   return (
     <S.WebContainer>
@@ -139,42 +138,22 @@ export default function Home() {
           >
             <S.CategoryTitle>지금 핫한 대회</S.CategoryTitle>
             <S.ContestArea>
-              <ContestCard
-                posterImageUrl=""
-                competitionId={1}
-                competitionType="FREE"
-                name="제 26회 팔씨름 국가대표 선발전"
-                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                recruitingEnd="2023-09-25"
-                showImage={true}
-              />
-              <ContestCard
-                posterImageUrl=""
-                competitionId={1}
-                competitionType="FREE"
-                name="제 26회 팔씨름 국가대표 선발전"
-                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                recruitingEnd="2023-09-25"
-                showImage={true}
-              />
-              <ContestCard
-                posterImageUrl=""
-                competitionId={1}
-                competitionType="FREE"
-                name="제 26회 팔씨름 국가대표 선발전"
-                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                recruitingEnd="2023-09-25"
-                showImage={true}
-              />
-              <ContestCard
-                posterImageUrl=""
-                competitionId={1}
-                competitionType="FREE"
-                name="제 26회 팔씨름 국가대표 선발전"
-                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                recruitingEnd="2023-09-25"
-                showImage={true}
-              />
+              {contestList.map((contest) => (
+                <ContestCard
+                  key={contest.competitionId}
+                  posterImageUrl={
+                    contest.posters.length === 0
+                      ? ""
+                      : contest.posters[0].posterUrl
+                  }
+                  competitionId={contest.competitionId}
+                  competitionType={contest.competitionType}
+                  name={contest.name}
+                  host={contest.host}
+                  recruitingEnd={contest.recruitingEnd}
+                  showImage={true}
+                />
+              ))}
             </S.ContestArea>
           </div>
           <S.SeeMoreButton>더 많은 대회 보기</S.SeeMoreButton>
@@ -198,33 +177,22 @@ export default function Home() {
               </S.CategoryHeader>
 
               <S.ContestAreaTwo>
-                <ContestCard
-                  posterImageUrl=""
-                  competitionId={1}
-                  competitionType="FREE"
-                  name="제 26회 팔씨름 국가대표 선발전"
-                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                  recruitingEnd="2023-09-25"
-                  showImage={true}
-                />
-                <ContestCard
-                  posterImageUrl=""
-                  competitionId={1}
-                  competitionType="FREE"
-                  name="제 26회 팔씨름 국가대표 선발전"
-                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                  recruitingEnd="2023-09-25"
-                  showImage={true}
-                />
-                <ContestCard
-                  posterImageUrl=""
-                  competitionId={1}
-                  competitionType="FREE"
-                  name="제 26회 팔씨름 국가대표 선발전"
-                  host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                  recruitingEnd="2023-09-25"
-                  showImage={true}
-                />
+                {contestList.map((contest) => (
+                  <ContestCard
+                    key={contest.competitionId}
+                    posterImageUrl={
+                      contest.posters.length === 0
+                        ? ""
+                        : contest.posters[0].posterUrl
+                    }
+                    competitionId={contest.competitionId}
+                    competitionType={contest.competitionType}
+                    name={contest.name}
+                    host={contest.host}
+                    recruitingEnd={contest.recruitingEnd}
+                    showImage={true}
+                  />
+                ))}
               </S.ContestAreaTwo>
             </S.RealTimeContest>
             <S.OrganizationSearchContainer>
