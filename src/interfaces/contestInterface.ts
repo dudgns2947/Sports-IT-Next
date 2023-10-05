@@ -32,6 +32,14 @@ export interface IContestParams {
 export interface IHost {
   uid: number;
   name: string;
+  profileImageUrl: string | null;
+  hostProfile: string | null;
+  following: string[];
+  followers: string[];
+  feeds: string[];
+  description: string | null;
+  categories: string[];
+  competitionResults: string[];
 }
 
 export interface IPoster {
@@ -40,13 +48,17 @@ export interface IPoster {
 
 export interface IContestInfo {
   argeements: string[];
+  categories: string[];
   category: string;
   competitionId: number;
+  competitionResults: string[];
   competitionType: string;
   content: string;
   createdDate: string;
   endDate: string;
   host: IHost;
+  latitude: number | null;
+  longitude: number | null;
   location: string;
   locationDetail: string;
   maxPlayer: number | null;
@@ -55,7 +67,7 @@ export interface IContestInfo {
   posters: IPoster[];
   recruitingEnd: string;
   recruitingStart: string;
-  scrapCount: string;
+  scrapCount: number;
   startDate: string;
   state: string;
   stateDetail: string | null;

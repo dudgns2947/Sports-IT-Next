@@ -3,7 +3,12 @@ import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
-import { FilterType, IContestInfo, IContestParams, ISearchInput } from "@component/interfaces/contestInterface";
+import {
+  FilterType,
+  IContestInfo,
+  IContestParams,
+  ISearchInput,
+} from "@component/interfaces/contestInterface";
 import React, { use, useEffect, useRef, useState } from "react";
 import { useRecoilState, useRecoilValue, SetRecoilState } from "recoil";
 import { AiOutlineDown } from "react-icons/ai";
@@ -20,6 +25,10 @@ import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import Head from "next/head";
 import { keywordAtom } from "@component/atoms/contestAtom";
+import { ContestAreaTwo, WebContainer } from "@component/styles/index.styles";
+import Header from "@component/components/web/header/Header";
+import Footer from "@component/components/web/footer/Footer";
+import ContestCard from "@component/components/web/contest/Contest";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 
 type OrderType = "viewCount" | "createdDate" | "scrapCount";
@@ -33,7 +42,10 @@ const Options = [
 const Index = () => {
   const { register, handleSubmit, setValue, watch } = useForm<ISearchInput>();
   const [keyword, setKeyword] = useRecoilState(keywordAtom);
-  const [filterBy, setFilterBy] = useState<FilterType[]>(["PLANNING", "RECRUITING"]);
+  const [filterBy, setFilterBy] = useState<FilterType[]>([
+    "PLANNING",
+    "RECRUITING",
+  ]);
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
@@ -56,7 +68,7 @@ const Index = () => {
   async function getContest(contestProps: IContestParams) {
     if (typeof window !== "undefined") {
       try {
-        const response = await baseApi.get("competitions/slice", {
+        const response = await baseApi.get("competitions/all", {
           headers: {
             Authorization: `Bearer ${contestProps.token}`,
           },
@@ -73,7 +85,7 @@ const Index = () => {
         });
         console.log(response);
         // setContestList((current) => [...current, ...response.data.content]);
-        setContestList(response.data.content);
+        setContestList(response.data);
         await console.log(contestList);
       } catch (e) {
         alert(e);
@@ -114,13 +126,21 @@ const Index = () => {
   const onClickTotal = () => {
     setIsFresh(true);
     setPage(0);
-    if (filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")) {
+    if (
+      filterBy.includes("recruitingEnd") &&
+      filterBy.includes("totalPrize") &&
+      filterBy.includes("recommend")
+    ) {
       let newFilterBy = [...filterBy];
       newFilterBy = newFilterBy.filter((item) => item !== "recruitingEnd");
       newFilterBy = newFilterBy.filter((item) => item !== "totalPrize");
       newFilterBy = newFilterBy.filter((item) => item !== "recommend");
       setFilterBy(newFilterBy);
-    } else if (filterBy.includes("recruitingEnd") || filterBy.includes("totalPrize") || filterBy.includes("recommend")) {
+    } else if (
+      filterBy.includes("recruitingEnd") ||
+      filterBy.includes("totalPrize") ||
+      filterBy.includes("recommend")
+    ) {
       let newFilterBy = [...filterBy];
       if (!newFilterBy.includes("recruitingEnd")) {
         newFilterBy.push("recruitingEnd");
@@ -173,17 +193,163 @@ const Index = () => {
     }
   }, [inView]);
 
+  console.log(contestList);
+
   return (
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <PageWrapper>
+      <WebContainer>
+        <Header />
+        <main
+          style={{
+            padding: "0 13%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+          }}
+        >
+          <S.AsideContainer>
+            <S.AsideContent>
+              <S.FilterCategory>상태</S.FilterCategory>
+              <S.FilterLabel htmlFor="PLANNING">
+                <S.FilterInput
+                  type="checkbox"
+                  name="status"
+                  value="PLANNING"
+                  id="PLANNING"
+                />
+                모집예정
+              </S.FilterLabel>
+              <S.FilterLabel htmlFor="RECRUITING">
+                <S.FilterInput
+                  type="checkbox"
+                  name="status"
+                  value="RECRUITING"
+                  id="RECRUITING"
+                />
+                모집중
+              </S.FilterLabel>
+              <S.FilterLabel htmlFor="RECRUITING_END">
+                <S.FilterInput
+                  type="checkbox"
+                  name="status"
+                  value="RECRUITING_END"
+                  id="RECRUITING_END"
+                />
+                마감임박
+              </S.FilterLabel>
+              <S.FilterLabel htmlFor="IN_PROGRESS">
+                <S.FilterInput
+                  type="checkbox"
+                  name="status"
+                  value="IN_PROGRESS"
+                  id="IN_PROGRESS"
+                />
+                진행중
+              </S.FilterLabel>
+              <S.FilterLabel htmlFor="END">
+                <S.FilterInput
+                  type="checkbox"
+                  name="status"
+                  value="END"
+                  id="END"
+                />
+                종료
+              </S.FilterLabel>
+            </S.AsideContent>
+            <S.AsideContent>
+              <S.FilterCategory>카테고리</S.FilterCategory>
+              <S.FilterLabel htmlFor="END">
+                <S.FilterInput
+                  type="checkbox"
+                  name="status"
+                  value="END"
+                  id="END"
+                />
+                팔씨름
+              </S.FilterLabel>
+              <S.FilterLabel htmlFor="END">
+                <S.FilterInput
+                  type="checkbox"
+                  name="status"
+                  value="END"
+                  id="END"
+                />
+                수영
+              </S.FilterLabel>
+            </S.AsideContent>
+          </S.AsideContainer>
+          <section>
+            <S.ContestArea>
+              {contestList.map((contest) => (
+                <ContestCard
+                  key={contest.competitionId}
+                  posterImageUrl={
+                    contest.posters.length === 0
+                      ? ""
+                      : contest.posters[0].posterUrl
+                  }
+                  competitionId={contest.competitionId}
+                  competitionType={contest.competitionType}
+                  name={contest.name}
+                  host={contest.host}
+                  recruitingEnd={contest.recruitingEnd}
+                  showImage={true}
+                />
+              ))}
+              {/* <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              />
+              <ContestCard
+                posterImageUrl=""
+                competitionId={1}
+                competitionType="FREE"
+                name="제 26회 팔씨름 국가대표 선발전"
+                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
+                recruitingEnd="2023-09-25"
+                showImage={true}
+              /> */}
+            </S.ContestArea>
+          </section>
+        </main>
+        <Footer />
+      </WebContainer>
+      {/* <PageWrapper>
         <Seo title="대회" />
         <S.TopBar>
           <S.SearchForm onSubmit={handleSubmit(onValid)}>
-            <S.SearchInput {...register("keyword")} type="text" placeholder="통합 검색" />
-            {/* <S.SearchButton> */}
+            <S.SearchInput
+              {...register("keyword")}
+              type="text"
+              placeholder="통합 검색"
+            />
+            
             <S.SearchIcon
               onClick={() => {
                 setIsFresh(true);
@@ -192,7 +358,7 @@ const Index = () => {
                 setValue("keyword", "");
               }}
             />
-            {/* </S.SearchButton> */}
+
           </S.SearchForm>
           <S.ButtonArea>
             <S.AlarmButton onClick={() => router.push("/alarm")} />
@@ -203,7 +369,11 @@ const Index = () => {
           <S.TopWrapper>
             <S.FilterButtonArea>
               <S.TotalButton
-                active={filterBy.includes("recruitingEnd") && filterBy.includes("totalPrize") && filterBy.includes("recommend")}
+                active={
+                  filterBy.includes("recruitingEnd") &&
+                  filterBy.includes("totalPrize") &&
+                  filterBy.includes("recommend")
+                }
                 onClick={onClickTotal}
               >
                 전체
@@ -255,7 +425,7 @@ const Index = () => {
                     </S.OrderOption>
                   ))}
                 </S.OrderSelect>
-                {/* <S.ArrowIcon /> */}
+                
               </S.Order>
             </S.OrderArea>
 
@@ -264,7 +434,9 @@ const Index = () => {
                 contestList.map((contest) => (
                   <Contest
                     key={contest.competitionId}
-                    posterImageUrl={contest.posters[0] ? contest.posters[0].posterUrl : ""}
+                    posterImageUrl={
+                      contest.posters[0] ? contest.posters[0].posterUrl : ""
+                    }
                     competitionId={contest.competitionId}
                     competitionType={contest.competitionType}
                     name={contest.name}
@@ -278,7 +450,9 @@ const Index = () => {
             </S.ContestArea>
             <S.SeeMoreArea ref={ref}></S.SeeMoreArea>
             {role === "ROLE_INSTITUTION" ? (
-              <S.RegisterButton onClick={() => router.push("register/event-select")}>
+              <S.RegisterButton
+                onClick={() => router.push("register/event-select")}
+              >
                 <S.PlusIcons />
                 대회 개최하기
               </S.RegisterButton>
@@ -286,7 +460,7 @@ const Index = () => {
           </S.ContentArea>
         </S.Container>
         <BottomBar />
-      </PageWrapper>
+      </PageWrapper> */}
     </>
   );
 };

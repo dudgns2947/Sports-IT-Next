@@ -33,7 +33,7 @@ const ContestCard = ({
     >
       {showImage === false ? null : (
         <Image
-          src={posterImageUrl ? posterImageUrl : "/images/contest/example2.png"}
+          src={"/images/contest/example2.png"}
           width={300}
           height={300}
           alt="poster-image"
@@ -43,6 +43,7 @@ const ContestCard = ({
             height: "300px",
             marginBottom: "15px",
           }}
+          priority
         />
       )}
 
