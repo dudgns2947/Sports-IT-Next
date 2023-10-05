@@ -289,7 +289,7 @@ export const AsideContainer = styled.aside`
   padding: 30px;
   position: sticky;
   position: -webkit-sticky;
-  top: 20px;
+  top: 0px;
 `;
 
 export const AsideContent = styled.div`

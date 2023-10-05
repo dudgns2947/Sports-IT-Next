@@ -68,7 +68,7 @@ const Index = () => {
   async function getContest(contestProps: IContestParams) {
     if (typeof window !== "undefined") {
       try {
-        const response = await baseApi.get("competitions/slice", {
+        const response = await baseApi.get("competitions/all", {
           headers: {
             Authorization: `Bearer ${contestProps.token}`,
           },
@@ -85,7 +85,7 @@ const Index = () => {
         });
         console.log(response);
         // setContestList((current) => [...current, ...response.data.content]);
-        setContestList(response.data.content);
+        setContestList(response.data);
         await console.log(contestList);
       } catch (e) {
         alert(e);
@@ -193,6 +193,8 @@ const Index = () => {
     }
   }, [inView]);
 
+  console.log(contestList);
+
   return (
     <>
       <Head>
@@ -281,7 +283,23 @@ const Index = () => {
           </S.AsideContainer>
           <section>
             <S.ContestArea>
-              <ContestCard
+              {contestList.map((contest) => (
+                <ContestCard
+                  key={contest.competitionId}
+                  posterImageUrl={
+                    contest.posters.length === 0
+                      ? ""
+                      : contest.posters[0].posterUrl
+                  }
+                  competitionId={contest.competitionId}
+                  competitionType={contest.competitionType}
+                  name={contest.name}
+                  host={contest.host}
+                  recruitingEnd={contest.recruitingEnd}
+                  showImage={true}
+                />
+              ))}
+              {/* <ContestCard
                 posterImageUrl=""
                 competitionId={1}
                 competitionType="FREE"
@@ -316,7 +334,7 @@ const Index = () => {
                 host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
                 recruitingEnd="2023-09-25"
                 showImage={true}
-              />
+              /> */}
             </S.ContestArea>
           </section>
         </main>

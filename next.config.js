@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   distDir: "build",
   images: {
-    domains: ["picsum.photos"],
+    domains: ["picsum.photos", "sportsit.s3.ap-northeast-2.amazonaws.com"],
   },
   // exportTrailingSlash: true,
 };
