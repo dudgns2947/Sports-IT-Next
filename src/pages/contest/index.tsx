@@ -29,6 +29,7 @@ import { ContestAreaTwo, WebContainer } from "@component/styles/index.styles";
 import Header from "@component/components/web/header/Header";
 import Footer from "@component/components/web/footer/Footer";
 import ContestCard from "@component/components/web/contest/Contest";
+import FilterBox from "@component/components/web/checkbox/FilterBox";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 
 type OrderType = "viewCount" | "createdDate" | "scrapCount";
@@ -42,10 +43,7 @@ const Options = [
 const Index = () => {
   const { register, handleSubmit, setValue, watch } = useForm<ISearchInput>();
   const [keyword, setKeyword] = useRecoilState(keywordAtom);
-  const [filterBy, setFilterBy] = useState<FilterType[]>([
-    "PLANNING",
-    "RECRUITING",
-  ]);
+  const [filterBy, setFilterBy] = useState<FilterType[]>([]);
   const [orderBy, setOrderBy] = useState("createdDate");
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
@@ -68,7 +66,7 @@ const Index = () => {
   async function getContest(contestProps: IContestParams) {
     if (typeof window !== "undefined") {
       try {
-        const response = await baseApi.get("competitions/all", {
+        const response = await baseApi.get("competitions/slice", {
           headers: {
             Authorization: `Bearer ${contestProps.token}`,
           },
@@ -85,7 +83,7 @@ const Index = () => {
         });
         console.log(response);
         // setContestList((current) => [...current, ...response.data.content]);
-        setContestList(response.data);
+        setContestList(response.data.result.content);
         await console.log(contestList);
       } catch (e) {
         alert(e);
@@ -123,43 +121,43 @@ const Index = () => {
     setValue("keyword", "");
   };
 
-  const onClickTotal = () => {
-    setIsFresh(true);
-    setPage(0);
-    if (
-      filterBy.includes("recruitingEnd") &&
-      filterBy.includes("totalPrize") &&
-      filterBy.includes("recommend")
-    ) {
-      let newFilterBy = [...filterBy];
-      newFilterBy = newFilterBy.filter((item) => item !== "recruitingEnd");
-      newFilterBy = newFilterBy.filter((item) => item !== "totalPrize");
-      newFilterBy = newFilterBy.filter((item) => item !== "recommend");
-      setFilterBy(newFilterBy);
-    } else if (
-      filterBy.includes("recruitingEnd") ||
-      filterBy.includes("totalPrize") ||
-      filterBy.includes("recommend")
-    ) {
-      let newFilterBy = [...filterBy];
-      if (!newFilterBy.includes("recruitingEnd")) {
-        newFilterBy.push("recruitingEnd");
-      }
-      if (!newFilterBy.includes("totalPrize")) {
-        newFilterBy.push("totalPrize");
-      }
-      if (!newFilterBy.includes("recommend")) {
-        newFilterBy.push("recommend");
-      }
-      setFilterBy(newFilterBy);
-    } else {
-      const newFilterBy = [...filterBy];
-      newFilterBy.push("recruitingEnd");
-      newFilterBy.push("totalPrize");
-      newFilterBy.push("recommend");
-      setFilterBy(newFilterBy);
-    }
-  };
+  // const onClickTotal = () => {
+  //   setIsFresh(true);
+  //   setPage(0);
+  //   if (
+  //     filterBy.includes("recruitingEnd") &&
+  //     filterBy.includes("totalPrize") &&
+  //     filterBy.includes("recommend")
+  //   ) {
+  //     let newFilterBy = [...filterBy];
+  //     newFilterBy = newFilterBy.filter((item) => item !== "recruitingEnd");
+  //     newFilterBy = newFilterBy.filter((item) => item !== "totalPrize");
+  //     newFilterBy = newFilterBy.filter((item) => item !== "recommend");
+  //     setFilterBy(newFilterBy);
+  //   } else if (
+  //     filterBy.includes("recruitingEnd") ||
+  //     filterBy.includes("totalPrize") ||
+  //     filterBy.includes("recommend")
+  //   ) {
+  //     let newFilterBy = [...filterBy];
+  //     if (!newFilterBy.includes("recruitingEnd")) {
+  //       newFilterBy.push("recruitingEnd");
+  //     }
+  //     if (!newFilterBy.includes("totalPrize")) {
+  //       newFilterBy.push("totalPrize");
+  //     }
+  //     if (!newFilterBy.includes("recommend")) {
+  //       newFilterBy.push("recommend");
+  //     }
+  //     setFilterBy(newFilterBy);
+  //   } else {
+  //     const newFilterBy = [...filterBy];
+  //     newFilterBy.push("recruitingEnd");
+  //     newFilterBy.push("totalPrize");
+  //     newFilterBy.push("recommend");
+  //     setFilterBy(newFilterBy);
+  //   }
+  // };
 
   useEffect(() => {
     getContest({
@@ -172,28 +170,29 @@ const Index = () => {
     });
   }, [keyword, filterBy, orderBy]);
 
-  useEffect(() => {
-    if (!isFresh) {
-      getContestMore({
-        token: token,
-        keyword: keyword,
-        filterBy: filterBy,
-        orderBy: orderBy,
-        page: page,
-        size: size,
-      });
-    }
-  }, [page, size]);
+  // useEffect(() => {
+  //   if (!isFresh) {
+  //     getContestMore({
+  //       token: token,
+  //       keyword: keyword,
+  //       filterBy: filterBy,
+  //       orderBy: orderBy,
+  //       page: page,
+  //       size: size,
+  //     });
+  //   }
+  // }, [page, size]);
 
-  useEffect(() => {
-    if (inView && contestList && contestList.length !== 0) {
-      console.log("get more data !");
-      setIsFresh(false);
-      setPage((current) => current + 1);
-    }
-  }, [inView]);
+  // useEffect(() => {
+  //   if (inView && contestList && contestList.length !== 0) {
+  //     console.log("get more data !");
+  //     setIsFresh(false);
+  //     setPage((current) => current + 1);
+  //   }
+  // }, [inView]);
 
   console.log(contestList);
+  console.log(filterBy);
 
   return (
     <>
@@ -204,7 +203,7 @@ const Index = () => {
         <Header />
         <main
           style={{
-            padding: "0 13%",
+            padding: "0 11%",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-start",
@@ -213,55 +212,34 @@ const Index = () => {
           <S.AsideContainer>
             <S.AsideContent>
               <S.FilterCategory>상태</S.FilterCategory>
-              <S.FilterLabel htmlFor="PLANNING">
-                <S.FilterInput
-                  type="checkbox"
-                  name="status"
-                  value="PLANNING"
-                  id="PLANNING"
-                />
-                모집예정
-              </S.FilterLabel>
-              <S.FilterLabel htmlFor="RECRUITING">
-                <S.FilterInput
-                  type="checkbox"
-                  name="status"
-                  value="RECRUITING"
-                  id="RECRUITING"
-                />
-                모집중
-              </S.FilterLabel>
-              <S.FilterLabel htmlFor="RECRUITING_END">
-                <S.FilterInput
-                  type="checkbox"
-                  name="status"
-                  value="RECRUITING_END"
-                  id="RECRUITING_END"
-                />
-                마감임박
-              </S.FilterLabel>
-              <S.FilterLabel htmlFor="IN_PROGRESS">
-                <S.FilterInput
-                  type="checkbox"
-                  name="status"
-                  value="IN_PROGRESS"
-                  id="IN_PROGRESS"
-                />
-                진행중
-              </S.FilterLabel>
-              <S.FilterLabel htmlFor="END">
-                <S.FilterInput
-                  type="checkbox"
-                  name="status"
-                  value="END"
-                  id="END"
-                />
-                종료
-              </S.FilterLabel>
+              <FilterBox
+                filterKeyword="RECRUITING"
+                filterContent="모집중"
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+              />
+              <FilterBox
+                filterKeyword="RECRUITING_END"
+                filterContent="모집 완료"
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+              />
+              <FilterBox
+                filterKeyword="IN_PROGRESS"
+                filterContent="진행중"
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+              />
+              <FilterBox
+                filterKeyword="END"
+                filterContent="종료"
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+              />
             </S.AsideContent>
             <S.AsideContent>
               <S.FilterCategory>카테고리</S.FilterCategory>
-              <S.FilterLabel htmlFor="END">
+              {/* <S.FilterLabel htmlFor="END">
                 <S.FilterInput
                   type="checkbox"
                   name="status"
@@ -278,7 +256,7 @@ const Index = () => {
                   id="END"
                 />
                 수영
-              </S.FilterLabel>
+              </S.FilterLabel> */}
             </S.AsideContent>
           </S.AsideContainer>
           <section>
@@ -299,42 +277,6 @@ const Index = () => {
                   showImage={true}
                 />
               ))}
-              {/* <ContestCard
-                posterImageUrl=""
-                competitionId={1}
-                competitionType="FREE"
-                name="제 26회 팔씨름 국가대표 선발전"
-                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                recruitingEnd="2023-09-25"
-                showImage={true}
-              />
-              <ContestCard
-                posterImageUrl=""
-                competitionId={1}
-                competitionType="FREE"
-                name="제 26회 팔씨름 국가대표 선발전"
-                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                recruitingEnd="2023-09-25"
-                showImage={true}
-              />
-              <ContestCard
-                posterImageUrl=""
-                competitionId={1}
-                competitionType="FREE"
-                name="제 26회 팔씨름 국가대표 선발전"
-                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                recruitingEnd="2023-09-25"
-                showImage={true}
-              />
-              <ContestCard
-                posterImageUrl=""
-                competitionId={1}
-                competitionType="FREE"
-                name="제 26회 팔씨름 국가대표 선발전"
-                host={{ uid: 1, name: "(사)대한팔씨름연맹" }}
-                recruitingEnd="2023-09-25"
-                showImage={true}
-              /> */}
             </S.ContestArea>
           </section>
         </main>

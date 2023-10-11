@@ -1,14 +1,10 @@
 import { SetStateAction } from "react";
 
 export type FilterType =
-  | "PLANNING"
   | "RECRUITING"
   | "RECRUITING_END"
   | "IN_PROGRESS"
-  | "END"
-  | "recruitingEnd"
-  | "recommend"
-  | "totalPrize";
+  | "END";
 
 export interface ISearchInput {
   keyword: string;
