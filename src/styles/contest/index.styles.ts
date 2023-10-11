@@ -289,7 +289,7 @@ export const AsideContainer = styled.aside`
   padding: 30px;
   position: sticky;
   position: -webkit-sticky;
-  top: 0px;
+  top: 60px;
 `;
 
 export const AsideContent = styled.div`
@@ -303,6 +303,13 @@ export const FilterCategory = styled.p`
   font-weight: bold;
   margin-bottom: 14px;
   color: #212121;
+`;
+
+export const ContentContainer = styled.div`
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 export const ContestArea = styled.div`
@@ -319,4 +326,19 @@ export const ContestArea = styled.div`
   @media only screen and (min-width: 1440px) {
     grid-template-columns: repeat(3, 1fr);
   }
+`;
+
+export const OrderContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  top: 0px;
+  padding: 10px 10%;
+  position: sticky;
+  background-color: #ffffff;
+`;
+
+export const OrderWrapper = styled.div`
+  border: 1px solid #aeaeae;
+  padding: 8px 10px;
+  border-radius: 8px;
 `;
