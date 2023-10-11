@@ -29,7 +29,8 @@ const FilterBox = ({
             );
             setFilterBy(newFilterBy);
           } else {
-            setFilterBy([...filterBy, filterKeyword]);
+            const newFilterBy = [...filterBy, filterKeyword];
+            setFilterBy(newFilterBy);
           }
         }}
       />

@@ -50,14 +50,14 @@ const Index = () => {
   const [contestList, setContestList] = useState<IContestInfo[]>([]);
   const [token, setToken] = useRecoilState(userTokenAtom);
   const [role, setRole] = useRecoilState(roleAtom);
-  if (typeof window !== "undefined") {
-    let role: string | null = window.localStorage.getItem("role");
-    if (role === null) {
-      role = "ROLE_USER";
-    }
-    setToken(window.localStorage.getItem("token"));
-    setRole(role as "ROLE_USER" | "ROLE_INSTITUTION");
-  }
+  // if (typeof window !== "undefined") {
+  //   let role: string | null = window.localStorage.getItem("role");
+  //   if (role === null) {
+  //     role = "ROLE_USER";
+  //   }
+  //   setToken(window.localStorage.getItem("token"));
+  //   setRole(role as "ROLE_USER" | "ROLE_INSTITUTION");
+  // }
   const [isFresh, setIsFresh] = useState(true);
   const [ref, inView] = useInView();
 
