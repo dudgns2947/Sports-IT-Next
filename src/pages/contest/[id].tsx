@@ -7,7 +7,6 @@ import {
 } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import Contest from "@component/components/contest/Contest";
-import ContestInfo from "@component/components/contest/ContestInfo";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import { IContestInfo, IHost } from "@component/interfaces/contestInterface";
 import { useRouter } from "next/router";
@@ -28,8 +27,12 @@ import ContestDetailLayout from "@component/components/layout/ContestDetailLayou
 import Link from "next/link";
 import { InfoMenuType } from "@component/interfaces/contest/contestInterface";
 import { Tag, TagArea } from "@component/components/web/contest/Contest.style";
+import ContestDetail from "@component/components/contest/detail/ContestDetail";
+import ContestNotice from "@component/components/contest/notice/ContestNotice";
+import ContestInquiry from "@component/components/contest/inquiry/ContestInquiry";
+import ContestReview from "@component/components/contest/review/ContestReview";
 
-const ContestDetail = () => {
+const ContestInfo = () => {
   const router = useRouter();
   const id = router.query.id;
   const token = useRecoilValue(userTokenAtom);
@@ -209,31 +212,15 @@ const ContestDetail = () => {
             <S.MenuRemain></S.MenuRemain>
           </S.MenuBar>
           <div>
-            <S.DetailWrapper>
-              <S.DetailTitle>모집 기간</S.DetailTitle>
-              <S.DetailContent>
-                {getMonth(contest?.recruitingStart as string)}월{" "}
-                {getDay(contest?.recruitingStart as string)}일 (
-                {getDayOfWeek(contest?.recruitingStart as string)}) ~{" "}
-                {getMonth(contest?.recruitingEnd as string)}월{" "}
-                {getDay(contest?.recruitingEnd as string)}일 (
-                {getDayOfWeek(contest?.recruitingEnd as string)})
-              </S.DetailContent>
-            </S.DetailWrapper>
-            <S.DetailWrapper>
-              <S.DetailTitle>총 상금</S.DetailTitle>
-              <S.DetailContent>{contest?.totalPrize}</S.DetailContent>
-            </S.DetailWrapper>
-            <S.DetailWrapper>
-              <S.DetailTitle>개최 지역</S.DetailTitle>
-              <S.DetailContent>
-                {contest?.location} {contest?.locationDetail}
-              </S.DetailContent>
-            </S.DetailWrapper>
-            <S.DetailWrapper>
-              <S.DetailTitle>상세 정보</S.DetailTitle>
-              <S.DetailContent>{contest?.content}</S.DetailContent>
-            </S.DetailWrapper>
+            {infoMenu === "detail" ? (
+              <ContestDetail contest={contest as IContestInfo} />
+            ) : infoMenu === "notice" ? (
+              <ContestNotice />
+            ) : infoMenu === "inquiry" ? (
+              <ContestInquiry />
+            ) : infoMenu === "review" ? (
+              <ContestReview />
+            ) : null}
           </div>
         </S.ContestInfoLeft>
         <S.ContestInfoRight>
@@ -371,4 +358,4 @@ const ContestDetail = () => {
   );
 };
 
-export default ContestDetail;
+export default ContestInfo;
