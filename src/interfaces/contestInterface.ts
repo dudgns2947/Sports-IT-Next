@@ -42,10 +42,14 @@ export interface IPoster {
   posterUrl: string;
 }
 
+export interface Icategory {
+  category: string;
+  name: string;
+}
+
 export interface IContestInfo {
   argeements: string[];
-  categories: string[];
-  category: string;
+  categories: Icategory[];
   competitionId: number;
   competitionResults: string[];
   competitionType: string;

@@ -60,7 +60,7 @@ const ContestDetail = () => {
     const diffTime = Math.abs(today.getTime() - date.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    return `D-${diffDays}`;
+    return diffDays;
   };
 
   const getMonth = (str: string) => {
@@ -213,7 +213,14 @@ const ContestDetail = () => {
         <S.ContestInfoRight>
           <S.ContestCard>
             <TagArea>
-              <Tag is_premium={true}>마감임박</Tag>
+              {getDday(Date.parse(contest?.endDate as string) / 1000) < 8 ? (
+                <Tag is_premium={true}>마감임박</Tag>
+              ) : null}
+              {contest?.categories.map((category) => (
+                <Tag key={category.category} is_premium={false}>
+                  {category.name}
+                </Tag>
+              ))}
             </TagArea>
             <S.ContestName>{contest?.name}</S.ContestName>
             <S.ContestHostName>{contest?.host.name}</S.ContestHostName>
@@ -222,7 +229,7 @@ const ContestDetail = () => {
                 🏆 {(contest?.totalPrize as number) / 10000}만원
               </S.TotalPrice>
               <S.Dday>
-                {getDday(Date.parse(contest?.endDate as string) / 1000)}
+                {`D-${getDday(Date.parse(contest?.endDate as string) / 1000)}`}
               </S.Dday>
             </S.SpaceBetweenAreaWithMargin>
             <S.SpaceBetweenArea>
