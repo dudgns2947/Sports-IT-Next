@@ -195,63 +195,62 @@ const Index = () => {
   console.log(filterBy);
 
   return (
-    <>
+    <WebContainer>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <WebContainer>
-        <Header />
+      <Header />
 
-        <main>
-          <S.OrderContainer>
-            <S.OrderWrapper>
-              <S.OrderSelect
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                  // setIsFresh(true);
-                  // setPage(0);
-                  setOrderBy(e.currentTarget.value);
-                }}
-              >
-                {Options.map((option) => (
-                  <S.OrderOption key={option.value} value={option.value}>
-                    {option.name}
-                  </S.OrderOption>
-                ))}
-              </S.OrderSelect>
-            </S.OrderWrapper>
-          </S.OrderContainer>
-          <S.ContentContainer>
-            <S.AsideContainer>
-              <S.AsideContent>
-                <S.FilterCategory>상태</S.FilterCategory>
-                <FilterBox
-                  filterKeyword="RECRUITING"
-                  filterContent="모집중"
-                  filterBy={filterBy}
-                  setFilterBy={setFilterBy}
-                />
-                <FilterBox
-                  filterKeyword="RECRUITING_END"
-                  filterContent="모집 완료"
-                  filterBy={filterBy}
-                  setFilterBy={setFilterBy}
-                />
-                <FilterBox
-                  filterKeyword="IN_PROGRESS"
-                  filterContent="진행중"
-                  filterBy={filterBy}
-                  setFilterBy={setFilterBy}
-                />
-                <FilterBox
-                  filterKeyword="END"
-                  filterContent="종료"
-                  filterBy={filterBy}
-                  setFilterBy={setFilterBy}
-                />
-              </S.AsideContent>
-              <S.AsideContent>
-                <S.FilterCategory>카테고리</S.FilterCategory>
-                {/* <S.FilterLabel htmlFor="END">
+      <main>
+        <S.OrderContainer>
+          <S.OrderWrapper>
+            <S.OrderSelect
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                // setIsFresh(true);
+                // setPage(0);
+                setOrderBy(e.currentTarget.value);
+              }}
+            >
+              {Options.map((option) => (
+                <S.OrderOption key={option.value} value={option.value}>
+                  {option.name}
+                </S.OrderOption>
+              ))}
+            </S.OrderSelect>
+          </S.OrderWrapper>
+        </S.OrderContainer>
+        <S.ContentContainer>
+          <S.AsideContainer>
+            <S.AsideContent>
+              <S.FilterCategory>상태</S.FilterCategory>
+              <FilterBox
+                filterKeyword="RECRUITING"
+                filterContent="모집중"
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+              />
+              <FilterBox
+                filterKeyword="RECRUITING_END"
+                filterContent="모집 완료"
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+              />
+              <FilterBox
+                filterKeyword="IN_PROGRESS"
+                filterContent="진행중"
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+              />
+              <FilterBox
+                filterKeyword="END"
+                filterContent="종료"
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+              />
+            </S.AsideContent>
+            <S.AsideContent>
+              <S.FilterCategory>카테고리</S.FilterCategory>
+              {/* <S.FilterLabel htmlFor="END">
                 <S.FilterInput
                   type="checkbox"
                   name="status"
@@ -269,32 +268,31 @@ const Index = () => {
                 />
                 수영
               </S.FilterLabel> */}
-              </S.AsideContent>
-            </S.AsideContainer>
-            <section>
-              <S.ContestArea>
-                {contestList.map((contest) => (
-                  <ContestCard
-                    key={contest.competitionId}
-                    posterImageUrl={
-                      contest.posters.length === 0
-                        ? ""
-                        : contest.posters[0].posterUrl
-                    }
-                    competitionId={contest.competitionId}
-                    competitionType={contest.competitionType}
-                    name={contest.name}
-                    host={contest.host}
-                    recruitingEnd={contest.recruitingEnd}
-                    showImage={true}
-                  />
-                ))}
-              </S.ContestArea>
-            </section>
-          </S.ContentContainer>
-        </main>
-        <Footer />
-      </WebContainer>
+            </S.AsideContent>
+          </S.AsideContainer>
+          <section>
+            <S.ContestArea>
+              {contestList.map((contest) => (
+                <ContestCard
+                  key={contest.competitionId}
+                  posterImageUrl={
+                    contest.posters.length === 0
+                      ? ""
+                      : contest.posters[0].posterUrl
+                  }
+                  competitionId={contest.competitionId}
+                  competitionType={contest.competitionType}
+                  name={contest.name}
+                  host={contest.host}
+                  recruitingEnd={contest.recruitingEnd}
+                  showImage={true}
+                />
+              ))}
+            </S.ContestArea>
+          </section>
+        </S.ContentContainer>
+      </main>
+      <Footer />
       {/* <PageWrapper>
         <Seo title="대회" />
         <S.TopBar>
@@ -416,7 +414,7 @@ const Index = () => {
         </S.Container>
         <BottomBar />
       </PageWrapper> */}
-    </>
+    </WebContainer>
   );
 };
 

@@ -13,3 +13,9 @@ export interface IContest {
 export interface ITag {
   is_premium: boolean;
 }
+
+export type InfoMenuType = "detail" | "inquiry" | "notice" | "review";
+
+export interface MenuProps {
+  active: boolean;
+}
