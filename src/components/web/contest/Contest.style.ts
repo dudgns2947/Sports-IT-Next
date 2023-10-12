@@ -14,8 +14,8 @@ export const TagArea = styled.div`
 `;
 
 export const Tag = styled.span<ITag>`
-  width: 40px;
   height: 22px;
+  padding: 0 7px;
   font-size: 10px;
   display: flex;
   justify-content: center;

@@ -1,14 +1,10 @@
 import { SetStateAction } from "react";
 
 export type FilterType =
-  | "PLANNING"
   | "RECRUITING"
   | "RECRUITING_END"
   | "IN_PROGRESS"
-  | "END"
-  | "recruitingEnd"
-  | "recommend"
-  | "totalPrize";
+  | "END";
 
 export interface ISearchInput {
   keyword: string;
@@ -46,10 +42,14 @@ export interface IPoster {
   posterUrl: string;
 }
 
+export interface Icategory {
+  category: string;
+  name: string;
+}
+
 export interface IContestInfo {
   argeements: string[];
-  categories: string[];
-  category: string;
+  categories: Icategory[];
   competitionId: number;
   competitionResults: string[];
   competitionType: string;

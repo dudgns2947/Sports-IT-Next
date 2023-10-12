@@ -289,7 +289,7 @@ export const AsideContainer = styled.aside`
   padding: 30px;
   position: sticky;
   position: -webkit-sticky;
-  top: 0px;
+  top: 60px;
 `;
 
 export const AsideContent = styled.div`
@@ -305,31 +305,11 @@ export const FilterCategory = styled.p`
   color: #212121;
 `;
 
-export const FilterLabel = styled.label`
+export const ContentContainer = styled.div`
+  padding: 0 10%;
   display: flex;
-  align-items: center;
-  user-select: none;
-  padding: 5px 0;
-  font-size: 14px;
-  color: #747474;
-`;
-
-export const FilterInput = styled.input`
-  margin-right: 7px;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #e9ebed;
-  border-radius: 2px;
-
-  &:checked {
-    border: none;
-    background-color: #fd3446;
-    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-    background-size: 100% 100%;
-    background-position: 50%;
-    background-repeat: no-repeat;
-  }
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 export const ContestArea = styled.div`
@@ -343,7 +323,22 @@ export const ContestArea = styled.div`
   @media only screen and (min-width: 1124px) {
     grid-template-columns: repeat(2, 1fr);
   }
-  @media only screen and (min-width: 1540px) {
+  @media only screen and (min-width: 1440px) {
     grid-template-columns: repeat(3, 1fr);
   }
+`;
+
+export const OrderContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  top: 0px;
+  padding: 10px 10%;
+  position: sticky;
+  background-color: #ffffff;
+`;
+
+export const OrderWrapper = styled.div`
+  border: 1px solid #aeaeae;
+  padding: 8px 10px;
+  border-radius: 8px;
 `;
