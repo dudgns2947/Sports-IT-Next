@@ -208,7 +208,33 @@ const ContestDetail = () => {
             </S.Menu>
             <S.MenuRemain></S.MenuRemain>
           </S.MenuBar>
-          <div></div>
+          <div>
+            <S.DetailWrapper>
+              <S.DetailTitle>모집 기간</S.DetailTitle>
+              <S.DetailContent>
+                {getMonth(contest?.recruitingStart as string)}월{" "}
+                {getDay(contest?.recruitingStart as string)}일 (
+                {getDayOfWeek(contest?.recruitingStart as string)}) ~{" "}
+                {getMonth(contest?.recruitingEnd as string)}월{" "}
+                {getDay(contest?.recruitingEnd as string)}일 (
+                {getDayOfWeek(contest?.recruitingEnd as string)})
+              </S.DetailContent>
+            </S.DetailWrapper>
+            <S.DetailWrapper>
+              <S.DetailTitle>총 상금</S.DetailTitle>
+              <S.DetailContent>{contest?.totalPrize}</S.DetailContent>
+            </S.DetailWrapper>
+            <S.DetailWrapper>
+              <S.DetailTitle>개최 지역</S.DetailTitle>
+              <S.DetailContent>
+                {contest?.location} {contest?.locationDetail}
+              </S.DetailContent>
+            </S.DetailWrapper>
+            <S.DetailWrapper>
+              <S.DetailTitle>상세 정보</S.DetailTitle>
+              <S.DetailContent>{contest?.content}</S.DetailContent>
+            </S.DetailWrapper>
+          </div>
         </S.ContestInfoLeft>
         <S.ContestInfoRight>
           <S.ContestCard>
@@ -276,36 +302,36 @@ const ContestDetail = () => {
     //               : "/images/logo/replace_poster.png"
     //           }
     //         />
-    //         <S.DetailWrapper>
-    //           <S.DetailTitle>모집 기간</S.DetailTitle>
-    //           <S.DetailContent>
-    //             {getMonth(contest.recruitingStart)}월{" "}
-    //             {getDay(contest.recruitingStart)}일 (
-    //             {getDayOfWeek(contest.recruitingStart)}) ~{" "}
-    //             {getMonth(contest.recruitingEnd)}월{" "}
-    //             {getDay(contest.recruitingEnd)}일 (
-    //             {getDayOfWeek(contest.recruitingEnd)})
-    //           </S.DetailContent>
-    //         </S.DetailWrapper>
-    //         <S.DetailWrapper>
-    //           <S.DetailTitle>총 상금</S.DetailTitle>
-    //           <S.DetailContent>{contest.totalPrize}</S.DetailContent>
-    //         </S.DetailWrapper>
-    //         <S.DetailWrapper>
-    //           <S.DetailTitle>개최 지역</S.DetailTitle>
-    //           <S.DetailContent>
-    //             {contest.location} {contest.locationDetail}
-    //           </S.DetailContent>
-    //           {/* <Map
-    //             latitude={parseFloat("127.0403496")}
-    //             longitude={parseFloat("37.2815219")}
-    //             addressName={contest?.location!}
-    //           /> */}
-    //         </S.DetailWrapper>
-    //         <S.DetailWrapper>
-    //           <S.DetailTitle>상세 정보</S.DetailTitle>
-    //           <S.DetailContent>{contest.content}</S.DetailContent>
-    //         </S.DetailWrapper>
+    // <S.DetailWrapper>
+    //   <S.DetailTitle>모집 기간</S.DetailTitle>
+    //   <S.DetailContent>
+    //     {getMonth(contest.recruitingStart)}월{" "}
+    //     {getDay(contest.recruitingStart)}일 (
+    //     {getDayOfWeek(contest.recruitingStart)}) ~{" "}
+    //     {getMonth(contest.recruitingEnd)}월{" "}
+    //     {getDay(contest.recruitingEnd)}일 (
+    //     {getDayOfWeek(contest.recruitingEnd)})
+    //   </S.DetailContent>
+    // </S.DetailWrapper>
+    // <S.DetailWrapper>
+    //   <S.DetailTitle>총 상금</S.DetailTitle>
+    //   <S.DetailContent>{contest.totalPrize}</S.DetailContent>
+    // </S.DetailWrapper>
+    // <S.DetailWrapper>
+    //   <S.DetailTitle>개최 지역</S.DetailTitle>
+    //   <S.DetailContent>
+    //     {contest.location} {contest.locationDetail}
+    //   </S.DetailContent>
+    //   {/* <Map
+    //     latitude={parseFloat("127.0403496")}
+    //     longitude={parseFloat("37.2815219")}
+    //     addressName={contest?.location!}
+    //   /> */}
+    // </S.DetailWrapper>
+    // <S.DetailWrapper>
+    //   <S.DetailTitle>상세 정보</S.DetailTitle>
+    //   <S.DetailContent>{contest.content}</S.DetailContent>
+    // </S.DetailWrapper>
     //       </S.ContestArea>
     //     ) : null}
     //   </ContentPaddingArea>
