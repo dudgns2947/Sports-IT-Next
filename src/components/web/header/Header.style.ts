@@ -44,7 +44,13 @@ export const BlackText = styled(BlackNavText)`
   }
 `;
 
-export const HeaderBottomArea = styled(HeaderTopArea)``;
+interface HeaderBottomAreaProps {
+  isHidden: boolean;
+}
+
+export const HeaderBottomArea = styled(HeaderTopArea)<HeaderBottomAreaProps>`
+  visibility: ${(props) => (props.isHidden ? "hidden" : "visible")};
+`;
 
 export const RegisterNavButton = styled.button`
   width: 123px;

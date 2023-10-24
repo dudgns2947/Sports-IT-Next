@@ -15,11 +15,12 @@ import * as S from "../../styles/register/contest-info.styles";
 import {
   contestEventAtom,
   contestEventCountAtom,
-  contestEventSelector,
 } from "@component/atoms/contestAtom";
 import Head from "next/head";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import { WebContainer } from "@component/styles/index.styles";
+import Header from "@component/components/web/header/Header";
 
 const LinkText = styled.span`
   font-size: 14px;
@@ -53,9 +54,11 @@ const EventSelect = () => {
   const router = useRouter();
 
   console.log(contestEvents);
+  console.log(router);
   return (
-    <>
-      <Head>
+    <WebContainer>
+      <Header />
+      {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <PageWrapper>
@@ -85,8 +88,8 @@ const EventSelect = () => {
         <Link href="/register/headcount">
           <NavBar navText="다음" active={count === 1 ? true : false} />
         </Link>
-      </PageWrapper>
-    </>
+      </PageWrapper> */}
+    </WebContainer>
   );
 };
 
