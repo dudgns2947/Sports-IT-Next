@@ -186,6 +186,8 @@ export const ContestCard = styled.div`
   padding: 20px 24px;
   border-radius: 10px;
   margin-left: 10px;
+  position: sticky;
+  top: 0;
 `;
 
 export const ContestImage = styled(Image)`
