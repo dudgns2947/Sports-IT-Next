@@ -62,7 +62,23 @@ import { atom, selector } from "recoil";
 
 export const contestEventAtom = atom<IEvent[]>({
   key: "contestEvent",
-  default: [],
+  default: [
+    { name: "배구", code: 1, category: "" },
+    { name: "농구", code: 2, category: "" },
+    { name: "팔씨름", code: 3, category: "" },
+    { name: "필라테스", code: 4, category: "" },
+    { name: "E-Sports", code: 5, category: "" },
+    { name: "배드민턴", code: 6, category: "" },
+    { name: "수영", code: 7, category: "" },
+    { name: "테니스", code: 8, category: "" },
+    { name: "태권도", code: 9, category: "" },
+    { name: "축구", code: 10, category: "" },
+    { name: "럭비", code: 11, category: "" },
+    { name: "마라톤", code: 12, category: "" },
+    { name: "아이스하키", code: 13, category: "" },
+    { name: "볼링", code: 14, category: "" },
+    { name: "합기도", code: 15, category: "" },
+  ],
 });
 
 export const contestEventCountAtom = atom<number>({

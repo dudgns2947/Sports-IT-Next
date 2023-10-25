@@ -5,4 +5,5 @@
 export interface IEvent {
   name: string;
   code: number;
+  category: string;
 }

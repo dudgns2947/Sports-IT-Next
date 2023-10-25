@@ -1,55 +1,52 @@
-import Seo from "@component/components/Seo";
-import { PageWrapper } from "@component/components/container/container";
-import GoBackHeader from "@component/components/header/GoBackHeader";
 import React, { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  SelectArea,
-  Text,
-  TextArea,
-} from "../../styles/auth/event-select.styles";
-import EventSelectButton from "@component/components/button/EventSelectButton";
-import Link from "next/link";
-import NavBar from "@component/components/navbar/NavBar";
-import * as S from "../../styles/register/contest-info.styles";
 import {
   contestEventAtom,
   contestEventCountAtom,
 } from "@component/atoms/contestAtom";
-import Head from "next/head";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { WebContainer } from "@component/styles/index.styles";
 import Header from "@component/components/web/header/Header";
+import * as S from "../../styles/register/event-select.style";
+import {
+  GlobalBoldText,
+  GlobalGreyText,
+} from "@component/styles/text/text.style";
+import NextButton from "@component/components/web/button/NextButton";
+import Link from "next/link";
+import EventButton from "@component/components/web/button/EventButton";
+import { selectEventAtom } from "@component/atoms/eventAtom";
 
-const LinkText = styled.span`
-  font-size: 14px;
-  color: #e05e6d;
-  border-bottom: 1px solid #e05e6d;
-  cursor: pointer;
-`;
+// const LinkText = styled.span`
+//   font-size: 14px;
+//   color: #e05e6d;
+//   border-bottom: 1px solid #e05e6d;
+//   cursor: pointer;
+// `;
 
-export const BottomArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 10%;
-  margin-bottom: 10%;
-`;
+// export const BottomArea = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   height: 10%;
+//   margin-bottom: 10%;
+// `;
 
-interface BottomTextProps {
-  count: number;
-}
+// interface BottomTextProps {
+//   count: number;
+// }
 
-export const BottomText = styled.span<BottomTextProps>`
-  /* color: #747474; */
-  color: ${(props) => (props.count > 5 ? "#E05E6D" : "#747474")};
-  margin-bottom: 7px;
-`;
+// export const BottomText = styled.span<BottomTextProps>`
+//   /* color: #747474; */
+//   color: ${(props) => (props.count > 5 ? "#E05E6D" : "#747474")};
+//   margin-bottom: 7px;
+// `;
 
 const EventSelect = () => {
   const [contestEvents, setContestEvents] = useRecoilState(contestEventAtom);
+  const [selectEvent, setSelectEvent] = useRecoilState(selectEventAtom);
   const [count, setCount] = useRecoilState(contestEventCountAtom);
   const router = useRouter();
 
@@ -58,6 +55,26 @@ const EventSelect = () => {
   return (
     <WebContainer>
       <Header />
+      <S.EventSelectContainer>
+        <GlobalBoldText>개최할 대회 종목을 선택해주세요.</GlobalBoldText>
+        <GlobalGreyText>
+          카테고리를 선택하여 원하는 종목을 찾아보세요 !
+        </GlobalGreyText>
+        <S.CategoryArea></S.CategoryArea>
+        <S.EventArea>
+          {contestEvents.map((event) => (
+            <EventButton
+              key={event.code}
+              active={selectEvent === event.name}
+              eventName={event.name}
+              setSelectEvent={setSelectEvent}
+            />
+          ))}
+        </S.EventArea>
+        <Link href="/register/contest-info">
+          <NextButton />
+        </Link>
+      </S.EventSelectContainer>
       {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
