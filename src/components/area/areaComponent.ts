@@ -11,8 +11,8 @@ export const ContentPaddingArea = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  padding: 0 15px;
-  padding-bottom: 5%;
+  /* padding: 0 15px; */
+  /* padding-bottom: 5%; */
 `;
 
 export const ContentColumnArea = styled(ContentPaddingArea)`
@@ -32,4 +32,8 @@ export const FlexColumnCenter = styled(FlexColumn)`
 
 export const FlexColumnRowCenter = styled(FlexColumnCenter)`
   align-items: center;
+`;
+
+export const PaddingArea = styled.div`
+  padding: 0 20%;
 `;

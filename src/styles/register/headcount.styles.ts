@@ -34,7 +34,7 @@ export const InputTitle = styled.h3`
 `;
 
 export const Input = styled.input`
-  width: 95%;
+  width: 100%;
   height: 45px;
   font-size: 14px;
   font-weight: 400;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Input } from "./headcount.styles";
 
 export const SmallInput = styled(Input)`
-  width: 32%;
+  width: 90%;
   margin-right: 10px;
 `;
 
@@ -14,7 +14,10 @@ export const LargeInput = styled(Input)`
   }
 `;
 
-export const SmallInputWrapper = styled.div``;
+export const SmallInputWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export const Form = styled.form``;
 
@@ -25,6 +28,9 @@ export const InputWrapper = styled.div`
 `;
 
 export const Text = styled.span`
-  margin-right: 10px;
+  /* margin-right: 10px; */
   font-size: 14px;
+  width: 10%;
 `;
+
+export const ContentContainer = styled.div``;

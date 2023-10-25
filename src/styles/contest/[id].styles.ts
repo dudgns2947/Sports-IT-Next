@@ -1,10 +1,7 @@
 import styled from "styled-components";
-import { GrShareOption } from "react-icons/gr";
 import { TbMessageCircle2 } from "react-icons/tb";
 import Image from "next/image";
 import { MenuProps } from "@component/interfaces/contest/contestInterface";
-import { AiOutlineHeart } from "react-icons/ai";
-import { VscCopy } from "react-icons/vsc";
 
 export const ContestArea = styled.div`
   padding-bottom: 20%;
@@ -128,67 +125,67 @@ export const ApplyBar = styled.div`
   padding: 20px 15px;
 `;
 
-export const IconArea = styled.div`
-  width: 45px;
-  height: 45px;
-  background: #ffffff;
-  border: 1px solid #ededed;
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
+// export const IconArea = styled.div`
+//   width: 45px;
+//   height: 45px;
+//   background: #ffffff;
+//   border: 1px solid #ededed;
+//   border-radius: 6px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   cursor: pointer;
+// `;
 
-export const ApplyButton = styled.button`
-  height: 45px;
-  width: 190px;
-  background: #222428;
-  border-radius: 6px;
-  color: #ffffff;
-  cursor: pointer;
-`;
+// export const ApplyButton = styled.button`
+//   height: 45px;
+//   width: 190px;
+//   background: #222428;
+//   border-radius: 6px;
+//   color: #ffffff;
+//   cursor: pointer;
+// `;
 
 // export const ResultButton = styled(ApplyButton)`
 //   background: #fd3446;
 //   color: #ffffff;
 // `;
 
-export const ShareIcon = styled(VscCopy)`
-  width: 50%;
-  height: 50%;
-  color: #747474;
-`;
+// export const ShareIcon = styled(VscCopy)`
+//   width: 50%;
+//   height: 50%;
+//   color: #747474;
+// `;
 
-export const MessageIcon = styled(TbMessageCircle2)`
-  height: 50%;
-  width: 50%;
-`;
+// export const MessageIcon = styled(TbMessageCircle2)`
+//   height: 50%;
+//   width: 50%;
+// `;
 
-export const HeartIcon = styled(AiOutlineHeart)`
-  width: 50%;
-  height: 50%;
-  color: #747474;
-`;
+// export const HeartIcon = styled(AiOutlineHeart)`
+//   width: 50%;
+//   height: 50%;
+//   color: #747474;
+// `;
 
-export const ContestDetailContainer = styled.div`
-  padding: 0 10%;
-  display: grid;
-  grid-template-columns: 1fr 350px;
-`;
+// export const ContestDetailContainer = styled.div`
+//   padding: 0 10%;
+//   display: grid;
+//   grid-template-columns: 1fr 350px;
+// `;
 
-export const ContestInfoLeft = styled.div``;
+// export const ContestInfoLeft = styled.div``;
 
-export const ContestInfoRight = styled.div``;
+// export const ContestInfoRight = styled.div``;
 
-export const ContestCard = styled.div`
-  border: 1px solid #e9ebed;
-  padding: 20px 24px;
-  border-radius: 10px;
-  margin-left: 10px;
-  position: sticky;
-  top: 0;
-`;
+// export const ContestCard = styled.div`
+//   border: 1px solid #e9ebed;
+//   padding: 20px 24px;
+//   border-radius: 10px;
+//   margin-left: 10px;
+//   position: sticky;
+//   top: 0;
+// `;
 
 export const ContestImage = styled(Image)`
   margin-bottom: 20px;
@@ -216,36 +213,36 @@ export const MenuRemain = styled.div`
   height: 40px;
 `;
 
-export const ContestName = styled.h1`
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
+// export const ContestName = styled.h1`
+//   font-size: 20px;
+//   font-weight: bold;
+//   margin-bottom: 10px;
+// `;
 
-export const ContestHostName = styled.h2`
-  font-size: 14px;
-  color: #747474;
-  margin-bottom: 10px;
-`;
+// export const ContestHostName = styled.h2`
+//   font-size: 14px;
+//   color: #747474;
+//   margin-bottom: 10px;
+// `;
 
-export const SpaceBetweenArea = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+// export const SpaceBetweenArea = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+// `;
 
-export const SpaceBetweenAreaWithMargin = styled(SpaceBetweenArea)`
-  margin-bottom: 20px;
-`;
+// export const SpaceBetweenAreaWithMargin = styled(SpaceBetweenArea)`
+//   margin-bottom: 20px;
+// `;
 
-export const TotalPrice = styled.span`
-  font-size: 14px;
-`;
+// export const TotalPrice = styled.span`
+//   font-size: 14px;
+// `;
 
-export const Dday = styled.span`
-  color: #fd3446;
-  font-size: 14px;
-  font-weight: bold;
-`;
+// export const Dday = styled.span`
+//   color: #fd3446;
+//   font-size: 14px;
+//   font-weight: bold;
+// `;
 
 // export const ApplyButton = styled.button`
 //   background-color: #212121;
