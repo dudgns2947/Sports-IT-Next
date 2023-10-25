@@ -8,11 +8,15 @@ export const EventSelectContainer = styled.div`
   padding: 100px 0;
 `;
 
-export const CategoryArea = styled.div``;
+export const CategoryArea = styled.div`
+  display: flex;
+  margin: 40px 0 60px 0;
+`;
 
 export const EventArea = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 1000px;
+  margin-bottom: 100px;
 `;
