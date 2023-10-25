@@ -1,3 +1,9 @@
+// export interface IEvent {
+//   [key: string]: boolean;
+// }
+
 export interface IEvent {
-  [key: string]: boolean;
+  name: string;
+  code: number;
+  category: string;
 }

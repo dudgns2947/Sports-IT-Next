@@ -76,24 +76,27 @@ export default function Home() {
   const [name, setName] = useState("");
 
   async function getContest(contestProps: IContestParams) {
-    const response = await baseApi.get("competitions/slice", {
-      headers: {
-        Authorization: `Bearer ${contestProps.token}`,
-      },
-      params: {
-        keyword: contestProps.keyword,
-        filterBy: contestProps.filterBy,
-        orderBy: contestProps.orderBy,
-        page: contestProps.page,
-        size: contestProps.size,
-      },
-      paramsSerializer: (params) => {
-        return qs.stringify(params, { arrayFormat: "repeat" });
-      },
-    });
-    console.log(response);
-    setContestList(response.data.result.content);
-    await console.log(contestList);
+    try {
+      const response = await baseApi.get("competitions/slice", {
+        headers: {
+          Authorization: `Bearer ${contestProps.token}`,
+        },
+        params: {
+          keyword: contestProps.keyword,
+          filterBy: contestProps.filterBy,
+          orderBy: contestProps.orderBy,
+          page: contestProps.page,
+          size: contestProps.size,
+        },
+        paramsSerializer: (params) => {
+          return qs.stringify(params, { arrayFormat: "repeat" });
+        },
+      });
+      console.log(response);
+      setContestList(response.data.result.content);
+    } catch (e) {
+      alert(e);
+    }
   }
 
   useEffect(() => {
