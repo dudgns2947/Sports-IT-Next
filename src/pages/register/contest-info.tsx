@@ -1,7 +1,7 @@
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
-import React, { use, useEffect, useState } from "react";
+import React, { ChangeEvent, use, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   Input,
@@ -29,6 +29,7 @@ import {
   contestTotalPrizeAtom,
   contestLatitudeAtom,
   contestLongitudeAtom,
+  contestTotalPrizeTextAtom,
 } from "@component/atoms/contestAtom";
 import Head from "next/head";
 import { Router, useRouter } from "next/router";
@@ -68,6 +69,9 @@ const ContestInfo = () => {
     contestRecruitingEndAtom
   );
   const [totalPrize, setTotalPrize] = useRecoilState(contestTotalPrizeAtom);
+  const [totalPrizeText, setTotalPrizeText] = useRecoilState(
+    contestTotalPrizeTextAtom
+  );
   const [location, setLocation] = useRecoilState(contestLocationAtom) || "";
   const [locationDetail, setLocationDetail] = useRecoilState(
     contestLocationDetailAtom
@@ -108,6 +112,23 @@ const ContestInfo = () => {
       console.log("주소 매핑실패");
     }
   }, [newAddress]);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    const numericInput = Number(inputValue.replace(/,/g, ""));
+
+    setTotalPrize(numericInput);
+    setTotalPrizeText(numericInput.toLocaleString());
+  };
+
+  console.log(contestName);
+  console.log(startDate);
+  console.log(endDate);
+  console.log(recruitingStart);
+  console.log(recruitingEnd);
+  console.log(totalPrize);
+  console.log(location);
+  console.log(locationDetail);
   return (
     <>
       <WebContainer>
@@ -192,14 +213,10 @@ const ContestInfo = () => {
             <InputArea>
               <InputTitle>총 상금</InputTitle>
               <S.LargeInput
-                type="number"
+                type="text"
                 placeholder="ex) 10,000,000"
-                onChange={(e) =>
-                  e.currentTarget.value !== ""
-                    ? setTotalPrize(parseInt(e.currentTarget.value))
-                    : 0
-                }
-                value={totalPrize!}
+                onChange={handleInputChange}
+                value={totalPrizeText}
               />
             </InputArea>
             <InputArea>

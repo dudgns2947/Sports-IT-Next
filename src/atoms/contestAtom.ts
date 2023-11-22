@@ -132,6 +132,11 @@ export const contestTotalPrizeAtom = atom<number | null>({
   default: 0,
 });
 
+export const contestTotalPrizeTextAtom = atom<string>({
+  key: "contestTotalPrizeText",
+  default: "",
+});
+
 export const contestContentAtom = atom<string | null>({
   key: "contestContent",
   default: "",

@@ -82,8 +82,8 @@ const EventSelect = () => {
     useRecoilState(contestCategoryAtom);
   const router = useRouter();
 
-  console.log(contestEvents);
-  console.log(router);
+  console.log(selectEvent);
+  console.log(contestCategory);
   return (
     <WebContainer>
       <Header />
