@@ -7,7 +7,7 @@ export const SmallInput = styled(Input)`
 `;
 
 export const TinyInput = styled(Input)`
-  width: 45%;
+  width: 90%;
 `;
 
 export const LargeInput = styled(Input)`

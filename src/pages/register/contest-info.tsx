@@ -87,6 +87,7 @@ const ContestInfo = () => {
   const [totalPrizeText, setTotalPrizeText] = useRecoilState(
     contestTotalPrizeTextAtom
   );
+  const [isNoPrize, setIsNoPrize] = useState(false);
   const [awardInfo, setAwardInfo] = useRecoilState(AwardInfoAtom);
   const [location, setLocation] = useRecoilState(contestLocationAtom) || "";
   const [locationDetail, setLocationDetail] = useRecoilState(
@@ -131,10 +132,14 @@ const ContestInfo = () => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
+
     const numericInput = Number(inputValue.replace(/,/g, ""));
 
-    setTotalPrize(numericInput);
-    setTotalPrizeText(numericInput.toLocaleString());
+    if (!isNaN(numericInput)) {
+      console.log("error");
+      setTotalPrize(numericInput);
+      setTotalPrizeText(numericInput.toLocaleString());
+    }
   };
 
   console.log(contestName);
@@ -147,6 +152,8 @@ const ContestInfo = () => {
   console.log(locationDetail);
   console.log(isNoLimitPlayers);
   console.log(isNoLimitAudience);
+  console.log(maxNumOfPlayers);
+  console.log(maxNumOfAudience);
   return (
     <>
       <WebContainer>
@@ -166,8 +173,8 @@ const ContestInfo = () => {
                   <NumCheckBox
                     checkContent="정원없음"
                     active={isNoLimitPlayers}
-                    setNoLimit={setIsNoLimitPlayers}
-                    setMaxNum={setMaxNumOfPlayers}
+                    setBoolean={setIsNoLimitPlayers}
+                    setString={setMaxNumOfPlayers}
                   />
                 </FlexRowSpaceBetween>
 
@@ -176,7 +183,9 @@ const ContestInfo = () => {
                   placeholder="ex) 100"
                   disabled={isNoLimitPlayers}
                   onChange={(e) => {
-                    setMaxNumOfPlayers(e.target.value);
+                    if (!isNaN(Number(e.target.value))) {
+                      setMaxNumOfPlayers(e.target.value);
+                    }
                   }}
                   value={maxNumOfPlayers!}
                 ></Input>
@@ -187,8 +196,8 @@ const ContestInfo = () => {
                   <NumCheckBox
                     checkContent="정원없음"
                     active={isNoLimitAudience}
-                    setNoLimit={setIsNoLimitAudience}
-                    setMaxNum={setMaxNumOfAudience}
+                    setBoolean={setIsNoLimitAudience}
+                    setString={setMaxNumOfAudience}
                   />
                 </FlexRowSpaceBetween>
 
@@ -197,7 +206,9 @@ const ContestInfo = () => {
                   placeholder="ex) 100"
                   disabled={isNoLimitAudience}
                   onChange={(e) => {
-                    setMaxNumOfAudience(e.target.value);
+                    if (!isNaN(Number(e.target.value))) {
+                      setMaxNumOfAudience(e.target.value);
+                    }
                   }}
                   value={maxNumOfAudience!}
                 ></Input>
@@ -286,16 +297,34 @@ const ContestInfo = () => {
 
             <InputArea>
               <InputTitle>총 상금</InputTitle>
-              <FlexRow style={{ alignItems: "flex-end" }}>
-                <S.TinyInput
-                  type="text"
-                  placeholder="ex) 10,000,000"
-                  onChange={handleInputChange}
-                  value={totalPrizeText}
-                  style={{ marginBottom: 0, marginRight: "5px" }}
+              <FlexRowSpaceBetween style={{ width: "60%" }}>
+                <FlexRow
+                  style={{
+                    alignItems: "flex-end",
+                    width: "100%",
+                  }}
+                >
+                  <S.TinyInput
+                    type="text"
+                    disabled={isNoPrize}
+                    placeholder="ex) 10,000,000"
+                    onChange={handleInputChange}
+                    value={totalPrizeText}
+                    style={{
+                      marginBottom: 0,
+                      marginRight: "5px",
+                    }}
+                  />
+                  원
+                </FlexRow>
+                <NumCheckBox
+                  checkContent="상금없음"
+                  active={isNoPrize}
+                  setBoolean={setIsNoPrize}
+                  setString={setTotalPrizeText}
+                  setNumber={setTotalPrize}
                 />
-                원
-              </FlexRow>
+              </FlexRowSpaceBetween>
             </InputArea>
             <InputArea>
               <InputTitle>시상</InputTitle>

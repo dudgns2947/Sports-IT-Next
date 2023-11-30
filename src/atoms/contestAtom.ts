@@ -127,7 +127,7 @@ export const contestRecruitingEndAtom = atom<string | null>({
   default: "",
 });
 
-export const contestTotalPrizeAtom = atom<number | null>({
+export const contestTotalPrizeAtom = atom<number>({
   key: "contestTotalPrize",
   default: 0,
 });
