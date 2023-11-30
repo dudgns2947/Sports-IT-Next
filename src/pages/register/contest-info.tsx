@@ -6,7 +6,10 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import {
   Input,
   InputArea,
+  InputAreaTwo,
   InputTitle,
+  InputTwo,
+  TextArea,
 } from "../../styles/register/headcount.styles";
 import NavBar from "@component/components/navbar/NavBar";
 import * as S from "../../styles/register/contest-info.styles";
@@ -16,6 +19,8 @@ import {
   ContentPaddingArea,
   FlexColumn,
   FlexColumnRowCenter,
+  FlexRow,
+  FlexRowSpaceBetween,
   PaddingArea,
 } from "@component/components/area/areaComponent";
 import {
@@ -30,6 +35,9 @@ import {
   contestLatitudeAtom,
   contestLongitudeAtom,
   contestTotalPrizeTextAtom,
+  AwardInfoAtom,
+  contestMaxPlayerAtom,
+  contestMaxViewerAtom,
 } from "@component/atoms/contestAtom";
 import Head from "next/head";
 import { Router, useRouter } from "next/router";
@@ -47,6 +55,7 @@ import {
   GlobalBoldText,
   GlobalGreyText,
 } from "@component/styles/text/text.style";
+import NumCheckBox from "@component/components/web/checkbox/NumCheckBox";
 
 function transformDate(input: string) {
   const date = new Date(input);
@@ -59,6 +68,12 @@ function transformDate(input: string) {
 }
 
 const ContestInfo = () => {
+  const [maxNumOfPlayers, setMaxNumOfPlayers] =
+    useRecoilState(contestMaxPlayerAtom);
+  const [maxNumOfAudience, setMaxNumOfAudience] =
+    useRecoilState(contestMaxViewerAtom);
+  const [isNoLimitPlayers, setIsNoLimitPlayers] = useState(false);
+  const [isNoLimitAudience, setIsNoLimitAudience] = useState(false);
   const [contestName, setContestName] = useRecoilState(contestNameAtom);
   const [startDate, setStartDate] = useRecoilState(contestStartDateAtom);
   const [endDate, setEndDate] = useRecoilState(contestEndDateAtom);
@@ -72,6 +87,7 @@ const ContestInfo = () => {
   const [totalPrizeText, setTotalPrizeText] = useRecoilState(
     contestTotalPrizeTextAtom
   );
+  const [awardInfo, setAwardInfo] = useRecoilState(AwardInfoAtom);
   const [location, setLocation] = useRecoilState(contestLocationAtom) || "";
   const [locationDetail, setLocationDetail] = useRecoilState(
     contestLocationDetailAtom
@@ -129,6 +145,8 @@ const ContestInfo = () => {
   console.log(totalPrize);
   console.log(location);
   console.log(locationDetail);
+  console.log(isNoLimitPlayers);
+  console.log(isNoLimitAudience);
   return (
     <>
       <WebContainer>
@@ -141,6 +159,51 @@ const ContestInfo = () => {
             </GlobalGreyText>
           </FlexColumn>
           <ContentPaddingArea>
+            <FlexRowSpaceBetween>
+              <InputAreaTwo>
+                <FlexRowSpaceBetween>
+                  <InputTitle>대회 최대 정원</InputTitle>
+                  <NumCheckBox
+                    checkContent="정원없음"
+                    active={isNoLimitPlayers}
+                    setNoLimit={setIsNoLimitPlayers}
+                    setMaxNum={setMaxNumOfPlayers}
+                  />
+                </FlexRowSpaceBetween>
+
+                <Input
+                  type="text"
+                  placeholder="ex) 100"
+                  disabled={isNoLimitPlayers}
+                  onChange={(e) => {
+                    setMaxNumOfPlayers(e.target.value);
+                  }}
+                  value={maxNumOfPlayers!}
+                ></Input>
+              </InputAreaTwo>
+              <InputAreaTwo>
+                <FlexRowSpaceBetween>
+                  <InputTitle>관람객 최대 정원</InputTitle>
+                  <NumCheckBox
+                    checkContent="정원없음"
+                    active={isNoLimitAudience}
+                    setNoLimit={setIsNoLimitAudience}
+                    setMaxNum={setMaxNumOfAudience}
+                  />
+                </FlexRowSpaceBetween>
+
+                <Input
+                  type="text"
+                  placeholder="ex) 100"
+                  disabled={isNoLimitAudience}
+                  onChange={(e) => {
+                    setMaxNumOfAudience(e.target.value);
+                  }}
+                  value={maxNumOfAudience!}
+                ></Input>
+              </InputAreaTwo>
+            </FlexRowSpaceBetween>
+
             <InputArea>
               <InputTitle>대회명</InputTitle>
               <Input
@@ -150,37 +213,20 @@ const ContestInfo = () => {
                 value={contestName!}
               ></Input>
             </InputArea>
+            <InputArea>
+              <InputTitle>대회 기관(단체)명</InputTitle>
+              <Input
+                type="text"
+                placeholder="ex) 사단법인 대한 팔씨름 연맹"
+                onChange={(e) => setContestName(e.currentTarget.value)}
+                value={contestName!}
+              ></Input>
+            </InputArea>
+
             {/* <InputArea>
           <InputTitle>대회 기관(단체)명</InputTitle>
           <Input type="text" placeholder="ex) 스포츠잇"></Input>
         </InputArea> */}
-            <InputArea>
-              <InputTitle>대회 일정</InputTitle>
-              <S.SmallInputWrapper>
-                <div style={{ width: "50%" }}>
-                  <S.SmallInput
-                    onChange={(e) =>
-                      setStartDate(
-                        new Date(e.currentTarget.value).toISOString()
-                      )
-                    }
-                    type="date"
-                    value={transformDate(startDate!)}
-                  />
-                  <S.Text>부터</S.Text>
-                </div>
-                <div style={{ width: "50%" }}>
-                  <S.SmallInput
-                    onChange={(e) =>
-                      setEndDate(new Date(e.currentTarget.value).toISOString())
-                    }
-                    type="date"
-                    value={transformDate(endDate!)}
-                  />
-                  <S.Text>까지</S.Text>
-                </div>
-              </S.SmallInputWrapper>
-            </InputArea>
             <InputArea>
               <InputTitle>모집 기간</InputTitle>
               <S.SmallInputWrapper>
@@ -211,13 +257,53 @@ const ContestInfo = () => {
               </S.SmallInputWrapper>
             </InputArea>
             <InputArea>
+              <InputTitle>대회 일정</InputTitle>
+              <S.SmallInputWrapper>
+                <div style={{ width: "50%" }}>
+                  <S.SmallInput
+                    onChange={(e) =>
+                      setStartDate(
+                        new Date(e.currentTarget.value).toISOString()
+                      )
+                    }
+                    type="date"
+                    value={transformDate(startDate!)}
+                  />
+                  <S.Text>부터</S.Text>
+                </div>
+                <div style={{ width: "50%" }}>
+                  <S.SmallInput
+                    onChange={(e) =>
+                      setEndDate(new Date(e.currentTarget.value).toISOString())
+                    }
+                    type="date"
+                    value={transformDate(endDate!)}
+                  />
+                  <S.Text>까지</S.Text>
+                </div>
+              </S.SmallInputWrapper>
+            </InputArea>
+
+            <InputArea>
               <InputTitle>총 상금</InputTitle>
-              <S.LargeInput
-                type="text"
-                placeholder="ex) 10,000,000"
-                onChange={handleInputChange}
-                value={totalPrizeText}
-              />
+              <FlexRow style={{ alignItems: "flex-end" }}>
+                <S.TinyInput
+                  type="text"
+                  placeholder="ex) 10,000,000"
+                  onChange={handleInputChange}
+                  value={totalPrizeText}
+                  style={{ marginBottom: 0, marginRight: "5px" }}
+                />
+                원
+              </FlexRow>
+            </InputArea>
+            <InputArea>
+              <InputTitle>시상</InputTitle>
+              <TextArea
+                placeholder="ex) 1등 : 100만원, 2등 50만원 .."
+                onChange={(e) => setAwardInfo(e.currentTarget.value)}
+                value={awardInfo!}
+              ></TextArea>
             </InputArea>
             <InputArea>
               <InputTitle>개최 장소</InputTitle>

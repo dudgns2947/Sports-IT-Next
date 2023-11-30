@@ -137,6 +137,11 @@ export const contestTotalPrizeTextAtom = atom<string>({
   default: "",
 });
 
+export const AwardInfoAtom = atom<string | null>({
+  key: "awardInfo",
+  default: "",
+});
+
 export const contestContentAtom = atom<string | null>({
   key: "contestContent",
   default: "",
@@ -162,14 +167,14 @@ export const contestLatitudeAtom = atom<string | null>({
   default: "",
 });
 
-export const contestMaxPlayerAtom = atom<number | null>({
+export const contestMaxPlayerAtom = atom<string>({
   key: "contestMaxPlayer",
-  default: null,
+  default: "",
 });
 
-export const contestMaxViewerAtom = atom<number | null>({
+export const contestMaxViewerAtom = atom<string>({
   key: "contestMaxViewer",
-  default: null,
+  default: "",
 });
 
 export const contestTemplateIdAtom = atom<number | null>({
