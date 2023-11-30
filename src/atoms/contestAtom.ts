@@ -187,6 +187,16 @@ export const contestPosterList = atom<File[]>({
   default: [],
 });
 
+export const contestPosterAtom = atom<File | null>({
+  key: "contestPoster",
+  default: null,
+});
+
+export const contestPosterPreviewAtom = atom<string | undefined>({
+  key: "contestPosterPreview",
+  default: undefined,
+});
+
 export const contestRuleFileNames = atom<string[]>({
   key: "contestRuleFileNames",
   default: [],

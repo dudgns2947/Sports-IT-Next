@@ -46,8 +46,8 @@ export const ImageInputArea = styled.div`
 `;
 
 export const ImageInputLabel = styled.label`
-  width: 72px;
-  height: 72px;
+  width: 300px;
+  height: 300px;
   border: 1px solid #ededed;
   margin-right: 10px;
   position: relative;
@@ -56,14 +56,15 @@ export const ImageInputLabel = styled.label`
 export const ImageInput = styled.input``;
 
 export const PreviewImage = styled.img`
-  width: 72px;
-  height: 72px;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
 `;
 
 export const CameraIcon = styled(AiFillCamera)`
   color: #d9d9d9;
-  width: 25px;
-  height: 20px;
+  width: 75px;
+  height: 75px;
 `;
 
 export const DeleteIcon = styled(AiFillCloseCircle)`
