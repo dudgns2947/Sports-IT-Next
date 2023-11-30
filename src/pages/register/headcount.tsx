@@ -7,7 +7,10 @@ import NavBar from "@component/components/navbar/NavBar";
 import * as S from "../../styles/register/headcount.styles";
 import { useForm } from "react-hook-form";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { contestMaxPlayerAtom, contestMaxViewerAtom } from "@component/atoms/contestAtom";
+import {
+  contestMaxPlayerAtom,
+  contestMaxViewerAtom,
+} from "@component/atoms/contestAtom";
 import { useRouter } from "next/router";
 import { HeadCountForm } from "@component/interfaces/headcountInterface";
 import Head from "next/head";
@@ -15,8 +18,10 @@ import Head from "next/head";
 const Headcount = () => {
   const router = useRouter();
   const { register, handleSubmit, formState } = useForm<HeadCountForm>();
-  const [maxNumOfPlayers, setMaxNumOfPlayers] = useRecoilState(contestMaxPlayerAtom);
-  const [maxNumOfAudience, setMaxNumOfAudience] = useRecoilState(contestMaxViewerAtom);
+  const [maxNumOfPlayers, setMaxNumOfPlayers] =
+    useRecoilState(contestMaxPlayerAtom);
+  const [maxNumOfAudience, setMaxNumOfAudience] =
+    useRecoilState(contestMaxViewerAtom);
   // const setMaxNumOfPlayers = useSetRecoilState(contestMaxPlayerAtom);
   // const setMaxNumOfAudience = useSetRecoilState(contestMaxViewerAtom);
   const [errorMsg, setErrorMsg] = useState<string | undefined>("");
@@ -26,12 +31,12 @@ const Headcount = () => {
   console.log(maxNumOfAudience);
 
   const onValid = (data: HeadCountForm) => {
-    if (data.numOfPlayers) {
-      setMaxNumOfPlayers(data.numOfPlayers);
-    }
-    if (data.numOfAudience) {
-      setMaxNumOfAudience(data.numOfAudience);
-    }
+    // if (data.numOfPlayers) {
+    //   setMaxNumOfPlayers(data.numOfPlayers);
+    // }
+    // if (data.numOfAudience) {
+    //   setMaxNumOfAudience(data.numOfAudience);
+    // }
     router.push("/register/contest-info");
   };
 
@@ -67,23 +72,33 @@ const Headcount = () => {
               <S.InputTitle>선수 정원</S.InputTitle>
               <S.Input
                 {...register("numOfPlayers", {
-                  validate: (value) => (value >= 0 ? true : "선수 정원은 0 이상의 수로 입력해주세요."),
+                  validate: (value) =>
+                    value >= 0
+                      ? true
+                      : "선수 정원은 0 이상의 수로 입력해주세요.",
                 })}
                 type="number"
                 placeholder="최대 선수 인원을 입력해주세요."
               ></S.Input>
-              <S.ErrorMessage>{errorMsg === "" ? null : errorMsg}</S.ErrorMessage>
+              <S.ErrorMessage>
+                {errorMsg === "" ? null : errorMsg}
+              </S.ErrorMessage>
             </S.InputArea>
             <S.InputArea>
               <S.InputTitle>관람객 정원</S.InputTitle>
               <S.Input
                 {...register("numOfAudience", {
-                  validate: (value) => (value >= 0 ? true : "관람객 정원은 0 이상의 수로 입력해주세요."),
+                  validate: (value) =>
+                    value >= 0
+                      ? true
+                      : "관람객 정원은 0 이상의 수로 입력해주세요.",
                 })}
                 type="number"
                 placeholder="최대 관람객 인원을 입력해주세요."
               ></S.Input>
-              <S.ErrorMessage>{errorMsgTwo === "" ? null : errorMsgTwo}</S.ErrorMessage>
+              <S.ErrorMessage>
+                {errorMsgTwo === "" ? null : errorMsgTwo}
+              </S.ErrorMessage>
             </S.InputArea>
           </S.InputWrapper>
           <NavBar navText="다음" active={true} />
