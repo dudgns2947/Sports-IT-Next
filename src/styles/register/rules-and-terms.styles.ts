@@ -45,6 +45,7 @@ export const DataContent = styled.span`
 export const UploadForm = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const TitleArea = styled.div`
@@ -164,4 +165,17 @@ export const FileUploadText = styled.span`
 
 export const FileInput = styled.input`
   display: none;
+`;
+
+export const RegisterArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dotted #000000;
+  width: 100%;
+  height: 56px;
+  font-size: 16px;
+  border-radius: 6px;
+  margin: 20px 0;
+  cursor: pointer;
 `;

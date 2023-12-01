@@ -22,12 +22,16 @@ import Header from "@component/components/web/header/Header";
 import {
   ContentPaddingArea,
   FlexColumn,
+  FlexColumnRowCenter,
   PaddingArea,
 } from "@component/components/area/areaComponent";
 import {
   GlobalBoldText,
   GlobalGreyText,
 } from "@component/styles/text/text.style";
+import { ruleTermModalOpenAtom } from "@component/atoms/modalAtom";
+import RuleTermModal from "@component/components/web/modal/RuleTermModal";
+import NextButton from "@component/components/web/button/NextButton";
 
 const RulesAndTerms = () => {
   const [inputText, setInputText] = useState("");
@@ -40,6 +44,9 @@ const RulesAndTerms = () => {
   const [ruleFiles, setRuleFiles] = useRecoilState(contestRuleFiles);
   const [ruleUrlNames, setRuleUrlNames] = useRecoilState(contestRuleUrlNames);
   const [ruleUrls, setRuleUrls] = useRecoilState(contestRuleUrls);
+  const [ruleTermModalOpen, setRuleTermModalOpen] = useRecoilState(
+    ruleTermModalOpenAtom
+  );
 
   const router = useRouter();
 
@@ -106,7 +113,7 @@ const RulesAndTerms = () => {
     <>
       <WebContainer>
         <Header />
-        <PaddingArea>
+        <PaddingArea style={{ marginBottom: "20px" }}>
           <FlexColumn>
             <GlobalBoldText>
               🔒 대회 규정 및 약관을 등록해 주세요.
@@ -116,6 +123,17 @@ const RulesAndTerms = () => {
             </GlobalGreyText>
           </FlexColumn>
           <ContentPaddingArea>
+            <S.RegisterArea onClick={() => setRuleTermModalOpen(true)}>
+              + 규정 및 약관 등록
+            </S.RegisterArea>
+            <RuleTermModal
+              modalOpen={ruleTermModalOpen}
+              setModalOpen={setRuleTermModalOpen}
+              setRuleFileNames={setRuleFileNames}
+              setRuleFiles={setRuleFiles}
+              setRuleUrlNames={setRuleUrlNames}
+              setRuleUrls={setRuleUrls}
+            />
             {ruleFiles.length !== 0
               ? ruleFiles.map((ruleFile, index) => (
                   <S.DataArea key={index}>
@@ -162,7 +180,7 @@ const RulesAndTerms = () => {
                   </S.DataArea>
                 ))
               : null}
-            {willAdd ? (
+            {/* {willAdd ? (
               <S.UploadForm>
                 <S.TitleArea>
                   <S.Title>규정 혹은 약관 이름</S.Title>
@@ -255,9 +273,14 @@ const RulesAndTerms = () => {
                 setValue={setWillAdd}
                 text="규정 / 약관 추가하기"
               ></AddButton>
-            )}
+            )} */}
           </ContentPaddingArea>
         </PaddingArea>
+        <FlexColumnRowCenter>
+          <Link href="/register/sector-and-weight">
+            <NextButton />
+          </Link>
+        </FlexColumnRowCenter>
       </WebContainer>
       {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
