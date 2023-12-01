@@ -210,7 +210,7 @@ const ContestDetail = () => {
           </ContentPaddingArea>
         </PaddingArea>
         <FlexColumnRowCenter>
-          <Link href="/register/contest-detail">
+          <Link href="/register/rules-and-terms">
             <NextButton />
           </Link>
         </FlexColumnRowCenter>

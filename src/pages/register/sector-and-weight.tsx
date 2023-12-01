@@ -2,7 +2,7 @@ import { baseApi } from "@component/api/utils/instance";
 import {
   contestContentAtom,
   contestEndDateAtom,
-  contestEventSelector,
+  // contestEventSelector,
   contestLocationAtom,
   contestLocationDetailAtom,
   contestMaxPlayerAtom,
@@ -24,6 +24,8 @@ import Seo from "@component/components/Seo";
 import {
   ContentArea,
   ContentPaddingArea,
+  FlexColumn,
+  PaddingArea,
 } from "@component/components/area/areaComponent";
 import AddButton from "@component/components/button/AddButton";
 import SurveyCard from "@component/components/card/SurveyCard";
@@ -39,6 +41,12 @@ import React, { use, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import Head from "next/head";
+import { WebContainer } from "@component/styles/index.styles";
+import Header from "@component/components/web/header/Header";
+import {
+  GlobalBoldText,
+  GlobalGreyText,
+} from "@component/styles/text/text.style";
 
 const SurveyArea = styled.div``;
 
@@ -73,7 +81,7 @@ const SectorAndWeight = () => {
   );
   const [maxPlayer, setMaxPlayer] = useRecoilState(contestMaxPlayerAtom);
   const [maxViewer, setMaxViewer] = useRecoilState(contestMaxViewerAtom);
-  const eventSelector = useRecoilValue(contestEventSelector);
+  // const eventSelector = useRecoilValue(contestEventSelector);
 
   const [ruleFileNames, setRuleFileNames] =
     useRecoilState(contestRuleFileNames);
@@ -166,7 +174,7 @@ const SectorAndWeight = () => {
       "/competitions",
       {
         name: contestName,
-        sportCategory: eventToEnglish(eventSelector),
+        sportCategory: eventToEnglish(""),
         startDate: contestStartDate,
         endDate: contestEndDate,
         recruitingStart: recruitingStart,
@@ -251,6 +259,18 @@ const SectorAndWeight = () => {
 
   return (
     <>
+      <WebContainer>
+        <Header />
+        <PaddingArea>
+          <FlexColumn style={{ marginBottom: "30px" }}>
+            <GlobalBoldText>🗂️ 부문 또는 체급을 등록 해주세요.</GlobalBoldText>
+            <GlobalGreyText>
+              참가자에게 동의를 받기 위한 규정 혹은 약관이 있다면 등록해 주세요.
+            </GlobalGreyText>
+          </FlexColumn>
+        </PaddingArea>
+        <ContentPaddingArea></ContentPaddingArea>
+      </WebContainer>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
@@ -290,7 +310,7 @@ const SectorAndWeight = () => {
           <AddButton text="부문 / 체급 추가하기"></AddButton>
         </AddButtonArea> */}
         </ContentPaddingArea>
-        <Link onClick={registerContest} href="/register/register-success">
+        <Link href="/register/survey">
           <NavBar navText="대회 등록" active={true} />
         </Link>
       </PageWrapper>
