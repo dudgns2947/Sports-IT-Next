@@ -134,8 +134,13 @@ const ImageCropper = ({ children, aspectRatio, onCrop }: PropsType) => {
                 alignItems: "center",
               }}
             >
-              <CancelButton onClick={() => setPreviewImage(undefined)}>
-                취소
+              <CancelButton
+                onClick={() => {
+                  setPreviewImage(undefined);
+                  setPosterImage(null);
+                }}
+              >
+                초기화
               </CancelButton>
               <ApplyButton className="crop" onClick={getCropData}>
                 적용하기

@@ -1,14 +1,6 @@
-import Seo from "@component/components/Seo";
-import { PageWrapper } from "@component/components/container/container";
-import GoBackHeader from "@component/components/header/GoBackHeader";
-import NavBar from "@component/components/navbar/NavBar";
 import Link from "next/link";
 import React, { useState } from "react";
-import {
-  Form,
-  InputArea,
-  InputTitle,
-} from "../../styles/register/headcount.styles";
+import { InputArea, InputTitle } from "../../styles/register/headcount.styles";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import * as S from "../../styles/register/contest-detail.styles";
@@ -35,9 +27,9 @@ import {
   GlobalGreyText,
 } from "@component/styles/text/text.style";
 import NextButton from "@component/components/web/button/NextButton";
-import ImageCropper from "@component/components/web/cropper/ImageCropper";
 import { cropModalOpenAtom } from "@component/atoms/modalAtom";
 import CropModal from "@component/components/web/modal/CropModal";
+import "react-quill/dist/quill.snow.css";
 
 const ContestDetail = () => {
   const { register, handleSubmit, formState, watch, setValue } =
@@ -50,10 +42,21 @@ const ContestDetail = () => {
   const [posterImage, setPosterImage] = useRecoilState(contestPosterAtom);
   const [posterList, setPosterList] = useRecoilState(contestPosterList);
   const [cropModalOpen, setCropModalOpen] = useRecoilState(cropModalOpenAtom);
-  const imageList = watch("imageList");
-
   const [contestContent, setContestContent] =
     useRecoilState(contestContentAtom);
+  const [isOpen, setIsOpen] = useState(false);
+  let ReactQuill =
+    isOpen && typeof window === "object" ? require("react-quill") : () => {};
+
+  const handleTextValue = (
+    content: any,
+    delta: any,
+    source: any,
+    editor: any
+  ) => {
+    setContestContent(editor.getContents());
+  };
+  // const imageList = watch("imageList");
 
   useEffect(() => {
     if (posterList && posterList.length > 0) {
@@ -78,8 +81,46 @@ const ContestDetail = () => {
     setPosterList(posterList.filter((_, index) => index !== id));
   };
 
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "image"],
+      [{ align: [] }, { color: [] }, { background: [] }], // dropdown with defaults from theme
+      ["clean"],
+    ],
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "align",
+    "color",
+    "background",
+  ];
+
   console.log(previewImage);
   console.log(posterImage);
+  console.log(contestContent);
 
   return (
     <>
@@ -150,14 +191,22 @@ const ContestDetail = () => {
                 ))} */}
               </S.ImageInputArea>
             </InputArea>
-            <InputArea>
+            <ReactQuill
+              theme="snow"
+              style={{ height: "400px", marginBottom: "80px" }}
+              value={contestContent || ""}
+              modules={modules}
+              formats={formats}
+              onChange={handleTextValue}
+            />
+            {/* <InputArea>
               <InputTitle>상세 정보</InputTitle>
               <S.LargeInput
                 value={contestContent ? contestContent : ""}
                 placeholder="대회 정보&#13;&#10;장소&#13;&#10;날짜&#13;&#10;식순&#13;&#10;대회 시간&#13;&#10;상금"
                 onChange={(e) => setContestContent(e.currentTarget.value)}
               />
-            </InputArea>
+            </InputArea> */}
           </ContentPaddingArea>
         </PaddingArea>
         <FlexColumnRowCenter>
