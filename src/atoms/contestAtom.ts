@@ -329,3 +329,8 @@ export const participateFormAtom = atom({
   key: "participateForm",
   default: "",
 });
+
+export const genderAtom = atom<number>({
+  key: "gender",
+  default: 0,
+});

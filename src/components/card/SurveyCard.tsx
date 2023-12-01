@@ -5,6 +5,7 @@ import { ISector, IWeightSector } from "@component/interfaces/contestInterface";
 import styled from "styled-components";
 import { BoldSubText } from "../text/boldText";
 import { Input } from "../input/inputComponent";
+import { genderAtom } from "@component/atoms/contestAtom";
 
 interface SurveyCardProps {
   setWeightSectors: React.Dispatch<SetStateAction<IWeightSector[]>>;
@@ -18,6 +19,7 @@ const SurveyCard = ({ setWeightSectors, setModalOpen }: SurveyCardProps) => {
   const [sectorName, setSectorName] = useState<string>("");
   const [cost, setCost] = useState(0);
   const [expendCost, setExpendCost] = useState(0);
+  const [gender, setGender] = useRecoilState(genderAtom);
   return (
     <S.SurveyCardWrapper>
       <S.SurveyTopArea>
@@ -136,6 +138,7 @@ const SurveyCard = ({ setWeightSectors, setModalOpen }: SurveyCardProps) => {
               expandCost: expendCost,
               subSectors: sectors,
               multi: multi,
+              gender: gender,
             });
             console.log(tempWeightSectors);
             return tempWeightSectors;

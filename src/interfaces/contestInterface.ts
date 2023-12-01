@@ -117,6 +117,7 @@ export interface IWeightSector {
   cost: number;
   expandCost: number;
   multi: boolean;
+  gender: number;
   subSectors: ISector[];
 }
 

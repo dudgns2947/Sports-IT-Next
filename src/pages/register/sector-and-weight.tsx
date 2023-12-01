@@ -18,6 +18,7 @@ import {
   contestStartDateAtom,
   contestTotalPrizeAtom,
   contestWeightSectors,
+  genderAtom,
 } from "@component/atoms/contestAtom";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
@@ -25,6 +26,7 @@ import {
   ContentArea,
   ContentPaddingArea,
   FlexColumn,
+  FlexColumnRowCenter,
   PaddingArea,
 } from "@component/components/area/areaComponent";
 import AddButton from "@component/components/button/AddButton";
@@ -49,12 +51,7 @@ import {
 } from "@component/styles/text/text.style";
 import { sectorWeightModalOpenAtom } from "@component/atoms/modalAtom";
 import SectorWeightModal from "@component/components/web/modal/SectorWeightModal";
-
-const SurveyArea = styled.div``;
-
-const AddButtonArea = styled.div`
-  padding-bottom: 40px;
-`;
+import NextButton from "@component/components/web/button/NextButton";
 
 interface IResponseOne {
   success: boolean;
@@ -96,6 +93,8 @@ const SectorAndWeight = () => {
   const [sectorWeightModalOpen, setSectorWeightModalOpen] = useRecoilState(
     sectorWeightModalOpenAtom
   );
+
+  const [gender, setGender] = useRecoilState(genderAtom);
 
   let token: string | null = "";
 
@@ -267,7 +266,7 @@ const SectorAndWeight = () => {
     <>
       <WebContainer>
         <Header />
-        <PaddingArea>
+        <PaddingArea style={{ marginBottom: "20px" }}>
           <FlexColumn style={{ marginBottom: "30px" }}>
             <GlobalBoldText>🗂️ 부문 또는 체급을 등록 해주세요.</GlobalBoldText>
             <GlobalGreyText>
@@ -282,22 +281,39 @@ const SectorAndWeight = () => {
               modalOpen={sectorWeightModalOpen}
               setModalOpen={setSectorWeightModalOpen}
             />
+
+            <GenderButton active={gender === 0} onClick={() => setGender(0)}>
+              남성
+            </GenderButton>
+            <GenderButton active={gender === 1} onClick={() => setGender(1)}>
+              여성
+            </GenderButton>
+
             {weightSectors
-              ? weightSectors.map((weightSector, index) => (
-                  <SurveyEndCard
-                    key={index}
-                    cardIndex={index}
-                    title={weightSector.title}
-                    cost={weightSector.cost}
-                    expandCost={weightSector.expandCost}
-                    subSectors={weightSector.subSectors}
-                    multi={weightSector.multi}
-                    setWeightSectors={setWeightSectors}
-                  />
-                ))
+              ? weightSectors.map(
+                  (weightSector, index) =>
+                    weightSector.gender === gender && (
+                      <SurveyEndCard
+                        key={index}
+                        cardIndex={index}
+                        title={weightSector.title}
+                        cost={weightSector.cost}
+                        expandCost={weightSector.expandCost}
+                        subSectors={weightSector.subSectors}
+                        multi={weightSector.multi}
+                        gender={weightSector.gender}
+                        setWeightSectors={setWeightSectors}
+                      />
+                    )
+                )
               : null}
           </ContentPaddingArea>
         </PaddingArea>
+        <FlexColumnRowCenter>
+          <Link href="/register/survey">
+            <NextButton />
+          </Link>
+        </FlexColumnRowCenter>
       </WebContainer>
       {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -359,4 +375,14 @@ const RegisterArea = styled.div`
   border-radius: 6px;
   margin: 20px 0;
   cursor: pointer;
+`;
+
+const GenderButton = styled.button<{ active: boolean }>`
+  width: 68px;
+  height: 38px;
+  border-radius: 20px;
+  color: ${(props) => (props.active ? "#ffffff" : "212121")};
+  background-color: ${(props) => (props.active ? "#212121" : "ffffff")};
+  margin-right: 7px;
+  border: ${(props) => (props.active ? null : "1px solid #E9EBED")};
 `;
