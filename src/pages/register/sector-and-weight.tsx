@@ -47,6 +47,8 @@ import {
   GlobalBoldText,
   GlobalGreyText,
 } from "@component/styles/text/text.style";
+import { sectorWeightModalOpenAtom } from "@component/atoms/modalAtom";
+import SectorWeightModal from "@component/components/web/modal/SectorWeightModal";
 
 const SurveyArea = styled.div``;
 
@@ -90,6 +92,10 @@ const SectorAndWeight = () => {
   const [ruleUrls, setRuleUrls] = useRecoilState(contestRuleUrls);
 
   const [posterList, setPosterList] = useRecoilState(contestPosterList);
+
+  const [sectorWeightModalOpen, setSectorWeightModalOpen] = useRecoilState(
+    sectorWeightModalOpenAtom
+  );
 
   let token: string | null = "";
 
@@ -268,10 +274,32 @@ const SectorAndWeight = () => {
               참가자에게 동의를 받기 위한 규정 혹은 약관이 있다면 등록해 주세요.
             </GlobalGreyText>
           </FlexColumn>
+          <ContentPaddingArea>
+            <RegisterArea onClick={() => setSectorWeightModalOpen(true)}>
+              + 부문 및 체급 등록
+            </RegisterArea>
+            <SectorWeightModal
+              modalOpen={sectorWeightModalOpen}
+              setModalOpen={setSectorWeightModalOpen}
+            />
+            {weightSectors
+              ? weightSectors.map((weightSector, index) => (
+                  <SurveyEndCard
+                    key={index}
+                    cardIndex={index}
+                    title={weightSector.title}
+                    cost={weightSector.cost}
+                    expandCost={weightSector.expandCost}
+                    subSectors={weightSector.subSectors}
+                    multi={weightSector.multi}
+                    setWeightSectors={setWeightSectors}
+                  />
+                ))
+              : null}
+          </ContentPaddingArea>
         </PaddingArea>
-        <ContentPaddingArea></ContentPaddingArea>
       </WebContainer>
-      <Head>
+      {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <PageWrapper>
@@ -298,24 +326,37 @@ const SectorAndWeight = () => {
                 ))
               : null}
             <SurveyCard setWeightSectors={setWeightSectors} />
-          </SurveyArea>
-          {/* <SurveyArea>
+          </SurveyArea> */}
+      {/* <SurveyArea>
           {surveyList.map((survey, index) => (
             <SurveyCard index={index} setSurveyList={setSurveyList} />
           ))}
         </SurveyArea> */}
-          {/* <AddButtonArea
+      {/* <AddButtonArea
           onClick={() => setSurveyList((current) => [...current, ""])}
         >
           <AddButton text="부문 / 체급 추가하기"></AddButton>
         </AddButtonArea> */}
-        </ContentPaddingArea>
+      {/* </ContentPaddingArea>
         <Link href="/register/survey">
           <NavBar navText="대회 등록" active={true} />
         </Link>
-      </PageWrapper>
+      </PageWrapper> */}
     </>
   );
 };
 
 export default SectorAndWeight;
+
+const RegisterArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dotted #000000;
+  width: 100%;
+  height: 56px;
+  font-size: 16px;
+  border-radius: 6px;
+  margin: 20px 0;
+  cursor: pointer;
+`;

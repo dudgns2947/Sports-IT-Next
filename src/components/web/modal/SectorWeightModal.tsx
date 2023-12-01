@@ -1,5 +1,9 @@
+import { contestWeightSectors } from "@component/atoms/contestAtom";
+import SurveyCard from "@component/components/card/SurveyCard";
 import React from "react";
 import ReactModal from "react-modal";
+import { useRecoilState } from "recoil";
+import styled from "styled-components";
 
 const SectorWeightModal = ({
   modalOpen,
@@ -8,6 +12,8 @@ const SectorWeightModal = ({
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const [weightSectors, setWeightSectors] =
+    useRecoilState(contestWeightSectors);
   return (
     <ReactModal
       isOpen={modalOpen}
@@ -17,7 +23,17 @@ const SectorWeightModal = ({
       style={customModalStyles}
       ariaHideApp={false}
       shouldCloseOnOverlayClick={true}
-    ></ReactModal>
+    >
+      <UploadForm>
+        <TitleArea>
+          <Title>부문 및 체급 등록</Title>
+        </TitleArea>
+        <SurveyCard
+          setWeightSectors={setWeightSectors}
+          setModalOpen={setModalOpen}
+        />
+      </UploadForm>
+    </ReactModal>
   );
 };
 
@@ -36,8 +52,8 @@ const customModalStyles: ReactModal.Styles = {
   content: {
     display: "flex",
     flexDirection: "column",
-    width: "400px",
-    height: "90%",
+    width: "667px",
+    height: "65%",
     zIndex: "150",
     position: "absolute",
     top: "50%",
@@ -50,3 +66,21 @@ const customModalStyles: ReactModal.Styles = {
     // overflow: "auto",
   },
 };
+
+const TitleArea = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+`;
+
+const Title = styled.span`
+  font-weight: 600;
+  font-size: 20px;
+  color: #212121;
+`;
+
+const UploadForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;

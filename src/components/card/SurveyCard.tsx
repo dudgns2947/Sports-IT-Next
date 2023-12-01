@@ -8,9 +8,10 @@ import { Input } from "../input/inputComponent";
 
 interface SurveyCardProps {
   setWeightSectors: React.Dispatch<SetStateAction<IWeightSector[]>>;
+  setModalOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const SurveyCard = ({ setWeightSectors }: SurveyCardProps) => {
+const SurveyCard = ({ setWeightSectors, setModalOpen }: SurveyCardProps) => {
   const [title, setTitle] = useState<string>("");
   const [sectors, setSectors] = useState<ISector[]>([]);
   const [multi, setMulti] = useState<boolean>(false);
@@ -81,6 +82,7 @@ const SurveyCard = ({ setWeightSectors }: SurveyCardProps) => {
             <S.ToggleText>중복여부</S.ToggleText>
             <S.ToggleLabel>
               <S.ToggleInput
+                style={{ marginLeft: "3px" }}
                 active={multi}
                 checked={multi}
                 role="switch"
@@ -144,6 +146,7 @@ const SurveyCard = ({ setWeightSectors }: SurveyCardProps) => {
           setCost(0);
           setExpendCost(0);
           setMulti(false);
+          setModalOpen(false);
         }}
       >
         등록

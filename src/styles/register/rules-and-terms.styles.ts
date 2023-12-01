@@ -52,11 +52,12 @@ export const TitleArea = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
+  border-bottom: 1px solid #e9ebed;
 `;
 
 export const Title = styled.span`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 20px;
   color: #212121;
 `;
 

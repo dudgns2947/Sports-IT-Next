@@ -282,7 +282,7 @@ export const RegisterButton = styled.button`
   width: 100%;
   height: 50px;
   margin-bottom: 10px;
-  background-color: black;
+  background-color: #fd3446;
   color: white;
   border-radius: 5px;
 `;
