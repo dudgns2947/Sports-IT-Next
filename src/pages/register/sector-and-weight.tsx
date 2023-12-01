@@ -2,7 +2,7 @@ import { baseApi } from "@component/api/utils/instance";
 import {
   contestContentAtom,
   contestEndDateAtom,
-  contestEventSelector,
+  // contestEventSelector,
   contestLocationAtom,
   contestLocationDetailAtom,
   contestMaxPlayerAtom,
@@ -18,12 +18,16 @@ import {
   contestStartDateAtom,
   contestTotalPrizeAtom,
   contestWeightSectors,
+  genderAtom,
 } from "@component/atoms/contestAtom";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
 import {
   ContentArea,
   ContentPaddingArea,
+  FlexColumn,
+  FlexColumnRowCenter,
+  PaddingArea,
 } from "@component/components/area/areaComponent";
 import AddButton from "@component/components/button/AddButton";
 import SurveyCard from "@component/components/card/SurveyCard";
@@ -39,12 +43,15 @@ import React, { use, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import Head from "next/head";
-
-const SurveyArea = styled.div``;
-
-const AddButtonArea = styled.div`
-  padding-bottom: 40px;
-`;
+import { WebContainer } from "@component/styles/index.styles";
+import Header from "@component/components/web/header/Header";
+import {
+  GlobalBoldText,
+  GlobalGreyText,
+} from "@component/styles/text/text.style";
+import { sectorWeightModalOpenAtom } from "@component/atoms/modalAtom";
+import SectorWeightModal from "@component/components/web/modal/SectorWeightModal";
+import NextButton from "@component/components/web/button/NextButton";
 
 interface IResponseOne {
   success: boolean;
@@ -73,7 +80,7 @@ const SectorAndWeight = () => {
   );
   const [maxPlayer, setMaxPlayer] = useRecoilState(contestMaxPlayerAtom);
   const [maxViewer, setMaxViewer] = useRecoilState(contestMaxViewerAtom);
-  const eventSelector = useRecoilValue(contestEventSelector);
+  // const eventSelector = useRecoilValue(contestEventSelector);
 
   const [ruleFileNames, setRuleFileNames] =
     useRecoilState(contestRuleFileNames);
@@ -82,6 +89,12 @@ const SectorAndWeight = () => {
   const [ruleUrls, setRuleUrls] = useRecoilState(contestRuleUrls);
 
   const [posterList, setPosterList] = useRecoilState(contestPosterList);
+
+  const [sectorWeightModalOpen, setSectorWeightModalOpen] = useRecoilState(
+    sectorWeightModalOpenAtom
+  );
+
+  const [gender, setGender] = useRecoilState(genderAtom);
 
   let token: string | null = "";
 
@@ -166,7 +179,7 @@ const SectorAndWeight = () => {
       "/competitions",
       {
         name: contestName,
-        sportCategory: eventToEnglish(eventSelector),
+        sportCategory: eventToEnglish(""),
         startDate: contestStartDate,
         endDate: contestEndDate,
         recruitingStart: recruitingStart,
@@ -251,7 +264,58 @@ const SectorAndWeight = () => {
 
   return (
     <>
-      <Head>
+      <WebContainer>
+        <Header />
+        <PaddingArea style={{ marginBottom: "20px" }}>
+          <FlexColumn style={{ marginBottom: "30px" }}>
+            <GlobalBoldText>🗂️ 부문 또는 체급을 등록 해주세요.</GlobalBoldText>
+            <GlobalGreyText>
+              참가자에게 동의를 받기 위한 규정 혹은 약관이 있다면 등록해 주세요.
+            </GlobalGreyText>
+          </FlexColumn>
+          <ContentPaddingArea>
+            <RegisterArea onClick={() => setSectorWeightModalOpen(true)}>
+              + 부문 및 체급 등록
+            </RegisterArea>
+            <SectorWeightModal
+              modalOpen={sectorWeightModalOpen}
+              setModalOpen={setSectorWeightModalOpen}
+            />
+
+            <GenderButton active={gender === 0} onClick={() => setGender(0)}>
+              남성
+            </GenderButton>
+            <GenderButton active={gender === 1} onClick={() => setGender(1)}>
+              여성
+            </GenderButton>
+
+            {weightSectors
+              ? weightSectors.map(
+                  (weightSector, index) =>
+                    weightSector.gender === gender && (
+                      <SurveyEndCard
+                        key={index}
+                        cardIndex={index}
+                        title={weightSector.title}
+                        cost={weightSector.cost}
+                        expandCost={weightSector.expandCost}
+                        subSectors={weightSector.subSectors}
+                        multi={weightSector.multi}
+                        gender={weightSector.gender}
+                        setWeightSectors={setWeightSectors}
+                      />
+                    )
+                )
+              : null}
+          </ContentPaddingArea>
+        </PaddingArea>
+        <FlexColumnRowCenter>
+          <Link href="/register/survey">
+            <NextButton />
+          </Link>
+        </FlexColumnRowCenter>
+      </WebContainer>
+      {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <PageWrapper>
@@ -278,24 +342,47 @@ const SectorAndWeight = () => {
                 ))
               : null}
             <SurveyCard setWeightSectors={setWeightSectors} />
-          </SurveyArea>
-          {/* <SurveyArea>
+          </SurveyArea> */}
+      {/* <SurveyArea>
           {surveyList.map((survey, index) => (
             <SurveyCard index={index} setSurveyList={setSurveyList} />
           ))}
         </SurveyArea> */}
-          {/* <AddButtonArea
+      {/* <AddButtonArea
           onClick={() => setSurveyList((current) => [...current, ""])}
         >
           <AddButton text="부문 / 체급 추가하기"></AddButton>
         </AddButtonArea> */}
-        </ContentPaddingArea>
-        <Link onClick={registerContest} href="/register/register-success">
+      {/* </ContentPaddingArea>
+        <Link href="/register/survey">
           <NavBar navText="대회 등록" active={true} />
         </Link>
-      </PageWrapper>
+      </PageWrapper> */}
     </>
   );
 };
 
 export default SectorAndWeight;
+
+const RegisterArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dotted #000000;
+  width: 100%;
+  height: 56px;
+  font-size: 16px;
+  border-radius: 6px;
+  margin: 20px 0;
+  cursor: pointer;
+`;
+
+const GenderButton = styled.button<{ active: boolean }>`
+  width: 68px;
+  height: 38px;
+  border-radius: 20px;
+  color: ${(props) => (props.active ? "#ffffff" : "212121")};
+  background-color: ${(props) => (props.active ? "#212121" : "ffffff")};
+  margin-right: 7px;
+  border: ${(props) => (props.active ? null : "1px solid #E9EBED")};
+`;

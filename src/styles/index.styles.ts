@@ -32,6 +32,7 @@ export const WebContainer = styled.div`
   width: 100%;
   overflow-x: hidden;
   padding-top: 112px;
+  padding-bottom: 20px;
   height: 100vh;
 `;
 

@@ -4,22 +4,32 @@ import { FilterInput, FilterLabel } from "./FilterBox.style";
 const NumCheckBox = ({
   checkContent,
   active,
-  setNoLimit,
-  setMaxNum,
+  setBoolean,
+  setString,
+  setNumber,
 }: {
   checkContent: string;
   active: boolean;
-  setNoLimit: React.Dispatch<React.SetStateAction<boolean>>;
-  setMaxNum: React.Dispatch<React.SetStateAction<string>>;
+  setBoolean: React.Dispatch<React.SetStateAction<boolean>>;
+  setString: React.Dispatch<React.SetStateAction<string>>;
+  setNumber?: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   return (
-    <FilterLabel style={{ marginBottom: "10px" }}>
+    <FilterLabel
+      style={{
+        marginBottom: "10px",
+        whiteSpace: "nowrap",
+      }}
+    >
       <FilterInput
         type="checkbox"
         checked={active}
         onClick={() => {
-          setNoLimit((current) => !current);
-          setMaxNum("");
+          setBoolean((current) => !current);
+          setString("");
+          if (setNumber) {
+            setNumber(0);
+          }
         }}
       />
       {checkContent}

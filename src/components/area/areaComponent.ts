@@ -10,7 +10,6 @@ export const ContentArea = styled.div`
 export const ContentPaddingArea = styled.div`
   width: 100%;
   height: 100%;
-  overflow: auto;
   /* padding: 0 15px; */
   /* padding-bottom: 5%; */
 `;

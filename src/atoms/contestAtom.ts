@@ -127,7 +127,7 @@ export const contestRecruitingEndAtom = atom<string | null>({
   default: "",
 });
 
-export const contestTotalPrizeAtom = atom<number | null>({
+export const contestTotalPrizeAtom = atom<number>({
   key: "contestTotalPrize",
   default: 0,
 });
@@ -185,6 +185,16 @@ export const contestTemplateIdAtom = atom<number | null>({
 export const contestPosterList = atom<File[]>({
   key: "contestPosterList",
   default: [],
+});
+
+export const contestPosterAtom = atom<File | null>({
+  key: "contestPoster",
+  default: null,
+});
+
+export const contestPosterPreviewAtom = atom<string | undefined>({
+  key: "contestPosterPreview",
+  default: undefined,
 });
 
 export const contestRuleFileNames = atom<string[]>({
@@ -318,4 +328,9 @@ export const participantsAtom = atom<IParticipant[]>({
 export const participateFormAtom = atom({
   key: "participateForm",
   default: "",
+});
+
+export const genderAtom = atom<number>({
+  key: "gender",
+  default: 0,
 });
