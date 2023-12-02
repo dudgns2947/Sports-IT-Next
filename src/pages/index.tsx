@@ -95,7 +95,7 @@ export default function Home() {
       console.log(response);
       setContestList(response.data.result.content);
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   }
 
