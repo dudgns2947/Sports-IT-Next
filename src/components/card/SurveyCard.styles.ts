@@ -150,11 +150,11 @@ export const ToggleInput = styled.input<ToggleInputProps>`
     transform: scale(0.8);
     background-color: gray;
     transition: left 250ms linear;
-    border-color: ${(props) => (props.active ? "#4C8BFF" : "gray")};
+    border-color: ${(props) => (props.active ? "#FD3446" : "gray")};
   }
   :checked {
-    background-color: #4c8bff;
-    border-color: #4c8bff;
+    background-color: #fd3446;
+    border-color: #fd3446;
   }
   :checked::before {
     background-color: white;
