@@ -4,12 +4,15 @@ import styled from "styled-components";
 import SelectBox from "../selectbox/SelectBox";
 import {
   FlexColumnRowCenter,
+  FlexEndRow,
   FlexRow,
   FlexRowSpaceBetween,
 } from "@component/components/area/areaComponent";
 import { Input, TextArea } from "@component/components/input/inputComponent";
 import { BiRadioCircle } from "react-icons/bi";
 import { MdOutlineClose } from "react-icons/md";
+import { CiImageOn } from "react-icons/ci";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const SurveyModal = ({
   modalOpen,
@@ -24,8 +27,28 @@ const SurveyModal = ({
   const [surveyContent, setSurveyContent] = useState<string>("");
   const [options, setOptions] = useState<string[]>([]);
   const [optionContent, setOptionContent] = useState<string>("");
+  const [surveyImagePreview, setSurveyImagePreview] = useState<string>("");
+  const [surveyImageFile, setSurveyImageFile] = useState<File>();
 
   console.log(options);
+  console.log(surveyImagePreview);
+  console.log(surveyImageFile);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const files = e.target.files;
+
+    if (!files) return;
+
+    setSurveyImageFile(files[0]);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setSurveyImagePreview(reader.result as string);
+    };
+    reader.readAsDataURL(files[0]);
+  };
 
   return (
     <ReactModal
@@ -47,20 +70,34 @@ const SurveyModal = ({
               options={["주관식 질문", "객관식 질문"]}
               setValue={setIsSubject}
             />
-            <div>
-              <ToggleArea>
-                <ToggleText>중복여부</ToggleText>
-                <ToggleLabel>
-                  <ToggleInput
-                    active={multi}
-                    checked={multi}
-                    type="checkbox"
-                    role="switch"
-                    onChange={() => setMulti((current) => !current)}
-                  />
-                </ToggleLabel>
-              </ToggleArea>
-            </div>
+            <FlexEndRow>
+              {!isSubject && (
+                <ToggleArea>
+                  <ToggleText>중복여부</ToggleText>
+                  <ToggleLabel>
+                    <ToggleInput
+                      active={multi}
+                      checked={multi}
+                      type="checkbox"
+                      role="switch"
+                      onChange={() => setMulti((current) => !current)}
+                    />
+                  </ToggleLabel>
+                </ToggleArea>
+              )}
+
+              <ImageUploadArea>
+                <ImageLabel htmlFor="image">
+                  <ImageIcon />
+                </ImageLabel>
+                <input
+                  type="file"
+                  id="image"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+              </ImageUploadArea>
+            </FlexEndRow>
           </FlexRowSpaceBetween>
           <Input
             style={{ width: "100%", marginBottom: "5px" }}
@@ -68,6 +105,17 @@ const SurveyModal = ({
             value={surveyTitle}
             onChange={(e) => setSurveyTitle(e.target.value)}
           />
+          {surveyImagePreview && (
+            <div style={{ position: "relative" }}>
+              <Image src={surveyImagePreview} alt="surveyImage" />
+              <DeleteIcon
+                onClick={() => {
+                  setSurveyImageFile(undefined);
+                  setSurveyImagePreview("");
+                }}
+              />
+            </div>
+          )}
 
           {isSubject ? (
             <TextArea
@@ -143,7 +191,7 @@ const customModalStyles: ReactModal.Styles = {
     display: "flex",
     flexDirection: "column",
     width: "667px",
-    height: "65%",
+    height: "70%",
     zIndex: "150",
     position: "absolute",
     top: "50%",
@@ -304,4 +352,51 @@ const CloseIcon = styled(MdOutlineClose)`
   width: 20px;
   height: 20px;
   color: black;
+`;
+
+const ImageUploadArea = styled.div`
+  label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: normal;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+`;
+
+const ImageIcon = styled(CiImageOn)`
+  width: 30px;
+  height: 30px;
+  color: #747474;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  margin-bottom: 5px;
+`;
+
+const DeleteIcon = styled(AiFillCloseCircle)`
+  height: 30px;
+  width: 30px;
+  color: #aeaeae;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+`;
+
+const ImageLabel = styled.label`
+  position: relative;
 `;
