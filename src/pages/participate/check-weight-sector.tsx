@@ -15,7 +15,13 @@ import { useRecoilState, SetRecoilState, useRecoilValue } from "recoil";
 import * as S from "../../styles/participate/check-weight-sector.styles";
 import Link from "next/link";
 import NavBar from "../../components/navbar/NavBar";
+
 import { useState } from "react";
+import {
+  GlobalBoldText,
+  GlobalGreyText,
+} from "@component/styles/text/text.style";
+import { SelectBox } from "@component/styles/contest/result-input.styles";
 import axios from "axios";
 import {
   ContentArea,
@@ -28,6 +34,10 @@ import baseApi from "@component/api/utils/instance";
 import { WebContainer } from "@component/styles/index.styles";
 import NextButton from "@component/components/web/button/NextButton";
 import Header from "@component/components/web/header/Header";
+import FilterBox from "@component/components/web/checkbox/FilterBox";
+import { FilterType } from "@component/interfaces/contestInterface";
+import { SetStateAction } from "jotai";
+import EventButton from "@component/components/web/button/EventButton";
 
 const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
@@ -37,10 +47,12 @@ const ChoiceRole = () => {
   const [selectSubSectors, setSelectSubSectors] =
     useRecoilState(selectSubSectorAtom);
   const [sectors, setSectors] = useRecoilState(participateSectors);
+  const [filterBy, setFilterBy] = useState<FilterType[]>([]);
   const [weightCost, setWeightCost] =
     useRecoilState<WeightCost>(weightcostAtom);
   const [paymentCost, setPaymentCost] = useRecoilState(paymentCostAtom);
   const templateId = useRecoilValue(templateIdAtom);
+  const [isSubject, setIsSubject] = useState(true);
   console.log(role);
   console.log(count);
 
@@ -143,9 +155,74 @@ const ChoiceRole = () => {
         <Header />
         <PaddingArea></PaddingArea>
         <FlexColumnRowCenter>
-          <Link href="/participate/payment">
-            <NextButton />
-          </Link>
+          <S.Contents>
+          <S.Aside>
+            <GlobalBoldText>✏️ 참가할 부문을 선택해주세요.</GlobalBoldText>
+              <S.AsideContainer>
+                <S.AsideContent>
+                  <S.AsideCategory>
+                    <S.FilterCategoryTitle>성별</S.FilterCategoryTitle>
+                    <S.FilterCategoryContents>
+                      <S.Label><input type="radio" name="color" value="blue"/> 남자</S.Label>
+                      <S.Label><input type="radio" name="color" value="blue"/> 여자</S.Label>
+                    </S.FilterCategoryContents> 
+                  </S.AsideCategory>
+                  <S.AsideCategory>
+                    <S.FilterCategoryTitle>분류</S.FilterCategoryTitle>
+                      <S.Label><input type="radio" name="color" value="blue"/> 오른팔</S.Label>
+                      <S.Label><input type="radio" name="color" value="blue"/> 왼팔</S.Label>
+                  </S.AsideCategory>
+                  <S.AsideCategory>
+                    <S.FilterCategoryTitle>부문</S.FilterCategoryTitle>
+                    <select>
+                      <option>프로</option>
+                      <option>세미프로</option>
+                      <option>아마추어</option>
+                    </select>
+                  </S.AsideCategory>
+                  <S.AsideCategory>
+                    <S.FilterCategoryTitle>체급</S.FilterCategoryTitle>
+                    <select>
+                      <option>-70kg</option>
+                      <option>-80kg</option>
+                      <option>-85kg</option>
+                    </select>
+                  </S.AsideCategory>
+                  <S.ButtonArea>
+                    <S.Button>추가</S.Button>
+                    <S.Button>초기화</S.Button>
+                  </S.ButtonArea>
+                </S.AsideContent>
+              </S.AsideContainer>
+          </S.Aside>
+          <S.PaymentArea>
+            <div>
+              <div>
+                <div>
+                  <div>
+                    남성 | 오른팔 | 프로
+                  </div>
+                  <div>
+                    -78kg
+                  </div>
+                  <div>
+                    50,000원
+                  </div>
+                  <div>
+                    -86kg
+                  </div>
+                  <div>
+                    50,000원
+                  </div>
+                </div>
+              </div>
+              <div>총 결제금액</div>
+            </div>
+            <Link href="/participate/payment">
+              <NextButton />
+            </Link>
+          </S.PaymentArea>
+          </S.Contents>
         </FlexColumnRowCenter>
       </WebContainer>
       {/* <Head>
