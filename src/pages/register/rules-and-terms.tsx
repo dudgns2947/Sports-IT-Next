@@ -113,7 +113,7 @@ const RulesAndTerms = () => {
     <>
       <WebContainer>
         <Header />
-        <PaddingArea style={{ marginBottom: "20px" }}>
+        <PaddingArea>
           <FlexColumn>
             <GlobalBoldText>
               🔒 대회 규정 및 약관을 등록해 주세요.

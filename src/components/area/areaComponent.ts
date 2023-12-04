@@ -44,6 +44,7 @@ export const FlexColumnRowCenter = styled(FlexColumnCenter)`
 
 export const PaddingArea = styled.div`
   padding: 0 20%;
+  margin-bottom: 20px;
 `;
 
 export const FlexEndRow = styled.div`
