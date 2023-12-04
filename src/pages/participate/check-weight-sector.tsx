@@ -20,9 +20,14 @@ import axios from "axios";
 import {
   ContentArea,
   ContentPaddingArea,
+  FlexColumnRowCenter,
+  PaddingArea,
 } from "@component/components/area/areaComponent";
-import { baseApi } from "@component/api/utils/instance";
 import Head from "next/head";
+import baseApi from "@component/api/utils/instance";
+import { WebContainer } from "@component/styles/index.styles";
+import NextButton from "@component/components/web/button/NextButton";
+import Header from "@component/components/web/header/Header";
 
 const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
@@ -134,7 +139,16 @@ const ChoiceRole = () => {
 
   return (
     <>
-      <Head>
+      <WebContainer>
+        <Header />
+        <PaddingArea></PaddingArea>
+        <FlexColumnRowCenter>
+          <Link href="/participate/payment">
+            <NextButton />
+          </Link>
+        </FlexColumnRowCenter>
+      </WebContainer>
+      {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <S.RoleSelectContainer>
@@ -154,7 +168,6 @@ const ChoiceRole = () => {
                         {sector.title} ({sector.cost}원 / +{sector.expandCost}
                         원)
                       </S.HeaderText>
-                      {/* <S.LowerIcon></S.LowerIcon> */}
                     </S.SectorContainer>
                     <S.SurveyArea>
                       {sector.subSectors
@@ -190,7 +203,7 @@ const ChoiceRole = () => {
             active={weightCost ? true : false}
           />
         </Link>
-      </S.RoleSelectContainer>
+      </S.RoleSelectContainer> */}
     </>
   );
 };

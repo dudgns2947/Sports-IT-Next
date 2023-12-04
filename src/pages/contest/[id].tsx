@@ -1,4 +1,3 @@
-import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
 import {
@@ -37,6 +36,7 @@ import {
   ContestInfoLeft,
   ContestInfoRight,
 } from "@component/styles/layout.style";
+import baseApi from "@component/api/utils/instance";
 
 const ContestInfo = () => {
   const router = useRouter();

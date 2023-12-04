@@ -1,4 +1,3 @@
-import { baseApi } from "@component/api/utils/instance";
 import {
   contestContentAtom,
   contestEndDateAtom,
@@ -52,6 +51,7 @@ import {
 import { sectorWeightModalOpenAtom } from "@component/atoms/modalAtom";
 import SectorWeightModal from "@component/components/web/modal/SectorWeightModal";
 import NextButton from "@component/components/web/button/NextButton";
+import baseApi from "@component/api/utils/instance";
 
 interface IResponseOne {
   success: boolean;
@@ -266,7 +266,7 @@ const SectorAndWeight = () => {
     <>
       <WebContainer>
         <Header />
-        <PaddingArea style={{ marginBottom: "20px" }}>
+        <PaddingArea>
           <FlexColumn style={{ marginBottom: "30px" }}>
             <GlobalBoldText>🗂️ 부문 또는 체급을 등록 해주세요.</GlobalBoldText>
             <GlobalGreyText>
