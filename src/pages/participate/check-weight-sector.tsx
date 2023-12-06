@@ -38,6 +38,7 @@ import FilterBox from "@component/components/web/checkbox/FilterBox";
 import { FilterType } from "@component/interfaces/contestInterface";
 import { SetStateAction } from "jotai";
 import EventButton from "@component/components/web/button/EventButton";
+import PayWeightNSectorCard from "@component/components/card/PayWeightNSector";
 
 const ChoiceRole = () => {
   const [role, setRole] = useRecoilState<RoleAtomType>(roleAtom);
@@ -163,14 +164,14 @@ const ChoiceRole = () => {
                   <S.AsideCategory>
                     <S.FilterCategoryTitle>성별</S.FilterCategoryTitle>
                     <S.FilterCategoryContents>
-                      <S.Label><input type="radio" name="color" value="blue"/> 남자</S.Label>
-                      <S.Label><input type="radio" name="color" value="blue"/> 여자</S.Label>
+                      <S.Label><input type="radio" name="gender" value="blue"/> 남자</S.Label>
+                      <S.Label><input type="radio" name="gender" value="blue"/> 여자</S.Label>
                     </S.FilterCategoryContents> 
                   </S.AsideCategory>
                   <S.AsideCategory>
                     <S.FilterCategoryTitle>분류</S.FilterCategoryTitle>
-                      <S.Label><input type="radio" name="color" value="blue"/> 오른팔</S.Label>
-                      <S.Label><input type="radio" name="color" value="blue"/> 왼팔</S.Label>
+                      <S.Label><input type="radio" name="subector" value="blue"/> 오른팔</S.Label>
+                      <S.Label><input type="radio" name="subector" value="blue"/> 왼팔</S.Label>
                   </S.AsideCategory>
                   <S.AsideCategory>
                     <S.FilterCategoryTitle>부문</S.FilterCategoryTitle>
@@ -196,28 +197,8 @@ const ChoiceRole = () => {
               </S.AsideContainer>
           </S.Aside>
           <S.PaymentArea>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    남성 | 오른팔 | 프로
-                  </div>
-                  <div>
-                    -78kg
-                  </div>
-                  <div>
-                    50,000원
-                  </div>
-                  <div>
-                    -86kg
-                  </div>
-                  <div>
-                    50,000원
-                  </div>
-                </div>
-              </div>
-              <div>총 결제금액</div>
-            </div>
+            <PayWeightNSectorCard/>
+            <PayWeightNSectorCard/>
             <Link href="/participate/payment">
               <NextButton />
             </Link>

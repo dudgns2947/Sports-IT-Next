@@ -15,6 +15,7 @@ export const Label = styled.label`
 `;
 
 export const AsideContainer = styled.aside`
+  margin-top: 10px;
   border: 1px solid #e9ebed;
   border-radius: 10px;
   width: 350px;
@@ -38,6 +39,7 @@ export const Contents = styled.div`
 export const PaymentArea = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const Button = styled.button`
@@ -59,7 +61,7 @@ export const FilterCategoryContents = styled.div`
 export const AsideCategory = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: px;
+  margin-bottom: 5px;
 `;
 
 export const AsideContent = styled.div`
