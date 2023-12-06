@@ -1,5 +1,5 @@
 import { ILoginProps, ISignupProps, ICheckEmailProps } from "@component/interfaces/accountInterface";
-import { baseApi } from "../utils/instance";
+import baseApi from "../utils/instance";
 
 const SIGNUP_URI = "signup";
 const LOGIN_URI = "authenticate";

@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { baseApi } from "../utils/instance";
+import baseApi from "../utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import {
   IContestParams,
