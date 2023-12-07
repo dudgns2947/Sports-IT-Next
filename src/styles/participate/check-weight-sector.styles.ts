@@ -2,11 +2,82 @@ import { Container } from "@component/components/container/container";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import styled from "styled-components";
 
+export const Aside = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  margin-right : 25px;
+`;
+
+export const Label = styled.label`
+  margin-right: 10px;
+`;
+
+export const AsideContainer = styled.aside`
+  margin-top: 10px;
+  border: 1px solid #e9ebed;
+  border-radius: 10px;
+  width: 350px;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  top: 60px;
+`;
 export const RoleSelectContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+`;
+
+export const Contents = styled.div`
+  display:flex;
+  flex-direction: row;
+`;
+
+export const PaymentArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Button = styled.button`
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #e9ebed;
+  border-radius: 10px;
+  float: right;
+`;
+
+export const ButtonArea = styled.div`
+  
+`;
+
+export const FilterCategoryContents = styled.div`
+
+`;
+
+export const AsideCategory = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+`;
+
+export const AsideContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  
+`;
+
+export const FilterCategoryTitle = styled.p`
+  display:inline;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 14px;
+  margin-right: 20px;
+  color: #212121;
 `;
 
 export const QuestionArea = styled.div`
