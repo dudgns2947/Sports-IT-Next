@@ -13,10 +13,17 @@ export const HistoryArea = styled.div`
 export const BoldText = styled.span`
   display: block;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 19px;
   margin-bottom: 10px;
   color: #212121;
+`;
+
+export const Card = styled.div`
+  border: 2px solid #aeaeae;
+  width: 500px;
+  height: 200px;
+  border-radius: 10px;
 `;
 
 export const HistoryContent = styled.div`
