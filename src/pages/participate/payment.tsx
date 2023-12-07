@@ -44,6 +44,8 @@ import { WebContainer } from "@component/styles/index.styles";
 import Header from "@component/components/web/header/Header";
 import NextButton from "@component/components/web/button/NextButton";
 import baseApi from "@component/api/utils/instance";
+import CuponCard from "@component/components/card/CuponCard";
+import InsuranceCard from "@component/components/card/InsuranceCard";
 
 const Payment = () => {
   const [insuranceCheck, setInsuranceCheck] = useState(false);
@@ -298,7 +300,12 @@ const Payment = () => {
     <>
       <WebContainer>
         <Header />
-        <PaddingArea></PaddingArea>
+        <PaddingArea>
+          <S.BoldText>💳 결제하기</S.BoldText>
+          <S.Card>우현이 컴포넌트 </S.Card>
+          <CuponCard/>
+          <InsuranceCard/>
+        </PaddingArea>
       </WebContainer>
       {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
