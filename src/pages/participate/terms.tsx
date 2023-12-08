@@ -68,11 +68,13 @@ const Terms = () => {
     <>
       <WebContainer>
         <Header />
+        <Seo title="서비스 약관동의" />
         <PaddingArea>
-          <S.TextArea>
+          <FlexColumnRowCenter style={{ padding: "10% 20px 5% 20px" }}>
+            <S.ExclamationIcon />
             <S.Text>대회 참여약관 확인 후</S.Text>
             <S.Text>동의 해주세요.</S.Text>
-          </S.TextArea>
+          </FlexColumnRowCenter>
           <S.TermArea>
             <S.TotalAgree>
               <S.TotalAgreeIcon
@@ -97,7 +99,7 @@ const Terms = () => {
                   agree={appTerm}
                   onClick={() => setAppTerm((current) => !current)}
                 />
-                <S.TermText>심판규정 (필수)</S.TermText>
+                <S.TermText>대회 운영 약관 (필수)</S.TermText>
               </S.TermLeftArea>
               <S.TermPageIcon />
             </S.Term>
@@ -107,7 +109,7 @@ const Terms = () => {
                   agree={privacyPolicy}
                   onClick={() => setPrivacyPolicy((current) => !current)}
                 />
-                <S.TermText>복장규정 (필수)</S.TermText>
+                <S.TermText>대회 보증금 약관 (필수)</S.TermText>
               </S.TermLeftArea>
               <S.TermPageIcon />
             </S.Term>
@@ -117,7 +119,7 @@ const Terms = () => {
                   agree={thirdParty}
                   onClick={() => setThirdParty((current) => !current)}
                 />
-                <S.TermText>시상식규정 (필수)</S.TermText>
+                <S.TermText>공문서 발급 동의 (필수)</S.TermText>
               </S.TermLeftArea>
               <S.TermPageIcon />
             </S.Term>
@@ -129,7 +131,7 @@ const Terms = () => {
           </Link>
         </FlexColumnRowCenter>
       </WebContainer>
-      <Head>
+      {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <PageWrapper>
@@ -194,7 +196,7 @@ const Terms = () => {
             active={appTerm && privacyPolicy && thirdParty}
           />
         </Link>
-      </PageWrapper>
+      </PageWrapper> */}
     </>
   );
 };

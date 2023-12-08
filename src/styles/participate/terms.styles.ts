@@ -5,6 +5,8 @@ import {
   AiOutlineRight,
 } from "react-icons/ai";
 
+import { BsExclamationCircleFill } from "react-icons/bs";
+
 export const TextArea = styled.div`
   display: flex;
   flex-direction: column;
@@ -78,4 +80,11 @@ export const TermPageIcon = styled(AiOutlineRight)`
   width: 18px;
   height: 25px;
   color: #aeaeae;
+`;
+
+export const ExclamationIcon = styled(BsExclamationCircleFill)`
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+  color: #e9ebed;
 `;
