@@ -101,7 +101,7 @@ const ChoiceRole = () => {
           </S.SelectArea>
         </PaddingArea>
         <FlexColumnRowCenter>
-          <Link href="/participate/terms">
+          <Link href="/participate/check-people">
             <NextButton />
           </Link>
         </FlexColumnRowCenter>

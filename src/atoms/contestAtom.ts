@@ -334,3 +334,8 @@ export const genderAtom = atom<number>({
   key: "gender",
   default: 0,
 });
+
+export const isGroupAtom = atom<boolean>({
+  key: "isGroup",
+  default: false,
+});
