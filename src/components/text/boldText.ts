@@ -17,3 +17,9 @@ export const BoldSubText = styled.span`
   font-size: 16px;
   color: #212121;
 `;
+
+export const GrayText = styled.span`
+  font-size: 0.8em;
+  font-family: pretendard;
+  color: #bebebe;
+`;
