@@ -14,7 +14,7 @@ interface SurveyCardProps {
 
 const SurveyCard = ({ setWeightSectors, setModalOpen }: SurveyCardProps) => {
   const [title, setTitle] = useState<string>("");
-  const [sectors, setSectors] = useState<ISector[]>([]);
+  const [sectors, setSectors] = useState<{ name: string }[]>([]);
   const [multi, setMulti] = useState<boolean>(false);
   const [sectorName, setSectorName] = useState<string>("");
   const [cost, setCost] = useState(0);

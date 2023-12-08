@@ -126,7 +126,7 @@ const Terms = () => {
           </S.TermArea>
         </PaddingArea>
         <FlexColumnRowCenter>
-          <Link href="/participate/check-weight-sector">
+          <Link href="/participate/survey">
             <NextButton />
           </Link>
         </FlexColumnRowCenter>
