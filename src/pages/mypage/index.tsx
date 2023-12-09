@@ -7,7 +7,7 @@ import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
 import NavBar from "@component/components/navbar/NavBar";
 import React, { useEffect, useState } from "react";
-import { IconContainer } from "../../styles/index.styles";
+import { IconContainer, WebContainer } from "../../styles/index.styles";
 import CustomButton from "@component/components/button/Custombutton";
 import styled from "styled-components";
 import Seo from "@component/components/Seo";
@@ -22,87 +22,25 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { roleAtom } from "@component/atoms/roleAtom";
 import { userEmailAtom, userNameAtom } from "@component/atoms/tokenAtom";
 import { set } from "react-hook-form";
-
-const TransformArea = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f9f9fa;
-  border-radius: 14px;
-  width: 100%;
-  height: 72px;
-  padding: 14px 17px;
-`;
-
-const TransformTextArea = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const TransformBoldText = styled.span`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  color: #212121;
-  margin-bottom: 2px;
-`;
-
-const TransformLightText = styled.span`
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: #aeaeae;
-`;
-
-const TransformButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 57px;
-  height: 44px;
-  border-radius: 14px;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  background-color: #fd3446;
-  cursor: pointer;
-`;
-
-const LoginNavArea = styled.div`
-  width: 100%;
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const LoginNavButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ff002e;
-  color: white;
-  width: 70%;
-  height: 10%;
-  border-radius: 8px;
-  cursor: pointer;
-`;
-
-const iconProps = [
-  ["/images/logo/contest.png", "대회", "/mypage/contest"],
-  ["/images/logo/document.png", "공문서", "document"],
-  ["/images/logo/coupon.png", "쿠폰", "/mypage"],
-  ["/images/logo/point.png", "포인트", "/mypage"],
-];
+import Header from "@component/components/web/header/Header";
+import { IContestInfo } from "@component/interfaces/contestInterface";
+import ContestCard from "@component/components/web/contest/Contest";
 
 const MyPage = () => {
   const [userRole, setUserRole] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [token, setToken] = useState("");
+  const [orderBy, setOrderBy] = useState("createdDate");
+  const [contestList, setContestList] = useState<IContestInfo[]>([]);
 
   const router = useRouter();
+
+  const Options = [
+    { value: "createdDate", name: "최신순" },
+    { value: "scrapCount", name: "좋아요순" },
+    { value: "viewCount", name: "조회순" },
+  ];
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -116,7 +54,49 @@ const MyPage = () => {
   console.log(userRole);
   return (
     <>
-      <Head>
+      <WebContainer>
+        <Header />
+        <OrderContainer>
+          <OrderWrapper>
+            <OrderSelect
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                // setIsFresh(true);
+                // setPage(0);
+                setOrderBy(e.currentTarget.value);
+              }}
+            >
+              {Options.map((option) => (
+                <OrderOption key={option.value} value={option.value}>
+                  {option.name}
+                </OrderOption>
+              ))}
+            </OrderSelect>
+          </OrderWrapper>
+        </OrderContainer>
+        <ContentContainer>
+          <AsideContainer>Hello</AsideContainer>
+          <ContestArea>
+            {contestList.map((contest) => (
+              <ContestCard
+                key={contest.competitionId}
+                posterImageUrl={
+                  contest.posters.length === 0
+                    ? ""
+                    : contest.posters[0].posterUrl
+                }
+                competitionId={contest.competitionId}
+                competitionType={contest.competitionType}
+                name={contest.name}
+                host={contest.host}
+                recruitingEnd={contest.recruitingEnd}
+                showImage={true}
+              />
+            ))}
+          </ContestArea>
+        </ContentContainer>
+      </WebContainer>
+
+      {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <PageWrapper>
@@ -167,8 +147,71 @@ const MyPage = () => {
           <NavTab url="/mypage" content="프리미엄 구독 신청" />
         </ContentPaddingArea>
         <BottomBar />
-      </PageWrapper>
+      </PageWrapper> */}
     </>
   );
 };
 export default MyPage;
+
+const OrderSelect = styled.select`
+  border: none;
+`;
+
+const OrderOption = styled.option`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+`;
+const AsideContainer = styled.aside`
+  border: 1px solid #e9ebed;
+  border-radius: 10px;
+  width: 300px;
+  padding: 30px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 60px;
+`;
+
+const AsideContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+`;
+
+const ContentContainer = styled.div`
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+const ContestArea = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  @media only screen and (min-width: 868px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  @media only screen and (min-width: 1124px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media only screen and (min-width: 1440px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const OrderContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  top: 0px;
+  padding: 10px 10%;
+  position: sticky;
+  background-color: #ffffff;
+`;
+
+const OrderWrapper = styled.div`
+  border: 1px solid #aeaeae;
+  padding: 8px 10px;
+  border-radius: 8px;
+`;
