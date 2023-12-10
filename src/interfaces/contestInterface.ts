@@ -108,16 +108,17 @@ export interface RegisterForm {
   templateId: number;
 }
 
-export interface ISector {
-  name: string;
-}
+// export interface ISector {
+//   name: string;
+// }
 
 export interface IWeightSector {
   title: string;
   cost: number;
   expandCost: number;
   multi: boolean;
-  subSectors: ISector[];
+  gender: number;
+  subSectors: { name: string }[];
 }
 
 export interface IWeightSectorList {
@@ -156,4 +157,31 @@ export interface IMyContestList {
   competition: ICompetition;
   joinDate: string;
   type: string;
+}
+
+export interface ISurvey {
+  isSubject: boolean; // 주관식 여부 (true 주관식, false 객관식)
+  multi: boolean; // 중복 가능 여부
+  surveyTitle: string; // 설문 제목
+  surveyContent: string; // 설문 내용(주관식용)
+  options: string[]; // 설문 옵션 목록(객관식용)
+  surveyImageFile: File; // 설문 사진 (최대 1개)
+}
+
+export interface ISubSector {
+  subSectorCode: number;
+  subSectorName: string;
+}
+
+export interface ISector {
+  sectorCode: number;
+  sectorName: string;
+  sectorGender: number;
+  subSectors: ISubSector[] | [];
+}
+
+export interface ITeam {
+  competitionId: number;
+  teamIdx: number;
+  teamName: string;
 }

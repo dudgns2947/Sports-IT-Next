@@ -1,4 +1,4 @@
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 import Seo from "@component/components/Seo";
 import {
   ContentArea,

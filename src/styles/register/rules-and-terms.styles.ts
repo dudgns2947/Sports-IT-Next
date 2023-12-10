@@ -45,17 +45,19 @@ export const DataContent = styled.span`
 export const UploadForm = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const TitleArea = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
+  border-bottom: 1px solid #e9ebed;
 `;
 
 export const Title = styled.span`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 20px;
   color: #212121;
 `;
 
@@ -164,4 +166,17 @@ export const FileUploadText = styled.span`
 
 export const FileInput = styled.input`
   display: none;
+`;
+
+export const RegisterArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dotted #000000;
+  width: 100%;
+  height: 56px;
+  font-size: 16px;
+  border-radius: 6px;
+  margin: 20px 0;
+  cursor: pointer;
 `;

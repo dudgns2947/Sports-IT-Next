@@ -5,18 +5,21 @@ import { ISector, IWeightSector } from "@component/interfaces/contestInterface";
 import styled from "styled-components";
 import { BoldSubText } from "../text/boldText";
 import { Input } from "../input/inputComponent";
+import { genderAtom } from "@component/atoms/contestAtom";
 
 interface SurveyCardProps {
   setWeightSectors: React.Dispatch<SetStateAction<IWeightSector[]>>;
+  setModalOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const SurveyCard = ({ setWeightSectors }: SurveyCardProps) => {
+const SurveyCard = ({ setWeightSectors, setModalOpen }: SurveyCardProps) => {
   const [title, setTitle] = useState<string>("");
-  const [sectors, setSectors] = useState<ISector[]>([]);
+  const [sectors, setSectors] = useState<{ name: string }[]>([]);
   const [multi, setMulti] = useState<boolean>(false);
   const [sectorName, setSectorName] = useState<string>("");
   const [cost, setCost] = useState(0);
   const [expendCost, setExpendCost] = useState(0);
+  const [gender, setGender] = useRecoilState(genderAtom);
   return (
     <S.SurveyCardWrapper>
       <S.SurveyTopArea>
@@ -81,6 +84,7 @@ const SurveyCard = ({ setWeightSectors }: SurveyCardProps) => {
             <S.ToggleText>중복여부</S.ToggleText>
             <S.ToggleLabel>
               <S.ToggleInput
+                style={{ marginLeft: "3px" }}
                 active={multi}
                 checked={multi}
                 role="switch"
@@ -134,6 +138,7 @@ const SurveyCard = ({ setWeightSectors }: SurveyCardProps) => {
               expandCost: expendCost,
               subSectors: sectors,
               multi: multi,
+              gender: gender,
             });
             console.log(tempWeightSectors);
             return tempWeightSectors;
@@ -144,6 +149,7 @@ const SurveyCard = ({ setWeightSectors }: SurveyCardProps) => {
           setCost(0);
           setExpendCost(0);
           setMulti(false);
+          setModalOpen(false);
         }}
       >
         등록

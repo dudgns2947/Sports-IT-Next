@@ -2,6 +2,8 @@ import Seo from "@component/components/Seo";
 import {
   ContentArea,
   ContentPaddingArea,
+  FlexColumnRowCenter,
+  PaddingArea,
 } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import Contest from "@component/components/contest/Contest";
@@ -24,7 +26,6 @@ import {
   totalPaymentAtom,
 } from "@component/atoms/contestAtom";
 import { IContestInfo, IHost } from "@component/interfaces/contestInterface";
-import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Index from "../contest";
 import {
@@ -39,6 +40,12 @@ import {
   privacyPolicyAtom,
   thirdPartyAtom,
 } from "@component/atoms/termAtom";
+import { WebContainer } from "@component/styles/index.styles";
+import Header from "@component/components/web/header/Header";
+import NextButton from "@component/components/web/button/NextButton";
+import baseApi from "@component/api/utils/instance";
+import CuponCard from "@component/components/card/CuponCard";
+import InsuranceCard from "@component/components/card/InsuranceCard";
 
 const Payment = () => {
   const [insuranceCheck, setInsuranceCheck] = useState(false);
@@ -291,7 +298,16 @@ const Payment = () => {
   console.log(selectContestId);
   return (
     <>
-      <Head>
+      <WebContainer>
+        <Header />
+        <PaddingArea>
+          <S.BoldText>💳 결제하기</S.BoldText>
+          <S.Card>우현이 컴포넌트 </S.Card>
+          <CuponCard/>
+          <InsuranceCard/>
+        </PaddingArea>
+      </WebContainer>
+      {/* <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <PageWrapper>
@@ -387,19 +403,12 @@ const Payment = () => {
               {finalPayment === 0 ? totalPayment : finalPayment}원
             </S.TotalCostText>
           </S.TotalCostArea>
-          {/* <S.PayArea>
-          <S.BoldText>결제 수단</S.BoldText>
-          <div>
-            <S.PayImage src="/images/logo/kakaopay.jpeg" />
-            <S.PayImage src="/images/logo/kg.png" />
-          </div>
-        </S.PayArea> */}
         </ContentPaddingArea>
 
         <div onClick={onClickPayment}>
           <NavBar navText="결제하기" active={true} />
         </div>
-      </PageWrapper>
+      </PageWrapper> */}
     </>
   );
 };

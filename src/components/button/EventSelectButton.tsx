@@ -1,6 +1,5 @@
 import { useRecoilState } from "recoil";
 import * as S from "./EventSelectButtonStyles";
-import { eventAtom } from "@component/atoms/eventAtom";
 import { EventSelectButtonProps } from "@component/interfaces/selectInterface";
 
 const EventSelectButton = ({
@@ -9,15 +8,15 @@ const EventSelectButton = ({
   setCount,
   setEvent,
 }: EventSelectButtonProps) => {
-  const onClickEvent = (eventName: string) => {
-    setEvent((events) => {
-      const eventState = events[eventName];
-      return {
-        ...events,
-        [eventName]: !eventState,
-      };
-    });
-  };
+  // const onClickEvent = (eventName: string) => {
+  //   setEvent((events) => {
+  //     const eventState = events[eventName];
+  //     return {
+  //       ...events,
+  //       [eventName]: !eventState,
+  //     };
+  //   });
+  // };
   return (
     <S.SelectButton
       onClick={() => {
@@ -26,7 +25,7 @@ const EventSelectButton = ({
         } else {
           setCount((count) => (count += 1));
         }
-        onClickEvent(text);
+        // onClickEvent(text);
       }}
       active={active}
     >

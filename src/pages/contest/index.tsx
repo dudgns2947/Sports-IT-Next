@@ -1,5 +1,4 @@
 import { getContestList } from "@component/api/contest/contestApi";
-import { baseApi } from "@component/api/utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import Seo from "@component/components/Seo";
 import { PageWrapper } from "@component/components/container/container";
@@ -30,6 +29,7 @@ import Header from "@component/components/web/header/Header";
 import Footer from "@component/components/web/footer/Footer";
 import ContestCard from "@component/components/web/contest/Contest";
 import FilterBox from "@component/components/web/checkbox/FilterBox";
+import baseApi from "@component/api/utils/instance";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 
 type OrderType = "viewCount" | "createdDate" | "scrapCount";

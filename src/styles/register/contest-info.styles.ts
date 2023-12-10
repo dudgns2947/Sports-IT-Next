@@ -2,8 +2,12 @@ import styled from "styled-components";
 import { Input } from "./headcount.styles";
 
 export const SmallInput = styled(Input)`
-  width: 32%;
+  width: 85%;
   margin-right: 10px;
+`;
+
+export const TinyInput = styled(Input)`
+  width: 90%;
 `;
 
 export const LargeInput = styled(Input)`
@@ -14,7 +18,11 @@ export const LargeInput = styled(Input)`
   }
 `;
 
-export const SmallInputWrapper = styled.div``;
+export const SmallInputWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
 
 export const Form = styled.form``;
 
@@ -25,6 +33,8 @@ export const InputWrapper = styled.div`
 `;
 
 export const Text = styled.span`
-  margin-right: 10px;
+  /* margin-right: 10px; */
   font-size: 14px;
 `;
+
+export const ContentContainer = styled.div``;
