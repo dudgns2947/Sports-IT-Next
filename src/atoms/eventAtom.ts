@@ -57,7 +57,7 @@ export const eventCountAtom = atom<number>({
   default: 0,
 });
 
-export const selectEventAtom = atom<string>({
+export const selectEventAtom = atom<IEvent | null>({
   key: "selectEvent",
-  default: "",
+  default: null,
 });

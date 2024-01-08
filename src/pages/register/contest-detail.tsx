@@ -74,6 +74,7 @@ const ContestDetail = () => {
       setPreviewImages(imageUrlList);
       console.log(previewImages);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [posterList]);
 
   const handleDeleteImage = (id: number) => {
@@ -191,22 +192,22 @@ const ContestDetail = () => {
                 ))} */}
               </S.ImageInputArea>
             </InputArea>
-            <ReactQuill
+            {/* <ReactQuill
               theme="snow"
               style={{ height: "400px", marginBottom: "80px" }}
               value={contestContent || ""}
               modules={modules}
               formats={formats}
               onChange={handleTextValue}
-            />
-            {/* <InputArea>
+            /> */}
+            <InputArea>
               <InputTitle>상세 정보</InputTitle>
               <S.LargeInput
                 value={contestContent ? contestContent : ""}
                 placeholder="대회 정보&#13;&#10;장소&#13;&#10;날짜&#13;&#10;식순&#13;&#10;대회 시간&#13;&#10;상금"
                 onChange={(e) => setContestContent(e.currentTarget.value)}
               />
-            </InputArea> */}
+            </InputArea>
           </ContentPaddingArea>
         </PaddingArea>
         <FlexColumnRowCenter>

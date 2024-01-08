@@ -2,12 +2,20 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Header } from "@component/components/feel-it/Header";
 import { useQuery } from "react-query";
-import { organizationType, userTypeOrganization, userTypeSportsman, usersDbMock } from "@component/libs/mock/users";
+import {
+  organizationType,
+  userTypeOrganization,
+  userTypeSportsman,
+  usersDbMock,
+} from "@component/libs/mock/users";
 import { Sportsman } from "@component/components/feel-it/Sportsman";
 import { Organization } from "@component/components/feel-it/Organization";
-import { tabForOrganization, tabForSportsman } from "@component/libs/static_data";
-import useSWR from "swr";
-import { baseApi } from "@component/api/utils/instance";
+import {
+  tabForOrganization,
+  tabForSportsman,
+} from "@component/libs/static_data";
+// import useSWR from "swr";
+// import baseApi from "@component/api/utils/instance";
 
 type userlinksType = {
   type: string;
@@ -22,10 +30,22 @@ export type everyTabType = tabForOrganizationType | tabForSportsmanType;
 
 const useRouteRelatedLogic = () => {
   const router = useRouter();
-  const longituteUpdated = typeof router.query.longitute === "string" ? parseFloat(router.query.longitute) : null;
-  const latiuteUpdated = typeof router.query.latitude === "string" ? parseFloat(router.query.latitude) : null;
-  const AddressNameUpdated = typeof router.query.addressName === "string" ? router.query.addressName : null;
-  const newAddress = typeof router.query.newAddress === "string" ? router.query.newAddress : null;
+  const longituteUpdated =
+    typeof router.query.longitute === "string"
+      ? parseFloat(router.query.longitute)
+      : null;
+  const latiuteUpdated =
+    typeof router.query.latitude === "string"
+      ? parseFloat(router.query.latitude)
+      : null;
+  const AddressNameUpdated =
+    typeof router.query.addressName === "string"
+      ? router.query.addressName
+      : null;
+  const newAddress =
+    typeof router.query.newAddress === "string"
+      ? router.query.newAddress
+      : null;
 
   useEffect(() => {
     router.query.longitute &&
@@ -34,15 +54,31 @@ const useRouteRelatedLogic = () => {
       }, 100);
   }, [router.query.longitute]);
 
-  return { router, longituteUpdated, latiuteUpdated, AddressNameUpdated, newAddress };
+  return {
+    router,
+    longituteUpdated,
+    latiuteUpdated,
+    AddressNameUpdated,
+    newAddress,
+  };
 };
 
 export default function Component() {
-  const { router, longituteUpdated, latiuteUpdated, AddressNameUpdated, newAddress } = useRouteRelatedLogic();
-  const [currentTab, setCurrentTab] = useState<tabForOrganizationType | tabForSportsmanType>();
+  const {
+    router,
+    longituteUpdated,
+    latiuteUpdated,
+    AddressNameUpdated,
+    newAddress,
+  } = useRouteRelatedLogic();
+  const [currentTab, setCurrentTab] = useState<
+    tabForOrganizationType | tabForSportsmanType
+  >();
 
   const getUserInfo = async (userId: string) => {
-    const userdata = await Promise.resolve(usersDbMock.find((v) => v.userId === userId));
+    const userdata = await Promise.resolve(
+      usersDbMock.find((v) => v.userId === userId)
+    );
 
     if (!userdata) {
       throw new Error("유저 아이디를 찾을 수 없음");
@@ -71,7 +107,11 @@ export default function Component() {
   const changeDefaultTab = (tabname: everyTabType) => setCurrentTab(tabname);
 
   const pageUserInfoLatest =
-    pageUserInfo?.userType === "ROLE_INSTITUTION" && newAddress && latiuteUpdated && longituteUpdated && AddressNameUpdated
+    pageUserInfo?.userType === "ROLE_INSTITUTION" &&
+    newAddress &&
+    latiuteUpdated &&
+    longituteUpdated &&
+    AddressNameUpdated
       ? {
           ...pageUserInfo,
           address: newAddress,
@@ -81,17 +121,37 @@ export default function Component() {
         }
       : pageUserInfo;
 
-  const isOrganizationPage = status === "success" && pageUserInfoLatest && pageUserInfoLatest.userType === "ROLE_INSTITUTION" && currentTab;
+  const isOrganizationPage =
+    status === "success" &&
+    pageUserInfoLatest &&
+    pageUserInfoLatest.userType === "ROLE_INSTITUTION" &&
+    currentTab;
 
-  const isSportsmanPage = status === "success" && pageUserInfoLatest && pageUserInfoLatest.userType === "ROLE_USER" && currentTab;
+  const isSportsmanPage =
+    status === "success" &&
+    pageUserInfoLatest &&
+    pageUserInfoLatest.userType === "ROLE_USER" &&
+    currentTab;
 
   console.log(pageUserInfoLatest);
 
   return (
     <div className="w-screen mb-44">
       <Header />
-      {isOrganizationPage && <Organization currentTab={currentTab} pageUserInfo={pageUserInfoLatest} changeDefaultTab={changeDefaultTab} />}
-      {isSportsmanPage && <Sportsman currentTab={currentTab} changeDefaultTab={changeDefaultTab} pageUserInfo={pageUserInfoLatest} />}
+      {isOrganizationPage && (
+        <Organization
+          currentTab={currentTab}
+          pageUserInfo={pageUserInfoLatest}
+          changeDefaultTab={changeDefaultTab}
+        />
+      )}
+      {isSportsmanPage && (
+        <Sportsman
+          currentTab={currentTab}
+          changeDefaultTab={changeDefaultTab}
+          pageUserInfo={pageUserInfoLatest}
+        />
+      )}
     </div>
   );
 }

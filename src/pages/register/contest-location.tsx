@@ -102,6 +102,7 @@ const Component: React.FC = () => {
     if (daumWrapperRef.current) {
       initializeDaumPostcode();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [daumWrapperRef.current, initializeDaumPostcode]);
 
   function foldDaumPostcode() {
@@ -118,6 +119,7 @@ const Component: React.FC = () => {
       script.onload = initializeDaumPostcode;
       document.head.appendChild(script);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function initializeDaumPostcode() {

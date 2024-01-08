@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 
-const NextButton = () => {
+const NextButton = ({ content }: { content?: string }) => {
   return (
     <div
       style={{
@@ -16,7 +16,7 @@ const NextButton = () => {
         fontSize: "16px",
       }}
     >
-      다음
+      {content ? content : "다음"}
     </div>
   );
 };

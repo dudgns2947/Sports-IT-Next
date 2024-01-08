@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import axios from "axios";
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 import Head from "next/head";
 
 const AddButtonArea = styled.div`
@@ -74,7 +74,10 @@ const Form = () => {
         <Seo title="대회 폼 등록" />
         <GoBackHeader title="대회 등록" />
         <S.ContentAreaWrapper>
-          <S.ContestInform contestName="대한팔씨름연맹 제 26회 국가대표 선발전" contestGroup="(사)대한팔씨름연맹"></S.ContestInform>
+          <S.ContestInform
+            contestName="대한팔씨름연맹 제 26회 국가대표 선발전"
+            contestGroup="(사)대한팔씨름연맹"
+          ></S.ContestInform>
           <S.Divider />
 
           {/* {surveyList.map((survey, index) => (

@@ -11,7 +11,7 @@ import NavBar from "@component/components/navbar/NavBar";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Head from "next/head";
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 import { useRouter } from "next/router";
 import { IContestInfo } from "@component/interfaces/contestInterface";
 
@@ -56,6 +56,7 @@ const ContestDocument = () => {
       if (!id) return;
       getContestInfo(parseInt(id as string));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
   return (
     <>

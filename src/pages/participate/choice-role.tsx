@@ -53,6 +53,7 @@ const ChoiceRole = () => {
 
   useEffect(() => {
     getAvailabe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

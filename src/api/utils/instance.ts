@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from "axios";
-import Swal from "sweetalert2";
 
 require("dotenv").config();
 

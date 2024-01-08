@@ -1,21 +1,19 @@
+import { IEvent } from "@component/interfaces/contestInterface";
 import React from "react";
 import styled from "styled-components";
 
 const EventButton = ({
   active,
-  eventName,
+  event,
   setSelectEvent,
 }: {
   active: boolean;
-  eventName: string;
-  setSelectEvent: React.Dispatch<React.SetStateAction<string>>;
+  event: IEvent;
+  setSelectEvent: React.Dispatch<React.SetStateAction<IEvent | null>>;
 }) => {
   return (
-    <EventButtonWrapper
-      active={active}
-      onClick={() => setSelectEvent(eventName)}
-    >
-      <EventName>{eventName}</EventName>
+    <EventButtonWrapper active={active} onClick={() => setSelectEvent(event)}>
+      <EventName>{event?.name}</EventName>
     </EventButtonWrapper>
   );
 };

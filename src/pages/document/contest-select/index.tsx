@@ -1,12 +1,8 @@
 import Seo from "@component/components/Seo";
-import {
-  ContentArea,
-  ContentPaddingArea,
-} from "@component/components/area/areaComponent";
+import { ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import ContestCard from "@component/components/contest/ContestCard";
 import GoBackHeader from "@component/components/header/GoBackHeader";
-import { Input } from "@component/components/input/inputComponent";
 import { SearchIcon } from "@component/components/navbar/TopBar.styles";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -18,7 +14,7 @@ import {
 import { useInView } from "react-intersection-observer";
 import { useRouter } from "next/router";
 import { ContestNullArea } from "@component/styles/contest/index.styles";
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 
 const BoldTextArea = styled.div`
   display: flex;
@@ -122,10 +118,12 @@ const Index = () => {
       console.log("get more data !");
       setPage((current) => current + 1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
   useEffect(() => {
     getMyContest({ page: page, size: size });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, size]);
   return (
     <>
