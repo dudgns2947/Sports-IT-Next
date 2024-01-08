@@ -1,4 +1,4 @@
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 import {
   awardIndexAtom,
   awardListAtom,
@@ -148,6 +148,7 @@ const Result = () => {
       getSector();
     }
     // if (!router.isReady) return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   const handleInputChange = (

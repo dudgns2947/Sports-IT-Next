@@ -27,7 +27,7 @@ import {
   IContestInfo,
   IContestParams,
 } from "@component/interfaces/contestInterface";
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 import { useRecoilValue } from "recoil";
 import { userNameAtom, userTokenAtom } from "@component/atoms/tokenAtom";
 import { useRouter } from "next/router";
@@ -108,6 +108,7 @@ export default function Home() {
       page: page,
       size: size,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword, filterBy, orderBy, page, size]);
 
   useEffect(() => {

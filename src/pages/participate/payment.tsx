@@ -291,6 +291,7 @@ const Payment = () => {
 
   useEffect(() => {
     getContestDetail(selectContestId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(selectSectors);
@@ -303,8 +304,8 @@ const Payment = () => {
         <PaddingArea>
           <S.BoldText>💳 결제하기</S.BoldText>
           <S.Card>우현이 컴포넌트 </S.Card>
-          <CuponCard/>
-          <InsuranceCard/>
+          <CuponCard />
+          <InsuranceCard />
         </PaddingArea>
       </WebContainer>
       {/* <Head>

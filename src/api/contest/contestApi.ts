@@ -2,6 +2,7 @@ import { useRecoilValue } from "recoil";
 import baseApi from "../utils/instance";
 import { userTokenAtom } from "@component/atoms/tokenAtom";
 import {
+  CreateContestForm,
   IContestParams,
   RegisterForm,
 } from "@component/interfaces/contestInterface";
@@ -48,3 +49,7 @@ export const registerContest = (registerForm: RegisterForm) =>
       },
     }
   );
+
+// export const createContest = (createForm:CreateContestForm) => {
+//   baseApi.post()
+// }

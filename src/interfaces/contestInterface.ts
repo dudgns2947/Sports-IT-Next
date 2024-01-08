@@ -185,3 +185,28 @@ export interface ITeam {
   teamIdx: number;
   teamName: string;
 }
+
+export interface IEvent {
+  name: string;
+  code: number;
+  category: string;
+}
+
+export interface CreateContestForm {
+  sportCategory: string;
+  categories: string[];
+  maxPlayer: number;
+  maxViewer: number;
+  name: string;
+  recruitingStart: string;
+  recruitingEnd: string;
+  startDate: string;
+  endDate: string;
+  totalPrize: number;
+  prizeDetail: string;
+  location: string;
+  locationDetail: string;
+  latitude: number;
+  longitude: number;
+  content: string;
+}

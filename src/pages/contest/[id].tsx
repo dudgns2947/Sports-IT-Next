@@ -155,6 +155,7 @@ const ContestInfo = () => {
       if (!id) return;
       getContestDetail(parseInt(id as string));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   // async function getCoordinates() {

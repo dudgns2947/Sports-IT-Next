@@ -89,7 +89,7 @@ const ContestInfo = () => {
   );
   const [isNoPrize, setIsNoPrize] = useState(false);
   const [awardInfo, setAwardInfo] = useRecoilState(AwardInfoAtom);
-  const [location, setLocation] = useRecoilState(contestLocationAtom) || "";
+  const [location, setLocation] = useRecoilState(contestLocationAtom);
   const [locationDetail, setLocationDetail] = useRecoilState(
     contestLocationDetailAtom
   );
@@ -105,30 +105,30 @@ const ContestInfo = () => {
     const latitude = router.query.latitude;
     const newAddress = router.query.newAddress;
 
-    useEffect(() => {
-      setLocation(newAddress ? (newAddress as string) : "");
-      setCurrentLongitute(longitute ? (longitute as string) : "");
-      setCurrentLatitude(latitude ? (latitude as string) : "");
-      router.query.longitute &&
-        setTimeout(() => {
-          window.scrollTo(0, 500);
-        }, 100);
-    }, [router.query.longitute]);
+    // useEffect(() => {
+    //   setLocation(newAddress ? (newAddress as string) : "");
+    //   setCurrentLongitute(longitute ? (longitute as string) : "");
+    //   setCurrentLatitude(latitude ? (latitude as string) : "");
+    //   router.query.longitute &&
+    //     setTimeout(() => {
+    //       window.scrollTo(0, 500);
+    //     }, 100);
+    // }, [router.query.longitute]);
 
     return { longitute, latitude, newAddress };
   };
 
   const { longitute, latitude, newAddress } = useRouteMappingLocation();
 
-  useEffect(() => {
-    if (newAddress) {
-      console.log("newAddress", newAddress);
-      console.log("longitute", longitute);
-      console.log("latitude", latitude);
-    } else {
-      console.log("주소 매핑실패");
-    }
-  }, [newAddress]);
+  // useEffect(() => {
+  //   if (newAddress) {
+  //     console.log("newAddress", newAddress);
+  //     console.log("longitute", longitute);
+  //     console.log("latitude", latitude);
+  //   } else {
+  //     console.log("주소 매핑실패");
+  //   }
+  // }, [newAddress]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -148,6 +148,7 @@ const ContestInfo = () => {
   console.log(recruitingStart);
   console.log(recruitingEnd);
   console.log(totalPrize);
+  console.log(awardInfo);
   console.log(location);
   console.log(locationDetail);
   console.log(isNoLimitPlayers);
@@ -224,7 +225,7 @@ const ContestInfo = () => {
                 value={contestName!}
               ></Input>
             </InputArea>
-            <InputArea>
+            {/* <InputArea>
               <InputTitle>대회 기관(단체)명</InputTitle>
               <Input
                 type="text"
@@ -232,7 +233,7 @@ const ContestInfo = () => {
                 onChange={(e) => setContestName(e.currentTarget.value)}
                 value={contestName!}
               ></Input>
-            </InputArea>
+            </InputArea> */}
 
             {/* <InputArea>
           <InputTitle>대회 기관(단체)명</InputTitle>
@@ -338,15 +339,17 @@ const ContestInfo = () => {
               <InputTitle>개최 장소</InputTitle>
               <Input
                 type="text"
-                placeholder="장소 검색"
-                onClick={() => {
-                  router.push("/register/contest-location");
-                }}
+                placeholder="장소 입력"
+                // onClick={() => {
+                //   router.push("/register/contest-location");
+                // }}
                 value={location!}
+                onChange={(e) => setLocation(e.currentTarget.value)}
               />
               <Input
                 type="text"
                 placeholder="상세 주소 입력"
+                value={locationDetail!}
                 onChange={(e) => setLocationDetail(e.currentTarget.value)}
               />
             </InputArea>

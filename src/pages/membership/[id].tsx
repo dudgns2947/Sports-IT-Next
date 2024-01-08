@@ -36,14 +36,22 @@ export default function Component() {
         <GoBackHeader title="멤버십가입" />
         <div className="w-full pt-11 pl-5 pr-5">
           <div className="flex flex-col gap-2">
-            <div className="text-3xl font-medium" style={{ fontFamily: "Pretendard" }}>
+            <div
+              className="text-3xl font-medium"
+              style={{ fontFamily: "Pretendard" }}
+            >
               단체 회원으로
             </div>
-            <div className="text-3xl font-medium" style={{ fontFamily: "Pretendard" }}>
+            <div
+              className="text-3xl font-medium"
+              style={{ fontFamily: "Pretendard" }}
+            >
               가입하시겠습니까?
             </div>
           </div>
-          <div className="mt-7 mb-7 text-[#AEAEAE]">다양한 혜택을 확인해보세요!</div>
+          <div className="mt-7 mb-7 text-[#AEAEAE]">
+            다양한 혜택을 확인해보세요!
+          </div>
           <div className="flex flex-col gap-2">
             <div className="w-full py-4 px-4 rounded-lg bg-[#212121] flex justify-between">
               <div className="">
@@ -55,7 +63,7 @@ export default function Component() {
                 </div>
               </div>
               <div className="">
-                <img src={"/images/join_membership/card.png"}></img>
+                {/* <img src={"/images/join_membership/card.png"}></img> */}
               </div>
             </div>
             <div className="w-full py-4 px-4 rounded-lg bg-[#212121] flex justify-between">
@@ -68,7 +76,7 @@ export default function Component() {
                 </div>
               </div>
               <div className="">
-                <img src={"/images/join_membership/sale.png"}></img>
+                {/* <img src={"/images/join_membership/sale.png"}></img> */}
               </div>
             </div>
             <div className="w-full py-4 px-4 rounded-lg bg-[#212121] flex justify-between">
@@ -80,14 +88,17 @@ export default function Component() {
                 </div>
               </div>
               <div className="">
-                <img src={"/images/join_membership/community.png"}></img>
+                {/* <img src={"/images/join_membership/community.png"}></img> */}
               </div>
             </div>
           </div>
         </div>
         <div className="flex fixed bottom-0 left-0 w-screen h-[6em] z-[100] bg-[#FD3446] text-white place-items-center">
           <div className="w-full flex flex-col justify-center items-center">
-            <div className="pb-8 border-solid font-medium text-lg" onClick={(e) => alert("준비중인 기능입니다.")}>
+            <div
+              className="pb-8 border-solid font-medium text-lg"
+              onClick={(e) => alert("준비중인 기능입니다.")}
+            >
               멤버십 가입하기
             </div>
           </div>

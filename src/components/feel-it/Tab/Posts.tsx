@@ -1,5 +1,11 @@
 import Image from "next/image";
-import { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider } from "react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 type getUserImagesType = () => Promise<{ url: string; id: string }[]>;
 
 const useImageLoader = () => {
@@ -30,7 +36,7 @@ export const Posts = () => {
             return (
               <div className="w-[32%]" key={v.url}>
                 {/* <Image src={v.url} alt='' width={100} height={100}></Image> */}
-                <img src={v.url}></img>
+                {/* <img src={v.url}></img> */}
               </div>
             );
           })}

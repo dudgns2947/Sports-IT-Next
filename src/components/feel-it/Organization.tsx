@@ -20,28 +20,54 @@ import { tabForOrganization } from "@component/libs/static_data";
 // import { HistoryOfCompetition } from "./Portfolio/HistoryOfCompetition"
 // import { Physical } from "./Portfolio/Physical"
 
-type argsType = { currentTab: everyTabType; pageUserInfo: organizationType; changeDefaultTab: (tabname: everyTabType) => void };
+type argsType = {
+  currentTab: everyTabType;
+  pageUserInfo: organizationType;
+  changeDefaultTab: (tabname: everyTabType) => void;
+};
 
-export const Organization = ({ currentTab, pageUserInfo, changeDefaultTab }: argsType) => {
+export const Organization = ({
+  currentTab,
+  pageUserInfo,
+  changeDefaultTab,
+}: argsType) => {
   const [isUserMyself, setIsUserMyself] = useState(false);
 
   useEffect(() => {
     pageUserInfo.userId === "123456" && setIsUserMyself(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <div className="">
         <UserHeader userInfo={pageUserInfo} />
-        <TabItself tabs={tabForOrganization} currentTab={currentTab} changeDefaultTab={changeDefaultTab}></TabItself>
+        <TabItself
+          tabs={tabForOrganization}
+          currentTab={currentTab}
+          changeDefaultTab={changeDefaultTab}
+        ></TabItself>
         {currentTab === "정보" && (
           <div className="">
-            <Supervisions events={pageUserInfo.supervisions} isUserMyself={isUserMyself} />
-            <InfoDetail pageUserInfo={pageUserInfo} isUserMyself={isUserMyself} />
+            <Supervisions
+              events={pageUserInfo.supervisions}
+              isUserMyself={isUserMyself}
+            />
+            <InfoDetail
+              pageUserInfo={pageUserInfo}
+              isUserMyself={isUserMyself}
+            />
             <ModifyLocation pageUserInfo={pageUserInfo} />
-            <Map latitude={pageUserInfo.latitude} longitude={pageUserInfo.longitude} addressName={pageUserInfo.addressName} />
+            <Map
+              latitude={pageUserInfo.latitude}
+              longitude={pageUserInfo.longitude}
+              addressName={pageUserInfo.addressName}
+            />
             <ContestRules isUserMyself={isUserMyself} />
-            <LinksAboutUser pageUserInfo={pageUserInfo} isUserMyself={isUserMyself} />
+            <LinksAboutUser
+              pageUserInfo={pageUserInfo}
+              isUserMyself={isUserMyself}
+            />
           </div>
         )}
         {currentTab === "게시글" && <Posts />}

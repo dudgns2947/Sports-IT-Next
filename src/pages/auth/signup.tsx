@@ -12,16 +12,12 @@ import { useRecoilValue } from "recoil";
 import { roleAtom } from "@component/atoms/roleAtom";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
-import { signupPost, checkEmail } from "@component/api/account/accountApi";
-import {
-  ISignupForm,
-  ICheckEmailForm,
-} from "@component/interfaces/accountInterface";
+import { signupPost } from "@component/api/account/accountApi";
+import { ISignupForm } from "@component/interfaces/accountInterface";
 import { ContentArea } from "@component/components/area/areaComponent";
 import Head from "next/head";
 import styled from "styled-components";
-import axios from "axios";
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 
 const DuplicateCheckButton = styled.button`
   width: 100px;

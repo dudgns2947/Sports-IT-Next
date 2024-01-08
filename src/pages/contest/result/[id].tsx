@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import * as S from "../../../styles/contest/result-input.styles";
 import { useRouter } from "next/router";
 import { IWeightSector } from "@component/interfaces/contestInterface";
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
 import {
@@ -125,6 +125,7 @@ const Result = () => {
       getResult();
     }
     // if (!router.isReady) return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
   return (
     <PageWrapper>

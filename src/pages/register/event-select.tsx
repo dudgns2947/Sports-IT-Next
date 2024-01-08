@@ -47,21 +47,21 @@ import CategoryButton from "@component/components/web/button/CategoryButton";
 // `;
 
 const contestEvents = [
-  { name: "배구", code: 1, category: "" },
-  { name: "농구", code: 2, category: "" },
-  { name: "팔씨름", code: 3, category: "" },
-  { name: "필라테스", code: 4, category: "" },
-  { name: "E-Sports", code: 5, category: "" },
-  { name: "배드민턴", code: 6, category: "" },
-  { name: "수영", code: 7, category: "" },
-  { name: "테니스", code: 8, category: "" },
-  { name: "태권도", code: 9, category: "" },
-  { name: "축구", code: 10, category: "" },
-  { name: "럭비", code: 11, category: "" },
-  { name: "마라톤", code: 12, category: "" },
-  { name: "아이스하키", code: 13, category: "" },
-  { name: "볼링", code: 14, category: "" },
-  { name: "합기도", code: 15, category: "" },
+  { name: "배구", code: 1, category: "VALLEYBALL" },
+  { name: "골프", code: 2, category: "GOLF" },
+  { name: "팔씨름", code: 3, category: "ARM_WRESTLING" },
+  { name: "탁구", code: 4, category: "TABLE_TENNIS" },
+  { name: "배구", code: 5, category: "VALLEYBALL" },
+  { name: "배드민턴", code: 6, category: "BADMINTON" },
+  { name: "수영", code: 7, category: "SWIMMING" },
+  { name: "테니스", code: 8, category: "TENNIS" },
+  { name: "카누", code: 9, category: "CANOE" },
+  { name: "축구", code: 10, category: "SOCCER" },
+  { name: "럭비", code: 11, category: "RUGBY" },
+  { name: "마라톤", code: 12, category: "MARATHON" },
+  { name: "아이스하키", code: 13, category: "ICE_HOCKEY" },
+  { name: "볼링", code: 14, category: "BOWLING" },
+  { name: "택견", code: 15, category: "TAEKKYEON" },
 ];
 
 const contestCategories = [
@@ -111,8 +111,8 @@ const EventSelect = () => {
           {contestEvents.map((event) => (
             <EventButton
               key={event.code}
-              active={selectEvent === event.name}
-              eventName={event.name}
+              active={selectEvent?.name === event.name}
+              event={event}
               setSelectEvent={setSelectEvent}
             />
           ))}

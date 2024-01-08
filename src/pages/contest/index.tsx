@@ -168,6 +168,7 @@ const Index = () => {
       page: page,
       size: size,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword, filterBy, orderBy]);
 
   // useEffect(() => {
