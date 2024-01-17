@@ -1,13 +1,11 @@
-import * as S from "./insuranceCard.styles "
+import * as S from "./InsuranceCard.styles";
 
 const InsuranceCard = () => {
-    return (
-        <>
-            <S.CardWrapper>
-                
-            </S.CardWrapper>
-        </>
-    )
-}
+  return (
+    <>
+      <S.CardWrapper></S.CardWrapper>
+    </>
+  );
+};
 
 export default InsuranceCard;
