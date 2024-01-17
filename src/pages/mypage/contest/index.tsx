@@ -1,4 +1,4 @@
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 import Seo from "@component/components/Seo";
 import { ContentPaddingArea } from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
@@ -102,10 +102,12 @@ const Index = () => {
       console.log("get more data !");
       setPage((current) => current + 1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
   useEffect(() => {
     getMyContest({ page: page, size: size });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, size]);
 
   return (

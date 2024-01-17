@@ -1,5 +1,8 @@
 import Seo from "@component/components/Seo";
-import { ContentArea, ContentPaddingArea } from "@component/components/area/areaComponent";
+import {
+  ContentArea,
+  ContentPaddingArea,
+} from "@component/components/area/areaComponent";
 import { PageWrapper } from "@component/components/container/container";
 import GoBackHeader from "@component/components/header/GoBackHeader";
 import BottomBar from "@component/components/navbar/BottomBar";
@@ -11,7 +14,11 @@ import styled from "styled-components";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { userEmailAtom, userNameAtom, userTokenAtom } from "@component/atoms/tokenAtom";
+import {
+  userEmailAtom,
+  userNameAtom,
+  userTokenAtom,
+} from "@component/atoms/tokenAtom";
 import { useState, useEffect } from "react";
 import { roleAtom } from "@component/atoms/roleAtom";
 
@@ -41,13 +48,16 @@ const Setting = () => {
 
   //local storage에 저장된 토큰을 가져온다.
   const token = typeof window !== "undefined" && localStorage.getItem("jwt");
-  const StoredUserName = typeof window !== "undefined" && localStorage.getItem("name");
-  const StoredUserEmail = typeof window !== "undefined" && localStorage.getItem("email");
+  const StoredUserName =
+    typeof window !== "undefined" && localStorage.getItem("name");
+  const StoredUserEmail =
+    typeof window !== "undefined" && localStorage.getItem("email");
 
   useEffect(() => {
     setUserName((StoredUserName as string) ?? "");
     setUserEmail((StoredUserEmail as string) ?? "");
     //local storage에 이름 및 email 재저장
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (token !== null && typeof window !== "undefined") {
@@ -81,7 +91,11 @@ const Setting = () => {
         <GoBackHeader title="설정" />
         <Seo title="설정" />
         <ContentPaddingArea>
-          <ProfileTab imgUrl="/images/example/Post1.png" userName={userName} userEmail={userEmail} />
+          <ProfileTab
+            imgUrl="/images/example/Post1.png"
+            userName={userName}
+            userEmail={userEmail}
+          />
 
           <NavTitle content="계정 관리" />
           <NavTab url="/" content="비밀번호 재설정" />

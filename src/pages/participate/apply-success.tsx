@@ -17,7 +17,7 @@ import {
 } from "@component/atoms/contestAtom";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 import { applyRoleAtom } from "@component/atoms/roleAtom";
 import {
   appTermAtom,
@@ -105,6 +105,7 @@ const ApplySuccess = () => {
       if (!query) return;
       postResult();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   return (

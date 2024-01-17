@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import GoBackHeader from "@component/components/header/GoBackHeader";
-import { baseApi } from "@component/api/utils/instance";
 import { useState } from "react";
+import baseApi from "@component/api/utils/instance";
 
 const FindIdContainer = styled.div`
   display: flex;
@@ -86,8 +86,16 @@ const FindId = () => {
       <GoBackHeader title="비밀번호 찾기" />
 
       <FindIdForm onSubmit={handleSubmit}>
-        <FindIdInput type="text" placeholder="이메일을 입력해주세요" onChange={handleEmailChanged}></FindIdInput>
-        <FindIdInput type="text" placeholder="전화번호를 입력해주세요" onChange={handleNumberChanged}></FindIdInput>
+        <FindIdInput
+          type="text"
+          placeholder="이메일을 입력해주세요"
+          onChange={handleEmailChanged}
+        ></FindIdInput>
+        <FindIdInput
+          type="text"
+          placeholder="전화번호를 입력해주세요"
+          onChange={handleNumberChanged}
+        ></FindIdInput>
         <FindIdButton type="submit">비밀번호 찾기</FindIdButton>
       </FindIdForm>
     </FindIdContainer>

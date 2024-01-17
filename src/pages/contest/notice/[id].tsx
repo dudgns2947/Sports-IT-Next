@@ -1,4 +1,4 @@
-import { baseApi } from "@component/api/utils/instance";
+import baseApi from "@component/api/utils/instance";
 import ContestDetailLayout from "@component/components/layout/ContestDetailLayout";
 import Footer from "@component/components/web/footer/Footer";
 import Header from "@component/components/web/header/Header";
@@ -49,6 +49,7 @@ const Notice = () => {
       if (!id) return;
       getContestDetail(parseInt(id as string));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
   return (
     <WebContainer>

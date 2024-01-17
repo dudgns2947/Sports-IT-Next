@@ -50,7 +50,8 @@ const Component: React.FC = () => {
   const userId =
     typeof router.query.userId === "string"
       ? router.query.userId
-      : typeof window === "object" && new URLSearchParams(window.location.search).get("userId")
+      : typeof window === "object" &&
+        new URLSearchParams(window.location.search).get("userId")
       ? new URLSearchParams(window.location.search).get("userId")
       : null;
 
@@ -64,7 +65,9 @@ const Component: React.FC = () => {
   };
 
   const fetchGeoCoding = async () => {
-    const res = await fetch(`/api/naver_api?keyword=${address}`).then((r) => r.json());
+    const res = await fetch(`/api/naver_api?keyword=${address}`).then((r) =>
+      r.json()
+    );
     setIsNaverApiLoading(false);
 
     const dataForMap = geoCodingSchema.parse(res.data);
@@ -94,7 +97,11 @@ const Component: React.FC = () => {
     return res.data;
   };
 
-  const { data, refetch, status, isLoading, isError } = useQuery(["geolocation"], fetchGeoCoding, { enabled: false });
+  const { data, refetch, status, isLoading, isError } = useQuery(
+    ["geolocation"],
+    fetchGeoCoding,
+    { enabled: false }
+  );
 
   useEffect(() => {
     if (address !== "") {
@@ -106,6 +113,7 @@ const Component: React.FC = () => {
     if (daumWrapperRef.current) {
       initializeDaumPostcode();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [daumWrapperRef.current, initializeDaumPostcode]);
 
   function foldDaumPostcode() {
@@ -117,14 +125,21 @@ const Component: React.FC = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const script = document.createElement("script");
-      script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+      script.src =
+        "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
       script.onload = initializeDaumPostcode;
       document.head.appendChild(script);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function initializeDaumPostcode() {
-    if (typeof window !== "undefined" && window.daum && window.daum.Postcode && daumWrapperRef.current) {
+    if (
+      typeof window !== "undefined" &&
+      window.daum &&
+      window.daum.Postcode &&
+      daumWrapperRef.current
+    ) {
       if (!daumPostcodeRef.current) {
         daumPostcodeRef.current = new window.daum.Postcode({
           width: "100%",
@@ -147,7 +162,15 @@ const Component: React.FC = () => {
     <div className="w-[100vw]">
       <GoBackHeader title="장소 검색" />
 
-      {isNaverApiLoading && <Image alt="loading" priority width={300} height={300} src="/images/icon/loading.gif"></Image>}
+      {isNaverApiLoading && (
+        <Image
+          alt="loading"
+          priority
+          width={300}
+          height={300}
+          src="/images/icon/loading.gif"
+        ></Image>
+      )}
       <div
         id="wrap"
         ref={daumWrapperRef}
